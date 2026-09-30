@@ -27,7 +27,7 @@ Si algo de lo anterior está en conflicto, detente y pregunta.
 
 ## 3. Stack y versiones
 
-- Astro 7 (SSG, sin adaptador). Node.js 24 LTS (mínimo 22.12). PNPM 12 vía Corepack; los scripts de instalación permitidos se declaran en `pnpm-workspace.yaml` (`allowBuilds`).
+- Astro 7 (SSG, sin adaptador). Node.js 24 LTS (mínimo 22.12). PNPM 12 (12.8.1) fijado en `devEngines.packageManager` de `package.json` (`onFail: download`); no se usa Corepack. Los scripts de instalación permitidos se declaran en `pnpm-workspace.yaml` (`allowBuilds`).
 - `astro check` requiere TypeScript 6 (no es compatible con TypeScript 7); no actualices `typescript` a la versión 7.
 - Tailwind CSS 4 mediante `@tailwindcss/vite`. Los tokens viven en `src/styles/global.css` dentro de `@theme`. No existe `tailwind.config.js` y no debe crearse.
 - JavaScript (ES2022+). Sin TypeScript en el código de la aplicación; `tsconfig.json` existe solo para el soporte del editor y `astro check`.

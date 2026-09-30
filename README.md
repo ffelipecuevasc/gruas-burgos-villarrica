@@ -26,7 +26,7 @@ El sitio es una página única (one-page) con tres secciones principales, en esp
 🔸 **Estilos:** [Tailwind CSS](https://tailwindcss.com) 4, integrado mediante `@tailwindcss/vite`, enfoque mobile-first.
 🔸 **Interactividad:** HTML y CSS por defecto; `<script>` nativo de Astro para comportamientos mínimos. React solo si una RDA lo justifica.
 🔸 **Lenguaje:** JavaScript moderno (ES2022+).
-🔸 **Entorno:** Node.js 24 LTS y PNPM 12 (versión fijada en `package.json` mediante Corepack).
+🔸 **Entorno:** Node.js 24 LTS y PNPM 12 (versión 12.8.1 fijada en `devEngines.packageManager` de `package.json`).
 🔸 **Calidad de código:** Prettier con `prettier-plugin-astro` y `prettier-plugin-tailwindcss`; `astro check`.
 🔸 **Control de versiones:** Git, con repositorio remoto en GitHub.
 🔸 **Hosting:** Cloudflare Pages, con despliegue automático desde la rama `main` y vistas previas por rama.
@@ -36,15 +36,13 @@ El sitio es una página única (one-page) con tres secciones principales, en esp
 ## 3. Requisitos previos
 
 1. Node.js 24 LTS (mínimo 22.12, requisito de Astro 7). La versión de referencia está en `.nvmrc`.
-2. Corepack habilitado (`corepack enable`), que provee la versión de PNPM declarada en `package.json`.
-3. Git.
+2. Git.
 
 ## 4. Instalación y uso local
 
 ```bash
 git clone https://github.com/ffelipecuevasc/gruas-burgos-villarrica.git
 cd gruas-burgos-villarrica
-corepack enable
 pnpm install
 pnpm dev
 ```

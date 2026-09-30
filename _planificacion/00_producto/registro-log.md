@@ -2,7 +2,7 @@
 
 **Fuente única de verdad del trabajo pendiente.** Si discrepa con `_planificacion/README.md` o con cualquier otro documento de planificación, prevalece este archivo.
 
-- **Última actualización:** 2026-09-29
+- **Última actualización:** 2026-09-30
 - **Iteración activa:** 01-01 · Andamiaje del proyecto
 - **Próximo hito:** prototipo navegable en vista previa de Cloudflare Pages
 - **Entrega tentativa:** 2026-10-18
@@ -13,7 +13,7 @@
 
 | Iteración | Nombre                                              | Épica | Estado     | Depende de | Bitácora |
 | :-------- | :-------------------------------------------------- | :---- | :--------- | :--------- | :------- |
-| 01-01     | Andamiaje del proyecto                              | 01    | En curso   | —          | —        |
+| 01-01     | Andamiaje del proyecto                              | 01    | En revisión | —         | [bitacora-01-01-2026-09-30](../99_bitacora/bitacora-01-01-2026-09-30.md) |
 | 01-02     | Arquitectura base, layout y datos del negocio       | 01    | Pendiente  | 01-01      | —        |
 | 02-01     | Tokens de diseño, fuentes e íconos                  | 02    | Pendiente  | 01-02      | —        |
 | 02-02     | Componentes base de interfaz                        | 02    | Pendiente  | 02-01      | —        |
@@ -68,3 +68,4 @@ Ideas detectadas durante el trabajo que no forman parte de lo contratado. Se cot
 | Fecha      | Cambio                                               |
 | :--------- | :--------------------------------------------------- |
 | 2026-09-29 | Creación del registro, 5 épicas y 14 iteraciones.    |
+| 2026-09-30 | Iteración 01-01 en revisión; bitácora agregada. PNPM 12.8.1 fijado en `devEngines.packageManager` (sin Corepack). |
