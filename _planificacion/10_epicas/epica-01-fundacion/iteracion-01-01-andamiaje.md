@@ -1,7 +1,7 @@
 # Iteración 01-01 · Andamiaje del proyecto
 
 - **Épica:** 01 · Fundación del proyecto
-- **Estado:** En revisión (ejecución manual del desarrollador)
+- **Estado:** Terminada (ejecución manual del desarrollador)
 - **Rama sugerida:** `main` (commit inicial)
 - **Depende de:** —
 - **RDA relacionadas:** RDA-001, RDA-002, RDA-003
@@ -23,10 +23,10 @@ Crear el proyecto vacío en WebStorm e instalar Astro 7 manualmente con el stack
 
 ## Criterios de aceptación
 
-- [ ] `pnpm dev` muestra la página inicial en `http://localhost:4321`.
-- [ ] `pnpm build` termina sin errores y genera `sitemap-index.xml`.
-- [ ] `pnpm format:check` y `pnpm check` pasan.
-- [ ] `package.json` contiene `packageManager` con la versión de PNPM.
+- [x] `pnpm dev` muestra la página inicial en `http://localhost:4321`.
+- [x] `pnpm build` termina sin errores y genera `sitemap-index.xml`.
+- [x] `pnpm format:check` y `pnpm check` pasan.
+- [x] `package.json` fija PNPM 12.8.1 en `devEngines.packageManager` y no contiene el campo `packageManager`.
 
 ## Fuera de alcance
 

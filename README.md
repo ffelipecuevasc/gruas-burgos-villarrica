@@ -2,7 +2,7 @@
 
 Sitio web de **Grúas Burgos**, servicio de grúas, traslado y rescate vehicular 24 horas con base en Villarrica, Región de La Araucanía, Chile.
 
-🔹 **Sitio en producción:** [gruasvillarrica.cl](https://gruasvillarrica.cl)
+🔹 **Sitio (se publica en la iteración 05-01):** [gruasvillarrica.cl](https://gruasvillarrica.cl)
 🔹 **Repositorio:** [github.com/ffelipecuevasc/gruas-burgos-villarrica](https://github.com/ffelipecuevasc/gruas-burgos-villarrica)
 🔹 **Desarrollo:** [Felipe Cuevas](https://felipecuevas.dev), Desarrollador Web Full Stack
 
@@ -37,6 +37,7 @@ El sitio es una página única (one-page) con tres secciones principales, en esp
 
 1. Node.js 24 LTS (mínimo 22.12, requisito de Astro 7). La versión de referencia está en `.nvmrc`.
 2. Git.
+3. PNPM instalado (https://pnpm.io/installation). Si tu versión difiere de la 12.8.1 declarada en `devEngines.packageManager`, PNPM descarga y usa la declarada.
 
 ## 4. Instalación y uso local
 
@@ -85,7 +86,7 @@ El sitio se publica en **Cloudflare Pages** conectado a este repositorio:
 
 1. Cada push a `main` genera un despliegue de producción en `gruasvillarrica.cl`.
 2. Cada rama distinta de `main` genera una URL de vista previa para revisión.
-3. Configuración de compilación: comando `pnpm build`, directorio de salida `dist`, versión de Node tomada de `.nvmrc`.
+3. Configuración de compilación: comando `pnpm build`, directorio de salida `dist`, versión de Node tomada de `.nvmrc` y variable de compilación `PNPM_VERSION` = `12.8.1`.
 4. Las cabeceras HTTP (caché y seguridad) se definen en `public/_headers`.
 
 Al ser un sitio 100 % estático, no se requiere adaptador de servidor.

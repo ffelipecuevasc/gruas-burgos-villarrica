@@ -15,7 +15,7 @@ Pasar de la vista previa a producción sin datos provisionales.
 1. Agregar una validación en compilación que falle si `src/data/negocio.js` contiene `PENDIENTE_CLIENTE` cuando `CF_PAGES_BRANCH` es `main` (variable que Cloudflare Pages expone durante la compilación).
 2. Preparar la lista de verificación para el desarrollador:
    1. Proyecto de Cloudflare Pages conectado a GitHub, rama de producción `main`, comando `pnpm build`, salida `dist`.
-   2. Versión de Node tomada de `.nvmrc`; si PNPM no se resuelve, definir la variable `PNPM_VERSION`.
+   2. Versión de Node tomada de `.nvmrc`; definir siempre `PNPM_VERSION` = `12.8.1` en las variables de compilación; confirmar en el log que Node sea 24.x (si Pages no resuelve "24" desde `.nvmrc`, fijar `NODE_VERSION` completo) y PNPM 12.8.1.
    3. Dominio personalizado `gruasvillarrica.cl` y `www.gruasvillarrica.cl` con redirección 301 al dominio raíz.
    4. HTTPS forzado y certificado activo.
 3. Prueba de humo en producción: llamadas desde celular, WhatsApp, anclajes, 404, cabeceras.

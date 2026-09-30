@@ -1,0 +1,40 @@
+---
+import '../styles/global.css';
+import CabeceraSEO from '../components/CabeceraSEO.astro';
+import { negocio } from '../data/negocio.js';
+
+/**
+ * @typedef {Object} Props
+ * @property {string} titulo Contenido de `<title>`.
+ * @property {string} descripcion Meta descripción de la página.
+ * @property {boolean} [noindex] Excluye la página de los buscadores.
+ */
+
+/** @type {Props} */
+const { titulo, descripcion, noindex = false } = Astro.props;
+
+// Año del footer: se calcula en compilación, porque el sitio es estático.
+// El footer es provisional; el componente definitivo llega en la iteración 02-03.
+const anio = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="es-CL">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <CabeceraSEO titulo={titulo} descripcion={descripcion} noindex={noindex} />
+    <slot name="head" />
+  </head>
+  <body class="bg-neutral-950 text-neutral-100 antialiased">
+    <main>
+      <slot />
+    </main>
+    <footer class="border-t border-neutral-800 px-4 py-6 text-sm text-neutral-400">
+      <p>
+        © {anio} {negocio.nombre} · {negocio.direccion.texto}
+      </p>
+    </footer>
+  </body>
+</html>

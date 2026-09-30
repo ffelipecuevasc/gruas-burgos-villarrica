@@ -1,0 +1,19 @@
+---
+// Metadatos de búsqueda de cada página. Open Graph y JSON-LD se agregan en la iteración 04-01.
+
+/**
+ * @typedef {Object} Props
+ * @property {string} titulo Contenido de `<title>`.
+ * @property {string} descripcion Meta descripción, sin cifras ni afirmaciones no confirmadas.
+ * @property {boolean} [noindex] Excluye la página de los buscadores y omite el canonical.
+ */
+
+/** @type {Props} */
+const { titulo, descripcion, noindex = false } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<title>{titulo}</title>
+<meta name="description" content={descripcion} />
+{noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}

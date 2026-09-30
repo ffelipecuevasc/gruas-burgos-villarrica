@@ -1,0 +1,33 @@
+---
+import LayoutBase from '../layouts/LayoutBase.astro';
+import { negocio, enlaceTelefono } from '../data/negocio.js';
+
+const titulo = `Página no encontrada | ${negocio.nombre}`;
+const descripcion = 'La página que buscas no existe. Vuelve al inicio o llámanos.';
+---
+
+<LayoutBase titulo={titulo} descripcion={descripcion} noindex>
+  <section aria-labelledby="titulo-404" class="px-4 py-12">
+    <h1 id="titulo-404" class="text-3xl font-bold">
+      No encontramos esta página
+    </h1>
+    <p class="mt-4 max-w-prose">
+      Si necesitas una grúa, llámanos al {negocio.telefono.visible}. Atendemos{' '}
+      {negocio.horario.texto}.
+    </p>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a
+        href={enlaceTelefono()}
+        class="inline-flex min-h-12 items-center bg-orange-500 px-5 font-bold text-neutral-950 uppercase hover:bg-orange-300 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-orange-300"
+      >
+        Llamar ahora
+      </a>
+      <a
+        href="/"
+        class="inline-flex min-h-12 items-center border border-neutral-600 px-5 font-bold uppercase hover:border-orange-500 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-orange-300"
+      >
+        Volver al inicio
+      </a>
+    </div>
+  </section>
+</LayoutBase>

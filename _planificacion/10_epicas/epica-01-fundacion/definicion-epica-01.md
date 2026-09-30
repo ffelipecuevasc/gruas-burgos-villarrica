@@ -21,4 +21,4 @@
 
 - `pnpm build` genera `dist/` sin errores.
 - El repositorio remoto tiene el primer commit del desarrollador.
-- Cloudflare Pages está conectado y genera una URL de vista previa.
+- Cloudflare Pages está conectado, con `PNPM_VERSION=12.8.1` definida, y genera una URL de vista previa.

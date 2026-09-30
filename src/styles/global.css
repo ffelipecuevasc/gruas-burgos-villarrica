@@ -2,3 +2,10 @@
 
 /* Los tokens de diseño (@theme) se incorporan en la iteración 02-01.
    Referencia: DESIGN.md */
+
+@layer base {
+  /* El sitio solo tiene tema oscuro (DESIGN.md §1). */
+  html {
+    color-scheme: dark;
+  }
+}
