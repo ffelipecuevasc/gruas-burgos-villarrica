@@ -1,6 +1,6 @@
 # Épica 02 · Sistema de diseño
 
-- **Estado:** Pendiente
+- **Estado:** Terminada
 - **Objetivo:** trasladar el lenguaje visual del prototipo a tokens de Tailwind 4 y componentes Astro reutilizables, corrigiendo los problemas de accesibilidad y rendimiento de la auditoría 01.
 
 ## Alcance
@@ -12,11 +12,11 @@
 
 ## Iteraciones
 
-| Iteración | Nombre                               |
-| :-------- | :----------------------------------- |
-| 02-01     | Tokens de diseño, fuentes e íconos   |
-| 02-02     | Componentes base de interfaz         |
-| 02-03     | Header, acciones flotantes y footer  |
+| Iteración | Nombre                              | Estado    |
+| :-------- | :---------------------------------- | :-------- |
+| 02-01     | Tokens de diseño, fuentes e íconos  | Terminada |
+| 02-02     | Componentes base de interfaz        | Terminada |
+| 02-03     | Header, acciones flotantes y footer | Terminada |
 
 ## Criterio de término
 

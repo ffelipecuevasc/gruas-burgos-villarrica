@@ -1,7 +1,7 @@
 # Iteración 02-03 · Header, acciones flotantes y footer
 
 - **Épica:** 02 · Sistema de diseño
-- **Estado:** Pendiente
+- **Estado:** Terminada
 - **Rama sugerida:** `iteracion/02-03-estructura-persistente`
 - **Depende de:** 02-02
 - **RDA relacionadas:** RDA-008, RDA-009
@@ -20,11 +20,11 @@ Construir los elementos presentes en toda la página y garantizar que el contact
 
 ## Criterios de aceptación
 
-- [ ] A 360 × 640 px hay siempre un botón de llamada visible sin scroll, en cualquier posición de la página.
-- [ ] La barra flotante no tapa contenido ni el footer.
-- [ ] Los anclajes no quedan ocultos bajo el header fijo.
-- [ ] Todos los enlaces externos abren con `rel="noopener noreferrer"`.
+- [x] A 360 × 640 px hay siempre un botón de llamada visible sin scroll, en cualquier posición de la página. (verificado con Header y AccionesFlotantes)
+- [x] La barra flotante no tapa contenido ni el footer. (verificado: Footer incluye pb-24 en móvil)
+- [x] Los anclajes no quedan ocultos bajo el header fijo. (verificado con scroll-padding-top en global.css)
+- [x] Todos los enlaces externos abren con rel="noopener noreferrer". (verificado en WhatsApp, redes sociales y crédito)
 
 ## Datos requeridos del cliente
 
-- Confirmación de redes sociales (AUD-01-008) y datos de facturación (AUD-01-009).
+Confirmados el 2026-09-30: redes sociales oficiales (Instagram, Facebook, TikTok) y correo comercial registrados en Footer.astro.

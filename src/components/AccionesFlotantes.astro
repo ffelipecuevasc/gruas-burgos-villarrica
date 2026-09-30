@@ -1,0 +1,67 @@
+---
+import Icono from './Icono.astro';
+import { enlaceTelefono, enlaceWhatsApp } from '../data/negocio.js';
+
+/**
+ * @typedef {Object} Props
+ * @property {string} [class] Clases adicionales de Tailwind.
+ */
+
+/** @type {Props} */
+const { class: clase = '' } = Astro.props;
+---
+
+<!-- Barra fija inferior exclusiva para móvil (< md) -->
+<aside
+  aria-label="Acciones de contacto rápido"
+  class:list={[
+    'fixed inset-x-0 bottom-0 z-40 border-t border-surface-container-highest bg-surface/95 backdrop-blur-md px-space-sm pt-space-xs pb-[calc(0.5rem+env(safe-area-inset-bottom,0px))] md:hidden',
+    clase,
+  ]}
+>
+  <div class="grid grid-cols-2 gap-space-sm max-w-lg mx-auto">
+    <a
+      href={enlaceTelefono()}
+      class="inline-flex min-h-[48px] h-12 items-center justify-center gap-space-xs rounded-sm bg-primary-container px-space-md font-display text-label-md uppercase text-on-accent hover:bg-primary active:scale-95 transition-all focus-visible:outline-2 focus-visible:outline-primary"
+      aria-label="Llamar a Grúas Burgos"
+    >
+      <Icono nombre="llamada" />
+      <span>Llamar</span>
+    </a>
+
+    <a
+      href={enlaceWhatsApp()}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex min-h-[48px] h-12 items-center justify-center gap-space-xs rounded-sm border border-surface-container-highest bg-surface-container-low px-space-md font-display text-label-md uppercase text-on-surface hover:border-primary-container active:scale-95 transition-all focus-visible:outline-2 focus-visible:outline-primary"
+      aria-label="Escribir por WhatsApp a Grúas Burgos"
+    >
+      <Icono nombre="whatsapp" />
+      <span>WhatsApp</span>
+    </a>
+  </div>
+</aside>
+
+<!-- Botones flotantes para escritorio y tablet (>= md) -->
+<aside
+  aria-label="Contacto flotante"
+  class="hidden md:flex fixed bottom-space-lg right-space-lg z-40 flex-col gap-space-sm"
+>
+  <a
+    href={enlaceWhatsApp()}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="inline-flex min-h-12 items-center gap-space-sm rounded-full border border-surface-container-highest bg-surface/90 backdrop-blur-md px-space-lg py-space-sm font-display text-label-md uppercase text-on-surface shadow-lg hover:border-primary-container hover:text-primary active:scale-95 transition-all focus-visible:outline-2 focus-visible:outline-primary"
+  >
+    <Icono nombre="whatsapp" />
+    <span>WhatsApp 24/7</span>
+  </a>
+
+  <a
+    href={enlaceTelefono()}
+    class="inline-flex min-h-12 items-center gap-space-sm rounded-full bg-primary-container px-space-lg py-space-sm font-display text-label-md uppercase text-on-accent shadow-lg hover:bg-primary active:scale-95 transition-all focus-visible:outline-2 focus-visible:outline-primary"
+  >
+    <Icono nombre="llamada" />
+    <span>Llamar ahora</span>
+  </a>
+</aside>

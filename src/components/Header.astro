@@ -1,0 +1,145 @@
+---
+import Contenedor from './Contenedor.astro';
+import IndicadorDisponible from './IndicadorDisponible.astro';
+import Icono from './Icono.astro';
+import BotonLlamada from './BotonLlamada.astro';
+import { enlaceTelefono } from '../data/negocio.js';
+
+/**
+ * @typedef {Object} Props
+ * @property {string} [class] Clases adicionales de Tailwind.
+ */
+
+/** @type {Props} */
+const { class: clase = '' } = Astro.props;
+---
+
+<header
+  class:list={[
+    'sticky top-0 z-40 w-full border-b border-surface-container-highest bg-surface/95 backdrop-blur-md',
+    clase,
+  ]}
+>
+  <Contenedor class="flex flex-col gap-space-xs py-space-sm">
+    <!-- Nivel superior: Marca, disponibilidad y llamada rápida -->
+    <div class="flex items-center justify-between gap-space-md">
+      <a
+        href="#inicio"
+        class="group inline-flex flex-col focus-visible:outline-2 focus-visible:outline-primary"
+      >
+        <span class="font-display text-headline-sm uppercase tracking-tight text-on-surface group-hover:text-primary transition-colors">
+          Grúas Burgos
+        </span>
+        <span class="font-body text-body-xs text-secondary -mt-1">Villarrica y La Araucanía</span>
+      </a>
+
+      <div class="hidden sm:flex items-center">
+        <IndicadorDisponible />
+      </div>
+
+      <div class="flex items-center gap-space-sm">
+        <!-- Móvil: Botón de ícono directo accesible de 48x48 px -->
+        <a
+          href={enlaceTelefono()}
+          class="sm:hidden inline-flex min-h-12 min-w-12 items-center justify-center rounded-sm bg-primary-container text-on-accent hover:bg-primary active:scale-95 transition-all focus-visible:outline-2 focus-visible:outline-primary"
+          aria-label="Llamar a Grúas Burgos"
+        >
+          <Icono nombre="llamada" />
+        </a>
+
+        <!-- Desktop / Tablet: Reutiliza el componente BotonLlamada -->
+        <div class="hidden sm:block">
+          <BotonLlamada variante="principal" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Nivel inferior: Navegación semántica por anclas con aria-current dinámico -->
+    <nav
+      aria-label="Navegación principal"
+      class="border-t border-surface-container-low pt-space-xs"
+    >
+      <ul class="flex items-center justify-center sm:justify-start gap-space-lg">
+        <li>
+          <a
+            href="#inicio"
+            class="nav-enlace inline-block border-b-2 border-transparent py-1 font-display text-label-md uppercase text-secondary transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-primary aria-[current=page]:border-primary aria-[current=page]:text-primary aria-[current=page]:font-bold"
+          >
+            Inicio
+          </a>
+        </li>
+        <li>
+          <a
+            href="#servicios"
+            class="nav-enlace inline-block border-b-2 border-transparent py-1 font-display text-label-md uppercase text-secondary transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-primary aria-[current=page]:border-primary aria-[current=page]:text-primary aria-[current=page]:font-bold"
+          >
+            Servicios
+          </a>
+        </li>
+        <li>
+          <a
+            href="#cobertura"
+            class="nav-enlace inline-block border-b-2 border-transparent py-1 font-display text-label-md uppercase text-secondary transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-primary aria-[current=page]:border-primary aria-[current=page]:text-primary aria-[current=page]:font-bold"
+          >
+            Cobertura
+          </a>
+        </li>
+        <li>
+          <a
+            href="#contacto"
+            class="nav-enlace inline-block border-b-2 border-transparent py-1 font-display text-label-md uppercase text-secondary transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-primary aria-[current=page]:border-primary aria-[current=page]:text-primary aria-[current=page]:font-bold"
+          >
+            Contacto
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </Contenedor>
+</header>
+
+<script>
+  const configurarNavActivo = () => {
+    const enlaces = document.querySelectorAll('header nav a.nav-enlace');
+    if (!enlaces.length) return;
+
+    const secciones = Array.from(enlaces)
+      .map((enlace) => {
+        const href = enlace.getAttribute('href');
+        return href && href.startsWith('#') && href.length > 1
+          ? document.querySelector(href)
+          : null;
+      })
+      .filter((elemento) => elemento !== null);
+
+    if (!secciones.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            enlaces.forEach((enlace) => {
+              if (enlace.getAttribute('href') === `#${id}`) {
+                enlace.setAttribute('aria-current', 'page');
+              } else {
+                enlace.removeAttribute('aria-current');
+              }
+            });
+          }
+        });
+      },
+      {
+        rootMargin: '-15% 0px -70% 0px',
+        threshold: 0,
+      },
+    );
+
+    secciones.forEach((seccion) => {
+      if (seccion) observer.observe(seccion);
+    });
+  };
+
+  // Inicialización al cargar el DOM y en navegaciones
+  configurarNavActivo();
+  document.addEventListener('astro:page-load', configurarNavActivo);
+</script>
