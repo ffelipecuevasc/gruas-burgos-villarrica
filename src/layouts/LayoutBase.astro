@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { Font } from 'astro:assets';
 import CabeceraSEO from '../components/CabeceraSEO.astro';
 import { negocio } from '../data/negocio.js';
 
@@ -24,10 +25,18 @@ const anio = new Date().getFullYear();
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="dark" />
+    <Font
+      cssVariable="--font-barlow-condensed"
+      preload={[{ weight: 800, style: 'normal', subset: 'latin' }]}
+    />
+    <Font
+      cssVariable="--font-chivo"
+      preload={[{ weight: 400, style: 'normal', subset: 'latin' }]}
+    />
     <CabeceraSEO titulo={titulo} descripcion={descripcion} noindex={noindex} />
     <slot name="head" />
   </head>
-  <body class="bg-neutral-950 text-neutral-100 antialiased">
+  <body>
     <main>
       <slot />
     </main>
