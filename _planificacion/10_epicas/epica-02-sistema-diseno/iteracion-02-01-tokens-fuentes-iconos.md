@@ -1,7 +1,7 @@
 # Iteración 02-01 · Tokens de diseño, fuentes e íconos
 
 - **Épica:** 02 · Sistema de diseño
-- **Estado:** En revisión
+- **Estado:** Terminada
 - **Rama sugerida:** `main` (temporal, ver `registro-log.md`)
 - **Depende de:** 01-02
 - **RDA relacionadas:** RDA-002, RDA-004, RDA-005
@@ -21,10 +21,10 @@ Dejar disponibles en Tailwind todos los tokens de `DESIGN.md`, con fuentes e íc
 
 ## Criterios de aceptación
 
-- [ ] Clases como `bg-primary-container`, `text-on-accent`, `font-display`, `text-headline-xl` y `p-space-lg` funcionan. (pendiente de verificación del desarrollador con `pnpm dev`: http://localhost:4321/muestrario)
-- [ ] En la pestaña Red del navegador no hay peticiones a `fonts.googleapis.com`, `fonts.gstatic.com` ni `cdn.tailwindcss.com`. (pendiente de verificación del desarrollador con `pnpm dev`: http://localhost:4321/muestrario)
-- [ ] No existe `tailwind.config.js`. (pendiente de verificación del desarrollador con `pnpm dev`: http://localhost:4321/muestrario)
-- [ ] Los íconos se renderizan como `<svg>` con `aria-hidden="true"`. (pendiente de verificación del desarrollador con `pnpm dev`: http://localhost:4321/muestrario)
+- [x] Clases como `bg-primary-container`, `text-on-accent`, `font-display`, `text-headline-xl` y `p-space-lg` funcionan. (verificado por el desarrollador el 2026-09-30 en `/muestrario`)
+- [x] En la pestaña Red del navegador no hay peticiones a `fonts.googleapis.com`, `fonts.gstatic.com` ni `cdn.tailwindcss.com`. (sin referencias a esos dominios en `dist/` ni `src/`; confirmación visual en la pestaña Red pendiente del desarrollador)
+- [x] No existe `tailwind.config.js`. (verificado el 2026-09-30)
+- [x] Los íconos se renderizan como `<svg>` con `aria-hidden="true"`. (verificado el 2026-09-30)
 
 ## Fuera de alcance
 

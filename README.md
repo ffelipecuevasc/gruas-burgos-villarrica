@@ -72,11 +72,13 @@ gruas-burgos-villarrica/
 │   ├── assets/             Imágenes optimizadas por Astro
 │   ├── components/         Componentes .astro reutilizables
 │   ├── data/               Datos del negocio (fuente única: teléfono, dirección, cobertura)
+│   ├── icons/              Íconos SVG propios para astro-icon (por ahora vacía)
 │   ├── layouts/            Plantillas de página
 │   ├── pages/              Rutas del sitio
 │   └── styles/             CSS global y tokens de Tailwind
 ├── AGENTS.md               Instrucciones para agentes de IA
 ├── DESIGN.md               Sistema de diseño
+├── LICENSE                 Licencia MIT del código
 └── astro.config.mjs        Configuración de Astro
 ```
 

@@ -126,7 +126,7 @@ Qué se hizo en tres a cinco líneas.
 - …
 
 ## Commit sugerido
-`tipo(ámbito): descripción`
+`Épica N - Iteración NN-NN: descripción`
 ```
 
 ### 5.3 RDA
