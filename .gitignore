@@ -1,0 +1,31 @@
+# Build
+dist/
+.astro/
+
+# Dependencias
+node_modules/
+
+# Logs
+npm-debug.log*
+pnpm-debug.log*
+
+# Variables de entorno
+.env
+.env.*
+!.env.example
+
+# Sistema operativo / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.idea/workspace.xml
+.idea/shelf/
+.idea/tasks.xml
+.idea/usage.statistics.xml
+.idea/dictionaries/
+
+# Claude Code: preferencias personales (no se versionan)
+.claude/settings.local.json
+
+# Cloudflare
+.wrangler/
