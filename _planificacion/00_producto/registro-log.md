@@ -3,7 +3,7 @@
 **Fuente única de verdad del trabajo pendiente.** Si discrepa con `_planificacion/README.md` o con cualquier otro documento de planificación, prevalece este archivo.
 
 - **Última actualización:** 2026-09-30
-- **Iteración activa:** 01-02 · Arquitectura base, layout y datos del negocio
+- **Iteración activa:** — (siguiente: 02-01 · Tokens de diseño, fuentes e íconos, pendiente de iniciar)
 - **Próximo hito:** prototipo navegable en vista previa de Cloudflare Pages
 - **Entrega tentativa:** 2026-10-18
 - **Flujo de ramas vigente:** trabajo directo en `main` mientras Cloudflare Pages no esté conectado; al conectarlo se retoma `iteracion/XX-YY-…`.
@@ -15,7 +15,7 @@
 | Iteración | Nombre                                              | Épica | Estado     | Depende de | Bitácora |
 | :-------- | :-------------------------------------------------- | :---- | :--------- | :--------- | :------- |
 | 01-01     | Andamiaje del proyecto                              | 01    | Terminada  | —          | [bitacora-01-01-2026-09-30](../99_bitacora/bitacora-01-01-2026-09-30.md) |
-| 01-02     | Arquitectura base, layout y datos del negocio       | 01    | En revisión | 01-01     | [bitacora-01-02-2026-09-30](../99_bitacora/bitacora-01-02-2026-09-30.md) |
+| 01-02     | Arquitectura base, layout y datos del negocio       | 01    | Terminada  | 01-01     | [bitacora-01-02-2026-09-30](../99_bitacora/bitacora-01-02-2026-09-30.md) |
 | 02-01     | Tokens de diseño, fuentes e íconos                  | 02    | Pendiente  | 01-02      | —        |
 | 02-02     | Componentes base de interfaz                        | 02    | Pendiente  | 02-01      | —        |
 | 02-03     | Header, acciones flotantes y footer                 | 02    | Pendiente  | 02-02      | —        |
@@ -71,3 +71,4 @@ Ideas detectadas durante el trabajo que no forman parte de lo contratado. Se cot
 | 2026-09-29 | Creación del registro, 5 épicas y 14 iteraciones.    |
 | 2026-09-30 | Iteración 01-01 en revisión; bitácora agregada. PNPM 12.8.1 fijado en `devEngines.packageManager` (sin Corepack). |
 | 2026-09-30 | Auditoría 02 registrada y corregida (número del prototipo enmascarado, `PNPM_VERSION=12.8.1` documentado para Cloudflare Pages, criterios de 01-01 corregidos, `README.md` y `.gitignore` ajustados). 01-01 terminada; 01-02 en revisión: `negocio.js`, `LayoutBase`, `CabeceraSEO`, 404 e `index` con tres secciones; teléfono, WhatsApp y correo confirmados. Trabajo directo en `main`. |
+| 2026-09-30 | Auditoría 03 registrada; AUD-02-001 cerrado como riesgo aceptado (repositorio público); licencia MIT adoptada (LICENSE, `license` en package.json y README §9); tarea 3 de 01-02 actualizada; 01-02 terminada tras auditoría. Primera tarea ejecutada con Antigravity. |

@@ -107,4 +107,4 @@ Los agentes de IA que colaboran en el proyecto siguen las reglas de `AGENTS.md`.
 
 Desarrollado por **[Felipe Cuevas](https://felipecuevas.dev)** para **Grúas Burgos**, Villarrica, Chile.
 
-El código y el contenido de este repositorio son de uso privado del cliente y del desarrollador. Todos los derechos reservados.
+El código fuente de este repositorio se publica bajo la licencia MIT (ver [LICENSE](LICENSE)). El nombre, el logotipo y la marca «Grúas Burgos», junto con los textos, fotografías y demás contenido del cliente, no están cubiertos por esa licencia y todos los derechos sobre ellos quedan reservados.

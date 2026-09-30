@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "Sitio web de Grúas Burgos, Villarrica, La Araucanía",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "astro dev",

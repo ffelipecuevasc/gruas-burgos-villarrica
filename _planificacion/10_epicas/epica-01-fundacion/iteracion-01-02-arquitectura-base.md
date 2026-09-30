@@ -1,7 +1,7 @@
 # Iteración 01-02 · Arquitectura base, layout y datos del negocio
 
 - **Épica:** 01 · Fundación del proyecto
-- **Estado:** En revisión
+- **Estado:** Terminada
 - **Rama sugerida:** `main` (temporal, ver `registro-log.md`)
 - **Depende de:** 01-01
 - **RDA relacionadas:** RDA-008, RDA-009
@@ -15,7 +15,7 @@ Establecer la estructura de carpetas, el layout único del sitio y la fuente ún
 
 1. Crear `src/components/`, `src/layouts/` y `src/data/` con archivos reales, y `src/assets/` con un `.gitkeep`. No crear `public/` vacío: Git no versiona carpetas vacías y un `.gitkeep` dentro de `public/` se copiaría a `dist/`; se crea con su primer archivo real (04-01).
 2. Crear `src/data/negocio.js` con: nombre, eslogan, teléfono (visible y E.164), WhatsApp (número y mensajes predeterminados), correo, dirección, coordenadas, horario 24/7, cobertura, redes sociales y facturación. Usar `PENDIENTE_CLIENTE` donde falte información. Exportar helpers `enlaceTelefono()` y `enlaceWhatsApp(mensaje)`.
-3. Registrar como datos confirmados solo: nombre "Grúas Burgos", dirección "Vicente Reyes 870, Villarrica", dominio y URLs de Instagram, Facebook y TikTok de `rrss-gruas-burgos.txt`.
+3. Registrar como datos confirmados: nombre "Grúas Burgos", dirección "Vicente Reyes 870, Villarrica", dominio, teléfono de llamadas y WhatsApp (mismo número), correo de contacto y URLs de Instagram, Facebook y TikTok. Los valores viven solo en `src/data/negocio.js`. La cuenta de TikTok sigue por confirmar (AUD-01-008).
 4. Crear `src/layouts/LayoutBase.astro` con `lang="es-CL"`, `color-scheme: dark`, slot para `head` y `main`.
 5. Crear `src/components/CabeceraSEO.astro` con título, descripción y canonical (Open Graph y JSON-LD se completan en 04-01).
 6. Crear `src/pages/404.astro` en español con botones de llamada y volver al inicio.
@@ -35,4 +35,4 @@ Establecer la estructura de carpetas, el layout único del sitio y la fuente ún
 
 ## Datos requeridos del cliente
 
-- Teléfono, WhatsApp y correo (se dejan como `PENDIENTE_CLIENTE` si no llegan).
+- Teléfono, WhatsApp y correo: recibidos y registrados el 2026-09-30 (ver tarea 3).
