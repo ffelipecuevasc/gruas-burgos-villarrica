@@ -52,9 +52,9 @@ El prototipo define bien la dirección visual (oscuro, naranja de alta visibilid
 
 | ID         | Severidad | Hallazgo                                                                                                                         | Acción recomendada                                                            | Estado  |
 | :--------- | :-------- | :------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------- | :------ |
-| AUD-01-018 | Alta      | Texto `#5d1800` sobre naranja `#ff5715` tiene contraste 4,15:1 (falla AA en texto normal) y se usa en botones y en la tarjeta de despacho. | Texto `#0e0e0e` sobre naranja (6,09:1). Definido en `DESIGN.md`.             | Abierto |
+| AUD-01-018 | Alta      | Texto `#5d1800` sobre naranja `#ff5715` tiene contraste 4,15:1 (falla AA en texto normal) y se usa en botones y en la tarjeta de despacho. | Texto `#0e0e0e` sobre naranja (6,09:1). Definido en `DESIGN.md`.             | Resuelto en 02-02 |
 | AUD-01-019 | Media     | Placeholder `#474746` sobre `#0e0e0e`: contraste 2,08:1.                                                                         | Usar `#8f8d8c` (5,84:1).                                                     | Abierto |
-| AUD-01-020 | Media     | Texto escrito directamente en mayúsculas en el HTML; los lectores de pantalla pueden deletrearlo.                                | Texto en formato oración con `uppercase` en CSS.                             | Abierto |
+| AUD-01-020 | Media     | Texto escrito directamente en mayúsculas en el HTML; los lectores de pantalla pueden deletrearlo.                                | Texto en formato oración con `uppercase` en CSS.                             | Resuelto en 02-02 |
 | AUD-01-021 | Media     | `::-webkit-scrollbar { display: none }` oculta la barra de desplazamiento; animaciones `ping` y `pulse` sin `prefers-reduced-motion`. | Eliminar la regla y respetar movimiento reducido.                          | Resuelto en 02-01 |
 | AUD-01-022 | Media     | Etiquetas `<label>` del formulario no están asociadas a sus campos (`for`/`id`).                                                 | Asociar etiquetas y agregar `autocomplete`.                                  | Abierto |
 | AUD-01-023 | Media     | En móvil el teléfono del header se oculta (`hidden xl:flex`) y la navegación de tres enlaces no tiene tratamiento móvil.         | Botón de llamada visible en header móvil y barra inferior de acciones.       | Abierto |
@@ -108,7 +108,7 @@ Sin hallazgos de severidad Alta. 01-02 cumple los criterios informados; quedan o
 
 | ID | Severidad | Área | Hallazgo | Acción recomendada | Estado |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| AUD-03-001 | Baja | Calidad | `pnpm check` pasó de 0 a 4 sugerencias que, según el informe de Claude Code, proponen convertir el JSDoc de `Props` a tipos de TypeScript. | No aplicar: AGENTS.md §3 prohíbe TypeScript en el código de la aplicación. Reevaluar si las sugerencias aumentan. | Abierto (6 hints tras 02-01: Icono.astro suma 2 por el mismo motivo) |
+| AUD-03-001 | Baja | Calidad | `pnpm check` pasó de 0 a 4 sugerencias que, según el informe de Claude Code, proponen convertir el JSDoc de `Props` a tipos de TypeScript. | No aplicar: AGENTS.md §3 prohíbe TypeScript en el código de la aplicación. Reevaluar si las sugerencias aumentan. | Abierto (18 hints tras 02-02; decisión del desarrollador: mantenerlos visibles, ver AUD-05-002) |
 | AUD-03-002 | Baja | Estructura | `#inicio` incluye un `h2` provisional "Quiénes somos" sin contenido, que anticipa el bloque de 03-02 (RDA-009). | Completar o retirar en 03-02 y verificar la jerarquía h1 → h2 en el HTML generado. | Abierto |
 | AUD-03-003 | Baja | Documentación | La tarea 3 de 01-02 listaba como confirmados solo nombre, dirección, dominio y redes, aunque el contacto ya estaba confirmado. | Actualizar la tarea 3 y la sección de datos requeridos. | Resuelto el 2026-09-30 |
 | AUD-03-004 | Media | Privacidad | AUD-02-001 quedó pendiente de repositorio privado, pero el desarrollador decidió mantener el repositorio público. | Cerrar AUD-02-001 como riesgo aceptado; no reescribir historial. | Resuelto el 2026-09-30 |
@@ -136,3 +136,23 @@ Los tokens, astro-icon y la Fonts API funcionan con Astro 7. Se detectaron cinco
 | AUD-04-003 | Media | Fuentes | Si el proveedor de la Fonts API no puede descargar las fuentes, `pnpm build` termina con éxito y solo avisa ("No data found for font family"): el sitio saldría sin fuentes propias. Probado en un entorno sin acceso al proveedor; en la máquina del desarrollador la descarga funcionó (6 archivos .woff2). | Exigir en cada compilación que no aparezcan esos avisos y que existan los .woff2 en `dist/`; revisar el registro de compilación de Cloudflare en 05-01. Si falla de forma recurrente, evaluar `fontProviders.local()` con archivos en el repositorio. | Abierto |
 | AUD-04-004 | Baja | Accesibilidad | `astro-icon` no agrega `aria-hidden` por defecto (probado). | Envolver los íconos en `Icono.astro`, que siempre lo agrega. | Resuelto en 02-01 |
 | AUD-04-005 | Baja | Configuración | Git en Windows avisa "LF will be replaced by CRLF the next time Git touches it" al ejecutar `git diff`, y el repositorio no define `.gitattributes`: los saltos de línea dependen de la configuración de cada máquina. | Evaluar un `.gitattributes` con `* text=auto eol=lf` y configurar WebStorm con saltos de línea LF; decidirlo con el desarrollador. | Resuelto el 2026-09-30 (`.gitattributes` con `* text=auto eol=lf`; pendiente del desarrollador: configurar WebStorm con separador de línea LF) |
+
+---
+
+## Auditoría 05 · Preparación de la iteración 02-02
+
+- **Fecha:** 2026-09-30
+- **Auditor:** Claude (asistente de planificación)
+- **Alcance:** prueba de los siete componentes base en una copia temporal con Astro 7.3.5 y PNPM 12.8.1, cálculo de contrastes WCAG 2.2 y decisiones del desarrollador.
+
+### Resumen
+
+Los componentes compilan y pasan `astro check` sin errores. Todos los textos cumplen contraste AA; hay una excepción de borde aceptada por el desarrollador.
+
+### Hallazgos
+
+| ID | Severidad | Área | Hallazgo | Acción recomendada | Estado |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| AUD-05-001 | Baja | Accesibilidad | El borde del botón «contorno» (`surface-container-highest`, según `DESIGN.md` §5.1) tiene un contraste de 1,57:1 sobre `surface`. El texto del botón sí cumple AA (14,98:1), pero el borde es lo único que lo distingue del fondo. | Mantener lo definido en `DESIGN.md` §5.1. Reevaluar con el token `outline` (5,87:1 sobre `surface`) si hay problemas de usabilidad. | Resuelto el 2026-09-30 (riesgo aceptado por el desarrollador) |
+| AUD-05-002 | Baja | Calidad | `pnpm check` suma 2 hints por cada componente con JSDoc de `Props` (`AGENTS.md` §7.8): 18 tras 02-02 y en aumento. | Mantenerlos visibles sin cambiar el script `check`. Lo que bloquea son los errores y advertencias; el conteo de hints es solo referencia. | Resuelto el 2026-09-30 (decisión del desarrollador) |
+| AUD-05-003 | Baja | Calidad | `astro check` marca el error ts(7053) al indexar un objeto literal con una clave dinámica (por ejemplo `variantes[variante]`) en componentes con JSDoc. | Usar `Map` (`new Map(Object.entries({...}))` y `.get(clave)`), patrón ya usado en `Icono.astro` y `Boton.astro`. | Resuelto en 02-02 |
