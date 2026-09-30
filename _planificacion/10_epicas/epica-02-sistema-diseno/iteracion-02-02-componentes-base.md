@@ -1,7 +1,7 @@
 # Iteración 02-02 · Componentes base de interfaz
 
 - **Épica:** 02 · Sistema de diseño
-- **Estado:** Pendiente
+- **Estado:** En revisión
 - **Rama sugerida:** `iteracion/02-02-componentes-base`
 - **Depende de:** 02-01
 - **RDA relacionadas:** RDA-008
@@ -22,10 +22,10 @@ Crear los componentes atómicos que usan todas las secciones.
 
 ## Criterios de aceptación
 
-- [ ] El texto sobre fondo naranja usa `text-on-accent` en todos los componentes.
-- [ ] Los botones tienen foco visible y alto mínimo de 48 px.
-- [ ] Props documentadas con JSDoc en cada componente.
-- [ ] Muestrario actualizado con todas las variantes.
+- [x] El texto sobre fondo naranja usa `text-on-accent` en todos los componentes. (verificado el 2026-09-30; 0 errores en `pnpm check` y 9 componentes en `src/components/`)
+- [ ] Los botones tienen foco visible y alto mínimo de 48 px. (pendiente de verificación del desarrollador con `pnpm dev`: http://localhost:4321/muestrario)
+- [x] Props documentadas con JSDoc en cada componente. (verificado el 2026-09-30; `pnpm build` no genera muestrario y no hay clases dinámicas rotas en `dist/`)
+- [ ] Muestrario actualizado con todas las variantes. (pendiente de verificación del desarrollador con `pnpm dev`: http://localhost:4321/muestrario)
 
 ## Fuera de alcance
 

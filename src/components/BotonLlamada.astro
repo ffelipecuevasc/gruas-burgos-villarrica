@@ -1,0 +1,17 @@
+---
+import Boton from './Boton.astro';
+import { enlaceTelefono } from '../data/negocio.js';
+
+/**
+ * @typedef {Object} Props
+ * @property {'principal' | 'secundario' | 'contorno'} [variante] Aspecto del botón. Por defecto `principal`.
+ * @property {string} [class] Clases adicionales de Tailwind.
+ */
+
+/** @type {Props} */
+const { variante = 'principal', class: clase = '' } = Astro.props;
+---
+
+<Boton href={enlaceTelefono()} variante={variante} icono="llamada" class={clase}>
+  Llamar ahora
+</Boton>

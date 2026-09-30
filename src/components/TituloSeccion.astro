@@ -1,0 +1,20 @@
+---
+/**
+ * @typedef {Object} Props
+ * @property {string} id `id` del `h2`; la sección lo usa en `aria-labelledby`.
+ * @property {string} [etiqueta] Texto breve sobre el título. Úsalo solo si aporta información.
+ * @property {string} [bajada] Párrafo de apoyo bajo el título.
+ */
+
+/** @type {Props} */
+const { id, etiqueta, bajada } = Astro.props;
+---
+
+<header>
+  {etiqueta && <p class="font-display text-label-md text-primary uppercase">{etiqueta}</p>}
+  <h2 id={id} class="font-display text-headline-lg-mobile md:text-headline-lg uppercase">
+    <slot />
+  </h2>
+  <div class="bg-on-surface mt-space-md h-[3px] w-10"></div>
+  {bajada && <p class="text-secondary font-body text-body-lg mt-space-md max-w-2xl">{bajada}</p>}
+</header>

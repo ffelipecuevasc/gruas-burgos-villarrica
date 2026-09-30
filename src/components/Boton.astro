@@ -1,0 +1,50 @@
+---
+import Icono from './Icono.astro';
+
+/**
+ * @typedef {Object} Props
+ * @property {'principal' | 'secundario' | 'contorno'} [variante] Aspecto del botón. Por defecto `principal`.
+ * @property {string} [href] Si existe, se renderiza un `<a>`; si no, un `<button>`.
+ * @property {'button' | 'submit' | 'reset'} [type] Tipo del `<button>`. Por defecto `button`.
+ * @property {string} [icono] Clave de `Icono.astro`, por ejemplo `llamada`.
+ * @property {boolean} [externo] Abre el enlace en una pestaña nueva con `rel="noopener noreferrer"`.
+ * @property {string} [class] Clases adicionales de Tailwind.
+ */
+
+/** @type {Props & Record<string, any>} */
+const {
+  variante = 'principal',
+  href,
+  type = 'button',
+  icono,
+  externo = false,
+  class: clase = '',
+  ...resto
+} = Astro.props;
+
+// Tailwind solo detecta clases escritas completas: no armes nombres con texto.
+const base =
+  'inline-flex min-h-12 items-center justify-center gap-space-sm px-space-lg font-display text-label-lg uppercase transition-colors duration-150 active:scale-95';
+const variantes = new Map(
+  Object.entries({
+    principal: 'bg-primary-container text-on-accent hover:bg-primary',
+    secundario: 'bg-surface-container-lowest text-on-surface hover:text-primary',
+    contorno:
+      'border border-surface-container-highest text-on-surface hover:border-primary-container',
+  }),
+);
+const clases = [base, variantes.get(variante) ?? variantes.get('principal'), clase];
+const atributosExternos = externo ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+---
+
+{href ? (
+  <a href={href} class:list={clases} {...atributosExternos} {...resto}>
+    {icono && <Icono nombre={icono} />}
+    <slot />
+  </a>
+) : (
+  <button type={type} class:list={clases} {...resto}>
+    {icono && <Icono nombre={icono} />}
+    <slot />
+  </button>
+)}

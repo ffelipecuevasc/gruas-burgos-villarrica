@@ -1,0 +1,13 @@
+---
+/**
+ * @typedef {Object} Props
+ * @property {string} [class] Clases adicionales de Tailwind.
+ */
+
+/** @type {Props} */
+const { class: clase = '' } = Astro.props;
+---
+
+<div class:list={['mx-auto max-w-7xl px-gutter', clase]}>
+  <slot />
+</div>

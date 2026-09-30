@@ -1,6 +1,13 @@
 ---
 import LayoutBase from '../layouts/LayoutBase.astro';
 import Icono from '../components/Icono.astro';
+import Boton from '../components/Boton.astro';
+import BotonLlamada from '../components/BotonLlamada.astro';
+import BotonWhatsApp from '../components/BotonWhatsApp.astro';
+import Chip from '../components/Chip.astro';
+import Contenedor from '../components/Contenedor.astro';
+import IndicadorDisponible from '../components/IndicadorDisponible.astro';
+import TituloSeccion from '../components/TituloSeccion.astro';
 
 // Página de desarrollo (02-01): solo existe con `pnpm dev`. En `pnpm build`
 // getStaticPaths devuelve una lista vacía y no se genera ninguna página.
@@ -124,6 +131,62 @@ const iconos = [
           </li>
         ))}
       </ul>
+    </section>
+
+    <section aria-labelledby="titulo-botones">
+      <h2 id="titulo-botones" class="font-display text-headline-sm uppercase">
+        Botones
+      </h2>
+      <div class="mt-space-md flex flex-wrap gap-space-md">
+        <Boton variante="principal" icono="llamada">
+          Principal
+        </Boton>
+        <Boton variante="secundario" icono="whatsapp">
+          Secundario
+        </Boton>
+        <Boton variante="contorno" icono="ubicacion">
+          Contorno
+        </Boton>
+        <Boton variante="principal" href="#titulo-botones">
+          Enlace principal
+        </Boton>
+        <Boton variante="principal" type="button">
+          Botón sin ícono
+        </Boton>
+      </div>
+      <div class="mt-space-md flex flex-wrap gap-space-md">
+        <BotonLlamada />
+        <BotonWhatsApp />
+        <BotonWhatsApp
+          variante="principal"
+          mensaje="Hola, quiero cotizar un traslado de vehículo. "
+        />
+      </div>
+    </section>
+
+    <section aria-labelledby="titulo-componentes">
+      <h2 id="titulo-componentes" class="font-display text-headline-sm uppercase">
+        Indicador, chips, título de sección y contenedor
+      </h2>
+      <div class="mt-space-md space-y-space-lg">
+        <IndicadorDisponible />
+        <div class="flex flex-wrap gap-space-sm">
+          <Chip>Grúa cama</Chip>
+          <Chip>Rescate en ruta</Chip>
+          <Chip>Traslado</Chip>
+        </div>
+        <div class="bg-surface-container-low py-space-lg">
+          <Contenedor>
+            <TituloSeccion
+              id="titulo-ejemplo"
+              etiqueta="Servicios"
+              bajada="Texto de apoyo de ejemplo para revisar el ancho máximo y el contraste."
+            >
+              Título de sección de ejemplo
+            </TituloSeccion>
+          </Contenedor>
+        </div>
+      </div>
     </section>
 
     <section aria-labelledby="titulo-foco">

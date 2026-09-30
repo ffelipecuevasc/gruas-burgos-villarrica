@@ -1,0 +1,18 @@
+---
+/**
+ * @typedef {Object} Props
+ * @property {string} [class] Clases adicionales de Tailwind.
+ */
+
+/** @type {Props} */
+const { class: clase = '' } = Astro.props;
+---
+
+<span
+  class:list={[
+    'bg-surface-container-highest text-on-surface font-display text-label-md inline-flex items-center px-space-md py-space-xs uppercase',
+    clase,
+  ]}
+>
+  <slot />
+</span>

@@ -3,7 +3,7 @@
 **Fuente única de verdad del trabajo pendiente.** Si discrepa con `_planificacion/README.md` o con cualquier otro documento de planificación, prevalece este archivo.
 
 - **Última actualización:** 2026-09-30
-- **Iteración activa:** — (siguiente: 02-02 · Componentes base de interfaz, pendiente de iniciar)
+- **Iteración activa:** 02-02 · Componentes base de interfaz (en revisión)
 - **Próximo hito:** prototipo navegable en vista previa de Cloudflare Pages
 - **Entrega tentativa:** 2026-10-18
 - **Flujo de ramas vigente:** trabajo directo en `main` mientras Cloudflare Pages no esté conectado; al conectarlo se retoma `iteracion/XX-YY-…`.
@@ -17,7 +17,7 @@
 | 01-01     | Andamiaje del proyecto                              | 01    | Terminada  | —          | [bitacora-01-01-2026-09-30](../99_bitacora/bitacora-01-01-2026-09-30.md) |
 | 01-02     | Arquitectura base, layout y datos del negocio       | 01    | Terminada  | 01-01     | [bitacora-01-02-2026-09-30](../99_bitacora/bitacora-01-02-2026-09-30.md) |
 | 02-01     | Tokens de diseño, fuentes e íconos                  | 02    | Terminada  | 01-02     | [bitacora-02-01-2026-09-30](../99_bitacora/bitacora-02-01-2026-09-30.md) |
-| 02-02     | Componentes base de interfaz                        | 02    | Pendiente  | 02-01      | —        |
+| 02-02     | Componentes base de interfaz                        | 02    | En revisión | 02-01      | [bitacora-02-02-2026-09-30](../99_bitacora/bitacora-02-02-2026-09-30.md) |
 | 02-03     | Header, acciones flotantes y footer                 | 02    | Pendiente  | 02-02      | —        |
 | 03-01     | Sección Inicio: hero y contacto inmediato           | 03    | Pendiente  | 02-03      | —        |
 | 03-02     | Sección Inicio: quiénes somos y reseñas             | 03    | Pendiente  | 03-01      | —        |
@@ -74,3 +74,4 @@ Ideas detectadas durante el trabajo que no forman parte de lo contratado. Se cot
 | 2026-09-30 | Auditoría 03 registrada; AUD-02-001 cerrado como riesgo aceptado (repositorio público); licencia MIT adoptada (LICENSE, `license` en package.json y README §9); tarea 3 de 01-02 actualizada; 01-02 terminada tras auditoría. Primera tarea ejecutada con Antigravity. |
 | 2026-09-30 | Iteración 02-01 en revisión: tokens de `DESIGN.md`, Fonts API (fontsource), `astro-icon` con `Icono.astro` y página de desarrollo `[muestrario].astro`. Auditoría 04 registrada. AUD-03-006 cerrado. Convención de commits actualizada a «Épica N - Iteración NN-NN: descripción». |
 | 2026-09-30 | Iteración 02-01 terminada tras la verificación del desarrollador en `/muestrario`. `.gitattributes` adoptado (AUD-04-005 resuelto); convención de commits alineada en `_planificacion/README.md`; estructura de `README.md` §5 actualizada. |
+| 2026-09-30 | Iteración 02-02 en revisión: siete componentes base en `src/components/`, muestrario ampliado y verificaciones automáticas superadas. |
