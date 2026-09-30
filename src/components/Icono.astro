@@ -1,0 +1,40 @@
+---
+import { Icon } from 'astro-icon/components';
+
+// Única fuente de nombres de ícono del sitio (DESIGN.md §6).
+const ICONOS = new Map(
+  Object.entries({
+    marca: 'material-symbols:car-crash-outline',
+    llamada: 'material-symbols:call-outline',
+    whatsapp: 'simple-icons:whatsapp',
+    instagram: 'simple-icons:instagram',
+    facebook: 'simple-icons:facebook',
+    tiktok: 'simple-icons:tiktok',
+    horario: 'material-symbols:schedule-outline',
+    emergencia: 'material-symbols:emergency-outline',
+    rescate: 'material-symbols:home-repair-service-outline',
+    traslado: 'material-symbols:rv-hookup-outline',
+    'larga-distancia': 'material-symbols:distance-outline',
+    verificacion: 'material-symbols:check-circle-outline',
+    ubicacion: 'material-symbols:location-on-outline',
+    cobertura: 'material-symbols:near-me-outline',
+    advertencia: 'material-symbols:warning-outline',
+  }),
+);
+
+/**
+ * @typedef {Object} Props
+ * @property {string} nombre Clave del ícono, por ejemplo `llamada` o `whatsapp`.
+ * @property {string} [class] Clases de Tailwind para tamaño y color. Por defecto `size-6`.
+ */
+
+/** @type {Props} */
+const { nombre, class: clase = 'size-6' } = Astro.props;
+
+const id = ICONOS.get(nombre);
+if (!id) {
+  throw new Error(`Icono.astro: no existe el ícono "${nombre}". Revisa el mapa ICONOS.`);
+}
+---
+
+<Icon name={id} class={clase} aria-hidden="true" />

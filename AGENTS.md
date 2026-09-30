@@ -93,7 +93,7 @@ Usa siempre PNPM. Nunca `npm install` ni `yarn`.
 4. Verifica: `pnpm format`, `pnpm check`, `pnpm build` y revisión en viewport móvil (360 px) y escritorio.
 5. Escribe la bitácora en `_planificacion/99_bitacora/` con la plantilla de `_planificacion/README.md`.
 6. Actualiza el estado en `registro-log.md` y, si corresponde, en `decisiones.md` y `auditoria-tecnica.md`.
-7. Entrega un resumen al desarrollador con los archivos modificados y un mensaje de commit sugerido en formato Conventional Commits en español, por ejemplo `feat(hero): agrega botones de llamada y WhatsApp`. El commit lo hace él.
+7. Entrega un resumen al desarrollador con los archivos modificados y un mensaje de commit sugerido con el formato `Épica N - Iteración NN-NN: descripción`, en una sola línea de máximo 200 caracteres y en español de Chile; cuenta los caracteres antes de entregarlo. Por ejemplo: `Épica 3 - Iteración 03-01: agrega el hero con los botones de llamada y WhatsApp`. El commit lo hace él.
 
 ## 9. Cuándo detenerse y preguntar
 

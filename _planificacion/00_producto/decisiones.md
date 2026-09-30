@@ -56,6 +56,7 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 **Decisión:** Usar la Fonts API integrada de Astro (estable desde Astro 6) para descargar y servir Barlow Condensed (600, 700, 800) y Chivo (400, 600, 700) desde el propio dominio, con subconjunto latino, `font-display: swap` y precarga solo de los dos pesos críticos.
 **Alternativas consideradas:** Paquetes `@fontsource` (válido, pero más configuración manual); Google Fonts remoto (descartado).
 **Consecuencias:** Sin dependencias de terceros en la carga. Verificar la sintaxis vigente en la documentación de Astro al implementar.
+**Actualización 2026-09-30:** la Fonts API es estable (clave `fonts` de `astro.config.mjs`, sin `experimental`) desde Astro 6. Proveedor elegido: `fontProviders.fontsource()`; las fuentes se descargan al compilar y se sirven desde el propio dominio. Si el proveedor no responde, `pnpm build` solo emite avisos (ver AUD-04-003).
 
 ## RDA-005 · Íconos como SVG en línea en tiempo de compilación
 
@@ -66,6 +67,7 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 **Decisión:** Renderizar los íconos como SVG en línea durante la compilación con `astro-icon` y los sets `@iconify-json/material-symbols` y `@iconify-json/simple-icons` (WhatsApp, Instagram, Facebook, TikTok).
 **Alternativas consideradas:** Copiar SVG a mano en componentes (válido si se prefiere cero dependencias; más tedioso); fuente de íconos (descartada).
 **Consecuencias:** Solo se incluyen los íconos usados, sin JavaScript. Si `astro-icon` no es compatible con Astro 7 al momento de implementar, se usa la alternativa manual.
+**Actualización 2026-09-30:** `astro-icon` 1.2.0 verificado con Astro 7 junto con `@iconify-json/material-symbols` y `@iconify-json/simple-icons`. Los nombres de ícono viven en un único mapa en `src/components/Icono.astro`, que además marca los íconos con `aria-hidden="true"`.
 
 ## RDA-006 · Formulario de cotización que compone un mensaje de WhatsApp
 

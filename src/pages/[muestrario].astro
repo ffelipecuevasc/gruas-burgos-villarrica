@@ -1,0 +1,142 @@
+---
+import LayoutBase from '../layouts/LayoutBase.astro';
+import Icono from '../components/Icono.astro';
+
+// Página de desarrollo (02-01): solo existe con `pnpm dev`. En `pnpm build`
+// getStaticPaths devuelve una lista vacía y no se genera ninguna página.
+export function getStaticPaths() {
+  return import.meta.env.DEV ? [{ params: { muestrario: 'muestrario' } }] : [];
+}
+
+// Tailwind solo detecta clases escritas completas: no armes nombres con texto.
+const colores = [
+  { token: 'surface-container-lowest', clase: 'bg-surface-container-lowest' },
+  { token: 'surface', clase: 'bg-surface' },
+  { token: 'surface-container-low', clase: 'bg-surface-container-low' },
+  { token: 'surface-container', clase: 'bg-surface-container' },
+  { token: 'surface-container-high', clase: 'bg-surface-container-high' },
+  { token: 'surface-container-highest', clase: 'bg-surface-container-highest' },
+  { token: 'primary-container', clase: 'bg-primary-container' },
+  { token: 'primary', clase: 'bg-primary' },
+  { token: 'on-accent', clase: 'bg-on-accent' },
+  { token: 'on-surface', clase: 'bg-on-surface' },
+  { token: 'on-surface-variant', clase: 'bg-on-surface-variant' },
+  { token: 'secondary', clase: 'bg-secondary' },
+  { token: 'placeholder', clase: 'bg-placeholder' },
+  { token: 'outline', clase: 'bg-outline' },
+  { token: 'error', clase: 'bg-error' },
+];
+
+const textos = [
+  { token: 'headline-xl', clase: 'font-display uppercase text-headline-xl' },
+  { token: 'headline-xl-mobile', clase: 'font-display uppercase text-headline-xl-mobile' },
+  { token: 'headline-lg', clase: 'font-display uppercase text-headline-lg' },
+  { token: 'headline-lg-mobile', clase: 'font-display uppercase text-headline-lg-mobile' },
+  { token: 'headline-md', clase: 'font-display uppercase text-headline-md' },
+  { token: 'headline-sm', clase: 'font-display uppercase text-headline-sm' },
+  { token: 'label-lg', clase: 'font-display uppercase text-label-lg' },
+  { token: 'label-md', clase: 'font-display uppercase text-label-md' },
+  { token: 'label-sm', clase: 'font-display uppercase text-label-sm' },
+  { token: 'body-lg', clase: 'font-body text-body-lg' },
+  { token: 'body-md', clase: 'font-body text-body-md' },
+  { token: 'body-sm', clase: 'font-body text-body-sm' },
+];
+
+const iconos = [
+  'marca',
+  'llamada',
+  'whatsapp',
+  'instagram',
+  'facebook',
+  'tiktok',
+  'horario',
+  'emergencia',
+  'rescate',
+  'traslado',
+  'larga-distancia',
+  'verificacion',
+  'ubicacion',
+  'cobertura',
+  'advertencia',
+];
+---
+
+<LayoutBase
+  titulo="Muestrario de diseño | Grúas Burgos"
+  descripcion="Página de desarrollo para revisar colores, tipografías e íconos."
+  noindex
+>
+  <div class="px-gutter-mobile md:px-margin py-space-xl space-y-space-xl">
+    <header>
+      <h1 class="font-display text-headline-lg-mobile md:text-headline-lg uppercase">
+        Muestrario de diseño
+      </h1>
+      <p class="text-secondary font-body text-body-md mt-space-sm">
+        Página de desarrollo: solo existe con pnpm dev y no se publica.
+      </p>
+    </header>
+
+    <section aria-labelledby="titulo-colores">
+      <h2 id="titulo-colores" class="font-display text-headline-sm uppercase">
+        Colores
+      </h2>
+      <ul class="mt-space-md grid grid-cols-2 gap-space-md md:grid-cols-5">
+        {colores.map((color) => (
+          <li class="font-body text-body-sm">
+            <div class={`${color.clase} border-surface-container-highest h-16 border`} />
+            <span class="mt-space-xs block">{color.token}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section aria-labelledby="titulo-tipografia">
+      <h2 id="titulo-tipografia" class="font-display text-headline-sm uppercase">
+        Tipografía
+      </h2>
+      <ul class="mt-space-md space-y-space-md">
+        {textos.map((texto) => (
+          <li>
+            <span class="text-secondary font-body text-body-sm block">{texto.token}</span>
+            <span class={texto.clase}>Grúas en Villarrica y La Araucanía, 24 horas</span>
+          </li>
+        ))}
+      </ul>
+      <div class="mt-space-lg space-y-space-sm text-body-lg">
+        <p class="font-display font-semibold">Barlow Condensed 600: ¿Necesitas una grúa?</p>
+        <p class="font-display font-bold">Barlow Condensed 700: ¿Necesitas una grúa?</p>
+        <p class="font-display font-extrabold">Barlow Condensed 800: ¿Necesitas una grúa?</p>
+        <p class="font-body font-normal">Chivo 400: Atendemos de noche y con lluvia, ñandú.</p>
+        <p class="font-body font-semibold">Chivo 600: Atendemos de noche y con lluvia, ñandú.</p>
+        <p class="font-body font-bold">Chivo 700: Atendemos de noche y con lluvia, ñandú.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="titulo-iconos">
+      <h2 id="titulo-iconos" class="font-display text-headline-sm uppercase">
+        Íconos
+      </h2>
+      <ul class="mt-space-md grid grid-cols-3 gap-space-md md:grid-cols-5">
+        {iconos.map((nombre) => (
+          <li class="font-body text-body-sm flex items-center gap-space-sm">
+            <Icono nombre={nombre} class="text-primary-container size-8" />
+            <span>{nombre}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section aria-labelledby="titulo-foco">
+      <h2 id="titulo-foco" class="font-display text-headline-sm uppercase">
+        Foco visible
+      </h2>
+      <p class="font-body text-body-md mt-space-sm">
+        Presiona Tab para ver el anillo de foco en este{' '}
+        <a href="#titulo-foco" class="text-primary underline">
+          enlace de prueba
+        </a>
+        .
+      </p>
+    </section>
+  </div>
+</LayoutBase>

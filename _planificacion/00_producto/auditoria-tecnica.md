@@ -45,7 +45,7 @@ El prototipo define bien la dirección visual (oscuro, naranja de alta visibilid
 | ID         | Severidad | Hallazgo                                                                                                     | Acción recomendada                                  | Estado              |
 | :--------- | :-------- | :----------------------------------------------------------------------------------------------------------- | :-------------------------------------------------- | :------------------ |
 | AUD-01-015 | Alta      | Tailwind se carga desde `cdn.tailwindcss.com` (compilador JIT en el navegador, no apto para producción).     | Tailwind 4 compilado con Vite.                      | Resuelto en RDA-002 |
-| AUD-01-016 | Alta      | Tres hojas de Google Fonts remotas, dos de ellas de Material Symbols (una duplicada).                        | Fuentes autoalojadas e íconos SVG.                  | Resuelto en RDA-004 y RDA-005 |
+| AUD-01-016 | Alta      | Tres hojas de Google Fonts remotas, dos de ellas de Material Symbols (una duplicada).                        | Fuentes autoalojadas e íconos SVG.                  | Resuelto en 02-01 (RDA-004 y RDA-005) |
 | AUD-01-017 | Media     | La imagen del hero se carga como `<img>` sin dimensiones, formato moderno ni prioridad; el mapa es un `background-image` remoto. | `<Picture />` con AVIF/WebP, dimensiones y prioridad. | Abierto |
 
 ### D. Accesibilidad
@@ -55,10 +55,10 @@ El prototipo define bien la dirección visual (oscuro, naranja de alta visibilid
 | AUD-01-018 | Alta      | Texto `#5d1800` sobre naranja `#ff5715` tiene contraste 4,15:1 (falla AA en texto normal) y se usa en botones y en la tarjeta de despacho. | Texto `#0e0e0e` sobre naranja (6,09:1). Definido en `DESIGN.md`.             | Abierto |
 | AUD-01-019 | Media     | Placeholder `#474746` sobre `#0e0e0e`: contraste 2,08:1.                                                                         | Usar `#8f8d8c` (5,84:1).                                                     | Abierto |
 | AUD-01-020 | Media     | Texto escrito directamente en mayúsculas en el HTML; los lectores de pantalla pueden deletrearlo.                                | Texto en formato oración con `uppercase` en CSS.                             | Abierto |
-| AUD-01-021 | Media     | `::-webkit-scrollbar { display: none }` oculta la barra de desplazamiento; animaciones `ping` y `pulse` sin `prefers-reduced-motion`. | Eliminar la regla y respetar movimiento reducido.                          | Abierto |
+| AUD-01-021 | Media     | `::-webkit-scrollbar { display: none }` oculta la barra de desplazamiento; animaciones `ping` y `pulse` sin `prefers-reduced-motion`. | Eliminar la regla y respetar movimiento reducido.                          | Resuelto en 02-01 |
 | AUD-01-022 | Media     | Etiquetas `<label>` del formulario no están asociadas a sus campos (`for`/`id`).                                                 | Asociar etiquetas y agregar `autocomplete`.                                  | Abierto |
 | AUD-01-023 | Media     | En móvil el teléfono del header se oculta (`hidden xl:flex`) y la navegación de tres enlaces no tiene tratamiento móvil.         | Botón de llamada visible en header móvil y barra inferior de acciones.       | Abierto |
-| AUD-01-024 | Baja      | Íconos de fuente sin `aria-hidden`; el nombre del ícono se lee como texto.                                                       | Resuelto al pasar a SVG con `aria-hidden`.                                   | Resuelto en RDA-005 |
+| AUD-01-024 | Baja      | Íconos de fuente sin `aria-hidden`; el nombre del ícono se lee como texto.                                                       | Resuelto al pasar a SVG con `aria-hidden`.                                   | Resuelto en 02-01 (RDA-005) |
 
 ### E. SEO y estructura
 
@@ -108,9 +108,31 @@ Sin hallazgos de severidad Alta. 01-02 cumple los criterios informados; quedan o
 
 | ID | Severidad | Área | Hallazgo | Acción recomendada | Estado |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| AUD-03-001 | Baja | Calidad | `pnpm check` pasó de 0 a 4 sugerencias que, según el informe de Claude Code, proponen convertir el JSDoc de `Props` a tipos de TypeScript. | No aplicar: AGENTS.md §3 prohíbe TypeScript en el código de la aplicación. Reevaluar si las sugerencias aumentan. | Abierto |
+| AUD-03-001 | Baja | Calidad | `pnpm check` pasó de 0 a 4 sugerencias que, según el informe de Claude Code, proponen convertir el JSDoc de `Props` a tipos de TypeScript. | No aplicar: AGENTS.md §3 prohíbe TypeScript en el código de la aplicación. Reevaluar si las sugerencias aumentan. | Abierto (6 hints tras 02-01: Icono.astro suma 2 por el mismo motivo) |
 | AUD-03-002 | Baja | Estructura | `#inicio` incluye un `h2` provisional "Quiénes somos" sin contenido, que anticipa el bloque de 03-02 (RDA-009). | Completar o retirar en 03-02 y verificar la jerarquía h1 → h2 en el HTML generado. | Abierto |
 | AUD-03-003 | Baja | Documentación | La tarea 3 de 01-02 listaba como confirmados solo nombre, dirección, dominio y redes, aunque el contacto ya estaba confirmado. | Actualizar la tarea 3 y la sección de datos requeridos. | Resuelto el 2026-09-30 |
 | AUD-03-004 | Media | Privacidad | AUD-02-001 quedó pendiente de repositorio privado, pero el desarrollador decidió mantener el repositorio público. | Cerrar AUD-02-001 como riesgo aceptado; no reescribir historial. | Resuelto el 2026-09-30 |
 | AUD-03-005 | Baja | Documentación | README §9 declaraba "uso privado", incompatible con un repositorio público, y el repositorio no tenía archivo LICENSE. | Adoptar licencia MIT para el código: archivo LICENSE, campo `license` en package.json y README §9 con reserva de marca y contenido del cliente. | Resuelto el 2026-09-30 |
-| AUD-03-006 | Media | Gobernanza de agentes | `.claude/settings.json` solo rige a Claude Code. Con Antigravity, las prohibiciones de AGENTS.md §5 (commit, push, merge, despliegue, editar .claude/) dependen de que el agente las lea y del modo de operación del IDE. La prueba de permisos del 2026-09-30 (git status, git commit --dry-run y git push --dry-run) pidió aprobación al desarrollador en el IDE antes de ejecutarse; el agente no ve esa solicitud. | Elegir en el IDE un modo que pida aprobación para editar y ejecutar comandos, hacer la prueba de permisos (git commit --dry-run y git push --dry-run) y revisar cada comando antes de aprobar. | Abierto (mitigado: el IDE pide aprobación por comando; falta comprobar lo mismo para las ediciones de archivo) |
+| AUD-03-006 | Media | Gobernanza de agentes | `.claude/settings.json` solo rige a Claude Code. Con Antigravity, las prohibiciones de AGENTS.md §5 (commit, push, merge, despliegue, editar .claude/) dependen de que el agente las lea y del modo de operación del IDE. La prueba de permisos del 2026-09-30 (git status, git commit --dry-run y git push --dry-run) pidió aprobación al desarrollador en el IDE antes de ejecutarse; el agente no ve esa solicitud. | Elegir en el IDE un modo que pida aprobación para editar y ejecutar comandos, hacer la prueba de permisos (git commit --dry-run y git push --dry-run) y revisar cada comando antes de aprobar. | Resuelto el 2026-09-30 (verificado: el IDE pidió aprobación para cada comando de la prueba de permisos y para editar README.md, package.json y crear LICENSE). Condición: no activar aprobación automática ni listas de comandos permitidos que incluyan git |
+
+---
+
+## Auditoría 04 · Preparación de la iteración 02-01
+
+- **Fecha:** 2026-09-30
+- **Auditor:** Claude (asistente de planificación)
+- **Alcance:** pruebas de astro-icon, Fonts API y tokens de DESIGN.md en una copia temporal con Astro 7.3.5 y PNPM 12.8.1.
+
+### Resumen
+
+Los tokens, astro-icon y la Fonts API funcionan con Astro 7. Se detectaron cinco ajustes respecto del plan original de 02-01.
+
+### Hallazgos
+
+| ID | Severidad | Área | Hallazgo | Acción recomendada | Estado |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| AUD-04-001 | Baja | Estructura | La tarea 5 de 02-01 proponía `src/pages/_muestrario.astro`, pero Astro no enruta archivos con prefijo `_` ni en desarrollo (probado: responde 404). | Usar `src/pages/[muestrario].astro` con `getStaticPaths` que devuelve datos solo en desarrollo, de modo que `pnpm build` no lo genera. | Resuelto en 02-01 |
+| AUD-04-002 | Media | Compilación | `astro-icon` emite una advertencia en `pnpm build` si no existe `src/icons/` (probado con astro-icon 1.2.0). | Crear `src/icons/` con un `.gitkeep`. | Resuelto en 02-01 |
+| AUD-04-003 | Media | Fuentes | Si el proveedor de la Fonts API no puede descargar las fuentes, `pnpm build` termina con éxito y solo avisa ("No data found for font family"): el sitio saldría sin fuentes propias. Probado en un entorno sin acceso al proveedor; en la máquina del desarrollador la descarga funcionó (6 archivos .woff2). | Exigir en cada compilación que no aparezcan esos avisos y que existan los .woff2 en `dist/`; revisar el registro de compilación de Cloudflare en 05-01. Si falla de forma recurrente, evaluar `fontProviders.local()` con archivos en el repositorio. | Abierto |
+| AUD-04-004 | Baja | Accesibilidad | `astro-icon` no agrega `aria-hidden` por defecto (probado). | Envolver los íconos en `Icono.astro`, que siempre lo agrega. | Resuelto en 02-01 |
+| AUD-04-005 | Baja | Configuración | Git en Windows avisa "LF will be replaced by CRLF the next time Git touches it" al ejecutar `git diff`, y el repositorio no define `.gitattributes`: los saltos de línea dependen de la configuración de cada máquina. | Evaluar un `.gitattributes` con `* text=auto eol=lf` y configurar WebStorm con saltos de línea LF; decidirlo con el desarrollador. | Abierto |
