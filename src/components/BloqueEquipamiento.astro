@@ -1,0 +1,40 @@
+---
+import Chip from './Chip.astro';
+
+/**
+ * @typedef {Object} Props
+ * @property {string} [class] Clases adicionales de Tailwind.
+ */
+
+/** @type {Props} */
+const { class: clase = '' } = Astro.props;
+
+const especificaciones = [
+  'Plataforma hidráulica',
+  'Winche de tiro',
+  'Autos, SUV y camionetas 4x4',
+  'Atención 24/7',
+];
+---
+
+<div
+  class:list={[
+    'rounded-sm border border-surface-container-highest bg-surface-container-lowest p-space-lg md:p-space-xl text-on-surface',
+    clase,
+  ]}
+>
+  <div class="space-y-space-md max-w-3xl">
+    <h3 class="font-display text-headline-sm uppercase text-on-surface">Nuestro equipamiento</h3>
+
+    <p class="font-body text-body-md text-secondary">
+      Camión de rescate con plataforma hidráulica inclinable y winche de tiro, rotulado «Rescate en
+      ruta». Preparado para autos, SUV y camionetas 4x4.
+    </p>
+
+    <div class="flex flex-wrap gap-space-xs pt-space-xs">
+      {especificaciones.map((esp) => (
+        <Chip>{esp}</Chip>
+      ))}
+    </div>
+  </div>
+</div>

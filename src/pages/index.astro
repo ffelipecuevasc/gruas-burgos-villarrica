@@ -1,10 +1,16 @@
 ---
 import LayoutBase from '../layouts/LayoutBase.astro';
+import Contenedor from '../components/Contenedor.astro';
 import Hero from '../components/Hero.astro';
 import CintaMetricas from '../components/CintaMetricas.astro';
 import QuienesSomos from '../components/QuienesSomos.astro';
 import Resenas from '../components/Resenas.astro';
-import { negocio, enlaceTelefono } from '../data/negocio.js';
+import TituloSeccion from '../components/TituloSeccion.astro';
+import TarjetaServicio from '../components/TarjetaServicio.astro';
+import BloqueEquipamiento from '../components/BloqueEquipamiento.astro';
+import Boton from '../components/Boton.astro';
+import { servicios } from '../data/servicios.js';
+import { negocio, enlaceTelefono, enlaceWhatsApp } from '../data/negocio.js';
 
 const titulo = `${negocio.nombre} | Grúas en Villarrica 24 horas`;
 const descripcion =
@@ -18,10 +24,46 @@ const descripcion =
   <QuienesSomos />
   <Resenas />
 
-  <section id="servicios" aria-labelledby="titulo-servicios" class="px-4 py-12">
-    <h2 id="titulo-servicios" class="text-2xl font-bold">
-      Servicios
-    </h2>
+  <section
+    id="servicios"
+    aria-labelledby="titulo-servicios"
+    class="py-space-2xl bg-surface text-on-surface border-b border-surface-container-highest"
+  >
+    <Contenedor class="space-y-space-xl">
+      <TituloSeccion
+        id="titulo-servicios"
+        bajada="Atendemos autos, SUV y camionetas en la ciudad, en caminos rurales y en rutas de cordillera."
+      >
+        Servicios
+      </TituloSeccion>
+
+      <!-- Retícula responsiva: 1 col móvil, 2 en md, 3 en lg -->
+      <div class="grid grid-cols-1 gap-space-lg md:grid-cols-2 lg:grid-cols-3">
+        {servicios.map((servicio) => (
+          <TarjetaServicio servicio={servicio} />
+        ))}
+      </div>
+
+      <!-- Nota de traslados a otras ciudades -->
+      <div class="rounded-sm border border-surface-container-highest bg-surface-container-low p-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md">
+        <p class="font-body text-body-md text-secondary">
+          ¿Necesitas un traslado a otra ciudad? Escríbenos y coordinamos el viaje según el destino.
+        </p>
+        <Boton
+          href={enlaceWhatsApp('Hola, quiero cotizar un traslado a otra ciudad. ')}
+          variante="contorno"
+          externo={true}
+          icono="larga-distancia"
+          aria-label="Escribir por WhatsApp sobre traslados a otras ciudades"
+          class="shrink-0"
+        >
+          Escribir por WhatsApp
+        </Boton>
+      </div>
+
+      <!-- Bloque de equipamiento verificado -->
+      <BloqueEquipamiento />
+    </Contenedor>
   </section>
 
   <section id="contacto" aria-labelledby="titulo-contacto" class="px-4 py-12">

@@ -1,0 +1,68 @@
+---
+import Icono from './Icono.astro';
+import Boton from './Boton.astro';
+import { enlaceWhatsApp } from '../data/negocio.js';
+
+/**
+ * @typedef {import('../data/servicios.js').Servicio} Servicio
+ */
+
+/**
+ * @typedef {Object} Props
+ * @property {Servicio} servicio Objeto con la información del servicio.
+ * @property {string} [class] Clases adicionales de Tailwind.
+ */
+
+/** @type {Props} */
+const { servicio, class: clase = '' } = Astro.props;
+
+// Forzar la inferencia a string[] en JavaScript estándar para resolver ts(7006)
+const caracteristicas = (servicio?.caracteristicas ?? []).map(String);
+---
+
+<article
+  class:list={[
+    'flex flex-col justify-between rounded-sm border border-surface-container-highest bg-surface-container-low p-space-lg text-on-surface shadow-sm transition-colors hover:border-primary-container',
+    clase,
+  ]}
+>
+  <div class="space-y-space-md">
+    <!-- Ícono y línea de acento -->
+    <div>
+      <div class="inline-flex size-12 items-center justify-center rounded-sm bg-surface-container-highest text-primary">
+        <Icono nombre={servicio.icono} class="size-6" />
+      </div>
+      <div class="mt-space-sm h-[2px] w-8 bg-primary"></div>
+    </div>
+
+    <!-- Título y descripción -->
+    <div class="space-y-space-xs">
+      <h3 class="font-display text-headline-sm uppercase text-on-surface">{servicio.titulo}</h3>
+      <p class="font-body text-body-md text-secondary">{servicio.descripcion}</p>
+    </div>
+
+    <!-- Características con ícono de verificación -->
+    <ul class="space-y-space-xs pt-space-xs font-body text-body-sm text-secondary">
+      {caracteristicas.map((caracteristica) => (
+        <li class="flex items-start gap-space-xs">
+          <Icono nombre="verificacion" class="size-4 shrink-0 text-primary mt-0.5" />
+          <span>{caracteristica}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <!-- Botón contextual de WhatsApp -->
+  <div class="mt-space-lg border-t border-surface-container pt-space-md">
+    <Boton
+      href={enlaceWhatsApp(servicio.mensajeWhatsApp)}
+      variante="contorno"
+      externo={true}
+      icono="whatsapp"
+      class="w-full"
+      aria-label={`Escribir por WhatsApp sobre ${servicio.titulo}`}
+    >
+      Escribir por WhatsApp
+    </Boton>
+  </div>
+</article>

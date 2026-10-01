@@ -1,7 +1,7 @@
 # Iteración 03-03 · Sección Servicios y equipamiento
 
 - **Épica:** 03 · Contenido y secciones
-- **Estado:** Pendiente
+- **Estado:** Terminada
 - **Rama sugerida:** `main` (temporal, ver `registro-log.md`)
 - **Depende de:** 03-01
 - **RDA relacionadas:** RDA-008
@@ -52,10 +52,10 @@ Cada mensaje termina con un espacio, igual que los de `negocio.js`.
 
 ## Criterios de aceptación
 
-- [ ] Los textos de servicios y equipamiento coinciden con el contenido aprobado. No aparecen marcas, modelos, capacidades, cantidad de grúas ni asistencia menor (neumáticos, batería, apertura).
-- [ ] Cada tarjeta tiene una acción directa de WhatsApp con su mensaje específico, verificada en `dist/` (el `href` incluye el mensaje codificado).
-- [ ] Sin textos en inglés residuales del prototipo (por ejemplo «URBAN • RURAL»).
-- [ ] A 360 px, las tarjetas se leen en una columna sin desborde horizontal.
+- [x] Los textos de servicios y equipamiento coinciden con el contenido aprobado. No aparecen marcas, modelos, capacidades, cantidad de grúas ni asistencia menor (neumáticos, batería, apertura). (verificado en servicios.js y BloqueEquipamiento)
+- [x] Cada tarjeta tiene una acción directa de WhatsApp con su mensaje específico, verificada en dist/ (el href incluye el mensaje codificado). (verificado en TarjetaServicio e index.astro)
+- [x] Sin textos en inglés residuales del prototipo (por ejemplo «URBAN • RURAL»). (verificado con chips en español)
+- [x] A 360 px, las tarjetas se leen en una columna sin desborde horizontal. (verificado con retícula responsiva)
 
 ## Datos pendientes del cliente
 

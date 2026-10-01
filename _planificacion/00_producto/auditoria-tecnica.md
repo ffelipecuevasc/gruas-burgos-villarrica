@@ -23,7 +23,7 @@ El prototipo define bien la dirección visual (oscuro, naranja de alta visibilid
 | AUD-01-001 | Alta      | El teléfono `+56 9 9283 XXXX` se repite en todo el prototipo y no está confirmado como número real del cliente.                                                                                          | Confirmar número de llamada y de WhatsApp (pueden ser distintos). Centralizar en `negocio.js`. | Resuelto en 01-02 |
 | AUD-01-002 | Alta      | El correo `contacto@gruasburgos.cl` usa un dominio distinto de `gruasvillarrica.cl` y no consta que exista.                                                                                              | Confirmar correo real o crear uno en el dominio contratado.                                    | Resuelto en 01-02 |
 | AUD-01-003 | Alta      | Afirmaciones sin respaldo: "25 min tiempo promedio garantizado", "100 % seguro de carga", "0 daños", "tiempo de respuesta récord", "espera menor a 30 segundos", "respuesta en menos de 5 minutos con valor cerrado", "seguimiento GPS", "facturación inmediata", "operador certificado", "balizas homologadas MOP". | Validar cada una con el cliente. Eliminar o reformular las no respaldables para evitar publicidad engañosa (Ley 19.496 del Consumidor). | Resuelto parcialmente en 03-01 (Hero y Cinta de métricas usan exclusivamente contenido verificado; sin afirmaciones del prototipo) |
-| AUD-01-004 | Alta      | Especificaciones técnicas inconsistentes: winche de "12.000 lbs" (≈ 5,4 t) en un texto y "6 TON" en otro; "hasta 4.5 TON"; "plataforma 6.5 metros"; mención de "grúas pluma" y maquinaria (Bobcat, miniexcavadora). | Obtener ficha real de la flota: cantidad de grúas, tipo, capacidad y largo de plataforma.        | Abierto |
+| AUD-01-004 | Alta      | Especificaciones técnicas inconsistentes: winche de "12.000 lbs" (≈ 5,4 t) en un texto y "6 TON" en otro; "hasta 4.5 TON"; "plataforma 6.5 metros"; mención de "grúas pluma" y maquinaria (Bobcat, miniexcavadora). | Obtener ficha real de la flota: cantidad de grúas, tipo, capacidad y largo de plataforma.        | Resuelto parcialmente en 03-03 (Servicios y equipamiento publicados con datos verificados; marcas y capacidades pendientes de ficha de flota) |
 | AUD-01-005 | Alta      | Tiempos de cobertura por zona (15–20, 20–30, 30–40, 35 min, "Villarrica–Temuco en 60 min") sin respaldo.                                                                                                 | Confirmar zonas y rangos, o mostrar solo localidades sin tiempos.                               | Abierto |
 | AUD-01-006 | Media     | Cobertura del prototipo (Curarrehue, pasos fronterizos, aeropuerto, Concepción, Santiago) no coincide del todo con la del brief (Villarrica, Pucón, Loncoche, Temuco, Freire, Santiago, Puerto Montt). | Acordar lista definitiva de localidades y traslados de larga distancia.                         | Abierto |
 | AUD-01-007 | Media     | "+5 años de trayectoria" aparece en el brief y en el prototipo, pero no hay un año de inicio documentado que lo respalde.                                                                                                     | Confirmar año de inicio de operaciones.                                                         | Resuelto parcialmente en 03-02 (Quiénes somos publicado sin año de inicio ni cifras no confirmadas) |
@@ -191,3 +191,18 @@ El informe declaró la épica INCOMPLETA: `Header`, `Footer` y `AccionesFlotante
 | AUD-06-018 | Baja | Confianza | (Claude) El indicador «Disponible 24/7» quedaba oculto en móvil (`hidden sm:flex`). | Mostrarlo en todos los anchos. | Resuelto en 02-03 (corrección) |
 | AUD-06-019 | Baja | Diseño | (Claude) Entre 640 y 767 px se veían a la vez el botón de llamada del header y la barra inferior (puntos de quiebre `sm` y `md`). | Unificar en `md`. | Resuelto en 02-03 (corrección) |
 | AUD-06-020 | Baja | Calidad | (Claude) JavaScript de cliente (IntersectionObserver y `astro:page-load`) para un estado activo opcional. | No implementar la tarea opcional; el sitio queda sin JavaScript de cliente (AGENTS.md §7.1). | Resuelto en 02-03 (corrección) |
+
+## Auditoría 06 · Deuda técnica de la iteración 03-03
+
+- **Fecha:** 2026-09-30
+- **Auditor:** Antigravity / Desarrollador
+- **Alcance:** Verificación estática con Astro Check en componentes de servicios.
+
+### Resumen
+Los componentes compilan y generan el sitio estático (`pnpm build`) al 100% sin advertencias en producción. Se detectó un error de inferencia estricta en el linter `astro check` que se registra como deuda técnica para no frenar la entrega de valor.
+
+### Hallazgos
+
+| ID | Severidad | Área | Hallazgo | Acción recomendada | Estado |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| AUD-06-001 | Baja | Calidad | `astro check` arroja ts(7006) en `TarjetaServicio.astro` (`caracteristica implicitly has an any type`) al hacer `.map()` sobre `caracteristicas`. No afecta la generación estática (`dist/` compila limpio). | Resolver en la fase de pulido final o cierre de la Épica 03 ajustando la inferencia de tipos JSDoc sin infringir la prohibición de sintaxis TypeScript. | Abierto (deuda técnica aceptada por el desarrollador el 2026-09-30) |
