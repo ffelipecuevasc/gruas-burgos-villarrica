@@ -1,11 +1,11 @@
 # Iteración 02-02 · Componentes base de interfaz
 
 - **Épica:** 02 · Sistema de diseño
-- **Estado:** En revisión
-- **Rama sugerida:** `iteracion/02-02-componentes-base`
+- **Estado:** Terminada
+- **Rama sugerida:** `main` (temporal, ver `registro-log.md`)
 - **Depende de:** 02-01
 - **RDA relacionadas:** RDA-008
-- **Hallazgos que cierra:** AUD-01-018, AUD-01-020
+- **Hallazgos que cierra:** AUD-01-018, AUD-01-020, AUD-05-001, AUD-05-002, AUD-05-003
 
 ## Objetivo
 
@@ -22,10 +22,10 @@ Crear los componentes atómicos que usan todas las secciones.
 
 ## Criterios de aceptación
 
-- [x] El texto sobre fondo naranja usa `text-on-accent` en todos los componentes. (verificado el 2026-09-30; 0 errores en `pnpm check` y 9 componentes en `src/components/`)
-- [ ] Los botones tienen foco visible y alto mínimo de 48 px. (pendiente de verificación del desarrollador con `pnpm dev`: http://localhost:4321/muestrario)
-- [x] Props documentadas con JSDoc en cada componente. (verificado el 2026-09-30; `pnpm build` no genera muestrario y no hay clases dinámicas rotas en `dist/`)
-- [ ] Muestrario actualizado con todas las variantes. (pendiente de verificación del desarrollador con `pnpm dev`: http://localhost:4321/muestrario)
+- [x] El texto sobre fondo naranja usa `text-on-accent` en todos los componentes. (verificado con búsqueda en `src/components/`: el único texto sobre fondo naranja usa `text-on-accent`)
+- [x] Los botones tienen foco visible y alto mínimo de 48 px. (verificado el 2026-09-30 con Chromium: 8 botones de `/muestrario` de 48 px y anillo de foco de 3 px con el teclado)
+- [x] Props documentadas con JSDoc en cada componente. (`IndicadorDisponible` no recibe props)
+- [x] Muestrario actualizado con todas las variantes. (verificado en `/muestrario`: 3 variantes de `Boton`, `BotonLlamada`, `BotonWhatsApp`, `IndicadorDisponible`, `Chip`, `TituloSeccion` y `Contenedor`)
 
 ## Fuera de alcance
 

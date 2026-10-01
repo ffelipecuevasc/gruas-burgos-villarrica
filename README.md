@@ -67,7 +67,7 @@ El servidor de desarrollo queda disponible en `http://localhost:4321`.
 gruas-burgos-villarrica/
 ├── .claude/settings.json   Permisos del agente Claude Code
 ├── _planificacion/         Documentación de producto, épicas, iteraciones y bitácoras
-├── public/                 Archivos estáticos (favicon, robots.txt, _headers, imágenes OG)
+├── public/                 Archivos estáticos (favicon, robots.txt, _headers, imágenes OG) (aún no existe; se crea en 04-01)
 ├── src/
 │   ├── assets/             Imágenes optimizadas por Astro
 │   ├── components/         Componentes .astro reutilizables

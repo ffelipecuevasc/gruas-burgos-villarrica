@@ -20,6 +20,6 @@
 
 ## Criterio de término
 
-- Todas las piezas persistentes se ven como en el prototipo a 360 px, 768 px y 1280 px.
-- Ninguna petición de red a dominios de terceros al cargar la página.
-- Contrastes AA verificados en todos los componentes.
+- Todas las piezas persistentes se ven según `DESIGN.md` a 360 px, 768 px y 1280 px. (verificado el 2026-09-30 con Chromium a 360×640, 768×1024 y 1280×800: header de 112 px, barra inferior solo bajo `md`, botones flotantes desde `md`, sin desborde horizontal)
+- Ninguna petición de red a dominios de terceros al cargar la página. (sin referencias a dominios de terceros en `dist/` ni `src/`; la pestaña Red queda pendiente de confirmación visual del desarrollador)
+- Contrastes AA verificados en todos los componentes. (texto desde 6,09:1; el borde del botón «contorno» es una excepción aceptada, AUD-05-001)
