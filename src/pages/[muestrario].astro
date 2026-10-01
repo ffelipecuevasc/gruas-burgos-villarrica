@@ -8,9 +8,6 @@ import Chip from '../components/Chip.astro';
 import Contenedor from '../components/Contenedor.astro';
 import IndicadorDisponible from '../components/IndicadorDisponible.astro';
 import TituloSeccion from '../components/TituloSeccion.astro';
-import Header from '../components/Header.astro';
-import AccionesFlotantes from '../components/AccionesFlotantes.astro';
-import Footer from '../components/Footer.astro';
 
 // Página de desarrollo (02-01): solo existe con `pnpm dev`. En `pnpm build`
 // getStaticPaths devuelve una lista vacía y no se genera ninguna página.
@@ -136,16 +133,7 @@ const iconos = [
       </ul>
     </section>
 
-    <section id="inicio" aria-labelledby="titulo-header" class="mb-space-xl">
-      <h2 id="titulo-header" class="font-display text-headline-sm uppercase mb-space-md">
-        Header persistente
-      </h2>
-      <div class="border border-surface-container-highest">
-        <Header />
-      </div>
-    </section>
-
-    <section id="servicios" aria-labelledby="titulo-botones">
+    <section aria-labelledby="titulo-botones">
       <h2 id="titulo-botones" class="font-display text-headline-sm uppercase">
         Botones
       </h2>
@@ -176,7 +164,7 @@ const iconos = [
       </div>
     </section>
 
-    <section id="cobertura" aria-labelledby="titulo-componentes">
+    <section aria-labelledby="titulo-componentes">
       <h2 id="titulo-componentes" class="font-display text-headline-sm uppercase">
         Indicador, chips, título de sección y contenedor
       </h2>
@@ -212,24 +200,6 @@ const iconos = [
         </a>
         .
       </p>
-    </section>
-
-    <section aria-labelledby="titulo-flotantes" class="my-space-xl">
-      <h2 id="titulo-flotantes" class="font-display text-headline-sm uppercase mb-space-md">
-        Acciones flotantes de emergencia
-      </h2>
-      <p class="font-body text-body-md text-secondary mb-space-md">
-        En móvil se visualiza como una barra inferior fija (56 px). En escritorio aparece abajo a la
-        derecha.
-      </p>
-      <AccionesFlotantes />
-    </section>
-
-    <section id="contacto" aria-labelledby="titulo-footer" class="mt-space-xl">
-      <h2 id="titulo-footer" class="font-display text-headline-sm uppercase mb-space-md">
-        Footer del sitio
-      </h2>
-      <Footer />
     </section>
   </div>
 </LayoutBase>

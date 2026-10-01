@@ -1,145 +1,76 @@
 ---
 import Contenedor from './Contenedor.astro';
-import IndicadorDisponible from './IndicadorDisponible.astro';
 import Icono from './Icono.astro';
 import BotonLlamada from './BotonLlamada.astro';
-import { enlaceTelefono } from '../data/negocio.js';
+import IndicadorDisponible from './IndicadorDisponible.astro';
+import { negocio, enlaceTelefono } from '../data/negocio.js';
 
-/**
- * @typedef {Object} Props
- * @property {string} [class] Clases adicionales de Tailwind.
- */
-
-/** @type {Props} */
-const { class: clase = '' } = Astro.props;
+// Navegación por anclas de la página única (RDA-009). Con "/#…" también funciona desde la 404.
+const enlaces = [
+  { texto: 'Inicio', href: '/#inicio' },
+  { texto: 'Servicios', href: '/#servicios' },
+  { texto: 'Contacto', href: '/#contacto' },
+];
 ---
 
-<header
-  class:list={[
-    'sticky top-0 z-40 w-full border-b border-surface-container-highest bg-surface/95 backdrop-blur-md',
-    clase,
-  ]}
->
-  <Contenedor class="flex flex-col gap-space-xs py-space-sm">
-    <!-- Nivel superior: Marca, disponibilidad y llamada rápida -->
-    <div class="flex items-center justify-between gap-space-md">
-      <a
-        href="#inicio"
-        class="group inline-flex flex-col focus-visible:outline-2 focus-visible:outline-primary"
-      >
-        <span class="font-display text-headline-sm uppercase tracking-tight text-on-surface group-hover:text-primary transition-colors">
-          Grúas Burgos
-        </span>
-        <span class="font-body text-body-xs text-secondary -mt-1">Villarrica y La Araucanía</span>
-      </a>
-
-      <div class="hidden sm:flex items-center">
-        <IndicadorDisponible />
-      </div>
-
+<header class="sticky top-0 z-50 shadow-2xl">
+  <div class="bg-surface-container-lowest border-surface-container-highest h-16 border-b">
+    <Contenedor class="flex h-full items-center justify-between gap-space-md">
       <div class="flex items-center gap-space-sm">
-        <!-- Móvil: Botón de ícono directo accesible de 48x48 px -->
-        <a
-          href={enlaceTelefono()}
-          class="sm:hidden inline-flex min-h-12 min-w-12 items-center justify-center rounded-sm bg-primary-container text-on-accent hover:bg-primary active:scale-95 transition-all focus-visible:outline-2 focus-visible:outline-primary"
-          aria-label="Llamar a Grúas Burgos"
+        <span
+          class="bg-primary-container text-on-accent flex size-10 shrink-0 items-center justify-center"
+          aria-hidden="true"
         >
-          <Icono nombre="llamada" />
-        </a>
-
-        <!-- Desktop / Tablet: Reutiliza el componente BotonLlamada -->
-        <div class="hidden sm:block">
-          <BotonLlamada variante="principal" />
+          <Icono nombre="marca" class="size-6" />
+        </span>
+        <div class="relative flex flex-col gap-space-xs">
+          <a
+            href="/"
+            class="font-display text-headline-sm text-on-surface uppercase after:absolute after:inset-0"
+          >
+            {negocio.nombre}
+          </a>
+          <IndicadorDisponible />
         </div>
       </div>
-    </div>
-
-    <!-- Nivel inferior: Navegación semántica por anclas con aria-current dinámico -->
-    <nav
-      aria-label="Navegación principal"
-      class="border-t border-surface-container-low pt-space-xs"
-    >
-      <ul class="flex items-center justify-center sm:justify-start gap-space-lg">
-        <li>
-          <a
-            href="#inicio"
-            class="nav-enlace inline-block border-b-2 border-transparent py-1 font-display text-label-md uppercase text-secondary transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-primary aria-[current=page]:border-primary aria-[current=page]:text-primary aria-[current=page]:font-bold"
-          >
-            Inicio
-          </a>
-        </li>
-        <li>
-          <a
-            href="#servicios"
-            class="nav-enlace inline-block border-b-2 border-transparent py-1 font-display text-label-md uppercase text-secondary transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-primary aria-[current=page]:border-primary aria-[current=page]:text-primary aria-[current=page]:font-bold"
-          >
-            Servicios
-          </a>
-        </li>
-        <li>
-          <a
-            href="#cobertura"
-            class="nav-enlace inline-block border-b-2 border-transparent py-1 font-display text-label-md uppercase text-secondary transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-primary aria-[current=page]:border-primary aria-[current=page]:text-primary aria-[current=page]:font-bold"
-          >
-            Cobertura
-          </a>
-        </li>
-        <li>
-          <a
-            href="#contacto"
-            class="nav-enlace inline-block border-b-2 border-transparent py-1 font-display text-label-md uppercase text-secondary transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-primary aria-[current=page]:border-primary aria-[current=page]:text-primary aria-[current=page]:font-bold"
-          >
-            Contacto
-          </a>
-        </li>
+      <div class="flex items-center gap-space-md">
+        <a
+          href={enlaceTelefono()}
+          class="text-on-surface font-display text-headline-sm hover:text-primary hidden min-h-11 items-center gap-space-sm uppercase transition-colors duration-150 md:inline-flex"
+        >
+          <Icono nombre="llamada" class="text-primary-container size-6" />
+          {negocio.telefono.visible}
+        </a>
+        <div class="hidden md:block">
+          <BotonLlamada />
+        </div>
+        <a
+          href={enlaceTelefono()}
+          aria-label="Llamar a Grúas Burgos"
+          class="bg-primary-container text-on-accent hover:bg-primary inline-flex size-12 items-center justify-center transition-colors duration-150 active:scale-95 md:hidden"
+        >
+          <Icono nombre="llamada" class="size-6" />
+        </a>
+      </div>
+    </Contenedor>
+  </div>
+  <nav
+    aria-label="Principal"
+    class="bg-surface-container-low border-surface-container h-12 border-b"
+  >
+    <Contenedor class="flex h-full items-center">
+      <ul class="-ml-space-md flex h-full items-center">
+        {enlaces.map((enlace) => (
+          <li class="h-full">
+            <a
+              href={enlace.href}
+              class="text-on-surface-variant hover:text-on-surface font-display text-label-md flex h-full items-center px-space-md uppercase transition-colors duration-150"
+            >
+              {enlace.texto}
+            </a>
+          </li>
+        ))}
       </ul>
-    </nav>
-  </Contenedor>
+    </Contenedor>
+  </nav>
 </header>
-
-<script>
-  const configurarNavActivo = () => {
-    const enlaces = document.querySelectorAll('header nav a.nav-enlace');
-    if (!enlaces.length) return;
-
-    const secciones = Array.from(enlaces)
-      .map((enlace) => {
-        const href = enlace.getAttribute('href');
-        return href && href.startsWith('#') && href.length > 1
-          ? document.querySelector(href)
-          : null;
-      })
-      .filter((elemento) => elemento !== null);
-
-    if (!secciones.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            enlaces.forEach((enlace) => {
-              if (enlace.getAttribute('href') === `#${id}`) {
-                enlace.setAttribute('aria-current', 'page');
-              } else {
-                enlace.removeAttribute('aria-current');
-              }
-            });
-          }
-        });
-      },
-      {
-        rootMargin: '-15% 0px -70% 0px',
-        threshold: 0,
-      },
-    );
-
-    secciones.forEach((seccion) => {
-      if (seccion) observer.observe(seccion);
-    });
-  };
-
-  // Inicialización al cargar el DOM y en navegaciones
-  configurarNavActivo();
-  document.addEventListener('astro:page-load', configurarNavActivo);
-</script>

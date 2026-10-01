@@ -116,7 +116,7 @@ export const negocio = {
   redes: {
     instagram: 'https://www.instagram.com/gruas_burgos_villarrica_chile/',
     facebook: 'https://www.facebook.com/p/Gr%C3%BAas-Burgos-villarrica-chile-247-100083010505193/',
-    // Cuenta por confirmar con el cliente (AUD-01-008).
+    // Cuenta confirmada por el cliente (AUD-01-008).
     tiktok: 'https://www.tiktok.com/@yerko.gruas.burgo',
   },
   facturacion: {

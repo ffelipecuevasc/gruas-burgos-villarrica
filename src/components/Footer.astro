@@ -1,152 +1,99 @@
 ---
 import Contenedor from './Contenedor.astro';
 import Icono from './Icono.astro';
-import { enlaceTelefono, enlaceWhatsApp } from '../data/negocio.js';
+import { negocio, enlaceTelefono, PENDIENTE_CLIENTE } from '../data/negocio.js';
 
-/**
- * @typedef {Object} Props
- * @property {string} [class] Clases adicionales de Tailwind.
- */
+// Año del pie: se calcula al compilar, porque el sitio es estático.
+const anio = new Date().getFullYear();
 
-/** @type {Props} */
-const { class: clase = '' } = Astro.props;
+const redes = [
+  { nombre: 'Instagram', icono: 'instagram', href: negocio.redes.instagram },
+  { nombre: 'Facebook', icono: 'facebook', href: negocio.redes.facebook },
+  { nombre: 'TikTok', icono: 'tiktok', href: negocio.redes.tiktok },
+];
 
-const anioActual = new Date().getFullYear();
+// Los datos que el cliente aún no confirma (PENDIENTE_CLIENTE) nunca se muestran.
+const hayCobertura = negocio.cobertura.localidades !== PENDIENTE_CLIENTE;
+const hayFacturacion =
+  negocio.facturacion.razonSocial !== PENDIENTE_CLIENTE &&
+  negocio.facturacion.rut !== PENDIENTE_CLIENTE;
 ---
 
-<footer
-  class:list={[
-    'border-t border-surface-container-highest bg-surface-container-lowest text-on-surface pt-space-2xl pb-24 md:pb-space-2xl',
-    clase,
-  ]}
->
-  <Contenedor class="space-y-space-xl">
-    <div class="grid grid-cols-1 gap-space-xl md:grid-cols-2 lg:grid-cols-4">
-      <!-- Columna 1: Marca y Propuesta de valor -->
-      <div class="space-y-space-sm">
-        <span class="font-display text-headline-sm uppercase tracking-tight text-on-surface">
-          Grúas Burgos
-        </span>
-        <p class="font-body text-body-sm text-secondary">
-          Servicio profesional de grúas, rescate vehicular y traslados de emergencia disponible las
-          24 horas, los 365 días del año en la Región de La Araucanía.
-        </p>
-        <div class="pt-space-xs">
-          <span class="inline-flex items-center gap-space-xs text-label-sm font-display uppercase text-primary">
-            <span class="size-2 rounded-full bg-primary-container"></span>
-            Base Operativa en Villarrica
-          </span>
-        </div>
-      </div>
-
-      <!-- Columna 2: Ubicación y Cobertura -->
-      <div class="space-y-space-sm">
-        <h3 class="font-display text-label-lg uppercase tracking-wider text-on-surface">
-          Ubicación y Cobertura
-        </h3>
-        <p class="font-body text-body-sm text-secondary">
-          <strong class="text-on-surface">Base central:</strong>
-          <br />
-          Vicente Reyes 870, Villarrica, Chile.
-        </p>
-        <p class="font-body text-body-sm text-secondary">
-          <strong class="text-on-surface">Zonas de atención rápida:</strong>
-          <br />
-          Villarrica, Pucón, Loncoche, Freire, Temuco, Ruta 5 Sur y traslados interurbanos a todo el
-          país.
-        </p>
-      </div>
-
-      <!-- Columna 3: Contacto y Facturación -->
-      <div class="space-y-space-sm">
-        <h3 class="font-display text-label-lg uppercase tracking-wider text-on-surface">
-          Atención y Facturación
-        </h3>
-        <ul class="space-y-space-xs font-body text-body-sm text-secondary">
-          <li>Asistencia en ruta 24/7</li>
-          <li>Boleta y Factura electrónica</li>
-          <li>Convenio con aseguradoras</li>
-        </ul>
-        <div class="pt-space-xs flex flex-col gap-space-xs">
-          <a
-            href={enlaceTelefono()}
-            class="inline-flex items-center gap-space-xs font-display text-label-md uppercase text-primary hover:underline focus-visible:outline-2 focus-visible:outline-primary"
-          >
-            <Icono nombre="llamada" class="size-4" />
-            <span>Llamada de emergencia</span>
-          </a>
-          <a
-            href={enlaceWhatsApp()}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-space-xs font-display text-label-md uppercase text-secondary hover:text-primary transition-colors focus-visible:outline-2 focus-visible:outline-primary"
-          >
-            <Icono nombre="whatsapp" class="size-4" />
-            <span>Contacto vía WhatsApp</span>
-          </a>
-          <a
-            href="mailto:gruasburgosvillarrica@gmail.com"
-            class="inline-flex items-center gap-space-xs font-body text-body-xs text-secondary hover:text-primary transition-colors break-all focus-visible:outline-2 focus-visible:outline-primary"
-          >
-            <span>gruasburgosvillarrica@gmail.com</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Columna 4: Redes Sociales Oficiales -->
-      <div class="space-y-space-sm">
-        <h3 class="font-display text-label-lg uppercase tracking-wider text-on-surface">
-          Redes Sociales
-        </h3>
-        <p class="font-body text-body-sm text-secondary">
-          Sigue nuestros operativos y rescates en ruta:
-        </p>
-        <div class="flex items-center gap-space-md pt-space-xs">
-          <a
-            href="https://www.instagram.com/gruas_burgos_villarrica_chile/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex size-10 items-center justify-center rounded-sm border border-surface-container-highest bg-surface text-secondary hover:border-primary hover:text-primary transition-colors focus-visible:outline-2 focus-visible:outline-primary"
-            aria-label="Instagram de Grúas Burgos"
-          >
-            <Icono nombre="instagram" class="size-5" />
-          </a>
-          <a
-            href="https://www.facebook.com/p/Gr%C3%BAas-Burgos-villarrica-chile-247-100083010505193/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex size-10 items-center justify-center rounded-sm border border-surface-container-highest bg-surface text-secondary hover:border-primary hover:text-primary transition-colors focus-visible:outline-2 focus-visible:outline-primary"
-            aria-label="Facebook de Grúas Burgos"
-          >
-            <Icono nombre="facebook" class="size-5" />
-          </a>
-          <a
-            href="https://www.tiktok.com/@yerko.gruas.burgo"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex size-10 items-center justify-center rounded-sm border border-surface-container-highest bg-surface text-secondary hover:border-primary hover:text-primary transition-colors focus-visible:outline-2 focus-visible:outline-primary"
-            aria-label="TikTok de Grúas Burgos"
-          >
-            <Icono nombre="tiktok" class="size-5" />
-          </a>
-        </div>
-      </div>
+<footer class="bg-surface-container-lowest border-surface-container-low border-t">
+  <Contenedor class="grid grid-cols-1 gap-space-xl py-space-xl md:grid-cols-3">
+    <div class="space-y-space-sm">
+      <p class="font-display text-headline-sm uppercase">{negocio.nombre}</p>
+      <div class="bg-on-surface h-[3px] w-10"></div>
+      <p class="text-secondary font-body text-body-sm">{negocio.eslogan}</p>
+      <p class="text-secondary font-body text-body-sm flex items-center gap-space-xs">
+        <Icono nombre="ubicacion" class="text-primary size-5" />
+        {negocio.direccion.texto}
+      </p>
     </div>
-
-    <!-- Sub-footer: Copyright y Crédito de autor -->
-    <div class="border-t border-surface-container-high pt-space-md flex flex-col sm:flex-row items-center justify-between gap-space-sm font-body text-body-xs text-secondary">
-      <p>&copy; {anioActual} Grúas Burgos. Todos los derechos reservados.</p>
+    {hayCobertura && (
+      <div class="space-y-space-sm">
+        <h2 class="font-display text-headline-sm uppercase">Cobertura</h2>
+        <div class="bg-on-surface h-[3px] w-10" />
+        <p class="text-secondary font-body text-body-sm">{negocio.cobertura.localidades}</p>
+      </div>
+    )}
+    <div class="space-y-space-sm">
+      <h2 class="font-display text-headline-sm uppercase">Contacto directo</h2>
+      <div class="bg-on-surface h-[3px] w-10"></div>
+      <p>
+        <a
+          href={enlaceTelefono()}
+          class="text-primary font-display text-headline-sm inline-flex min-h-11 items-center hover:underline"
+        >
+          {negocio.telefono.visible}
+        </a>
+      </p>
+      <p>
+        <a
+          href={`mailto:${negocio.correo}`}
+          class="text-secondary hover:text-primary font-body text-body-sm inline-flex min-h-11 items-center underline"
+        >
+          {negocio.correo}
+        </a>
+      </p>
+      <ul class="flex gap-space-sm">
+        {redes.map((red) => (
+          <li>
+            <a
+              href={red.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${red.nombre} de ${negocio.nombre}`}
+              class="bg-surface-container-highest text-on-surface hover:text-primary flex size-11 items-center justify-center transition-colors duration-150"
+            >
+              <Icono nombre={red.icono} class="size-6" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Contenedor>
+  <div class="bg-surface-container-low">
+    <Contenedor class="text-secondary font-body text-body-sm flex flex-col gap-space-sm py-space-md md:flex-row md:items-center md:justify-between">
+      <p>
+        © {anio} {negocio.nombre}
+      </p>
+      {hayFacturacion && (
+        <p>
+          {negocio.facturacion.razonSocial} · RUT {negocio.facturacion.rut}
+        </p>
+      )}
       <p>
         Sitio desarrollado por{' '}
         <a
           href="https://felipecuevas.dev"
           target="_blank"
           rel="noopener noreferrer"
-          class="font-semibold text-on-surface hover:text-primary transition-colors underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-primary"
+          class="text-primary inline-flex min-h-11 items-center underline"
         >
           Felipe Cuevas
         </a>
       </p>
-    </div>
-  </Contenedor>
+    </Contenedor>
+  </div>
 </footer>
