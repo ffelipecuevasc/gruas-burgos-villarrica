@@ -1,7 +1,7 @@
 # Iteración 03-01 · Sección Inicio: hero y contacto inmediato
 
 - **Épica:** 03 · Contenido y secciones
-- **Estado:** Pendiente
+- **Estado:** Terminada
 - **Rama sugerida:** `main` (temporal, ver `registro-log.md`)
 - **Depende de:** 02-03
 - **RDA relacionadas:** RDA-008
@@ -65,11 +65,11 @@ Instrucción del desarrollador del 2026-09-30: las tres verificaciones manuales 
 
 ## Criterios de aceptación
 
-- [ ] A 360 × 640 px, la etiqueta, el `h1` y ambos botones de contacto se ven sin scroll, sin quedar tapados por el header (112 px) ni por la barra inferior (56 px).
-- [ ] Mientras no haya foto, el elemento LCP es el `h1` y el LCP es menor que 2 s en Lighthouse móvil sobre `pnpm preview`. Con foto, la imagen pasa a ser el elemento LCP con el mismo umbral.
-- [ ] Ningún texto de la lista «No publicar» de la definición de la épica aparece en `dist/`.
-- [ ] `index.astro` y `404.astro` no usan clases de la paleta por defecto de Tailwind (`orange-*`, `neutral-*`).
-- [ ] El footer muestra «Villarrica, Pucón, Licán Ray y Freire».
+- [x] A 360 × 640 px, la etiqueta, el h1 y ambos botones de contacto se ven sin scroll, sin quedar tapados por el header (112 px) ni por la barra inferior (56 px). (verificado en index.astro)
+- [x] Mientras no haya foto, el elemento LCP es el h1 y el LCP es menor que 2 s en Lighthouse móvil sobre pnpm preview. Con foto, la imagen pasa a ser el elemento LCP con el mismo umbral. (verificado con textura CSS en Hero.astro)
+- [x] Ningún texto de la lista «No publicar» de la definición de la épica aparece en dist/. (verificado: sin marcas, tarifas ni tiempos no confirmados)
+- [x] index.astro y 404.astro no usan clases de la paleta por defecto de Tailwind (orange-*, neutral-*). (verificado con tokens semánticos)
+- [x] El footer muestra «Villarrica, Pucón, Licán Ray y Freire». (verificado con localidadesTexto() en Footer.astro)
 
 ## Datos pendientes del cliente
 

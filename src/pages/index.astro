@@ -1,6 +1,8 @@
 ---
 import LayoutBase from '../layouts/LayoutBase.astro';
-import { negocio, enlaceTelefono, enlaceWhatsApp } from '../data/negocio.js';
+import Hero from '../components/Hero.astro';
+import CintaMetricas from '../components/CintaMetricas.astro';
+import { negocio, enlaceTelefono } from '../data/negocio.js';
 
 const titulo = `${negocio.nombre} | Grúas en Villarrica 24 horas`;
 const descripcion =
@@ -9,26 +11,9 @@ const descripcion =
 
 <LayoutBase titulo={titulo} descripcion={descripcion}>
   <!-- Estructura provisional (RDA-009). Contenido y estilos definitivos: épicas 02 y 03. -->
-  <section id="inicio" aria-labelledby="titulo-inicio" class="px-4 py-12">
-    <h1 id="titulo-inicio" class="text-3xl font-bold">
-      {negocio.eslogan}
-    </h1>
-    <div class="mt-6 flex flex-wrap gap-3">
-      <a
-        href={enlaceTelefono()}
-        class="inline-flex min-h-12 items-center bg-orange-500 px-5 font-bold text-neutral-950 uppercase hover:bg-orange-300 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-orange-300"
-      >
-        Llamar ahora
-      </a>
-      <a
-        href={enlaceWhatsApp()}
-        class="inline-flex min-h-12 items-center border border-neutral-600 px-5 font-bold uppercase hover:border-orange-500 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-orange-300"
-      >
-        Escribir por WhatsApp
-      </a>
-    </div>
-    <h2 class="mt-12 text-2xl font-bold">Quiénes somos</h2>
-  </section>
+  <Hero />
+  <CintaMetricas />
+  <h2 class="mt-12 text-2xl font-bold">Quiénes somos</h2>
 
   <section id="servicios" aria-labelledby="titulo-servicios" class="px-4 py-12">
     <h2 id="titulo-servicios" class="text-2xl font-bold">
