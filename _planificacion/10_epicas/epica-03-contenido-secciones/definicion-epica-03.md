@@ -1,6 +1,6 @@
 # Épica 03 · Contenido y secciones
 
-- **Estado:** Pendiente
+- **Estado:** Terminada
 - **Objetivo:** construir las tres secciones contratadas (Inicio, Servicios y Contacto) con contenido verificado, para que quien tiene una emergencia en ruta entienda en segundos qué hace Grúas Burgos, dónde opera y cómo pedir ayuda.
 - **Depende de:** Épica 02 (terminada el 2026-09-30).
 - **Fuentes de contenido:**
@@ -48,12 +48,12 @@
 
 ## Iteraciones
 
-| Iteración | Nombre | Depende de |
-| :-------- | :----- | :--------- |
-| 03-01 | Sección Inicio: hero y contacto inmediato | 02-03 |
-| 03-02 | Sección Inicio: quiénes somos y reseñas | 03-01 |
-| 03-03 | Sección Servicios y equipamiento | 03-01 |
-| 03-04 | Sección Contacto, cobertura y formulario | 03-01 |
+| Iteración | Nombre | Estado |
+| :--- | :--- | :--- |
+| 03-01 | Sección Inicio: hero y contacto inmediato | Terminada |
+| 03-02 | Sección Inicio: quiénes somos y reseñas | Terminada |
+| 03-03 | Sección Servicios y equipamiento | Terminada |
+| 03-04 | Sección Contacto, cobertura y formulario | Terminada |
 
 ## Reglas transversales
 

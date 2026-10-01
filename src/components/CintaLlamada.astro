@@ -1,0 +1,32 @@
+---
+import Contenedor from './Contenedor.astro';
+import BotonLlamada from './BotonLlamada.astro';
+
+/**
+ * @typedef {Object} Props
+ * @property {string} [class] Clases adicionales de Tailwind.
+ */
+
+/** @type {Props} */
+const { class: clase = '' } = Astro.props;
+---
+
+<section
+  aria-label="Llamada de emergencia directa"
+  class:list={['bg-primary-container py-space-xl text-on-accent', clase]}
+>
+  <Contenedor class="flex flex-col sm:flex-row items-center justify-between gap-space-lg text-center sm:text-left">
+    <div>
+      <h2 class="font-display text-headline-lg-mobile md:text-headline-lg uppercase tracking-tight text-on-accent">
+        ¿Quedaste en pana?
+      </h2>
+      <p class="font-body text-body-md text-on-accent/90 mt-space-xs">
+        Asistencia inmediata en Villarrica, Pucón, Licán Ray y Freire las 24 horas.
+      </p>
+    </div>
+
+    <div class="shrink-0">
+      <BotonLlamada variante="secundario" class="shadow-lg" />
+    </div>
+  </Contenedor>
+</section>

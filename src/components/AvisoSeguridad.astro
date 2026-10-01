@@ -1,0 +1,41 @@
+---
+import Icono from './Icono.astro';
+
+/**
+ * @typedef {Object} Props
+ * @property {string} [class] Clases adicionales de Tailwind.
+ */
+
+/** @type {Props} */
+const { class: clase = '' } = Astro.props;
+
+const recomendaciones = [
+  'Enciende las luces de emergencia.',
+  'Pon los triángulos detrás de tu vehículo.',
+  'Usa chaleco reflectante si te bajas.',
+  'Baja por el lado contrario al tránsito y espera fuera de la calzada, si es seguro.',
+];
+---
+
+<aside
+  aria-labelledby="titulo-seguridad"
+  class:list={[
+    'rounded-sm border border-primary/40 bg-surface-container-low p-space-lg text-on-surface',
+    clase,
+  ]}
+>
+  <div class="space-y-space-md">
+    <div class="flex items-center gap-space-xs text-primary font-display text-label-lg uppercase">
+      <Icono nombre="advertencia" class="size-6 text-primary shrink-0" />
+      <h3 id="titulo-seguridad" class="text-on-surface">
+        Mientras esperas la grúa
+      </h3>
+    </div>
+
+    <ol class="list-decimal space-y-space-xs pl-5 font-body text-body-md text-secondary">
+      {recomendaciones.map((rec) => (
+        <li>{rec}</li>
+      ))}
+    </ol>
+  </div>
+</aside>

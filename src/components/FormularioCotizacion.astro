@@ -1,0 +1,259 @@
+---
+import Boton from './Boton.astro';
+import Icono from './Icono.astro';
+import { enlaceWhatsApp } from '../data/negocio.js';
+
+/**
+ * @typedef {Object} Props
+ * @property {string} [class] Clases adicionales de Tailwind.
+ */
+
+/** @type {Props} */
+const { class: clase = '' } = Astro.props;
+
+const mensajeFallback = 'Hola, quiero cotizar un servicio de grúa. ';
+---
+
+<div
+  class:list={[
+    'rounded-sm border border-surface-container-highest bg-surface-container-low p-space-lg md:p-space-xl text-on-surface shadow-sm',
+    clase,
+  ]}
+>
+  <div class="space-y-space-md">
+    <div>
+      <div class="flex items-center gap-space-xs text-primary font-display text-label-md uppercase tracking-wider">
+        <Icono nombre="whatsapp" class="size-5" />
+        <span>Cotización Rápida</span>
+      </div>
+      <h3 class="mt-space-xs font-display text-headline-sm uppercase text-on-surface">
+        Pide una cotización
+      </h3>
+      <p class="font-body text-body-sm text-secondary">
+        Completa los datos y te responderemos inmediatamente por WhatsApp con el valor del servicio.
+      </p>
+    </div>
+
+    <!-- Fallback para navegadores sin JavaScript activo -->
+    <noscript>
+      <div class="rounded-sm border border-primary/40 bg-surface-container-lowest p-space-md text-center">
+        <p class="font-body text-body-sm text-secondary mb-space-sm">
+          Si el formulario no funciona, escríbenos directo por WhatsApp:
+        </p>
+        <Boton
+          href={enlaceWhatsApp(mensajeFallback)}
+          variante="principal"
+          externo={true}
+          icono="whatsapp"
+        >
+          Escribir directo por WhatsApp
+        </Boton>
+      </div>
+    </noscript>
+
+    <!-- Formulario interactivo accesible según RDA-006 -->
+    <form id="form-cotizacion" class="space-y-space-md hidden" novalidate>
+      <div class="grid grid-cols-1 gap-space-md sm:grid-cols-2">
+        <!-- Nombre -->
+        <div class="space-y-space-xs">
+          <label
+            for="campo-nombre"
+            class="font-display text-label-sm uppercase text-on-surface block"
+          >
+            Tu nombre <span class="text-primary">*</span>
+          </label>
+          <input
+            type="text"
+            id="campo-nombre"
+            name="nombre"
+            required
+            autocomplete="name"
+            placeholder="Ej. Carlos Muñoz"
+            class="w-full rounded-sm border border-surface-container-highest bg-surface-container-lowest px-space-md py-space-sm font-body text-body-md text-on-surface placeholder:text-[#8f8d8c] focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+          />
+        </div>
+
+        <!-- Teléfono -->
+        <div class="space-y-space-xs">
+          <label
+            for="campo-telefono"
+            class="font-display text-label-sm uppercase text-on-surface block"
+          >
+            Tu teléfono <span class="text-primary">*</span>
+          </label>
+          <input
+            type="tel"
+            id="campo-telefono"
+            name="telefono"
+            required
+            autocomplete="tel"
+            placeholder="+56 9 1234 5678"
+            class="w-full rounded-sm border border-surface-container-highest bg-surface-container-lowest px-space-md py-space-sm font-body text-body-md text-on-surface placeholder:text-[#8f8d8c] focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+          />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-space-md sm:grid-cols-2">
+        <!-- Tipo de vehículo -->
+        <div class="space-y-space-xs">
+          <label
+            for="campo-vehiculo"
+            class="font-display text-label-sm uppercase text-on-surface block"
+          >
+            Tipo de vehículo <span class="text-primary">*</span>
+          </label>
+          <select
+            id="campo-vehiculo"
+            name="vehiculo"
+            required
+            class="w-full rounded-sm border border-surface-container-highest bg-surface-container-lowest px-space-md py-space-sm font-body text-body-md text-on-surface focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+          >
+            <option value="" disabled selected>
+              Selecciona una opción
+            </option>
+            <option value="Auto">Auto</option>
+            <option value="SUV">SUV</option>
+            <option value="Camioneta">Camioneta</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+
+        <!-- Estado del vehículo -->
+        <div class="space-y-space-xs">
+          <label
+            for="campo-estado"
+            class="font-display text-label-sm uppercase text-on-surface block"
+          >
+            ¿Qué le pasó? <span class="text-primary">*</span>
+          </label>
+          <select
+            id="campo-estado"
+            name="estado"
+            required
+            class="w-full rounded-sm border border-surface-container-highest bg-surface-container-lowest px-space-md py-space-sm font-body text-body-md text-on-surface focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+          >
+            <option value="" disabled selected>
+              Selecciona el estado
+            </option>
+            <option value="No arranca">No arranca</option>
+            <option value="Accidentado">Accidentado</option>
+            <option value="Atascado fuera del camino">Atascado fuera del camino</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Origen -->
+      <div class="space-y-space-xs">
+        <label
+          for="campo-origen"
+          class="font-display text-label-sm uppercase text-on-surface block"
+        >
+          ¿Dónde está el vehículo? <span class="text-primary">*</span>
+        </label>
+        <input
+          type="text"
+          id="campo-origen"
+          name="origen"
+          required
+          placeholder="Ej. Ruta CH-199 km 15, camino a Pucón"
+          class="w-full rounded-sm border border-surface-container-highest bg-surface-container-lowest px-space-md py-space-sm font-body text-body-md text-on-surface placeholder:text-[#8f8d8c] focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+        />
+      </div>
+
+      <!-- Destino -->
+      <div class="space-y-space-xs">
+        <label
+          for="campo-destino"
+          class="font-display text-label-sm uppercase text-on-surface block"
+        >
+          ¿Adónde lo llevamos? <span class="text-secondary font-normal">(Opcional)</span>
+        </label>
+        <input
+          type="text"
+          id="campo-destino"
+          name="destino"
+          placeholder="Ej. Taller en Villarrica o domicilio"
+          class="w-full rounded-sm border border-surface-container-highest bg-surface-container-lowest px-space-md py-space-sm font-body text-body-md text-on-surface placeholder:text-[#8f8d8c] focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+        />
+      </div>
+
+      <!-- Botón Enviar -->
+      <div class="pt-space-xs">
+        <button
+          type="submit"
+          class="inline-flex min-h-12 w-full items-center justify-center gap-space-sm rounded-sm bg-primary-container px-space-lg font-display text-label-lg uppercase text-on-accent transition-colors hover:bg-primary active:scale-95 focus-visible:outline-2 focus-visible:outline-primary cursor-pointer"
+        >
+          <Icono nombre="whatsapp" class="size-5" />
+          <span>Enviar por WhatsApp</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  const inicializarFormulario = () => {
+    const form = /** @type {HTMLFormElement | null} */ (document.getElementById('form-cotizacion'));
+    if (!form) return;
+
+    form.classList.remove('hidden');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const inputNombre = /** @type {HTMLInputElement | null} */ (
+        document.getElementById('campo-nombre')
+      );
+      const inputTelefono = /** @type {HTMLInputElement | null} */ (
+        document.getElementById('campo-telefono')
+      );
+      const selectVehiculo = /** @type {HTMLSelectElement | null} */ (
+        document.getElementById('campo-vehiculo')
+      );
+      const selectEstado = /** @type {HTMLSelectElement | null} */ (
+        document.getElementById('campo-estado')
+      );
+      const inputOrigen = /** @type {HTMLInputElement | null} */ (
+        document.getElementById('campo-origen')
+      );
+      const inputDestino = /** @type {HTMLInputElement | null} */ (
+        document.getElementById('campo-destino')
+      );
+
+      const nombre = inputNombre?.value.trim() ?? '';
+      const telefono = inputTelefono?.value.trim() ?? '';
+      const vehiculo = selectVehiculo?.value ?? '';
+      const estado = selectEstado?.value ?? '';
+      const origen = inputOrigen?.value.trim() ?? '';
+      const destino = inputDestino?.value.trim() ?? '';
+
+      if (!nombre || !telefono || !vehiculo || !estado || !origen) {
+        if (inputNombre && !nombre) inputNombre.focus();
+        else if (inputTelefono && !telefono) inputTelefono.focus();
+        else if (inputOrigen && !origen) inputOrigen.focus();
+        return;
+      }
+
+      const lineas = [
+        'Hola, quiero cotizar un servicio de grúa.',
+        `• Nombre: ${nombre}`,
+        `• Teléfono: ${telefono}`,
+        `• Vehículo: ${vehiculo}`,
+        `• Situación: ${estado}`,
+        `• Ubicación actual: ${origen}`,
+      ];
+
+      if (destino) {
+        lineas.push(`• Destino: ${destino}`);
+      }
+
+      const textoFinal = lineas.join('\n');
+      const url = `https://wa.me/56946192286?text=${encodeURIComponent(textoFinal)}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+  };
+
+  inicializarFormulario();
+  document.addEventListener('astro:page-load', inicializarFormulario);
+</script>

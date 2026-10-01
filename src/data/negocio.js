@@ -174,3 +174,11 @@ export function localidadesTexto() {
 export function enlaceOpinionesGoogle() {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Grúas Burgos Villarrica')}`;
 }
+
+/**
+ * Devuelve la URL de Google Maps con la ruta hacia la base de operaciones en Vicente Reyes 870.
+ * @returns {string} URL formateada para Google Maps Directions.
+ */
+export function enlaceComoLlegar() {
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${negocio.direccion.texto}, Chile`)}`;
+}

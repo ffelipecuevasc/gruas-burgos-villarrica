@@ -9,7 +9,7 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 | RDA-003 | Sin React en la primera versión                          | Aceptada   |
 | RDA-004 | Fuentes autoalojadas con la Fonts API de Astro           | Aceptada   |
 | RDA-005 | Íconos como SVG en línea en tiempo de compilación        | Aceptada   |
-| RDA-006 | Formulario de cotización que compone un mensaje de WhatsApp | Propuesta |
+| RDA-006 | Formulario de cotización que compone un mensaje de WhatsApp | Aceptada |
 | RDA-007 | Reseñas de Google renderizadas en estático               | Aceptada   |
 | RDA-008 | Fuente única de datos del negocio en `src/data/negocio.js` | Aceptada |
 | RDA-009 | Una página con tres secciones ancladas                   | Aceptada   |
@@ -72,7 +72,7 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 ## RDA-006 · Formulario de cotización que compone un mensaje de WhatsApp
 
 - **Fecha:** 2026-09-29
-- **Estado:** Propuesta (requiere aprobación del desarrollador y del cliente)
+- **Estado:** Aceptada (aprobada por el desarrollador el 2026-09-30 e implementada en 03-04)
 
 **Contexto:** El prototipo tiene un formulario que solo muestra un `alert()`. El alcance no incluye backend ni envío de correos, y el canal real del negocio es WhatsApp.
 **Decisión:** Mantener el formulario con validación HTML nativa y, al enviarlo, construir con un `<script>` de Astro (menos de 1 KB) un mensaje de WhatsApp con tipo de vehículo, estado, origen y destino, y abrir `wa.me`. Sin JavaScript, el formulario degrada a un enlace de WhatsApp genérico.

@@ -3,7 +3,7 @@
 **Fuente única de verdad del trabajo pendiente.** Si discrepa con `_planificacion/README.md` o con cualquier otro documento de planificación, prevalece este archivo.
 
 - **Última actualización:** 2026-09-30
-- **Iteración activa:** — (siguiente: 03-04 · Sección Contacto, cobertura y formulario)
+- **Iteración activa:** — (Épica 03 completada con éxito; siguiente: Épica 04 o fase de pulido SEO/Performance)
 - **Próximo hito:** prototipo navegable en vista previa de Cloudflare Pages
 - **Entrega tentativa:** 2026-10-18
 - **Flujo de ramas vigente:** trabajo directo en `main` mientras Cloudflare Pages no esté conectado; al conectarlo se retoma `iteracion/XX-YY-…`.
@@ -21,8 +21,8 @@
 | 02-03     | Header, acciones flotantes y footer                 | 02    | Terminada  | 02-02      | [bitacora-02-03-2026-09-30](../99_bitacora/bitacora-02-03-2026-09-30.md) |
 | 03-01     | Sección Inicio: hero y contacto inmediato           | 03    | Terminada  | 02-03      | [bitacora-03-01-2026-09-30](../99_bitacora/bitacora-03-01-2026-09-30.md) |
 | 03-02     | Sección Inicio: quiénes somos y reseñas             | 03    | Terminada  | 03-01      | [bitacora-03-02-2026-09-30](../99_bitacora/bitacora-03-02-2026-09-30.md) |
-| 03-03     | Sección Servicios y equipamiento                    | 03    | Terminada  | 02-03      | [bitacora-03-03-2026-09-30](../99_bitacora/bitacora-03-03-2026-09-30.md) |
-| 03-04     | Sección Contacto, cobertura y formulario            | 03    | Pendiente  | 02-03      | —        |
+| 03-03     | Sección Servicios y equipamiento                    | 03    | Terminada  | 02-03      | [bitacora-03-03-2026-09-30](../99_bitacora/bitacora-03-02-2026-09-30.md) |
+| 03-04     | Sección Contacto, cobertura y formulario            | 03    | Terminada  | 02-03      | [bitacora-03-04-2026-09-30](../99_bitacora/bitacora-03-04-2026-09-30.md) |
 | 04-01     | SEO técnico y datos estructurados                   | 04    | Pendiente  | 03-04      | —        |
 | 04-02     | Imágenes y presupuesto de rendimiento               | 04    | Pendiente  | 03-04      | —        |
 | 04-03     | Auditoría de accesibilidad y Lighthouse             | 04    | Pendiente  | 04-01, 04-02 | —      |
@@ -82,3 +82,4 @@ Ideas detectadas durante el trabajo que no forman parte de lo contratado. Se cot
 | 2026-09-30 | Iteración 03-01 terminada: Hero de alta conversión con CTA dual, TarjetaDespacho (escritorio), CintaMetricas verificadas, negocio.js refactorizado con coordenadas y localidadesTexto, y 404.astro saneado con tokens. |
 | 2026-09-30 | Iteración 03-02 terminada: Quiénes somos (Yerko Burgos, plataforma hidráulica y winche), 10 reseñas de Google con acordeón accesible nativo sin JS, y RDA-007 actualizada. |
 | 2026-09-30 | Iteración 03-03 terminada: Sección Servicios con 3 tarjetas y mensajes específicos a WhatsApp, nota de traslados a otras ciudades y BloqueEquipamiento con chips; AUD-06-001 registrado como deuda técnica. |
+| 2026-09-30 | Iteración 03-04 y Épica 03 terminadas: Sección Contacto completa con CanalDirecto, ListaCobertura, MapaEsquematico SVG nativo, AvisoSeguridad, FormularioCotizacion (RDA-006) y CintaLlamada; AUD-06-002 registrado como deuda técnica. |

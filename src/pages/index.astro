@@ -9,6 +9,12 @@ import TituloSeccion from '../components/TituloSeccion.astro';
 import TarjetaServicio from '../components/TarjetaServicio.astro';
 import BloqueEquipamiento from '../components/BloqueEquipamiento.astro';
 import Boton from '../components/Boton.astro';
+import CanalDirecto from '../components/CanalDirecto.astro';
+import ListaCobertura from '../components/ListaCobertura.astro';
+import MapaEsquematico from '../components/MapaEsquematico.astro';
+import AvisoSeguridad from '../components/AvisoSeguridad.astro';
+import FormularioCotizacion from '../components/FormularioCotizacion.astro';
+import CintaLlamada from '../components/CintaLlamada.astro';
 import { servicios } from '../data/servicios.js';
 import { negocio, enlaceTelefono, enlaceWhatsApp } from '../data/negocio.js';
 
@@ -66,25 +72,40 @@ const descripcion =
     </Contenedor>
   </section>
 
-  <section id="contacto" aria-labelledby="titulo-contacto" class="px-4 py-12">
-    <h2 id="titulo-contacto" class="text-2xl font-bold">
-      Contacto
-    </h2>
-    <ul class="mt-4 space-y-2">
-      <li>
-        Teléfono y WhatsApp:{' '}
-        <a href={enlaceTelefono()} class="underline">
-          {negocio.telefono.visible}
-        </a>
-      </li>
-      <li>
-        Correo:{' '}
-        <a href={`mailto:${negocio.correo}`} class="underline">
-          {negocio.correo}
-        </a>
-      </li>
-      <li>Base: {negocio.direccion.texto}</li>
-      <li>Horario: {negocio.horario.texto}</li>
-    </ul>
+  <section
+    id="contacto"
+    aria-labelledby="titulo-contacto"
+    class="py-space-2xl bg-surface text-on-surface"
+  >
+    <Contenedor class="space-y-space-2xl">
+      <TituloSeccion
+        id="titulo-contacto"
+        bajada="Llámanos o escríbenos: atendemos las 24 horas, los 7 días."
+      >
+        Contacto
+      </TituloSeccion>
+
+      <!-- Bloque principal: Canal Directo y Formulario -->
+      <div class="grid grid-cols-1 gap-space-xl lg:grid-cols-12 items-start">
+        <div class="space-y-space-lg lg:col-span-5">
+          <CanalDirecto />
+          <AvisoSeguridad />
+        </div>
+        <div class="lg:col-span-7">
+          <FormularioCotizacion />
+        </div>
+      </div>
+
+      <!-- Bloque de Cobertura y Mapa Esquemático -->
+      <div class="grid grid-cols-1 gap-space-xl lg:grid-cols-12 items-start pt-space-lg border-t border-surface-container-highest">
+        <div class="lg:col-span-5">
+          <ListaCobertura />
+        </div>
+        <div class="lg:col-span-7">
+          <MapaEsquematico />
+        </div>
+      </div>
+    </Contenedor>
   </section>
+  <CintaLlamada />
 </LayoutBase>
