@@ -22,7 +22,7 @@ Dejar disponibles en Tailwind todos los tokens de `DESIGN.md`, con fuentes e íc
 ## Criterios de aceptación
 
 - [x] Clases como `bg-primary-container`, `text-on-accent`, `font-display`, `text-headline-xl` y `p-space-lg` funcionan. (verificado por el desarrollador el 2026-09-30 en `/muestrario`)
-- [x] En la pestaña Red del navegador no hay peticiones a `fonts.googleapis.com`, `fonts.gstatic.com` ni `cdn.tailwindcss.com`. (sin referencias a esos dominios en `dist/` ni `src/`; confirmación visual en la pestaña Red pendiente del desarrollador)
+- [x] En la pestaña Red del navegador no hay peticiones a `fonts.googleapis.com`, `fonts.gstatic.com` ni `cdn.tailwindcss.com`. (sin referencias a esos dominios en `dist/` ni `src/`; confirmado visualmente por el desarrollador en la pestaña Red el 2026-09-30)
 - [x] No existe `tailwind.config.js`. (verificado el 2026-09-30)
 - [x] Los íconos se renderizan como `<svg>` con `aria-hidden="true"`. (verificado el 2026-09-30)
 

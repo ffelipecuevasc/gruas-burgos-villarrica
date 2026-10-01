@@ -1,7 +1,13 @@
 ---
 import Contenedor from './Contenedor.astro';
 import Icono from './Icono.astro';
-import { negocio, enlaceTelefono, PENDIENTE_CLIENTE } from '../data/negocio.js';
+import {
+  negocio,
+  enlaceTelefono,
+  enlaceWhatsApp,
+  localidadesTexto,
+  PENDIENTE_CLIENTE,
+} from '../data/negocio.js';
 
 // Año del pie: se calcula al compilar, porque el sitio es estático.
 const anio = new Date().getFullYear();
@@ -13,7 +19,7 @@ const redes = [
 ];
 
 // Los datos que el cliente aún no confirma (PENDIENTE_CLIENTE) nunca se muestran.
-const hayCobertura = negocio.cobertura.localidades !== PENDIENTE_CLIENTE;
+const hayCobertura = negocio.cobertura.localidades.length > 0;
 const hayFacturacion =
   negocio.facturacion.razonSocial !== PENDIENTE_CLIENTE &&
   negocio.facturacion.rut !== PENDIENTE_CLIENTE;
@@ -34,7 +40,11 @@ const hayFacturacion =
       <div class="space-y-space-sm">
         <h2 class="font-display text-headline-sm uppercase">Cobertura</h2>
         <div class="bg-on-surface h-[3px] w-10" />
-        <p class="text-secondary font-body text-body-sm">{negocio.cobertura.localidades}</p>
+        <p class="font-body text-body-sm text-secondary">
+          <strong class="text-on-surface">Zonas de atención rápida:</strong>
+          <br />
+          {localidadesTexto()}
+        </p>
       </div>
     )}
     <div class="space-y-space-sm">

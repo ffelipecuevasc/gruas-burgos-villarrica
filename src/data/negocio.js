@@ -40,8 +40,15 @@ export const PENDIENTE_CLIENTE = 'PENDIENTE_CLIENTE';
  */
 
 /**
+ * @typedef {Object} Localidad
+ * @property {string} nombre
+ * @property {string} referencia
+ */
+
+/**
  * @typedef {Object} Cobertura
- * @property {string} localidades Localidades atendidas.
+ * @property {Localidad[]} localidades Localidades atendidas.
+ * @property {string} asistenciasDocumentadas
  * @property {string} tiemposRespuesta Tiempos estimados de llegada por zona.
  */
 
@@ -100,17 +107,24 @@ export const negocio = {
     pais: 'CL',
     texto: 'Vicente Reyes 870, Villarrica',
   },
+  // Coordenadas de referencia según ficha pública en directorio; validar contra pin oficial en 04-01
   coordenadas: {
-    latitud: PENDIENTE_CLIENTE,
-    longitud: PENDIENTE_CLIENTE,
+    latitud: '-39.2829139',
+    longitud: '-72.2253883',
   },
   horario: {
     texto: '24/7',
     siempreAbierto: true,
   },
   cobertura: {
-    localidades: PENDIENTE_CLIENTE,
-    tiemposRespuesta: PENDIENTE_CLIENTE,
+    localidades: [
+      { nombre: 'Villarrica', referencia: 'Base de operaciones' },
+      { nombre: 'Pucón', referencia: 'Ruta CH-199' },
+      { nombre: 'Licán Ray', referencia: 'Ruta S-95-T' },
+      { nombre: 'Freire', referencia: 'Ruta CH-199, conexión con la Ruta 5 Sur' },
+    ],
+    asistenciasDocumentadas: 'Paso fronterizo Mamuil Malal (Ruta CH-199, Curarrehue)',
+    tiemposRespuesta: 'PENDIENTE_CLIENTE',
   },
   anioInicio: PENDIENTE_CLIENTE,
   redes: {
@@ -140,4 +154,15 @@ export function enlaceTelefono() {
  */
 export function enlaceWhatsApp(mensaje = negocio.whatsapp.mensajes.emergencia) {
   return `https://wa.me/${negocio.whatsapp.numero}?text=${encodeURIComponent(mensaje)}`;
+}
+
+/**
+ * Devuelve la lista de localidades principales en formato texto continuo.
+ * @returns {string} Texto formateado con las localidades (ej. "Villarrica, Pucón, Licán Ray y Freire").
+ */
+export function localidadesTexto() {
+  const nombres = negocio.cobertura.localidades.map((loc) => loc.nombre);
+  if (nombres.length === 0) return '';
+  if (nombres.length === 1) return nombres[0];
+  return `${nombres.slice(0, -1).join(', ')} y ${nombres[nombres.length - 1]}`;
 }
