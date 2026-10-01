@@ -13,36 +13,37 @@ const { class: clase = '' } = Astro.props;
 ---
 
 <aside
-  aria-label="Información de despacho directo"
+  aria-labelledby="titulo-despacho"
   class:list={[
-    'w-full max-w-sm rounded-sm bg-primary-container p-space-lg text-on-accent shadow-xl border border-primary',
+    'w-full max-w-sm space-y-space-md border border-primary bg-primary-container p-space-lg text-on-accent shadow-xl',
     clase,
   ]}
 >
-  <div class="space-y-space-md">
-    <div class="flex items-center gap-space-xs font-display text-label-md uppercase tracking-wider text-on-accent/90">
-      <Icono nombre="llamada" class="size-4" />
-      <span>Despacho directo</span>
-    </div>
+  <p
+    id="titulo-despacho"
+    class="flex items-center gap-space-xs font-display text-label-md text-on-accent/90 uppercase"
+  >
+    <Icono nombre="llamada" class="size-4" />
+    Despacho directo
+  </p>
 
-    <div>
-      <p class="font-body text-body-sm text-on-accent/90">
-        Te atiende Yerko Burgos, a cualquier hora.
-      </p>
-      <a
-        href={enlaceTelefono()}
-        class="mt-space-xs block font-display text-headline-md uppercase tracking-tight text-on-accent hover:underline focus-visible:outline-2 focus-visible:outline-on-accent"
-      >
-        {negocio.telefono.visible}
-      </a>
-    </div>
+  <div>
+    <p class="font-body text-body-sm text-on-accent/90">
+      Te atiende Yerko Burgos, a cualquier hora.
+    </p>
+    {/* Sobre naranja, el foco va en `on-accent`: `primary` no alcanza 3:1 contra este fondo. */}
+    <a
+      href={enlaceTelefono()}
+      class="inline-flex min-h-11 items-center font-display text-headline-md text-on-accent uppercase hover:underline focus-visible:outline-on-accent"
+    >
+      {negocio.telefono.visible}
+    </a>
+  </div>
 
-    <div class="pt-space-xs border-t border-on-accent/20">
-      <BotonWhatsApp
-        variante="secundario"
-        mensaje="Hola, necesito una grúa en "
-        class="w-full justify-center"
-      />
-    </div>
+  <div class="border-t border-on-accent/20 pt-space-md">
+    <BotonWhatsApp
+      variante="secundario"
+      class="w-full justify-center focus-visible:outline-on-accent"
+    />
   </div>
 </aside>

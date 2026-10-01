@@ -14,64 +14,47 @@ const { class: clase = '' } = Astro.props;
 ---
 
 <div class:list={['space-y-space-lg', clase]}>
-  <!-- Bloque de Canal Directo -->
-  <div class="rounded-sm border border-surface-container-highest bg-surface-container-low p-space-lg md:p-space-xl">
-    <div class="space-y-space-md">
-      <div>
-        <p class="font-display text-label-md uppercase text-primary tracking-wider">
-          Atención Inmediata
-        </p>
-        <a
-          href={enlaceTelefono()}
-          class="mt-space-xs block font-display text-headline-lg-mobile md:text-headline-lg uppercase tracking-tight text-on-surface hover:text-primary transition-colors focus-visible:outline-2 focus-visible:outline-primary"
-        >
-          {negocio.telefono.visible}
-        </a>
-      </div>
+  <div class="space-y-space-md border border-surface-container-highest bg-surface-container-low p-space-lg md:p-space-xl">
+    <a
+      href={enlaceTelefono()}
+      class="inline-flex min-h-11 items-center font-display text-headline-lg-mobile text-on-surface uppercase transition-colors hover:text-primary md:text-headline-lg"
+    >
+      {negocio.telefono.visible}
+    </a>
 
-      <div class="flex flex-wrap gap-space-md pt-space-xs">
-        <BotonLlamada variante="principal" />
-        <BotonWhatsApp
-          variante="contorno"
-          mensaje="Hola, necesito una grúa. Te envío mi ubicación por aquí. "
-        >
-          Enviar mi ubicación por WhatsApp
-        </BotonWhatsApp>
-      </div>
-
-      <p class="font-body text-body-sm text-secondary">
-        En WhatsApp, toca el clip o el signo + y elige «Ubicación».
-      </p>
+    <div class="flex flex-wrap gap-space-md">
+      <BotonLlamada />
+      <BotonWhatsApp mensaje={negocio.whatsapp.mensajes.ubicacion}>
+        Enviar mi ubicación por WhatsApp
+      </BotonWhatsApp>
     </div>
+
+    <p class="font-body text-body-sm text-secondary">
+      En WhatsApp, toca el clip o el signo + y elige «Ubicación».
+    </p>
   </div>
 
   <div class="grid grid-cols-1 gap-space-md md:grid-cols-2">
-    <!-- Tarjeta Dirección -->
-    <div class="rounded-sm border border-surface-container-highest bg-surface-container-low p-space-lg space-y-space-xs">
-      <div class="flex items-center gap-space-xs text-primary font-display text-label-md uppercase">
+    <div class="space-y-space-xs border border-surface-container-highest bg-surface-container-low p-space-lg">
+      <div class="flex items-center gap-space-xs font-display text-label-md text-primary uppercase">
         <Icono nombre="ubicacion" class="size-5" />
         <h3 class="text-on-surface">Base de operaciones</h3>
       </div>
       <p class="font-body text-body-md text-secondary">{negocio.direccion.texto}</p>
-      <div class="pt-space-xs">
-        <a
-          href={enlaceComoLlegar()}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-1 font-display text-label-sm uppercase text-primary hover:underline focus-visible:outline-2 focus-visible:outline-primary"
-        >
-          <span>Cómo llegar</span>
-          <span aria-hidden="true" class="text-xs">
-            ↗
-          </span>
-        </a>
-      </div>
+      <a
+        href={enlaceComoLlegar()}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex min-h-11 items-center gap-space-xs font-display text-label-sm text-primary uppercase hover:underline"
+      >
+        Cómo llegar
+        <span aria-hidden="true">↗</span>
+      </a>
     </div>
 
-    <!-- Tarjeta Horario -->
-    <div class="rounded-sm border border-surface-container-highest bg-surface-container-low p-space-lg space-y-space-xs">
-      <div class="flex items-center gap-space-xs text-primary font-display text-label-md uppercase">
-        <Icono nombre="llamada" class="size-5" />
+    <div class="space-y-space-xs border border-surface-container-highest bg-surface-container-low p-space-lg">
+      <div class="flex items-center gap-space-xs font-display text-label-md text-primary uppercase">
+        <Icono nombre="horario" class="size-5" />
         <h3 class="text-on-surface">Horario</h3>
       </div>
       <p class="font-body text-body-md text-secondary">Atención 24 horas, los 7 días.</p>

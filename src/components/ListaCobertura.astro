@@ -14,20 +14,16 @@ const localidades = negocio.cobertura.localidades;
 
 <div class:list={['space-y-space-md', clase]}>
   <h3 class="font-display text-headline-sm uppercase text-on-surface">Dónde atendemos</h3>
-  <ul class="divide-y divide-surface-container-highest rounded-sm border border-surface-container-highest bg-surface-container-low font-body text-body-md">
+  <ul class="divide-y divide-surface-container-highest border border-surface-container-highest bg-surface-container-low font-body text-body-md">
     {localidades.map((loc) => (
       <li class="flex items-center justify-between p-space-md gap-space-sm">
-        <span class="font-display text-label-lg uppercase text-on-surface font-semibold">
-          {loc.nombre}
-        </span>
+        <span class="font-display text-label-lg text-on-surface uppercase">{loc.nombre}</span>
         <span class="text-secondary text-body-sm text-right">{loc.referencia}</span>
       </li>
     ))}
   </ul>
-  <div class="rounded-sm border-l-2 border-primary-container bg-surface-container-lowest p-space-md">
-    <p class="font-body text-body-sm text-secondary">
-      También hemos prestado servicio en el {negocio.cobertura.asistenciasDocumentadas}. Si estás en
-      otra localidad, consúltanos.
-    </p>
-  </div>
+  <p class="border-l-2 border-primary-container bg-surface-container-lowest p-space-md font-body text-body-sm text-secondary">
+    También hemos prestado servicio en el {negocio.cobertura.asistenciasDocumentadas}. Si estás en
+    otra localidad, consúltanos.
+  </p>
 </div>

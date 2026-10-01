@@ -15,7 +15,7 @@ export const PENDIENTE_CLIENTE = 'PENDIENTE_CLIENTE';
 /**
  * @typedef {Object} WhatsApp
  * @property {string} numero Solo dígitos, con código de país, para `wa.me`.
- * @property {{ emergencia: string, cotizacion: string }} mensajes Mensajes predeterminados.
+ * @property {{ emergencia: string, cotizacion: string, ubicacion: string, trasladoOtraCiudad: string }} mensajes Mensajes predeterminados; terminan con un espacio.
  */
 
 /**
@@ -48,7 +48,7 @@ export const PENDIENTE_CLIENTE = 'PENDIENTE_CLIENTE';
 /**
  * @typedef {Object} Cobertura
  * @property {Localidad[]} localidades Localidades atendidas.
- * @property {string} asistenciasDocumentadas
+ * @property {string} asistenciasDocumentadas Lugar donde se ha prestado servicio, redactado para ir dentro de una frase.
  * @property {string} tiemposRespuesta Tiempos estimados de llegada por zona.
  */
 
@@ -97,6 +97,8 @@ export const negocio = {
     mensajes: {
       emergencia: 'Hola, necesito una grúa en Villarrica. Mi ubicación es: ',
       cotizacion: 'Hola, quiero cotizar un servicio de grúa. ',
+      ubicacion: 'Hola, necesito una grúa. Te envío mi ubicación por aquí. ',
+      trasladoOtraCiudad: 'Hola, quiero cotizar un traslado a otra ciudad. ',
     },
   },
   correo: 'gruasburgosvillarrica@gmail.com',
@@ -123,8 +125,9 @@ export const negocio = {
       { nombre: 'Licán Ray', referencia: 'Ruta S-95-T' },
       { nombre: 'Freire', referencia: 'Ruta CH-199, conexión con la Ruta 5 Sur' },
     ],
-    asistenciasDocumentadas: 'Paso fronterizo Mamuil Malal (Ruta CH-199, Curarrehue)',
-    tiemposRespuesta: 'PENDIENTE_CLIENTE',
+    // En minúscula inicial: el dato se lee dentro de una frase (ListaCobertura.astro).
+    asistenciasDocumentadas: 'paso fronterizo Mamuil Malal (Ruta CH-199, Curarrehue)',
+    tiemposRespuesta: PENDIENTE_CLIENTE,
   },
   anioInicio: PENDIENTE_CLIENTE,
   redes: {

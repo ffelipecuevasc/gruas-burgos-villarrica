@@ -11,35 +11,32 @@
 
 /** @type {Props} */
 const { resena, class: clase = '' } = Astro.props;
-const estrellas = Array.from({ length: resena.calificacion }, () => '★').join('');
+const estrellas = '★'.repeat(resena.calificacion);
 ---
 
 <article
   class:list={[
-    'flex flex-col justify-between rounded-sm border border-surface-container-highest bg-surface-container-low p-space-lg text-on-surface shadow-sm',
+    'flex flex-col justify-between border border-surface-container-highest bg-surface-container-low p-space-lg text-on-surface',
     clase,
   ]}
 >
   <div class="space-y-space-sm">
-    <!-- Calificación visual de estrellas y accesible para lector de pantalla -->
-    <div class="flex items-center gap-space-xs text-primary-container" aria-hidden="true">
-      <span class="tracking-widest text-label-lg">{estrellas}</span>
-    </div>
-    <span class="sr-only">Calificación: {resena.calificacion} de 5</span>
+    <p class="text-label-lg text-primary-container" aria-hidden="true">
+      {estrellas}
+    </p>
+    <p class="sr-only">Calificación: {resena.calificacion} de 5</p>
 
-    <!-- Comentario íntegro con soporte de saltos de línea (white-space: pre-line) -->
-    <blockquote class="font-body text-body-md text-secondary whitespace-pre-line">
-      «{resena.comentario}»
+    <blockquote class="font-body text-body-md whitespace-pre-line text-secondary">
+      {resena.comentario}
     </blockquote>
   </div>
 
-  <!-- Pie de tarjeta: Autor, Fecha y Enlace a la opinión en Google -->
-  <footer class="mt-space-md border-t border-surface-container pt-space-sm flex items-center justify-between gap-space-sm font-body text-body-xs text-secondary">
+  <footer class="mt-space-md flex items-center justify-between gap-space-sm border-t border-surface-container pt-space-sm">
     <div>
-      <cite class="not-italic font-display text-label-md uppercase text-on-surface block">
+      <cite class="block font-display text-label-md text-on-surface uppercase not-italic">
         {resena.autor}
       </cite>
-      <time class="text-secondary block">{resena.fechaRelativa}</time>
+      <p class="font-body text-body-sm text-secondary">{resena.fechaRelativa}</p>
     </div>
 
     <a
@@ -47,12 +44,10 @@ const estrellas = Array.from({ length: resena.calificacion }, () => '★').join(
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Ver en Google la opinión de ${resena.autor}`}
-      class="inline-flex items-center gap-1 font-display text-label-sm uppercase text-primary hover:underline focus-visible:outline-2 focus-visible:outline-primary transition-colors"
+      class="inline-flex min-h-11 shrink-0 items-center gap-space-xs font-display text-label-sm text-primary uppercase hover:underline"
     >
-      <span>Ver en Google</span>
-      <span aria-hidden="true" class="text-xs">
-        ↗
-      </span>
+      Ver en Google
+      <span aria-hidden="true">↗</span>
     </a>
   </footer>
 </article>

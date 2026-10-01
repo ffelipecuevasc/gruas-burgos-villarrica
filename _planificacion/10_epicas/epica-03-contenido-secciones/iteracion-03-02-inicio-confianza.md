@@ -1,7 +1,7 @@
 # Iteración 03-02 · Sección Inicio: quiénes somos y reseñas
 
 - **Épica:** 03 · Contenido y secciones
-- **Estado:** Terminada
+- **Estado:** En revisión (corregida en 03-05; espera la verificación del desarrollador)
 - **Rama sugerida:** `main` (temporal, ver `registro-log.md`)
 - **Depende de:** 03-01
 - **RDA relacionadas:** RDA-007, RDA-008
@@ -179,11 +179,11 @@ Notas sobre los campos:
 
 ## Criterios de aceptación
 
-- [x] Las 10 reseñas coinciden con resenas.js, sin cambios de sentido (la única intervención es D1). (verificado en resenas.js)
-- [x] Sin AggregateRating ni Review en el marcado (RDA-007). (verificado: sin schema JSON-LD de reseñas)
-- [x] Bloque legible en una columna a 360 px. El <details> se abre con teclado. (verificado con details nativo)
-- [x] Todos los enlaces a Google abren en pestaña nueva con rel="noopener noreferrer". (verificado en TarjetaResena y Resenas)
-- [x] Quiénes somos no incluye años, cifras ni datos de la lista «No publicar». (verificado en QuienesSomos.astro)
+- [x] Las 10 reseñas coinciden con `resenas.js`, sin cambios de sentido (la única intervención es D1). (Medido en 03-05: 0 diferencias contra el bloque de arriba y 10 de 10 en `dist/`, sin comillas agregadas.)
+- [x] Sin `AggregateRating` ni `Review` en el marcado (RDA-007). (Medido en 03-05: búsqueda en `dist/` sin coincidencias.)
+- [x] Bloque legible en una columna a 360 px. El `<details>` se abre con teclado. (Medido en 03-05: una columna sin desborde; Enter abre y Espacio cierra.)
+- [x] Todos los enlaces a Google abren en pestaña nueva con `rel="noopener noreferrer"`. (Medido en 03-05 en `dist/`: los 11 enlaces del bloque.)
+- [x] Quiénes somos no incluye años, cifras ni datos de la lista «No publicar». (Medido en 03-05: texto de `dist/` idéntico al aprobado.)
 
 ## Datos pendientes del cliente
 

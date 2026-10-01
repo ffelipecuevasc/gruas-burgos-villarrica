@@ -3,6 +3,8 @@ import Contenedor from './Contenedor.astro';
 import TituloSeccion from './TituloSeccion.astro';
 
 /**
+ * Bloque de la sección `#inicio` (RDA-009).
+ *
  * @typedef {Object} Props
  * @property {string} [class] Clases adicionales de Tailwind.
  */
@@ -12,17 +14,18 @@ const { class: clase = '' } = Astro.props;
 ---
 
 <section
-  id="quienes-somos"
   aria-labelledby="titulo-quienes-somos"
   class:list={[
-    'py-space-2xl bg-surface text-on-surface border-b border-surface-container-highest',
+    'border-b border-surface-container-highest bg-surface py-space-xl text-on-surface',
     clase,
   ]}
 >
-  <Contenedor class="max-w-4xl space-y-space-lg">
+  <Contenedor class="space-y-space-lg">
     <TituloSeccion id="titulo-quienes-somos">Quiénes somos</TituloSeccion>
 
-    <div class="space-y-space-md font-body text-body-lg text-secondary">
+    {/* Ancho de lectura de DESIGN.md §3 (regla 2): con `max-w-xl` las líneas no pasan de 75 caracteres.
+        Va aquí y no en `Contenedor`, que ya fija su propio ancho máximo. */}
+    <div class="max-w-xl space-y-space-md font-body text-body-lg text-secondary">
       <p>
         Grúas Burgos es un servicio de grúas con base en Villarrica. Lo dirige Yerko Burgos, que
         está a cargo de los rescates.
@@ -35,11 +38,9 @@ const { class: clase = '' } = Astro.props;
         Malal.
       </p>
 
-      <div class="border-l-4 border-primary-container bg-surface-container-low p-space-md my-space-md">
-        <p class="font-display text-headline-sm uppercase text-on-surface tracking-wide">
-          «Servicio de grúa 24/7 y donde nos necesiten.»
-        </p>
-      </div>
+      <p class="border-l-4 border-primary-container bg-surface-container-low p-space-md font-display text-headline-sm text-on-surface uppercase">
+        «Servicio de grúa 24/7 y donde nos necesiten.»
+      </p>
 
       <p>
         Quienes nos han llamado destacan la rapidez, la puntualidad, la buena disposición y el

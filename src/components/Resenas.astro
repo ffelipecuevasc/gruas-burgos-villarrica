@@ -7,6 +7,8 @@ import { resenas } from '../data/resenas.js';
 import { enlaceOpinionesGoogle } from '../data/negocio.js';
 
 /**
+ * Bloque de la sección `#inicio` (RDA-009). Si no hay reseñas, no se renderiza.
+ *
  * @typedef {Object} Props
  * @property {string} [class] Clases adicionales de Tailwind.
  */
@@ -23,10 +25,9 @@ const resenasRestantes = resenas.slice(6);
 ---
 
 <section
-  id="opiniones"
   aria-labelledby="titulo-opiniones"
   class:list={[
-    'py-space-2xl bg-surface-container-lowest text-on-surface border-b border-surface-container-highest',
+    'border-b border-surface-container-highest bg-surface-container-lowest py-space-xl text-on-surface',
     clase,
   ]}
 >
@@ -35,25 +36,23 @@ const resenasRestantes = resenas.slice(6);
       Lo que dicen nuestros clientes
     </TituloSeccion>
 
-    <!-- Primeras 6 reseñas en retícula responsiva -->
     <div class="grid grid-cols-1 gap-space-md md:grid-cols-2 lg:grid-cols-3">
       {primerasResenas.map((resena) => (
         <TarjetaResena resena={resena} />
       ))}
     </div>
 
-    <!-- 4 reseñas restantes dentro de acordeón nativo HTML5 sin JavaScript -->
+    {/* Acordeón nativo: sin JavaScript y operable con teclado. */}
     {resenasRestantes.length > 0 && (
       <details class="group space-y-space-md">
-        <summary class="inline-flex cursor-pointer items-center gap-space-xs rounded-sm border border-surface-container-highest bg-surface-container-low px-space-md py-space-sm font-display text-label-md uppercase text-on-surface transition-colors hover:border-primary-container focus-visible:outline-2 focus-visible:outline-primary select-none">
-          <span class="group-open:hidden">Ver {resenasRestantes.length} opiniones más</span>
-          <span class="hidden group-open:inline">Ocultar opiniones adicionales</span>
-          <span class="text-xs transition-transform group-open:rotate-180" aria-hidden="true">
+        <summary class="inline-flex min-h-11 cursor-pointer items-center gap-space-xs border border-surface-container-highest bg-surface-container-low px-space-md font-display text-label-md text-on-surface uppercase transition-colors select-none hover:border-primary-container">
+          Ver {resenasRestantes.length} opiniones más
+          <span class="transition-transform group-open:rotate-180" aria-hidden="true">
             ▼
           </span>
         </summary>
 
-        <div class="grid grid-cols-1 gap-space-md pt-space-sm md:grid-cols-2 lg:grid-cols-3">
+        <div class="grid grid-cols-1 gap-space-md md:grid-cols-2 lg:grid-cols-3">
           {resenasRestantes.map((resena) => (
             <TarjetaResena resena={resena} />
           ))}
@@ -61,11 +60,8 @@ const resenasRestantes = resenas.slice(6);
       </details>
     )}
 
-    <!-- Enlace de cierre hacia Google Maps -->
-    <div class="pt-space-md text-center sm:text-left">
-      <Boton href={enlaceOpinionesGoogle()} variante="contorno" externo={true}>
-        Ver más opiniones en Google
-      </Boton>
-    </div>
+    <Boton href={enlaceOpinionesGoogle()} variante="contorno" externo>
+      Ver más opiniones en Google
+    </Boton>
   </Contenedor>
 </section>

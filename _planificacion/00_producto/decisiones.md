@@ -89,7 +89,7 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 **Alternativas consideradas:** Widget de terceros (JavaScript y rastreo); API de Places en compilación (requiere clave y facturación).
 **Consecuencias:** Las reseñas se actualizan manualmente. El cliente debe aprobar la selección.
 
-**Actualización 2026-09-30:** el desarrollador entregó 10 reseñas seleccionadas (no de 3 a 6), que se publican textuales y con el nombre completo del autor tal como aparece en Google (decisiones D1, D2 y D3). Se mantiene la prohibición de `AggregateRating` y `Review` en el marcado para evitar sanciones de Google.
+**Actualización 2026-09-30:** el desarrollador entregó 10 reseñas seleccionadas (no de 3 a 6), que se publican textuales y con el nombre completo del autor tal como aparece en Google. Se mantiene la prohibición de `AggregateRating` y `Review` en el marcado.
 
 ## RDA-008 · Fuente única de datos del negocio en `src/data/negocio.js`
 

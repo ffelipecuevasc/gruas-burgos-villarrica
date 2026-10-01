@@ -3,16 +3,33 @@ import Boton from './Boton.astro';
 import { enlaceWhatsApp } from '../data/negocio.js';
 
 /**
+ * El texto del botón va en el slot; si no se entrega, dice «Escribir por WhatsApp».
+ * Los demás atributos (por ejemplo `aria-label`) pasan al enlace.
+ *
  * @typedef {Object} Props
  * @property {string} [mensaje] Texto inicial del chat. Por defecto, el mensaje de emergencia de `negocio.js`.
  * @property {'principal' | 'secundario' | 'contorno'} [variante] Aspecto del botón. Por defecto `contorno`.
+ * @property {string} [icono] Clave de `Icono.astro`. Por defecto `whatsapp`.
  * @property {string} [class] Clases adicionales de Tailwind.
  */
 
-/** @type {Props} */
-const { mensaje, variante = 'contorno', class: clase = '' } = Astro.props;
+/** @type {Props & Record<string, any>} */
+const {
+  mensaje,
+  variante = 'contorno',
+  icono = 'whatsapp',
+  class: clase = '',
+  ...resto
+} = Astro.props;
 ---
 
-<Boton href={enlaceWhatsApp(mensaje)} variante={variante} icono="whatsapp" externo class={clase}>
-  Escribir por WhatsApp
+<Boton
+  href={enlaceWhatsApp(mensaje)}
+  variante={variante}
+  icono={icono}
+  externo
+  class={clase}
+  {...resto}
+>
+  <slot>Escribir por WhatsApp</slot>
 </Boton>

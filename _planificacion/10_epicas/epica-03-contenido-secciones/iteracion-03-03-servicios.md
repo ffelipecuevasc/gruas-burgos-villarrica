@@ -1,7 +1,7 @@
 # Iteración 03-03 · Sección Servicios y equipamiento
 
 - **Épica:** 03 · Contenido y secciones
-- **Estado:** Terminada
+- **Estado:** En revisión (corregida en 03-05; espera la verificación del desarrollador)
 - **Rama sugerida:** `main` (temporal, ver `registro-log.md`)
 - **Depende de:** 03-01
 - **RDA relacionadas:** RDA-008
@@ -52,10 +52,10 @@ Cada mensaje termina con un espacio, igual que los de `negocio.js`.
 
 ## Criterios de aceptación
 
-- [x] Los textos de servicios y equipamiento coinciden con el contenido aprobado. No aparecen marcas, modelos, capacidades, cantidad de grúas ni asistencia menor (neumáticos, batería, apertura). (verificado en servicios.js y BloqueEquipamiento)
-- [x] Cada tarjeta tiene una acción directa de WhatsApp con su mensaje específico, verificada en dist/ (el href incluye el mensaje codificado). (verificado en TarjetaServicio e index.astro)
-- [x] Sin textos en inglés residuales del prototipo (por ejemplo «URBAN • RURAL»). (verificado con chips en español)
-- [x] A 360 px, las tarjetas se leen en una columna sin desborde horizontal. (verificado con retícula responsiva)
+- [x] Los textos de servicios y equipamiento coinciden con el contenido aprobado. No aparecen marcas, modelos, capacidades, cantidad de grúas ni asistencia menor (neumáticos, batería, apertura). (Medido en 03-05: comparación de cadenas en `dist/` sin diferencias y búsqueda sin coincidencias.)
+- [x] Cada tarjeta tiene una acción directa de WhatsApp con su mensaje específico, verificada en `dist/` (el `href` incluye el mensaje codificado). (Medido en 03-05: los tres `href` decodifican a los mensajes de `servicios.js`.)
+- [x] Sin textos en inglés residuales del prototipo (por ejemplo «URBAN • RURAL»). (Medido en 03-05: sin texto visible en inglés y 0 comentarios HTML en `dist/`.)
+- [x] A 360 px, las tarjetas se leen en una columna sin desborde horizontal. (Medido en 03-05: una columna y `scrollWidth` de 360 px.)
 
 ## Datos pendientes del cliente
 

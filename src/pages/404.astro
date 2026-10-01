@@ -1,44 +1,42 @@
 ---
 import LayoutBase from '../layouts/LayoutBase.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import AccionesFlotantes from '../components/AccionesFlotantes.astro';
 import Contenedor from '../components/Contenedor.astro';
 import Boton from '../components/Boton.astro';
 import BotonLlamada from '../components/BotonLlamada.astro';
 import BotonWhatsApp from '../components/BotonWhatsApp.astro';
+import { negocio } from '../data/negocio.js';
+
+const titulo = `Página no encontrada | ${negocio.nombre}`;
+const descripcion =
+  'La página que buscas no existe. Si necesitas una grúa en Villarrica y La Araucanía, llámanos o escríbenos por WhatsApp.';
 ---
 
-<LayoutBase
-  titulo="Página no encontrada | Grúas Burgos Villarrica"
-  descripcion="La página que buscas no existe. Si necesitas una grúa o asistencia en ruta 24/7 en Villarrica y La Araucanía, contáctanos de inmediato."
-  noindex={true}
->
-  <Header />
-  <main class="flex min-h-[60vh] items-center py-space-2xl bg-surface">
-    <Contenedor class="text-center">
-      <p class="font-display text-headline-sm uppercase text-primary">Error 404</p>
-      <h1 class="mt-space-xs font-display text-headline-xl-mobile md:text-headline-xl uppercase text-on-surface">
+<LayoutBase titulo={titulo} descripcion={descripcion} noindex>
+  <section
+    aria-labelledby="titulo-404"
+    class="flex min-h-[60vh] items-center bg-surface py-space-xl"
+  >
+    <Contenedor class="w-full text-center">
+      <p class="font-display text-headline-sm text-primary uppercase">Error 404</p>
+      <h1
+        id="titulo-404"
+        class="mt-space-xs font-display text-headline-xl-mobile text-on-surface uppercase md:text-headline-xl"
+      >
         Página no encontrada
       </h1>
 
       <p class="mx-auto mt-space-md max-w-lg font-body text-body-lg text-secondary">
-        La dirección a la que intentas acceder no está disponible. Si te encuentras en una
-        emergencia vial en Villarrica, Pucón o alrededores, comunícate con nosotros de inmediato.
+        La dirección a la que intentas acceder no está disponible. Si necesitas una grúa, llámanos o
+        escríbenos por WhatsApp.
       </p>
 
       <div class="mt-space-xl flex flex-wrap items-center justify-center gap-space-md">
-        <BotonLlamada variante="principal" />
-        <BotonWhatsApp
-          variante="contorno"
-          mensaje="Hola, me perdí en el sitio web pero necesito consultar por una grúa. "
-        />
+        <BotonLlamada />
+        <BotonWhatsApp />
         <Boton href="/" variante="secundario">
           Volver al inicio
         </Boton>
       </div>
     </Contenedor>
-  </main>
-  <Footer />
-  <AccionesFlotantes />
+  </section>
 </LayoutBase>

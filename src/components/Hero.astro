@@ -3,61 +3,69 @@ import Contenedor from './Contenedor.astro';
 import BotonLlamada from './BotonLlamada.astro';
 import BotonWhatsApp from './BotonWhatsApp.astro';
 import TarjetaDespacho from './TarjetaDespacho.astro';
+import { negocio } from '../data/negocio.js';
 
 /**
+ * Primer bloque de la sección `#inicio`. No es una sección propia: su `h1` da nombre a `#inicio`.
+ *
  * @typedef {Object} Props
+ * @property {string} idTitulo `id` del `h1`; la sección `#inicio` lo usa en `aria-labelledby`.
  * @property {string} [class] Clases adicionales de Tailwind.
  */
 
 /** @type {Props} */
-const { class: clase = '' } = Astro.props;
+const { idTitulo, class: clase = '' } = Astro.props;
+
+const localidades = negocio.cobertura.localidades.map((localidad) => localidad.nombre).join(', ');
 ---
 
-<section
-  id="inicio"
+<div
   class:list={[
-    'relative overflow-hidden bg-surface-container-lowest py-space-xl md:py-space-2xl border-b border-surface-container-highest',
+    'relative overflow-hidden border-b border-surface-container-highest bg-surface-container-lowest py-space-xl',
     clase,
   ]}
 >
-  <!-- Textura CSS de fondo y degradado provisional hasta recibir foto real -->
+  {/* Textura CSS y velo: fondo provisional hasta recibir una foto real del cliente (AUD-01-011). */}
   <div
-    class="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#ff5715_1px,transparent_1px)] [background-size:16px_16px]"
+    class="pointer-events-none absolute inset-0 bg-[radial-gradient(var(--color-primary-container)_1px,transparent_1px)] [background-size:16px_16px] opacity-15"
     aria-hidden="true"
   ></div>
   <div
-    class="absolute inset-0 bg-gradient-to-b from-surface/40 via-surface-container-lowest/80 to-surface-container-lowest pointer-events-none"
+    class="pointer-events-none absolute inset-0 bg-gradient-to-b from-surface/40 via-surface-container-lowest/80 to-surface-container-lowest"
     aria-hidden="true"
   ></div>
 
   <Contenedor class="relative z-10">
     <div class="grid grid-cols-1 items-center gap-space-xl lg:grid-cols-12">
-      <!-- Columna Izquierda: Urgencia y CTA Dual (Above-the-fold) -->
+      {/* Separaciones y `text-body-md` en móvil ajustados para que, a 360 × 640 px, los dos botones
+          queden sobre la barra inferior con el `h1` en cuatro líneas (medido en la bitácora 03-05). */}
       <div class="space-y-space-md lg:col-span-7">
-        <div class="inline-flex items-center gap-space-xs rounded-full border border-primary/30 bg-surface-container-low px-space-md py-space-xs font-display text-label-md uppercase text-primary">
-          <span class="size-2 rounded-full bg-primary-container motion-safe:animate-pulse"></span>
-          Asistencia en ruta 24/7
+        <div class="space-y-space-xs">
+          <p class="font-display text-label-md text-primary uppercase">Asistencia en ruta 24/7</p>
+
+          <h1
+            id={idTitulo}
+            class="font-display text-headline-xl-mobile text-on-surface uppercase md:text-headline-xl"
+          >
+            Grúas en Villarrica y La Araucanía, 24 horas
+          </h1>
         </div>
 
-        <h1 class="font-display text-headline-xl-mobile md:text-headline-xl uppercase text-on-surface tracking-tight">
-          Grúas en Villarrica y La Araucanía, 24 horas
-        </h1>
-
-        <p class="font-body text-body-lg text-secondary max-w-xl">
-          Traslado en grúa cama, rescate 4x4 y retiro de vehículos siniestrados en Villarrica,
-          Pucón, Licán Ray, Freire y donde nos necesites.
+        <p class="max-w-xl font-body text-body-md text-secondary md:text-body-lg">
+          Traslado en grúa cama, rescate 4x4 y retiro de vehículos siniestrados en {localidades} y
+          donde nos necesites.
         </p>
 
-        <div class="flex flex-wrap gap-space-md pt-space-xs">
-          <BotonLlamada variante="principal" />
-          <BotonWhatsApp variante="contorno" mensaje="Hola, necesito una grúa en " />
+        <div class="flex flex-wrap gap-x-space-md gap-y-space-sm">
+          <BotonLlamada />
+          <BotonWhatsApp />
         </div>
       </div>
 
-      <!-- Columna Derecha: Tarjeta de Despacho (exclusiva escritorio/tablet) -->
+      {/* Desde md: en móvil duplicaría las acciones del header, del hero y de la barra inferior. */}
       <div class="hidden md:flex md:justify-end lg:col-span-5">
         <TarjetaDespacho />
       </div>
     </div>
   </Contenedor>
-</section>
+</div>

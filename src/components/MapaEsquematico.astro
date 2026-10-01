@@ -1,216 +1,100 @@
 ---
+import { negocio, localidadesTexto } from '../data/negocio.js';
+
 /**
+ * Mapa esquemático de la cobertura: SVG propio, sin escala, pensado para leerse a 360 px.
+ * Los nombres y las referencias salen de `negocio.cobertura.localidades`.
+ *
  * @typedef {Object} Props
  * @property {string} [class] Clases adicionales de Tailwind.
  */
 
 /** @type {Props} */
 const { class: clase = '' } = Astro.props;
+
+// Posición de cada localidad y de su rótulo, en unidades del viewBox (320 × 410).
+// Una localidad de `negocio.js` sin posición aquí no se dibuja.
+const posiciones = new Map(
+  Object.entries({
+    Villarrica: { x: 64, y: 200, rotuloX: 82, rotuloY: 226, ancla: 'start' },
+    Pucón: { x: 268, y: 200, rotuloX: 310, rotuloY: 160, ancla: 'end' },
+    'Licán Ray': { x: 52, y: 318, rotuloX: 70, rotuloY: 314, ancla: 'start' },
+    Freire: { x: 40, y: 56, rotuloX: 58, rotuloY: 52, ancla: 'start' },
+  }),
+);
+
+const puntos = negocio.cobertura.localidades.flatMap((localidad) => {
+  const posicion = posiciones.get(localidad.nombre);
+  if (!posicion) return [];
+  return [
+    {
+      ...localidad,
+      ...posicion,
+      esBase: localidad.nombre === negocio.direccion.comuna,
+      // Una referencia con coma se reparte en dos líneas para que quepa en el ancho del mapa.
+      lineas: localidad.referencia.split(', '),
+    },
+  ];
+});
 ---
 
-<div
-  class:list={[
-    'relative overflow-hidden rounded-sm border border-surface-container-highest bg-surface-container-lowest p-space-md',
-    clase,
-  ]}
->
+<div class:list={['border border-surface-container-highest bg-surface-container-lowest', clase]}>
   <svg
-    viewBox="0 0 600 360"
-    fill="none"
+    viewBox="0 0 320 410"
     xmlns="http://www.w3.org/2000/svg"
     role="img"
-    aria-label="Mapa esquemático de la cobertura: Villarrica, Pucón, Licán Ray y Freire"
-    class="w-full h-auto select-none"
+    aria-label={`Mapa esquemático de la cobertura: ${localidadesTexto()}`}
+    class="mx-auto block h-auto w-full max-w-md"
   >
-    <!-- Fondo y cuadrícula sutil -->
-    <rect width="600" height="360" fill="var(--color-surface-container-lowest, #0e0e0e)" />
-    <defs>
-      <pattern id="grid-mapa" width="24" height="24" patternUnits="userSpaceOnUse">
-        <path
-          d="M 24 0 L 0 0 0 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1"
-          class="text-surface-container-highest/30"
-        />
-      </pattern>
-    </defs>
-    <rect width="600" height="360" fill="url(#grid-mapa)" />
-
-    <!-- Masas de agua estilizadas (Lagos) -->
-    <!-- Lago Villarrica -->
-    <path
-      d="M 250 140 C 290 120, 360 130, 410 150 C 420 170, 380 190, 330 185 C 280 180, 240 160, 250 140 Z"
-      fill="currentColor"
-      class="text-surface-container-high/60"
-    />
-    <text
-      x="320"
-      y="160"
-      fill="currentColor"
-      class="text-secondary font-body text-[12px] opacity-70"
-    >
+    <ellipse cx="158" cy="152" rx="70" ry="30" class="fill-surface-container-high"></ellipse>
+    <text x="158" y="157" text-anchor="middle" class="fill-secondary font-body text-body-md">
       Lago Villarrica
     </text>
 
-    <!-- Lago Calafquén (parcial sur) -->
-    <path
-      d="M 250 280 C 280 260, 330 270, 370 295 C 360 325, 300 330, 260 310 Z"
-      fill="currentColor"
-      class="text-surface-container-high/60"
-    />
-    <text
-      x="290"
-      y="300"
-      fill="currentColor"
-      class="text-secondary font-body text-[12px] opacity-70"
-    >
+    <ellipse cx="150" cy="372" rx="96" ry="24" class="fill-surface-container-high"></ellipse>
+    <text x="150" y="377" text-anchor="middle" class="fill-secondary font-body text-body-md">
       Lago Calafquén
     </text>
 
-    <!-- Rutas principales -->
-    <!-- Ruta CH-199 (Freire -> Villarrica -> Pucón) -->
+    {/* Ruta CH-199 (Freire, Villarrica, Pucón) y Ruta S-95-T (Villarrica, Licán Ray). */}
     <path
-      d="M 70 80 L 220 180 L 470 190"
-      stroke="currentColor"
-      stroke-width="4"
+      d="M 40 56 L 64 200 L 268 200 M 64 200 L 52 318"
+      fill="none"
+      stroke-width="3"
       stroke-linecap="round"
       stroke-linejoin="round"
-      class="text-surface-container-highest"
-    />
-    <!-- Ruta S-95-T (Villarrica -> Licán Ray) -->
-    <path
-      d="M 220 180 L 250 270"
-      stroke="currentColor"
-      stroke-width="4"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      class="text-surface-container-highest"
-    />
+      class="stroke-outline"
+    ></path>
 
-    <!-- Etiquetas de rutas -->
-    <text
-      x="120"
-      y="125"
-      fill="currentColor"
-      class="text-secondary font-display text-[11px] uppercase tracking-wider"
-    >
-      Ruta CH-199
-    </text>
-    <text
-      x="340"
-      y="210"
-      fill="currentColor"
-      class="text-secondary font-display text-[11px] uppercase tracking-wider"
-    >
-      Ruta CH-199
-    </text>
-    <text
-      x="255"
-      y="235"
-      fill="currentColor"
-      class="text-secondary font-display text-[11px] uppercase tracking-wider"
-    >
-      Ruta S-95-T
-    </text>
-
-    <!-- Nodos de Localidades -->
-    <!-- Freire -->
-    <g transform="translate(70, 80)">
-      <circle
-        r="7"
-        fill="currentColor"
-        class="text-surface-container-highest"
-        stroke="#0e0e0e"
-        stroke-width="2"
-      />
-      <text
-        x="-15"
-        y="-14"
-        fill="currentColor"
-        class="text-on-surface font-display text-[14px] uppercase font-bold"
-      >
-        Freire
-      </text>
-      <text x="-15" y="0" fill="currentColor" class="text-secondary font-body text-[10px]">
-        Conexión Ruta 5 Sur
-      </text>
-    </g>
-
-    <!-- Pucón -->
-    <g transform="translate(470, 190)">
-      <circle
-        r="7"
-        fill="currentColor"
-        class="text-surface-container-highest"
-        stroke="#0e0e0e"
-        stroke-width="2"
-      />
-      <text
-        x="15"
-        y="4"
-        fill="currentColor"
-        class="text-on-surface font-display text-[14px] uppercase font-bold"
-      >
-        Pucón
-      </text>
-      <text x="15" y="18" fill="currentColor" class="text-secondary font-body text-[10px]">
-        Ruta CH-199
-      </text>
-    </g>
-
-    <!-- Licán Ray -->
-    <g transform="translate(250, 270)">
-      <circle
-        r="7"
-        fill="currentColor"
-        class="text-surface-container-highest"
-        stroke="#0e0e0e"
-        stroke-width="2"
-      />
-      <text
-        x="16"
-        y="5"
-        fill="currentColor"
-        class="text-on-surface font-display text-[14px] uppercase font-bold"
-      >
-        Licán Ray
-      </text>
-      <text x="16" y="19" fill="currentColor" class="text-secondary font-body text-[10px]">
-        Ruta S-95-T
-      </text>
-    </g>
-
-    <!-- Villarrica (Base de Operaciones destacada) -->
-    <g transform="translate(220, 180)">
-      <circle
-        r="16"
-        fill="currentColor"
-        class="text-primary-container/30 motion-safe:animate-ping"
-      />
-      <circle
-        r="9"
-        fill="currentColor"
-        class="text-primary-container"
-        stroke="#0e0e0e"
-        stroke-width="2"
-      />
-      <text
-        x="-10"
-        y="-18"
-        fill="currentColor"
-        class="text-primary font-display text-[16px] uppercase font-extrabold tracking-wide"
-      >
-        Villarrica
-      </text>
-      <text
-        x="-10"
-        y="-5"
-        fill="currentColor"
-        class="text-primary font-body text-[11px] font-semibold"
-      >
-        Base de Operaciones
-      </text>
-    </g>
+    {puntos.map((punto) => (
+      <g>
+        <circle
+          cx={punto.x}
+          cy={punto.y}
+          r={punto.esBase ? 9 : 6}
+          stroke-width="2"
+          class:list={[
+            'stroke-surface-container-lowest',
+            punto.esBase ? 'fill-primary-container' : 'fill-on-surface',
+          ]}
+        />
+        <text x={punto.rotuloX} y={punto.rotuloY} text-anchor={punto.ancla}>
+          <tspan
+            class:list={[
+              'font-display text-label-lg uppercase',
+              punto.esBase ? 'fill-primary' : 'fill-on-surface',
+            ]}
+          >
+            {punto.nombre}
+          </tspan>
+          {punto.lineas.map((linea, indice) => (
+            <tspan x={punto.rotuloX} dy="18" class="fill-secondary font-body text-body-md">
+              {linea}
+              {indice < punto.lineas.length - 1 ? ',' : ''}
+            </tspan>
+          ))}
+        </text>
+      </g>
+    ))}
   </svg>
 </div>

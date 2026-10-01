@@ -8,6 +8,7 @@ import Chip from '../components/Chip.astro';
 import Contenedor from '../components/Contenedor.astro';
 import IndicadorDisponible from '../components/IndicadorDisponible.astro';
 import TituloSeccion from '../components/TituloSeccion.astro';
+import { negocio } from '../data/negocio.js';
 
 // Página de desarrollo (02-01): solo existe con `pnpm dev`. En `pnpm build`
 // getStaticPaths devuelve una lista vacía y no se genera ninguna página.
@@ -157,10 +158,7 @@ const iconos = [
       <div class="mt-space-md flex flex-wrap gap-space-md">
         <BotonLlamada />
         <BotonWhatsApp />
-        <BotonWhatsApp
-          variante="principal"
-          mensaje="Hola, quiero cotizar un traslado de vehículo. "
-        />
+        <BotonWhatsApp variante="principal" mensaje={negocio.whatsapp.mensajes.cotizacion} />
       </div>
     </section>
 

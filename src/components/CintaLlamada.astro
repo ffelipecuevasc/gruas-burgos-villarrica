@@ -3,6 +3,8 @@ import Contenedor from './Contenedor.astro';
 import BotonLlamada from './BotonLlamada.astro';
 
 /**
+ * Cierre de la sección `#contacto` (RDA-009).
+ *
  * @typedef {Object} Props
  * @property {string} [class] Clases adicionales de Tailwind.
  */
@@ -12,21 +14,18 @@ const { class: clase = '' } = Astro.props;
 ---
 
 <section
-  aria-label="Llamada de emergencia directa"
+  aria-labelledby="titulo-cinta-llamada"
   class:list={['bg-primary-container py-space-xl text-on-accent', clase]}
 >
-  <Contenedor class="flex flex-col sm:flex-row items-center justify-between gap-space-lg text-center sm:text-left">
-    <div>
-      <h2 class="font-display text-headline-lg-mobile md:text-headline-lg uppercase tracking-tight text-on-accent">
-        ¿Quedaste en pana?
-      </h2>
-      <p class="font-body text-body-md text-on-accent/90 mt-space-xs">
-        Asistencia inmediata en Villarrica, Pucón, Licán Ray y Freire las 24 horas.
-      </p>
-    </div>
+  <Contenedor class="flex flex-col items-center justify-between gap-space-lg text-center sm:flex-row sm:text-left">
+    <h3
+      id="titulo-cinta-llamada"
+      class="font-display text-headline-lg-mobile text-on-accent uppercase md:text-headline-lg"
+    >
+      ¿Quedaste en pana?
+    </h3>
 
-    <div class="shrink-0">
-      <BotonLlamada variante="secundario" class="shadow-lg" />
-    </div>
+    {/* Sobre naranja, el foco va en `on-accent`: `primary` no alcanza 3:1 contra este fondo. */}
+    <BotonLlamada variante="secundario" class="shrink-0 focus-visible:outline-on-accent" />
   </Contenedor>
 </section>

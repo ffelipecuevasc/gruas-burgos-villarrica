@@ -1,5 +1,6 @@
 ---
 import Contenedor from './Contenedor.astro';
+import { negocio } from '../data/negocio.js';
 
 /**
  * @typedef {Object} Props
@@ -13,7 +14,7 @@ const metricas = [
   { valor: '24/7', etiqueta: 'Atención continua' },
   { valor: 'Grúa cama', etiqueta: 'Plataforma hidráulica' },
   { valor: 'Winche', etiqueta: 'Rescate 4x4' },
-  { valor: 'Villarrica', etiqueta: 'Base en Vicente Reyes 870' },
+  { valor: negocio.direccion.comuna, etiqueta: `Base en ${negocio.direccion.calle}` },
 ];
 ---
 
@@ -28,7 +29,7 @@ const metricas = [
     <dl class="grid grid-cols-2 gap-space-md sm:gap-space-lg md:grid-cols-4">
       {metricas.map((item) => (
         <div class="border-l-2 border-primary-container pl-space-md">
-          <dt class="font-display text-headline-sm uppercase text-on-surface">{item.valor}</dt>
+          <dt class="font-display text-headline-sm text-on-surface uppercase">{item.valor}</dt>
           <dd class="font-body text-body-sm text-secondary">{item.etiqueta}</dd>
         </div>
       ))}

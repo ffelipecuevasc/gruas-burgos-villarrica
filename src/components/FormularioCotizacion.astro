@@ -1,9 +1,13 @@
 ---
 import Boton from './Boton.astro';
-import Icono from './Icono.astro';
-import { enlaceWhatsApp } from '../data/negocio.js';
+import BotonWhatsApp from './BotonWhatsApp.astro';
+import { negocio, enlaceWhatsApp } from '../data/negocio.js';
 
 /**
+ * Formulario que arma un mensaje de WhatsApp (RDA-006). Valida el navegador; el script muestra
+ * junto a cada campo el mensaje de error del propio navegador, quita los espacios sobrantes y
+ * abre el chat.
+ *
  * @typedef {Object} Props
  * @property {string} [class] Clases adicionales de Tailwind.
  */
@@ -11,249 +15,210 @@ import { enlaceWhatsApp } from '../data/negocio.js';
 /** @type {Props} */
 const { class: clase = '' } = Astro.props;
 
-const mensajeFallback = 'Hola, quiero cotizar un servicio de grúa. ';
+const mensajeCotizacion = negocio.whatsapp.mensajes.cotizacion;
+
+// Etiquetas visibles; el script las reutiliza en el mensaje mediante `data-etiqueta`.
+const etiquetas = {
+  nombre: 'Tu nombre',
+  telefono: 'Tu teléfono',
+  vehiculo: 'Tipo de vehículo',
+  estado: '¿Qué le pasó?',
+  origen: '¿Dónde está el vehículo?',
+  destino: '¿Adónde lo llevamos?',
+};
+
+const claseEtiqueta = 'block font-display text-label-md text-on-surface uppercase';
+const claseCampo =
+  'min-h-12 w-full rounded-sm border border-outline bg-surface-container-lowest px-space-md font-body text-body-lg text-on-surface';
+const claseError = 'font-body text-body-sm text-error';
 ---
 
 <div
   class:list={[
-    'rounded-sm border border-surface-container-highest bg-surface-container-low p-space-lg md:p-space-xl text-on-surface shadow-sm',
+    'space-y-space-md border border-surface-container-highest bg-surface-container-low p-space-lg text-on-surface md:p-space-xl',
     clase,
   ]}
 >
-  <div class="space-y-space-md">
-    <div>
-      <div class="flex items-center gap-space-xs text-primary font-display text-label-md uppercase tracking-wider">
-        <Icono nombre="whatsapp" class="size-5" />
-        <span>Cotización Rápida</span>
+  <h3 id="titulo-cotizacion" class="font-display text-headline-sm text-on-surface uppercase">
+    Pide una cotización
+  </h3>
+
+  <noscript>
+    <p class="mb-space-md font-body text-body-md text-secondary">
+      Si el formulario no funciona, escríbenos directo por WhatsApp.
+    </p>
+    <BotonWhatsApp
+      id="enlace-cotizacion"
+      aria-labelledby="enlace-cotizacion titulo-cotizacion"
+      variante="principal"
+      mensaje={mensajeCotizacion}
+    />
+  </noscript>
+
+  {/* Oculto con `hidden` hasta que el script lo muestra: sin JavaScript queda solo el enlace de arriba. */}
+  <form
+    id="form-cotizacion"
+    hidden
+    class="space-y-space-md"
+    data-saludo={mensajeCotizacion.trim()}
+    data-enlace={enlaceWhatsApp('')}
+  >
+    <div class="grid grid-cols-1 gap-space-md sm:grid-cols-2">
+      <div class="space-y-space-xs">
+        <label for="campo-nombre" class={claseEtiqueta}>
+          {etiquetas.nombre}
+        </label>
+        <input
+          type="text"
+          id="campo-nombre"
+          name="nombre"
+          required
+          autocomplete="name"
+          data-etiqueta={etiquetas.nombre}
+          aria-describedby="error-nombre"
+          class={claseCampo}
+        />
+        <p id="error-nombre" aria-live="polite" class={claseError}></p>
       </div>
-      <h3 class="mt-space-xs font-display text-headline-sm uppercase text-on-surface">
-        Pide una cotización
-      </h3>
-      <p class="font-body text-body-sm text-secondary">
-        Completa los datos y te responderemos inmediatamente por WhatsApp con el valor del servicio.
-      </p>
+
+      <div class="space-y-space-xs">
+        <label for="campo-telefono" class={claseEtiqueta}>
+          {etiquetas.telefono}
+        </label>
+        <input
+          type="tel"
+          id="campo-telefono"
+          name="telefono"
+          required
+          autocomplete="tel"
+          pattern="[0-9+ \-]{8,16}"
+          data-etiqueta={etiquetas.telefono}
+          aria-describedby="error-telefono"
+          class={claseCampo}
+        />
+        <p id="error-telefono" aria-live="polite" class={claseError}></p>
+      </div>
+
+      <div class="space-y-space-xs">
+        <label for="campo-vehiculo" class={claseEtiqueta}>
+          {etiquetas.vehiculo}
+        </label>
+        <select
+          id="campo-vehiculo"
+          name="vehiculo"
+          required
+          data-etiqueta={etiquetas.vehiculo}
+          aria-describedby="error-vehiculo"
+          class={claseCampo}
+        >
+          <option value="" disabled selected>
+            Selecciona una opción
+          </option>
+          <option>Auto</option>
+          <option>SUV</option>
+          <option>Camioneta</option>
+          <option>Otro</option>
+        </select>
+        <p id="error-vehiculo" aria-live="polite" class={claseError}></p>
+      </div>
+
+      <div class="space-y-space-xs">
+        <label for="campo-estado" class={claseEtiqueta}>
+          {etiquetas.estado}
+        </label>
+        <select
+          id="campo-estado"
+          name="estado"
+          required
+          data-etiqueta={etiquetas.estado}
+          aria-describedby="error-estado"
+          class={claseCampo}
+        >
+          <option value="" disabled selected>
+            Selecciona una opción
+          </option>
+          <option>No arranca</option>
+          <option>Accidentado</option>
+          <option>Atascado fuera del camino</option>
+          <option>Otro</option>
+        </select>
+        <p id="error-estado" aria-live="polite" class={claseError}></p>
+      </div>
     </div>
 
-    <!-- Fallback para navegadores sin JavaScript activo -->
-    <noscript>
-      <div class="rounded-sm border border-primary/40 bg-surface-container-lowest p-space-md text-center">
-        <p class="font-body text-body-sm text-secondary mb-space-sm">
-          Si el formulario no funciona, escríbenos directo por WhatsApp:
-        </p>
-        <Boton
-          href={enlaceWhatsApp(mensajeFallback)}
-          variante="principal"
-          externo={true}
-          icono="whatsapp"
-        >
-          Escribir directo por WhatsApp
-        </Boton>
-      </div>
-    </noscript>
+    <div class="space-y-space-xs">
+      <label for="campo-origen" class={claseEtiqueta}>
+        {etiquetas.origen}
+      </label>
+      <input
+        type="text"
+        id="campo-origen"
+        name="origen"
+        required
+        data-etiqueta={etiquetas.origen}
+        aria-describedby="error-origen"
+        class={claseCampo}
+      />
+      <p id="error-origen" aria-live="polite" class={claseError}></p>
+    </div>
 
-    <!-- Formulario interactivo accesible según RDA-006 -->
-    <form id="form-cotizacion" class="space-y-space-md hidden" novalidate>
-      <div class="grid grid-cols-1 gap-space-md sm:grid-cols-2">
-        <!-- Nombre -->
-        <div class="space-y-space-xs">
-          <label
-            for="campo-nombre"
-            class="font-display text-label-sm uppercase text-on-surface block"
-          >
-            Tu nombre <span class="text-primary">*</span>
-          </label>
-          <input
-            type="text"
-            id="campo-nombre"
-            name="nombre"
-            required
-            autocomplete="name"
-            placeholder="Ej. Carlos Muñoz"
-            class="w-full rounded-sm border border-surface-container-highest bg-surface-container-lowest px-space-md py-space-sm font-body text-body-md text-on-surface placeholder:text-[#8f8d8c] focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-          />
-        </div>
+    <div class="space-y-space-xs">
+      <label for="campo-destino" class={claseEtiqueta}>
+        {etiquetas.destino} <span class="text-secondary">(opcional)</span>
+      </label>
+      <input
+        type="text"
+        id="campo-destino"
+        name="destino"
+        data-etiqueta={etiquetas.destino}
+        class={claseCampo}
+      />
+    </div>
 
-        <!-- Teléfono -->
-        <div class="space-y-space-xs">
-          <label
-            for="campo-telefono"
-            class="font-display text-label-sm uppercase text-on-surface block"
-          >
-            Tu teléfono <span class="text-primary">*</span>
-          </label>
-          <input
-            type="tel"
-            id="campo-telefono"
-            name="telefono"
-            required
-            autocomplete="tel"
-            placeholder="+56 9 1234 5678"
-            class="w-full rounded-sm border border-surface-container-highest bg-surface-container-lowest px-space-md py-space-sm font-body text-body-md text-on-surface placeholder:text-[#8f8d8c] focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-          />
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 gap-space-md sm:grid-cols-2">
-        <!-- Tipo de vehículo -->
-        <div class="space-y-space-xs">
-          <label
-            for="campo-vehiculo"
-            class="font-display text-label-sm uppercase text-on-surface block"
-          >
-            Tipo de vehículo <span class="text-primary">*</span>
-          </label>
-          <select
-            id="campo-vehiculo"
-            name="vehiculo"
-            required
-            class="w-full rounded-sm border border-surface-container-highest bg-surface-container-lowest px-space-md py-space-sm font-body text-body-md text-on-surface focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-          >
-            <option value="" disabled selected>
-              Selecciona una opción
-            </option>
-            <option value="Auto">Auto</option>
-            <option value="SUV">SUV</option>
-            <option value="Camioneta">Camioneta</option>
-            <option value="Otro">Otro</option>
-          </select>
-        </div>
-
-        <!-- Estado del vehículo -->
-        <div class="space-y-space-xs">
-          <label
-            for="campo-estado"
-            class="font-display text-label-sm uppercase text-on-surface block"
-          >
-            ¿Qué le pasó? <span class="text-primary">*</span>
-          </label>
-          <select
-            id="campo-estado"
-            name="estado"
-            required
-            class="w-full rounded-sm border border-surface-container-highest bg-surface-container-lowest px-space-md py-space-sm font-body text-body-md text-on-surface focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-          >
-            <option value="" disabled selected>
-              Selecciona el estado
-            </option>
-            <option value="No arranca">No arranca</option>
-            <option value="Accidentado">Accidentado</option>
-            <option value="Atascado fuera del camino">Atascado fuera del camino</option>
-            <option value="Otro">Otro</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Origen -->
-      <div class="space-y-space-xs">
-        <label
-          for="campo-origen"
-          class="font-display text-label-sm uppercase text-on-surface block"
-        >
-          ¿Dónde está el vehículo? <span class="text-primary">*</span>
-        </label>
-        <input
-          type="text"
-          id="campo-origen"
-          name="origen"
-          required
-          placeholder="Ej. Ruta CH-199 km 15, camino a Pucón"
-          class="w-full rounded-sm border border-surface-container-highest bg-surface-container-lowest px-space-md py-space-sm font-body text-body-md text-on-surface placeholder:text-[#8f8d8c] focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-        />
-      </div>
-
-      <!-- Destino -->
-      <div class="space-y-space-xs">
-        <label
-          for="campo-destino"
-          class="font-display text-label-sm uppercase text-on-surface block"
-        >
-          ¿Adónde lo llevamos? <span class="text-secondary font-normal">(Opcional)</span>
-        </label>
-        <input
-          type="text"
-          id="campo-destino"
-          name="destino"
-          placeholder="Ej. Taller en Villarrica o domicilio"
-          class="w-full rounded-sm border border-surface-container-highest bg-surface-container-lowest px-space-md py-space-sm font-body text-body-md text-on-surface placeholder:text-[#8f8d8c] focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-        />
-      </div>
-
-      <!-- Botón Enviar -->
-      <div class="pt-space-xs">
-        <button
-          type="submit"
-          class="inline-flex min-h-12 w-full items-center justify-center gap-space-sm rounded-sm bg-primary-container px-space-lg font-display text-label-lg uppercase text-on-accent transition-colors hover:bg-primary active:scale-95 focus-visible:outline-2 focus-visible:outline-primary cursor-pointer"
-        >
-          <Icono nombre="whatsapp" class="size-5" />
-          <span>Enviar por WhatsApp</span>
-        </button>
-      </div>
-    </form>
-  </div>
+    <Boton type="submit" icono="whatsapp" class="w-full">
+      Enviar por WhatsApp
+    </Boton>
+  </form>
 </div>
 
 <script>
-  const inicializarFormulario = () => {
-    const form = /** @type {HTMLFormElement | null} */ (document.getElementById('form-cotizacion'));
-    if (!form) return;
+  const form = document.forms.namedItem('form-cotizacion');
 
-    form.classList.remove('hidden');
+  if (form) {
+    form.hidden = false;
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
+    // Al fallar la validación del navegador, su mensaje queda visible junto al campo.
+    for (const campo of [...form.querySelectorAll('input'), ...form.querySelectorAll('select')]) {
+      const error = document.getElementById(`error-${campo.name}`);
+      if (!error) continue;
+      campo.addEventListener('invalid', () => {
+        error.textContent = campo.validationMessage;
+        campo.setAttribute('aria-invalid', 'true');
+      });
+      campo.addEventListener('input', () => {
+        error.textContent = '';
+        campo.removeAttribute('aria-invalid');
+      });
+      // Sin espacios sobrantes, un campo obligatorio con solo espacios queda vacío y no pasa la validación.
+      campo.addEventListener('change', () => {
+        campo.value = campo.value.trim();
+      });
+    }
 
-      const inputNombre = /** @type {HTMLInputElement | null} */ (
-        document.getElementById('campo-nombre')
+    // `submit` solo se dispara cuando el navegador da por válidos todos los campos.
+    form.addEventListener('submit', (evento) => {
+      evento.preventDefault();
+      const lineas = [form.dataset.saludo];
+      new FormData(form).forEach((valor, nombre) => {
+        const texto = String(valor).trim();
+        const etiqueta = form.querySelector(`[name="${nombre}"]`)?.getAttribute('data-etiqueta');
+        if (texto) lineas.push(`${etiqueta}: ${texto}`);
+      });
+      window.open(
+        form.dataset.enlace + encodeURIComponent(lineas.join('\n')),
+        '_blank',
+        'noopener,noreferrer',
       );
-      const inputTelefono = /** @type {HTMLInputElement | null} */ (
-        document.getElementById('campo-telefono')
-      );
-      const selectVehiculo = /** @type {HTMLSelectElement | null} */ (
-        document.getElementById('campo-vehiculo')
-      );
-      const selectEstado = /** @type {HTMLSelectElement | null} */ (
-        document.getElementById('campo-estado')
-      );
-      const inputOrigen = /** @type {HTMLInputElement | null} */ (
-        document.getElementById('campo-origen')
-      );
-      const inputDestino = /** @type {HTMLInputElement | null} */ (
-        document.getElementById('campo-destino')
-      );
-
-      const nombre = inputNombre?.value.trim() ?? '';
-      const telefono = inputTelefono?.value.trim() ?? '';
-      const vehiculo = selectVehiculo?.value ?? '';
-      const estado = selectEstado?.value ?? '';
-      const origen = inputOrigen?.value.trim() ?? '';
-      const destino = inputDestino?.value.trim() ?? '';
-
-      if (!nombre || !telefono || !vehiculo || !estado || !origen) {
-        if (inputNombre && !nombre) inputNombre.focus();
-        else if (inputTelefono && !telefono) inputTelefono.focus();
-        else if (inputOrigen && !origen) inputOrigen.focus();
-        return;
-      }
-
-      const lineas = [
-        'Hola, quiero cotizar un servicio de grúa.',
-        `• Nombre: ${nombre}`,
-        `• Teléfono: ${telefono}`,
-        `• Vehículo: ${vehiculo}`,
-        `• Situación: ${estado}`,
-        `• Ubicación actual: ${origen}`,
-      ];
-
-      if (destino) {
-        lineas.push(`• Destino: ${destino}`);
-      }
-
-      const textoFinal = lineas.join('\n');
-      const url = `https://wa.me/56946192286?text=${encodeURIComponent(textoFinal)}`;
-      window.open(url, '_blank', 'noopener,noreferrer');
     });
-  };
-
-  inicializarFormulario();
-  document.addEventListener('astro:page-load', inicializarFormulario);
+  }
 </script>

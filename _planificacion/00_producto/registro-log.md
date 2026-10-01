@@ -2,9 +2,9 @@
 
 **Fuente única de verdad del trabajo pendiente.** Si discrepa con `_planificacion/README.md` o con cualquier otro documento de planificación, prevalece este archivo.
 
-- **Última actualización:** 2026-09-30
-- **Iteración activa:** — (Épica 03 completada con éxito; siguiente: Épica 04 o fase de pulido SEO/Performance)
-- **Próximo hito:** prototipo navegable en vista previa de Cloudflare Pages
+- **Última actualización:** 2026-10-01
+- **Iteración activa:** 03-05 · Corrección de la Épica 03 tras la auditoría (en revisión: espera la verificación del desarrollador)
+- **Próximo hito:** verificación de 03-05 por el desarrollador y aprobación del cliente de la Épica 03 (hito «Prototipo»); después, prototipo navegable en vista previa de Cloudflare Pages
 - **Entrega tentativa:** 2026-10-18
 - **Flujo de ramas vigente:** trabajo directo en `main` mientras Cloudflare Pages no esté conectado; al conectarlo se retoma `iteracion/XX-YY-…`.
 
@@ -19,10 +19,11 @@
 | 02-01     | Tokens de diseño, fuentes e íconos                  | 02    | Terminada  | 01-02     | [bitacora-02-01-2026-09-30](../99_bitacora/bitacora-02-01-2026-09-30.md) |
 | 02-02     | Componentes base de interfaz                        | 02    | Terminada  | 02-01      | [bitacora-02-02-2026-09-30](../99_bitacora/bitacora-02-02-2026-09-30.md) |
 | 02-03     | Header, acciones flotantes y footer                 | 02    | Terminada  | 02-02      | [bitacora-02-03-2026-09-30](../99_bitacora/bitacora-02-03-2026-09-30.md) |
-| 03-01     | Sección Inicio: hero y contacto inmediato           | 03    | Terminada  | 02-03      | [bitacora-03-01-2026-09-30](../99_bitacora/bitacora-03-01-2026-09-30.md) |
-| 03-02     | Sección Inicio: quiénes somos y reseñas             | 03    | Terminada  | 03-01      | [bitacora-03-02-2026-09-30](../99_bitacora/bitacora-03-02-2026-09-30.md) |
-| 03-03     | Sección Servicios y equipamiento                    | 03    | Terminada  | 02-03      | [bitacora-03-03-2026-09-30](../99_bitacora/bitacora-03-02-2026-09-30.md) |
-| 03-04     | Sección Contacto, cobertura y formulario            | 03    | Terminada  | 02-03      | [bitacora-03-04-2026-09-30](../99_bitacora/bitacora-03-04-2026-09-30.md) |
+| 03-01     | Sección Inicio: hero y contacto inmediato           | 03    | En revisión | 02-03      | [bitacora-03-01-2026-09-30](../99_bitacora/bitacora-03-01-2026-09-30.md) |
+| 03-02     | Sección Inicio: quiénes somos y reseñas             | 03    | En revisión | 03-01      | [bitacora-03-02-2026-09-30](../99_bitacora/bitacora-03-02-2026-09-30.md) |
+| 03-03     | Sección Servicios y equipamiento                    | 03    | En revisión | 02-03      | [bitacora-03-03-2026-09-30](../99_bitacora/bitacora-03-03-2026-09-30.md) |
+| 03-04     | Sección Contacto, cobertura y formulario            | 03    | En revisión | 02-03      | [bitacora-03-04-2026-09-30](../99_bitacora/bitacora-03-04-2026-09-30.md) |
+| 03-05     | Corrección de la Épica 03 tras la auditoría         | 03    | En revisión | 03-04      | [bitacora-03-05-2026-10-01](../99_bitacora/bitacora-03-05-2026-10-01.md) |
 | 04-01     | SEO técnico y datos estructurados                   | 04    | Pendiente  | 03-04      | —        |
 | 04-02     | Imágenes y presupuesto de rendimiento               | 04    | Pendiente  | 03-04      | —        |
 | 04-03     | Auditoría de accesibilidad y Lighthouse             | 04    | Pendiente  | 04-01, 04-02 | —      |
@@ -41,20 +42,22 @@ Bloquean contenido real. Mientras falten, se usa `PENDIENTE_CLIENTE` en `src/dat
 | Correo de contacto                                          | AUD-01-002  | 01-02          | Confirmado |
 | Validación de afirmaciones comerciales                      | AUD-01-003  | 03-01          | Pendiente |
 | Ficha de la flota (tipos, capacidades, plataforma)          | AUD-01-004  | 03-03          | Pendiente |
-| Localidades de cobertura y tiempos estimados                | AUD-01-005, AUD-01-006 | 03-04 | Pendiente |
+| Localidades de cobertura y tiempos estimados                | AUD-01-005, AUD-01-006 | 03-04 | Parcial: cuatro localidades declaradas y publicadas; tiempos por zona y otras localidades, pendientes |
 | Año de inicio de operaciones                                | AUD-01-007  | 03-02          | Pendiente |
 | Confirmación de cuentas de redes sociales                   | AUD-01-008  | 02-03          | Confirmado |
-| Razón social, RUT y coordenadas de la base                  | AUD-01-009  | 02-03, 04-01   | Pendiente |
-| Enlace al perfil de Google Maps y selección de reseñas      | AUD-01-010  | 03-02          | Pendiente |
+| Razón social, RUT y coordenadas de la base                  | AUD-01-009  | 02-03, 04-01   | Parcial: coordenadas de referencia cargadas en `negocio.js` (se validan en 04-01); razón social y RUT, pendientes |
+| Enlace al perfil de Google Maps y selección de reseñas      | AUD-01-010  | 03-02          | Parcial: 10 reseñas seleccionadas y publicadas; enlace oficial al perfil, pendiente |
 | Fotos reales (flota, operaciones, base) y logo si existe    | AUD-01-011  | 03-01          | Pendiente |
 | Textos del negocio (punto 2 de "Qué necesito de usted" en la propuesta) | — | 03-01 a 03-04 | Pendiente |
+| Aceptación de publicar reseñas que mencionan tiempos y precio («alrededor de 30min», «tiempo récord», «precio») | — | 03-05 | Pendiente |
 
 ## 3. Decisiones por tomar
 
 | Tema                                               | RDA      | Responsable            |
 | :------------------------------------------------- | :------- | :--------------------- |
-| Formulario de cotización vía WhatsApp              | RDA-006  | Desarrollador y cliente |
 | Medición de conversiones de Google Ads en el sitio | RDA-010  | Desarrollador          |
+| Aprobación del cliente de la Épica 03 (hito Prototipo) | —    | Desarrollador          |
+| Alinear `AGENTS.md` §6.4 y `DESIGN.md` §5 con la decisión D3 (nombre completo del autor) | RDA-007 (AUD-08-032) | Desarrollador |
 
 ## 4. Propuestas fuera de alcance
 
@@ -83,3 +86,6 @@ Ideas detectadas durante el trabajo que no forman parte de lo contratado. Se cot
 | 2026-09-30 | Iteración 03-02 terminada: Quiénes somos (Yerko Burgos, plataforma hidráulica y winche), 10 reseñas de Google con acordeón accesible nativo sin JS, y RDA-007 actualizada. |
 | 2026-09-30 | Iteración 03-03 terminada: Sección Servicios con 3 tarjetas y mensajes específicos a WhatsApp, nota de traslados a otras ciudades y BloqueEquipamiento con chips; AUD-06-001 registrado como deuda técnica. |
 | 2026-09-30 | Iteración 03-04 y Épica 03 terminadas: Sección Contacto completa con CanalDirecto, ListaCobertura, MapaEsquematico SVG nativo, AvisoSeguridad, FormularioCotizacion (RDA-006) y CintaLlamada; AUD-06-002 registrado como deuda técnica. |
+| 2026-10-01 | Auditoría de la Épica 03 (informe de Claude Code en `epica-03-contenido-secciones/auditoria-epica.md`, commit `5c31568`): veredicto INCOMPLETA, 31 hallazgos, 7 de severidad Alta. Registrada como Auditoría 08 (AUD-08-001 a AUD-08-032). Las cuatro filas anteriores que dan por terminadas 03-01 a 03-04 y la Épica 03 quedan sin efecto: pasan a «En revisión». |
+| 2026-10-01 | Renumeración en `auditoria-tecnica.md`: la segunda sección «Auditoría 06 · Deuda técnica de la iteración 03-03» pasa a ser la Auditoría 07. Los «AUD-06-001» y «AUD-06-002» que citan las dos filas de 03-03 y 03-04 de este historial, las bitácoras 03-03 y 03-04 y los commits `a811d86` y `5c31568` corresponden ahora a AUD-07-001 y AUD-07-002. |
+| 2026-10-01 | Iteración 03-05 en revisión: corrección de la Épica 03 (404, tokens de espaciado, textos no aprobados, formulario validado por el navegador y con el número desde `negocio.js`, objetivos táctiles, foco, mapa legible en móvil y `pnpm check` en 0 errores) y documentación corregida. Pendiente: verificación del desarrollador y aprobación del cliente. |
