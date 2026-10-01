@@ -1,0 +1,48 @@
+---
+import BotonWhatsApp from './BotonWhatsApp.astro';
+import Icono from './Icono.astro';
+import { negocio, enlaceTelefono } from '../data/negocio.js';
+
+/**
+ * @typedef {Object} Props
+ * @property {string} [class] Clases adicionales de Tailwind.
+ */
+
+/** @type {Props} */
+const { class: clase = '' } = Astro.props;
+---
+
+<aside
+  aria-label="Información de despacho directo"
+  class:list={[
+    'w-full max-w-sm rounded-sm bg-primary-container p-space-lg text-on-accent shadow-xl border border-primary',
+    clase,
+  ]}
+>
+  <div class="space-y-space-md">
+    <div class="flex items-center gap-space-xs font-display text-label-md uppercase tracking-wider text-on-accent/90">
+      <Icono nombre="llamada" class="size-4" />
+      <span>Despacho directo</span>
+    </div>
+
+    <div>
+      <p class="font-body text-body-sm text-on-accent/90">
+        Te atiende Yerko Burgos, a cualquier hora.
+      </p>
+      <a
+        href={enlaceTelefono()}
+        class="mt-space-xs block font-display text-headline-md uppercase tracking-tight text-on-accent hover:underline focus-visible:outline-2 focus-visible:outline-on-accent"
+      >
+        {negocio.telefono.visible}
+      </a>
+    </div>
+
+    <div class="pt-space-xs border-t border-on-accent/20">
+      <BotonWhatsApp
+        variante="secundario"
+        mensaje="Hola, necesito una grúa en "
+        class="w-full justify-center"
+      />
+    </div>
+  </div>
+</aside>
