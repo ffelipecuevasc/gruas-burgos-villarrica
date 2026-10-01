@@ -2,6 +2,8 @@
 import LayoutBase from '../layouts/LayoutBase.astro';
 import Hero from '../components/Hero.astro';
 import CintaMetricas from '../components/CintaMetricas.astro';
+import QuienesSomos from '../components/QuienesSomos.astro';
+import Resenas from '../components/Resenas.astro';
 import { negocio, enlaceTelefono } from '../data/negocio.js';
 
 const titulo = `${negocio.nombre} | Grúas en Villarrica 24 horas`;
@@ -13,7 +15,8 @@ const descripcion =
   <!-- Estructura provisional (RDA-009). Contenido y estilos definitivos: épicas 02 y 03. -->
   <Hero />
   <CintaMetricas />
-  <h2 class="mt-12 text-2xl font-bold">Quiénes somos</h2>
+  <QuienesSomos />
+  <Resenas />
 
   <section id="servicios" aria-labelledby="titulo-servicios" class="px-4 py-12">
     <h2 id="titulo-servicios" class="text-2xl font-bold">

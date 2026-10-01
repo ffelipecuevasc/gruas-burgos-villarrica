@@ -1,0 +1,71 @@
+---
+import Contenedor from './Contenedor.astro';
+import TituloSeccion from './TituloSeccion.astro';
+import TarjetaResena from './TarjetaResena.astro';
+import Boton from './Boton.astro';
+import { resenas } from '../data/resenas.js';
+import { enlaceOpinionesGoogle } from '../data/negocio.js';
+
+/**
+ * @typedef {Object} Props
+ * @property {string} [class] Clases adicionales de Tailwind.
+ */
+
+/** @type {Props} */
+const { class: clase = '' } = Astro.props;
+
+if (!resenas || resenas.length === 0) {
+  return null;
+}
+
+const primerasResenas = resenas.slice(0, 6);
+const resenasRestantes = resenas.slice(6);
+---
+
+<section
+  id="opiniones"
+  aria-labelledby="titulo-opiniones"
+  class:list={[
+    'py-space-2xl bg-surface-container-lowest text-on-surface border-b border-surface-container-highest',
+    clase,
+  ]}
+>
+  <Contenedor class="space-y-space-xl">
+    <TituloSeccion id="titulo-opiniones" bajada="Opiniones publicadas en Google.">
+      Lo que dicen nuestros clientes
+    </TituloSeccion>
+
+    <!-- Primeras 6 reseñas en retícula responsiva -->
+    <div class="grid grid-cols-1 gap-space-md md:grid-cols-2 lg:grid-cols-3">
+      {primerasResenas.map((resena) => (
+        <TarjetaResena resena={resena} />
+      ))}
+    </div>
+
+    <!-- 4 reseñas restantes dentro de acordeón nativo HTML5 sin JavaScript -->
+    {resenasRestantes.length > 0 && (
+      <details class="group space-y-space-md">
+        <summary class="inline-flex cursor-pointer items-center gap-space-xs rounded-sm border border-surface-container-highest bg-surface-container-low px-space-md py-space-sm font-display text-label-md uppercase text-on-surface transition-colors hover:border-primary-container focus-visible:outline-2 focus-visible:outline-primary select-none">
+          <span class="group-open:hidden">Ver {resenasRestantes.length} opiniones más</span>
+          <span class="hidden group-open:inline">Ocultar opiniones adicionales</span>
+          <span class="text-xs transition-transform group-open:rotate-180" aria-hidden="true">
+            ▼
+          </span>
+        </summary>
+
+        <div class="grid grid-cols-1 gap-space-md pt-space-sm md:grid-cols-2 lg:grid-cols-3">
+          {resenasRestantes.map((resena) => (
+            <TarjetaResena resena={resena} />
+          ))}
+        </div>
+      </details>
+    )}
+
+    <!-- Enlace de cierre hacia Google Maps -->
+    <div class="pt-space-md text-center sm:text-left">
+      <Boton href={enlaceOpinionesGoogle()} variante="contorno" externo={true}>
+        Ver más opiniones en Google
+      </Boton>
+    </div>
+  </Contenedor>
+</section>

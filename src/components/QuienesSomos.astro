@@ -1,0 +1,50 @@
+---
+import Contenedor from './Contenedor.astro';
+import TituloSeccion from './TituloSeccion.astro';
+
+/**
+ * @typedef {Object} Props
+ * @property {string} [class] Clases adicionales de Tailwind.
+ */
+
+/** @type {Props} */
+const { class: clase = '' } = Astro.props;
+---
+
+<section
+  id="quienes-somos"
+  aria-labelledby="titulo-quienes-somos"
+  class:list={[
+    'py-space-2xl bg-surface text-on-surface border-b border-surface-container-highest',
+    clase,
+  ]}
+>
+  <Contenedor class="max-w-4xl space-y-space-lg">
+    <TituloSeccion id="titulo-quienes-somos">Quiénes somos</TituloSeccion>
+
+    <div class="space-y-space-md font-body text-body-lg text-secondary">
+      <p>
+        Grúas Burgos es un servicio de grúas con base en Villarrica. Lo dirige Yerko Burgos, que
+        está a cargo de los rescates.
+      </p>
+
+      <p>
+        Trabajamos con un camión de plataforma hidráulica (grúa cama) y winche para sacar vehículos
+        atascados fuera del camino. Atendemos autos, SUV y camionetas 4x4 en la ciudad, en caminos
+        rurales y en rutas de cordillera, y hemos prestado servicio en el paso fronterizo Mamuil
+        Malal.
+      </p>
+
+      <div class="border-l-4 border-primary-container bg-surface-container-low p-space-md my-space-md">
+        <p class="font-display text-headline-sm uppercase text-on-surface tracking-wide">
+          «Servicio de grúa 24/7 y donde nos necesiten.»
+        </p>
+      </div>
+
+      <p>
+        Quienes nos han llamado destacan la rapidez, la puntualidad, la buena disposición y el
+        cuidado con su vehículo.
+      </p>
+    </div>
+  </Contenedor>
+</section>

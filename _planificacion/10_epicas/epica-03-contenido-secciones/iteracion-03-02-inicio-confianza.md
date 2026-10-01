@@ -1,7 +1,7 @@
 # Iteración 03-02 · Sección Inicio: quiénes somos y reseñas
 
 - **Épica:** 03 · Contenido y secciones
-- **Estado:** Pendiente
+- **Estado:** Terminada
 - **Rama sugerida:** `main` (temporal, ver `registro-log.md`)
 - **Depende de:** 03-01
 - **RDA relacionadas:** RDA-007, RDA-008
@@ -179,11 +179,11 @@ Notas sobre los campos:
 
 ## Criterios de aceptación
 
-- [ ] Las 10 reseñas coinciden con `resenas.js`, sin cambios de sentido (la única intervención es D1).
-- [ ] Sin `AggregateRating` ni `Review` en el marcado (RDA-007).
-- [ ] Bloque legible en una columna a 360 px. El `<details>` se abre con teclado.
-- [ ] Todos los enlaces a Google abren en pestaña nueva con `rel="noopener noreferrer"`.
-- [ ] Quiénes somos no incluye años, cifras ni datos de la lista «No publicar».
+- [x] Las 10 reseñas coinciden con resenas.js, sin cambios de sentido (la única intervención es D1). (verificado en resenas.js)
+- [x] Sin AggregateRating ni Review en el marcado (RDA-007). (verificado: sin schema JSON-LD de reseñas)
+- [x] Bloque legible en una columna a 360 px. El <details> se abre con teclado. (verificado con details nativo)
+- [x] Todos los enlaces a Google abren en pestaña nueva con rel="noopener noreferrer". (verificado en TarjetaResena y Resenas)
+- [x] Quiénes somos no incluye años, cifras ni datos de la lista «No publicar». (verificado en QuienesSomos.astro)
 
 ## Datos pendientes del cliente
 

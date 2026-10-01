@@ -3,7 +3,7 @@
 **Fuente única de verdad del trabajo pendiente.** Si discrepa con `_planificacion/README.md` o con cualquier otro documento de planificación, prevalece este archivo.
 
 - **Última actualización:** 2026-09-30
-- **Iteración activa:** — (siguiente: 03-02 · Sección Inicio: quiénes somos y reseñas)
+- **Iteración activa:** — (siguiente: 03-03 · Sección Servicios y equipamiento)
 - **Próximo hito:** prototipo navegable en vista previa de Cloudflare Pages
 - **Entrega tentativa:** 2026-10-18
 - **Flujo de ramas vigente:** trabajo directo en `main` mientras Cloudflare Pages no esté conectado; al conectarlo se retoma `iteracion/XX-YY-…`.
@@ -20,7 +20,7 @@
 | 02-02     | Componentes base de interfaz                        | 02    | Terminada  | 02-01      | [bitacora-02-02-2026-09-30](../99_bitacora/bitacora-02-02-2026-09-30.md) |
 | 02-03     | Header, acciones flotantes y footer                 | 02    | Terminada  | 02-02      | [bitacora-02-03-2026-09-30](../99_bitacora/bitacora-02-03-2026-09-30.md) |
 | 03-01     | Sección Inicio: hero y contacto inmediato           | 03    | Terminada  | 02-03      | [bitacora-03-01-2026-09-30](../99_bitacora/bitacora-03-01-2026-09-30.md) |
-| 03-02     | Sección Inicio: quiénes somos y reseñas             | 03    | Pendiente  | 03-01      | —        |
+| 03-02     | Sección Inicio: quiénes somos y reseñas             | 03    | Terminada  | 03-01      | [bitacora-03-02-2026-09-30](../99_bitacora/bitacora-03-02-2026-09-30.md) |
 | 03-03     | Sección Servicios y equipamiento                    | 03    | Pendiente  | 02-03      | —        |
 | 03-04     | Sección Contacto, cobertura y formulario            | 03    | Pendiente  | 02-03      | —        |
 | 04-01     | SEO técnico y datos estructurados                   | 04    | Pendiente  | 03-04      | —        |
@@ -80,3 +80,4 @@ Ideas detectadas durante el trabajo que no forman parte de lo contratado. Se cot
 | 2026-09-30 | Corrección de la Épica 02: `Header`, `Footer` y `AccionesFlotantes` integrados en `LayoutBase` (commit `15c03d2`); footer solo con datos respaldados; tres anclas según RDA-009; estados y criterios de 02-02, 02-03 y de la épica corregidos; bitácora `bitacora-02-03-correccion-2026-09-30`. Épica 02 terminada tras la verificación en navegador. |
 | 2026-09-30 | Épica 02: el desarrollador confirmó las tres verificaciones manuales pendientes (pestaña Red sin dominios de terceros, revisión en un teléfono real a 360 px y WebStorm con separador LF). |
 | 2026-09-30 | Iteración 03-01 terminada: Hero de alta conversión con CTA dual, TarjetaDespacho (escritorio), CintaMetricas verificadas, negocio.js refactorizado con coordenadas y localidadesTexto, y 404.astro saneado con tokens. |
+| 2026-09-30 | Iteración 03-02 terminada: Quiénes somos (Yerko Burgos, plataforma hidráulica y winche), 10 reseñas de Google con acordeón accesible nativo sin JS, y RDA-007 actualizada. |

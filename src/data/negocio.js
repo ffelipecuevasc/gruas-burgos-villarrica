@@ -166,3 +166,11 @@ export function localidadesTexto() {
   if (nombres.length === 1) return nombres[0];
   return `${nombres.slice(0, -1).join(', ')} y ${nombres[nombres.length - 1]}`;
 }
+
+/**
+ * Devuelve el enlace para consultar las opiniones del negocio en Google Maps.
+ * @returns {string} URL de búsqueda formateada para Google Maps.
+ */
+export function enlaceOpinionesGoogle() {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Grúas Burgos Villarrica')}`;
+}
