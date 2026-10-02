@@ -12,7 +12,7 @@ Pasar de la vista previa a producción sin datos provisionales.
 
 ## Tareas
 
-1. Agregar una validación en compilación que falle si `src/data/negocio.js` contiene `PENDIENTE_CLIENTE` cuando `CF_PAGES_BRANCH` es `main` (variable que Cloudflare Pages expone durante la compilación).
+1. Validación de datos provisionales: **hecha en 04-02** (adelantada). La integración `src/integraciones/validar-datos-provisionales.js`, registrada en `astro.config.mjs`, detiene la compilación cuando `CF_PAGES_BRANCH` es `main` y algún archivo de `dist/` contiene `PENDIENTE_CLIENTE`; los datos provisionales que no se publican no bloquean. Aquí solo queda comprobar, en el registro de compilación de Cloudflare Pages, que se ejecuta: debe aparecer la línea «Sin PENDIENTE_CLIENTE en N archivos publicados».
 2. Preparar la lista de verificación para el desarrollador:
    1. Proyecto de Cloudflare Pages conectado a GitHub, rama de producción `main`, comando `pnpm build`, salida `dist`.
    2. Versión de Node tomada de `.nvmrc`; definir siempre `PNPM_VERSION` = `12.8.1` en las variables de compilación; confirmar en el log que Node sea 24.x (si Pages no resuelve "24" desde `.nvmrc`, fijar `NODE_VERSION` completo) y PNPM 12.8.1.
@@ -22,5 +22,5 @@ Pasar de la vista previa a producción sin datos provisionales.
 
 ## Criterios de aceptación
 
-- [ ] Compilación de `main` falla ante datos provisionales y pasa sin ellos.
+- [ ] Compilación de `main` falla ante datos provisionales y pasa sin ellos. (Simulado en local en 04-02 con `CF_PAGES_BRANCH=main`: pasa con el contenido actual y falla con un dato forzado. Falta confirmarlo en Cloudflare Pages.)
 - [ ] Prueba de humo documentada en la bitácora.

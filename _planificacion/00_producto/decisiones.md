@@ -14,6 +14,8 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 | RDA-008 | Fuente única de datos del negocio en `src/data/negocio.js` | Aceptada |
 | RDA-009 | Una página con tres secciones ancladas                   | Aceptada   |
 | RDA-010 | Medición de conversiones de Google Ads                   | Propuesta  |
+| RDA-011 | Fotos del negocio publicadas tal como están en sus redes | Aceptada   |
+| RDA-012 | `sharp` como dependencia directa                         | Aceptada   |
 
 ---
 
@@ -111,6 +113,8 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 **Alternativas consideradas:** Páginas separadas por sección (más navegación en una emergencia y fuera de lo contratado).
 **Consecuencias:** Cumple el alcance sin cotizaciones adicionales. Los anclajes permiten enlazar anuncios a secciones específicas.
 
+**Actualización 2026-10-02:** Inicio incluye además la galería «Trabajos en terreno» (iteración 04-02), entre Quiénes somos y las opiniones. Siguen siendo tres secciones y tres anclas: la galería es un bloque de Inicio y no tiene ancla propia.
+
 ## RDA-010 · Medición de conversiones de Google Ads
 
 - **Fecha:** 2026-09-29
@@ -120,3 +124,23 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 **Decisión propuesta:** Priorizar extensiones de llamada y conversiones de llamadas desde anuncios, que no requieren código en el sitio. Si se necesita medir clics en el sitio, cargar gtag.js de forma diferida después de la interacción o de `load`, y medir el impacto en Lighthouse antes de aceptarlo.
 **Alternativas consideradas:** Sin medición en el sitio (se pierde información de conversión); Google Tag Manager (más peso y complejidad).
 **Consecuencias:** Posible impacto de rendimiento que debe cuantificarse. Requiere decisión conjunta con el desarrollador.
+
+## RDA-011 · Fotos del negocio publicadas tal como están en sus redes
+
+- **Fecha:** 2026-10-01 (decisión del desarrollador; registrada el 2026-10-02 en la iteración 04-02)
+- **Estado:** Aceptada
+
+**Contexto:** El sitio necesita fotos reales (AUD-01-011) y el cliente no ha entregado originales. El desarrollador entregó el 2026-10-01 diez fotos de operaciones tomadas de las redes sociales del negocio. Pasaron por un proceso de mejora que regeneró parte de su contenido: en varias, los rótulos de la grúa muestran teléfonos y un nombre incorrectos. También se ven patentes de terceros, personas y el emblema de Bomberos de Pucón.
+**Decisión:** Publicar las diez fotos tal como están: la 6 fija en el hero y las otras nueve en la galería «Trabajos en terreno». Los riesgos anteriores los acepta el desarrollador. Ningún texto alternativo transcribe los rótulos (teléfonos, nombres, patentes) ni nombra la marca o el modelo de las grúas, y el teléfono válido es siempre el de `src/data/negocio.js`.
+**Alternativas consideradas:** Esperar los originales sin procesar (deja el hero y la galería sin fotos reales por un plazo indefinido); retocar o recortar los rótulos, las patentes y las personas (más manipulación sobre imágenes ya alteradas, y fuera de alcance).
+**Consecuencias:** El sitio muestra trabajos reales del negocio desde la primera versión. Un visitante puede leer en una foto un teléfono que no es el del negocio: en el hero la foto va al 35 % bajo el velo, pero en la galería los rótulos se leen. Cuando Yerko entregue los originales sin procesar, se reemplazan los archivos de `src/assets/fotos/` conservando los nombres, y se revisan los textos alternativos.
+
+## RDA-012 · `sharp` como dependencia directa
+
+- **Fecha:** 2026-10-01 (decisión del desarrollador; registrada el 2026-10-02 en la iteración 04-02)
+- **Estado:** Aceptada
+
+**Contexto:** Astro optimiza las imágenes con `sharp`, que trae como dependencia opcional. Con PNPM, que no expone en la raíz del proyecto las dependencias de otros paquetes, la compilación no lo encuentra: `pnpm build` falla con `MissingSharp` apenas se usa `<Image />`, `<Picture />` o `getImage` (reproducido en 04-01; la documentación de Astro indica instalarlo a mano con gestores estrictos).
+**Decisión:** Declarar `sharp` en `dependencies` de `package.json` (`pnpm add sharp`, versión 0.35.5, la misma que ya resolvía Astro). Es la única dependencia nueva de la iteración 04-02.
+**Alternativas consideradas:** `publicHoistPattern` en `pnpm-workspace.yaml` (descartada: depende de la configuración del instalador y es fácil de perder en Cloudflare Pages u otra máquina); `passthroughImageService` de Astro (no se usa: publica las fotos sin optimizar, de 0,9 a 2,3 MB cada una).
+**Consecuencias:** Peso en `dist/`: 0 B, porque `sharp` solo se ejecuta al compilar (`AGENTS.md` §5). No descarga nada nuevo: el paquete ya estaba en `node_modules` como dependencia opcional de Astro, y `pnpm-lock.yaml` solo deja de marcarlo como opcional. La compilación en frío genera 96 variantes de imagen (unos 25 s en la máquina del desarrollador); las siguientes las toman de la caché. Hay que confirmar en 04-03 que Cloudflare Pages lo instala y compila.

@@ -116,12 +116,13 @@ Reglas:
 | :--------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Header`               | Fijo, dos niveles: marca + estado 24/7 + teléfono (el teléfono se muestra también en móvil como botón de ícono con `aria-label`), y navegación por anclas. Altura total compensada con `scroll-padding-top`. |
 | `IndicadorDisponible`  | Punto naranja con texto "Disponible 24/7". La animación de pulso se desactiva con `prefers-reduced-motion`.                                                                                                  |
-| `Hero`                 | Foto real de la grúa con velo degradado, `h1` con ubicación y servicio, párrafo de apoyo, botones de llamada y WhatsApp visibles sin scroll a 360 × 640 px.                                                  |
+| `Hero`                 | Foto fija de la grúa (una sola, sin carrusel) al 35 % bajo el velo degradado: en móvil ocupa el 60 % superior del bloque y desde `md` lo cubre entero. `h1` con ubicación y servicio, párrafo de apoyo, botones de llamada y WhatsApp visibles sin scroll a 360 × 640 px. El texto mantiene contraste AA sobre la foto. |
 | `TarjetaDespacho`      | Bloque naranja con el número grande y botón de WhatsApp. Texto en `#0e0e0e`.                                                                                                                                 |
 | `CintaMetricas`        | 2–4 datos verificados (por ejemplo "24/7", "+5 años"). Ninguna cifra sin confirmación del cliente.                                                                                                           |
 | `TituloSeccion`        | Etiqueta superior opcional, `h2`, barra de acento y bajada. La etiqueta superior solo se usa si aporta información.                                                                                          |
 | `TarjetaServicio`      | Ícono, barra, `h3`, descripción, hasta 3 características con ícono de verificación y enlace de acción.                                                                                                       |
 | `BloqueEquipamiento`   | Descripción técnica de la flota y chips de especificaciones confirmadas.                                                                                                                                     |
+| `GaleriaTrabajos`      | Bloque de Inicio entre Quiénes somos y las opiniones: título «Trabajos en terreno» y nueve fotos, sin leyendas, visor ni interacción. La primera es apaisada y ocupa dos celdas; las demás son cuadradas. 2 columnas en móvil, 4 desde `md` y 5 desde `lg`, con separación `space-sm`, ángulos rectos y sin sombras. |
 | `TarjetaResena`        | Cita breve, nombre abreviado del autor, fecha y enlace a Google Maps. Sin estrellas inventadas.                                                                                                              |
 | `ListaCobertura`       | Filas con localidad, referencia de ruta y tiempo estimado. Tiempos solo si el cliente los confirma.                                                                                                          |
 | `FormularioCotizacion` | Campos con `label` visible; al enviar compone un mensaje de WhatsApp (RDA-006). Sin `alert()`.                                                                                                               |
@@ -171,11 +172,12 @@ El isotipo es el ícono «auto-towing» de Material Symbols Light (Apache Licens
 
 ## 7. Imágenes
 
-1. Solo fotos reales de Grúas Burgos (flota, operaciones, base). Las imágenes del prototipo son de referencia y no se publican.
-2. Formatos AVIF/WebP generados por `<Picture />`; ancho máximo de origen 1920 px.
-3. Hero: `loading="eager"` y `fetchpriority="high"`; opacidad 35 % bajo un velo degradado de `surface-container-lowest`.
+1. Solo fotos reales de Grúas Burgos (flota, operaciones, base), publicadas tal como están en las redes del negocio (RDA-011). Las imágenes del prototipo son de referencia y no se publican.
+2. Formatos: AVIF con reserva WebP, generados por `<Picture />` (`formats={['avif']}` y `fallbackFormat="webp"`). No se publican PNG ni JPEG de reserva. Ancho máximo de origen 1920 px. El procesamiento requiere `sharp` como dependencia directa (RDA-012).
+3. Hero: `loading="eager"` y `fetchpriority="high"`; opacidad 35 % bajo un velo degradado de `surface-container-lowest`. El velo no baja del 30 %: con ese mínimo el texto pequeño conserva contraste AA sobre cualquier punto de la foto.
 4. Mapa de cobertura: imagen estática local (no iframe de Google Maps en la carga inicial). El enlace "Cómo llegar" abre Google Maps.
-5. Todas las imágenes con `alt` descriptivo en español y dimensiones explícitas.
+5. Todas las imágenes con `alt` descriptivo en español y dimensiones explícitas. Ningún `alt` transcribe rótulos de las fotos ni nombra la marca o el modelo de las grúas.
+6. Las fotos que quedan bajo la primera pantalla usan `loading="lazy"`. Cada `<Picture />` declara `widths` y `sizes` acordes al espacio que ocupa, y `width` y `height` del tamaño mayor que necesita, para no publicar la foto completa.
 
 ## 8. Movimiento
 

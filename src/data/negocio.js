@@ -85,7 +85,6 @@ export const PENDIENTE_CLIENTE = 'PENDIENTE_CLIENTE';
 /** @type {Negocio} */
 export const negocio = {
   nombre: 'Grúas Burgos',
-  // Provisional: titular de ejemplo de DESIGN.md §10, hasta recibir los textos del cliente.
   eslogan: 'Grúas en Villarrica y La Araucanía, 24 horas',
   url: 'https://gruasvillarrica.cl',
   telefono: {

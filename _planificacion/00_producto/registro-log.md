@@ -2,9 +2,9 @@
 
 **Fuente única de verdad del trabajo pendiente.** Si discrepa con `_planificacion/README.md` o con cualquier otro documento de planificación, prevalece este archivo.
 
-- **Última actualización:** 2026-10-01
-- **Iteración activa:** 04-01 · SEO técnico, marca y datos estructurados (en revisión: espera la verificación del desarrollador)
-- **Próximo hito:** verificación de 04-01 por el desarrollador (incluye validar el JSON-LD en Schema.org y en la Prueba de resultados enriquecidos) y decisión sobre `sharp` (sección 3), que bloquea 04-02; después, 04-02 y la vista previa de Cloudflare Pages al iniciar 04-03. Sigue pendiente la aprobación del cliente de la Épica 03 (hito «Prototipo»)
+- **Última actualización:** 2026-10-02
+- **Iteración activa:** 04-02 · Fotos, galería, rendimiento y cabeceras (en revisión: espera la verificación del desarrollador)
+- **Próximo hito:** verificación de 04-02 por el desarrollador; después, conexión de la vista previa de Cloudflare Pages y creación de la rama `iteracion/04-03-auditoria` para iniciar 04-03. Siguen pendientes la validación del JSON-LD (04-01) y la aprobación del cliente de la Épica 03 (hito «Prototipo»)
 - **Entrega tentativa:** 2026-10-18
 - **Flujo de ramas vigente:** trabajo directo en `main` mientras Cloudflare Pages no esté conectado; al conectarlo se retoma `iteracion/XX-YY-…`.
 
@@ -25,7 +25,7 @@
 | 03-04     | Sección Contacto, cobertura y formulario            | 03    | Terminada  | 02-03      | [bitacora-03-04-2026-09-30](../99_bitacora/bitacora-03-04-2026-09-30.md) |
 | 03-05     | Corrección de la Épica 03 tras la auditoría         | 03    | Terminada  | 03-04      | [bitacora-03-05-2026-10-01](../99_bitacora/bitacora-03-05-2026-10-01.md) |
 | 04-01     | SEO técnico, marca y datos estructurados            | 04    | En revisión | 03-05      | [bitacora-04-01-2026-10-01](../99_bitacora/bitacora-04-01-2026-10-01.md) |
-| 04-02     | Fotos, galería, rendimiento y cabeceras             | 04    | Pendiente  | 04-01      | —        |
+| 04-02     | Fotos, galería, rendimiento y cabeceras             | 04    | En revisión | 04-01      | [bitacora-04-02-2026-10-02](../99_bitacora/bitacora-04-02-2026-10-02.md) |
 | 04-03     | Vista previa en Cloudflare, accesibilidad y Lighthouse | 04 | Pendiente  | 04-01, 04-02 | —      |
 | 05-01     | Publicación en producción                           | 05    | Pendiente  | 04-03      | —        |
 | 05-02     | Medición: Web Analytics, Search Console y Google Ads | 05   | Pendiente  | 05-01      | —        |
@@ -47,7 +47,7 @@ Bloquean contenido real. Mientras falten, se usa `PENDIENTE_CLIENTE` en `src/dat
 | Confirmación de cuentas de redes sociales                   | AUD-01-008  | 02-03          | Confirmado |
 | Razón social, RUT y coordenadas de la base                  | AUD-01-009  | 02-03, 04-01   | Parcial: coordenadas de referencia cargadas en `negocio.js`, sin validar: el desarrollador las valida contra el pin del perfil de Google (tarea del desarrollador de 04-01) y hasta entonces no se publican (el JSON-LD no lleva `geo`); razón social y RUT, pendientes |
 | Enlace al perfil de Google Maps y selección de reseñas      | AUD-01-010  | 03-02          | Parcial: 10 reseñas seleccionadas y publicadas; enlace oficial al perfil, pendiente (lo entrega el desarrollador; hasta entonces el JSON-LD no lleva `hasMap`) |
-| Fotos reales (flota, operaciones, base) y logo si existe    | AUD-01-011  | 03-01, 04-01, 04-02 | Parcial: isotipo y 10 fotos de operaciones entregados el 2026-10-01 y guardados en `src/assets/marca/` y `src/assets/fotos/` (04-01); las fotos se publican en 04-02 (RDA-011, por registrar). Originales sin procesar, pendientes |
+| Fotos reales (flota, operaciones, base) y logo si existe    | AUD-01-011  | 03-01, 04-01, 04-02 | Parcial: isotipo y 10 fotos de operaciones entregados el 2026-10-01 (04-01) y publicados en el hero y en la galería (04-02), tal como están en las redes del negocio (RDA-011). Originales sin procesar, pendientes |
 | Textos del negocio (punto 2 de "Qué necesito de usted" en la propuesta) | — | 03-01 a 03-04 | Pendiente |
 | Aceptación de publicar reseñas que mencionan tiempos y precio («alrededor de 30min», «tiempo récord», «precio») | — | 03-05 | Pendiente |
 
@@ -58,7 +58,7 @@ Bloquean contenido real. Mientras falten, se usa `PENDIENTE_CLIENTE` en `src/dat
 | Medición de conversiones de Google Ads en el sitio | RDA-010  | Desarrollador          |
 | Aprobación del cliente de la Épica 03 (hito Prototipo) | —    | Desarrollador          |
 | Alinear `AGENTS.md` §6.4 y `DESIGN.md` §5 con la decisión D3 (nombre completo del autor) | RDA-007 (AUD-08-032) | Desarrollador |
-| Cómo dar `sharp` al servicio de imágenes de Astro (dependencia directa o `publicHoistPattern` en `pnpm-workspace.yaml`): hoy `getImage`, `<Image />` y `<Picture />` hacen fallar `pnpm build` con `MissingSharp`. Bloquea 04-02 (ver bitácora 04-01) | Requiere RDA si se agrega la dependencia | Desarrollador |
+| Activar la política de seguridad de contenido de Astro (`security.csp`): recomendación en la bitácora 04-02. Requiere editar `astro.config.mjs` y una RDA; conviene decidirla junto con RDA-010 y Web Analytics (05-02) | Requiere RDA | Desarrollador |
 
 ## 4. Propuestas fuera de alcance
 
@@ -94,3 +94,5 @@ Ideas detectadas durante el trabajo que no forman parte de lo contratado. Se cot
 | 2026-10-01 | Aprobaciones del desarrollador sobre los pendientes de 03-05 (decisión 6 de `definicion-epica-04.md`): se aprueba el `aria-label` «Métricas destacadas del servicio»; se mantiene el mensaje genérico del navegador para el teléfono con letras; se acepta la etiqueta del hero sin cápsula ni punto; la sombra de 1 px de la barra móvil pasa a borde (hecho en 04-01). |
 | 2026-10-01 | Épica 04 replanificada por el desarrollador (nuevos nombres y dependencias de 04-01, 04-02 y 04-03). Material del cliente recibido: isotipo y 10 fotos de operaciones. |
 | 2026-10-01 | Iteración 04-01 en revisión: metadatos, Open Graph, Twitter Card, favicon, imagen de vista previa de 1200 × 630 px, JSON-LD del negocio sin `geo` ni `hasMap`, `robots.txt`, sitemap verificado, isotipo en el header (edición autorizada de `DESIGN.md` §6) y borde en la barra móvil. Hallazgo: Astro no encuentra `sharp` en este proyecto; bloquea 04-02 hasta que el desarrollador decida. Pendiente: verificación del desarrollador y validación del JSON-LD. |
+| 2026-10-02 | Decisión del desarrollador sobre `sharp`: dependencia directa con `pnpm add sharp` (RDA-012). Sale de «Decisiones por tomar». |
+| 2026-10-02 | Iteración 04-02 en revisión: foto fija en el hero y galería «Trabajos en terreno» en AVIF con reserva WebP, `image` del JSON-LD optimizada, `public/_headers`, validación de `PENDIENTE_CLIENTE` en la compilación de producción (integración registrada en `astro.config.mjs`, con autorización del desarrollador), Tailwind limitado a `src/` y presupuesto de la primera vista medido (166,3 KB de 400). RDA-011 y RDA-012 registradas; RDA-009 y `DESIGN.md` §5 y §7 actualizadas. Salvedad aceptada por el desarrollador: Chrome adelanta 3 de las 9 fotos de la galería al cargar a 360 × 640 px. Pendiente: verificación del desarrollador. |

@@ -4,6 +4,7 @@ import Contenedor from '../components/Contenedor.astro';
 import Hero from '../components/Hero.astro';
 import CintaMetricas from '../components/CintaMetricas.astro';
 import QuienesSomos from '../components/QuienesSomos.astro';
+import GaleriaTrabajos from '../components/GaleriaTrabajos.astro';
 import Resenas from '../components/Resenas.astro';
 import TituloSeccion from '../components/TituloSeccion.astro';
 import TarjetaServicio from '../components/TarjetaServicio.astro';
@@ -27,11 +28,12 @@ const descripcion =
 <LayoutBase titulo={titulo} descripcion={descripcion}>
   <DatosEstructurados slot="head" />
 
-  {/* Tres secciones ancladas (RDA-009). Quiénes somos y las opiniones son bloques de Inicio. */}
+  {/* Tres secciones ancladas (RDA-009). Quiénes somos, la galería y las opiniones son bloques de Inicio. */}
   <section id="inicio" aria-labelledby="titulo-inicio">
     <Hero idTitulo="titulo-inicio" />
     <CintaMetricas />
     <QuienesSomos />
+    <GaleriaTrabajos />
     <Resenas />
   </section>
 

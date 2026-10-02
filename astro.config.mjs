@@ -3,12 +3,13 @@ import { defineConfig, fontProviders } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
+import validarDatosProvisionales from './src/integraciones/validar-datos-provisionales.js';
 
 // Sitio estático (SSG) publicado en Cloudflare Pages. No requiere adaptador.
 export default defineConfig({
   site: 'https://gruasvillarrica.cl',
   trailingSlash: 'never',
-  integrations: [sitemap(), icon()],
+  integrations: [sitemap(), icon(), validarDatosProvisionales()],
   // Fuentes autoalojadas (RDA-004): Astro las descarga al compilar y las sirve desde el propio dominio.
   fonts: [
     {

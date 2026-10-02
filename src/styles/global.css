@@ -1,4 +1,6 @@
-@import 'tailwindcss';
+/* `source` limita la búsqueda de clases a `src/`: sin él, Tailwind también lee `_planificacion/` y
+   los documentos de la raíz, y publica utilidades que solo se nombran ahí. */
+@import 'tailwindcss' source('..');
 
 /* Tokens de diseño de DESIGN.md (secciones 2, 3, 4 y 9). */
 @theme {

@@ -1,9 +1,11 @@
 ---
+import { Picture } from 'astro:assets';
 import Contenedor from './Contenedor.astro';
 import BotonLlamada from './BotonLlamada.astro';
 import BotonWhatsApp from './BotonWhatsApp.astro';
 import TarjetaDespacho from './TarjetaDespacho.astro';
 import { negocio } from '../data/negocio.js';
+import fotoHero from '../assets/fotos/06-grua-de-noche-con-auto-accidentado.webp';
 
 /**
  * Primer bloque de la sección `#inicio`. No es una sección propia: su `h1` da nombre a `#inicio`.
@@ -25,13 +27,24 @@ const localidades = negocio.cobertura.localidades.map((localidad) => localidad.n
     clase,
   ]}
 >
-  {/* Textura CSS y velo: fondo provisional hasta recibir una foto real del cliente (AUD-01-011). */}
+  {/* Foto fija al 35 % bajo el velo (DESIGN.md §7). Es la imagen prioritaria de la página.
+      En móvil el bloque es más alto que ancho: la foto ocupa solo el 60 % superior, para que la
+      grúa se vea entera y no un recorte ampliado, y el velo llega a opaco justo donde termina.
+      Desde `md` cubre todo el bloque. */}
+  <Picture
+    src={fotoHero}
+    alt="Grúa con un auto accidentado sobre la plataforma, de noche, en un camino a las afueras de Villarrica."
+    formats={['avif']}
+    fallbackFormat="webp"
+    widths={[640, 960, 1280, 1920]}
+    sizes="(min-width: 768px) 100vw, 640px"
+    loading="eager"
+    fetchpriority="high"
+    decoding="async"
+    class="absolute inset-x-0 top-0 h-3/5 w-full object-cover opacity-35 md:h-full md:object-[center_65%]"
+  />
   <div
-    class="pointer-events-none absolute inset-0 bg-[radial-gradient(var(--color-primary-container)_1px,transparent_1px)] [background-size:16px_16px] opacity-15"
-    aria-hidden="true"
-  ></div>
-  <div
-    class="pointer-events-none absolute inset-0 bg-gradient-to-b from-surface/40 via-surface-container-lowest/80 to-surface-container-lowest"
+    class="pointer-events-none absolute inset-0 bg-gradient-to-b from-surface-container-lowest/30 from-30% via-surface-container-lowest via-60% to-surface-container-lowest md:from-0% md:via-surface-container-lowest/55 md:via-50%"
     aria-hidden="true"
   ></div>
 
