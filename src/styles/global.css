@@ -108,7 +108,26 @@
   html {
     color-scheme: dark;
     scroll-behavior: smooth;
-    scroll-padding-top: 7rem;
+    /* Lo que recibe el foco no puede quedar bajo los elementos fijos (WCAG 2.4.11). Arriba, el header
+       (7rem); abajo, la barra móvil (3.5rem más su borde). A cada lado se suma una holgura de 1.25rem:
+       en los campos de texto el navegador alinea el cursor y no la caja, que sobresale unos 13 px, y
+       el anillo de foco ocupa 5 px más. */
+    scroll-padding-top: calc(7rem + 1.25rem);
+    scroll-padding-bottom: calc(3.5rem + 1px + env(safe-area-inset-bottom) + 1.25rem);
+  }
+
+  /* Desde `md` lo fijo de abajo son los botones flotantes: 1.5rem de separación, dos botones de 3rem
+     y 0.5rem entre ellos (8rem), más la misma holgura. `Footer` reserva ese alto al final. */
+  @media (min-width: 48rem) {
+    html {
+      scroll-padding-bottom: 9.25rem;
+    }
+  }
+
+  /* Los destinos de las anclas descuentan la holgura: siguen quedando justo bajo el header. */
+  main,
+  section[id] {
+    scroll-margin-top: -1.25rem;
   }
 
   body {

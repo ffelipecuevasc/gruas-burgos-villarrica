@@ -1,6 +1,6 @@
 # Épica 04 · SEO técnico, rendimiento y accesibilidad
 
-- **Estado:** En curso (04-01 y 04-02 en revisión)
+- **Estado:** En curso (04-01 y 04-02 en revisión; 04-03 fase A hecha; 04-04 en revisión)
 - **Objetivo:** que Google encuentre el sitio en búsquedas locales de grúas, que la primera vista cargue en menos de 2 s con red móvil lenta (LCP de Lighthouse móvil) y que cualquier persona pueda usarlo (WCAG 2.2 AA).
 - **Depende de:** Épica 03 (iteraciones 03-01 a 03-05 verificadas por el desarrollador el 2026-10-01, commit `d6121eb`; la épica sigue «En revisión» solo por la aprobación del cliente, AUD-08-023).
 - **Material del cliente entregado el 2026-10-01:** isotipo (`LogoGruasBurgos.svg`) y 10 fotos de operaciones tomadas de las redes del negocio (ver RDA-011).
@@ -12,7 +12,8 @@
 3. Datos estructurados JSON-LD del negocio (04-01).
 4. Foto fija en el hero y galería de trabajos en Inicio (04-02).
 5. Presupuesto de rendimiento, cabeceras de Cloudflare Pages y validación de datos provisionales en la compilación (04-02).
-6. Conexión de la vista previa de Cloudflare Pages, auditoría de accesibilidad y Lighthouse sobre HTTPS (04-03).
+6. Conexión de Cloudflare Pages y del dominio propio, auditoría de accesibilidad y Lighthouse sobre HTTPS (04-03).
+7. Corrección de los defectos de la auditoría local (04-04).
 
 ## Iteraciones
 
@@ -20,9 +21,10 @@
 | :-------- | :------------------------------------------------------ | :----------- | :----------------------------------- |
 | 04-01     | SEO técnico, marca y datos estructurados                | 03-05        | Local (`pnpm build` y `pnpm preview`) |
 | 04-02     | Fotos, galería, rendimiento y cabeceras                 | 04-01        | Local (`pnpm build` y `pnpm preview`) |
-| 04-03     | Vista previa en Cloudflare, accesibilidad y Lighthouse  | 04-01, 04-02 | Vista previa de Cloudflare Pages      |
+| 04-03     | Cloudflare, dominio propio, accesibilidad y Lighthouse  | 04-01, 04-02 | Fase A en local; fase B en la vista previa y en `gruasvillarrica.cl` |
+| 04-04     | Corrección de la auditoría local                        | 04-03 (fase A) | Local (`pnpm build` y `pnpm preview`) |
 
-## Decisiones del desarrollador que rigen esta épica (2026-10-01)
+## Decisiones del desarrollador que rigen esta épica (2026-10-01 y 2026-10-02)
 
 1. **Verificación:** 04-01 y 04-02 se verifican en local. La vista previa de Cloudflare Pages se conecta al iniciar 04-03; desde ese momento se vuelve a trabajar con ramas `iteracion/XX-YY-…` y la compilación de producción debe fallar si publica datos provisionales.
 2. **Hero:** una sola foto fija (la 6, nocturna). No hay carrusel, transición ni efecto de scroll (`DESIGN.md` §8 se mantiene).
@@ -30,6 +32,8 @@
 4. **Fotos tal como están:** se publican como están en las redes del negocio, aunque varias muestran rótulos regenerados por el proceso de mejora (teléfonos y nombre incorrectos), patentes de terceros, personas y el emblema de Bomberos de Pucón. Es un riesgo aceptado por el desarrollador y se registra en RDA-011.
 5. **Isotipo:** el SVG entregado es el ícono «auto-towing» de Material Symbols Light (licencia Apache 2.0). Se usa como isotipo junto al nombre «Grúas Burgos» en la tipografía del sitio; no es una marca registrable.
 6. **Pendientes aprobados de 03-05:** se aprueba el `aria-label` «Métricas destacadas del servicio», se mantiene el mensaje genérico del navegador para el teléfono con letras, se acepta la etiqueta del hero sin cápsula ni punto, y la sombra de 1 px de la barra móvil pasa a borde (04-01).
+7. **Dominio propio anticipado (2026-10-02):** `gruasvillarrica.cl` se conecta a Cloudflare Pages durante 04-03, con `www` redirigido a la raíz y HTTPS forzado, y es **indexable apenas esté activo**, antes de la aprobación del cliente de la Épica 03 (AUD-08-023). El `noindex` de `_headers` solo vale para `*.pages.dev`.
+8. **Corrección de la auditoría local (2026-10-02):** 04-04 corrige FA-01, FA-02, FA-03, FA-04, FA-06, FA-07, FA-08, FA-10 y FA-11; se aprueba el texto «Saltar al contenido». FA-05 y FA-09 quedan abiertos y diferidos (cambian `DESIGN.md`). La primera pantalla a 320 × 568 px es un riesgo aceptado. El presupuesto de peso se mide a 360 × 640 px con densidad 1 y red 4G; las cifras con densidad alta o 3G se informan, sin exigirlas.
 
 ## Reglas transversales
 
@@ -43,7 +47,7 @@
 
 ## Criterio de término
 
-- En la vista previa de Cloudflare Pages: Lighthouse móvil ≥ 95 en Rendimiento, Accesibilidad y Buenas prácticas. En SEO, ≥ 95 sin contar la auditoría de indexación, que falla a propósito por el `noindex` de `*.pages.dev`; la cifra completa de SEO se mide en producción (05-01).
+- En `https://gruasvillarrica.cl` (indexable): Lighthouse móvil ≥ 95 en Rendimiento, Accesibilidad, Buenas prácticas y SEO. La vista previa de `*.pages.dev` se informa como referencia: su SEO excluye la indexación por el `noindex`.
 - JSON-LD sin errores en el validador de Schema.org y sin errores críticos en la Prueba de resultados enriquecidos de Google.
 - La vista previa del enlace en WhatsApp muestra imagen, título y descripción.
 - Sin hallazgos de severidad Alta abiertos en la Auditoría 09.

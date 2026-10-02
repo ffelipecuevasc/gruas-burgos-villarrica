@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { Font } from 'astro:assets';
 import CabeceraSEO from '../components/CabeceraSEO.astro';
+import EnlaceSaltar from '../components/EnlaceSaltar.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import AccionesFlotantes from '../components/AccionesFlotantes.astro';
@@ -38,8 +39,11 @@ const { titulo, descripcion, noindex = false } = Astro.props;
     <slot name="head" />
   </head>
   <body class="pb-[calc(3.5rem+1px+env(safe-area-inset-bottom))] md:pb-0">
+    <EnlaceSaltar destino="contenido" />
     <Header />
-    <main>
+    {/* `tabindex="-1"` deja que el foco llegue aquí desde «Saltar al contenido». El `main` no es un
+        control: no dibuja anillo de foco. */}
+    <main id="contenido" tabindex="-1" class="outline-none">
       <slot />
     </main>
     <Footer />

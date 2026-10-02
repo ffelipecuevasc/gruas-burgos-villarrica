@@ -16,17 +16,19 @@ const enlaces = [
 <header class="sticky top-0 z-50 shadow-2xl">
   <div class="bg-surface-container-lowest border-surface-container-highest h-16 border-b">
     <Contenedor class="flex h-full items-center justify-between gap-space-md">
-      <div class="flex items-center gap-space-sm">
+      {/* El enlace se estira con `::after` sobre todo el bloque de la marca: el isotipo y el indicador
+          también llevan al inicio, y la marca se anuncia una sola vez (el isotipo es decorativo). */}
+      <div class="relative flex items-center gap-space-sm">
         <span
           class="bg-primary-container text-on-accent flex size-10 shrink-0 items-center justify-center"
           aria-hidden="true"
         >
           <Icono nombre="marca" class="size-8" />
         </span>
-        <div class="relative flex flex-col gap-space-xs">
+        <div class="flex flex-col gap-space-xs">
           <a
             href="/"
-            class="font-display text-headline-sm text-on-surface uppercase after:absolute after:inset-0"
+            class="font-display text-headline-sm text-on-surface uppercase after:absolute after:inset-0 after:z-10"
           >
             {negocio.nombre}
           </a>
@@ -59,12 +61,17 @@ const enlaces = [
     class="bg-surface-container-low border-surface-container h-12 border-b"
   >
     <Contenedor class="flex h-full items-center">
-      <ul class="-ml-space-md flex h-full items-center">
-        {enlaces.map((enlace) => (
+      {/* El primer enlace no lleva relleno a la izquierda: así su texto sigue alineado con el margen
+          y el anillo de foco cabe entero en la pantalla. */}
+      <ul class="flex h-full items-center">
+        {enlaces.map((enlace, indice) => (
           <li class="h-full">
             <a
               href={enlace.href}
-              class="text-on-surface-variant hover:text-on-surface font-display text-label-md flex h-full items-center px-space-md uppercase transition-colors duration-150"
+              class:list={[
+                'text-on-surface-variant hover:text-on-surface font-display text-label-md flex h-full items-center uppercase transition-colors duration-150',
+                indice === 0 ? 'pr-space-md' : 'px-space-md',
+              ]}
             >
               {enlace.texto}
             </a>

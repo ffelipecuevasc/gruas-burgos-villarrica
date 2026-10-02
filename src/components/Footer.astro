@@ -73,7 +73,9 @@ const hayFacturacion =
       </ul>
     </div>
   </Contenedor>
-  <div class="bg-surface-container-low">
+  {/* Desde `md` reserva al final el alto de los botones flotantes más su holgura (el mismo valor que
+      `scroll-padding-bottom` en `global.css`): al llegar al final de la página no tapan el pie. */}
+  <div class="bg-surface-container-low md:pb-37">
     <Contenedor class="text-secondary font-body text-body-sm flex flex-col gap-space-sm py-space-md md:flex-row md:items-center md:justify-between">
       <p>
         © {anio} {negocio.nombre}

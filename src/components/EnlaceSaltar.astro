@@ -1,0 +1,23 @@
+---
+import Boton from './Boton.astro';
+
+/**
+ * Enlace para saltar al contenido: es el primer elemento enfocable de la página. Queda fuera de la
+ * pantalla hasta que recibe el foco con el teclado y lleva al `main`, sin JavaScript.
+ *
+ * @typedef {Object} Props
+ * @property {string} destino `id` del elemento al que salta (el `main` del layout).
+ */
+
+/** @type {Props} */
+const { destino } = Astro.props;
+---
+
+{/* Sobre el header (z-50). Se saca de la pantalla con `translate` y no con `sr-only`, para que al
+    enfocarlo conserve el tamaño y el foco de cualquier botón. */}
+<Boton
+  href={`#${destino}`}
+  class="fixed top-space-sm left-space-sm z-60 -translate-y-[200%] focus:translate-y-0"
+>
+  Saltar al contenido
+</Boton>

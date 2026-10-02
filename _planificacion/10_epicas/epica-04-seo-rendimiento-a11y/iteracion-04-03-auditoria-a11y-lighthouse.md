@@ -3,7 +3,7 @@
 - **Épica:** 04 · SEO técnico, rendimiento y accesibilidad
 - **Estado:** Pendiente
 - **Rama sugerida:** `iteracion/04-03-auditoria` (desde aquí se vuelve a trabajar con ramas)
-- **Depende de:** 04-01, 04-02
+- **Depende de:** 04-01, 04-02 y, para la fase B, 04-04
 - **RDA relacionadas:** RDA-001, RDA-006, RDA-010, RDA-011, RDA-012
 - **Hallazgos que cierra:** verificación final de los abiertos: AUD-01-025, AUD-05-001 y los que surjan en esta auditoría
 
@@ -16,6 +16,7 @@ Verificar el sitio completo sobre HTTPS en la vista previa de Cloudflare Pages y
 El agente (Claude Code) **no puede consultar la vista previa**: sus permisos niegan `curl` y `wget`, y `WebFetch` no incluye `pages.dev`. Por eso la iteración tiene dos fases:
 
 - **Fase A (agente, en local):** auditoría con `pnpm preview`, sin depender de Cloudflare. Puede correr de inmediato.
+- **04-04 (agente, en local):** corrige los defectos de la fase A. La fase B mide la versión corregida.
 - **Fase B (agente, con evidencia del desarrollador):** consolida las cifras y los resultados que el desarrollador obtuvo sobre la vista previa y registra la Auditoría 09.
 
 El desarrollador hace sus tareas en paralelo a la fase A y entrega la evidencia al empezar la fase B.
@@ -24,19 +25,21 @@ El desarrollador hace sus tareas en paralelo a la fase A y entrega la evidencia 
 
 1. Crear la rama `iteracion/04-03-auditoria` desde `main` (ya contiene 04-01 y 04-02).
 2. Conectar el repositorio a Cloudflare Pages:
-    - Rama de producción `main`, comando de compilación `pnpm build`, salida `dist`, sin dominio propio todavía.
-    - Variable de compilación `PNPM_VERSION` = `12.8.1`. Node sale de `.nvmrc` (`24`); si el registro de compilación no muestra Node 24.x, fijar `NODE_VERSION` completo.
-    - Nombre del proyecto: define la URL `<proyecto>.pages.dev`.
+   - Rama de producción `main`, comando de compilación `pnpm build`, salida `dist`, sin dominio propio todavía.
+   - Variable de compilación `PNPM_VERSION` = `12.8.1`. Node sale de `.nvmrc` (`24`); si el registro de compilación no muestra Node 24.x, fijar `NODE_VERSION` completo.
+   - Nombre del proyecto: define la URL `<proyecto>.pages.dev`.
 3. En el registro de compilación de `main`, comprobar y anotar: versión de Node, versión de pnpm, que `sharp` se instale sin errores y la línea «Sin PENDIENTE_CLIENTE en N archivos publicados».
 4. Subir la rama `iteracion/04-03-auditoria` para que Cloudflare cree su vista previa, y anotar la URL.
+   - Cuando 04-04 esté verificada, fusionar la rama en `main`. Eso publica en producción, en `https://gruasvillarrica.cl`, que es ahora **indexable** (decisión del 2026-10-02).
 5. Cabeceras, desde PowerShell (usar `curl.exe`, porque `curl` es otro comando en PowerShell). Copiar las salidas completas:
-    - `curl.exe -sI https://URL/` (portada).
-    - `curl.exe -sI https://URL/_astro/ARCHIVO` (cualquier archivo con huella: el nombre sale de `view-source` o de la pestaña Red).
-    - `curl.exe -sI https://URL/robots.txt` y `https://URL/favicon.ico`.
-    - `curl.exe -s -o NUL -w "%{http_code}" https://URL/no-existe` (debe ser 404).
-6. Desde un teléfono real (Android y, si es posible, iPhone con Safari): llamada, WhatsApp (los tres mensajes), «Cómo llegar», formulario, y la vista previa del enlace al compartirlo en WhatsApp.
+   - `curl.exe -sI https://URL/` (portada).
+   - `curl.exe -sI https://URL/_astro/ARCHIVO` (cualquier archivo con huella: el nombre sale de `view-source` o de la pestaña Red).
+   - `curl.exe -sI https://URL/robots.txt` y `https://URL/favicon.ico`.
+   - `curl.exe -s -o NUL -w "%{http_code}" https://URL/no-existe` (debe ser 404).
+   - Dominio propio, con las mismas pruebas: `curl.exe -sI "https://www.gruasvillarrica.cl/prueba?x=1"` (301 a `https://gruasvillarrica.cl/prueba?x=1`), `curl.exe -sI http://gruasvillarrica.cl/` (redirige a `https`) y `curl.exe -sI https://gruasvillarrica.cl/` (200, sin `x-robots-tag`). La dirección `pages.dev` debe seguir trayendo `x-robots-tag: noindex`.
+6. Desde un teléfono real (Android y, si es posible, iPhone con Safari): llamada, WhatsApp (los siete mensajes distintos que hay en el sitio; la lista está en la bitácora de la fase A), «Cómo llegar», formulario, y la vista previa del enlace al compartirlo en WhatsApp.
 7. Con TalkBack o VoiceOver: encabezados, nombres de botones, formulario y errores.
-8. PageSpeed Insights sobre la URL de la vista previa, en móvil y en escritorio: **tres ejecuciones** de cada una; guardar las cuatro cifras de cada ejecución y el enlace al informe.
+8. PageSpeed Insights sobre `https://gruasvillarrica.cl` (después de fusionar en `main`), en móvil y en escritorio: **tres ejecuciones** de cada una; guardar las cuatro cifras de cada ejecución y el enlace al informe. Opcional: la misma medición sobre la vista previa de la rama, como referencia. Anotar LCP y tiempo de bloqueo total: la fase A midió un LCP local de 2,6 a 4,2 s con red y CPU limitadas, y debe contrastarse.
 9. Validador de Schema.org y Prueba de resultados enriquecidos (modo URL de la vista previa o pegando el bloque): resultado y capturas.
 10. Revisar el favicon en la pestaña del navegador y borrar `node_modules/.cache/prueba-csp` (3,8 MB, resto de la prueba de CSP de 04-02).
 
@@ -60,7 +63,8 @@ El desarrollador hace sus tareas en paralelo a la fase A y entrega la evidencia 
 
 ## Criterios de aceptación
 
-- [ ] Lighthouse móvil en la vista previa (mediana de tres ejecuciones): ≥ 95 en Rendimiento, Accesibilidad y Buenas prácticas. En SEO, ≥ 95 sin contar la auditoría de indexación (falla a propósito por el `noindex` de `*.pages.dev`; se informa la cifra con y sin ella).
+- [ ] Lighthouse móvil en `https://gruasvillarrica.cl` (mediana de tres ejecuciones): ≥ 95 en Rendimiento, Accesibilidad, Buenas prácticas y SEO. La vista previa de `*.pages.dev` es referencia: su SEO excluye la indexación por el `noindex`.
+- [ ] Dominio propio: certificado activo, `www` redirigido a la raíz con código 301 conservando ruta y consulta, `http` redirigido a `https`, y la raíz sin `x-robots-tag`.
 - [ ] LCP < 2,0 s y CLS < 0,05 en Lighthouse móvil.
 - [ ] JSON-LD: 0 errores en el validador de Schema.org y 0 errores críticos en la Prueba de resultados enriquecidos.
 - [ ] Vista previa de WhatsApp con imagen, título y descripción (captura en la bitácora).
@@ -72,5 +76,6 @@ El desarrollador hace sus tareas en paralelo a la fase A y entrega la evidencia 
 
 ## Fuera de alcance
 
-- Dominio propio, HTTPS del dominio y medición de SEO completa en producción (05-01).
+- Registro de la decisión de publicar antes de la aprobación del cliente: lo hace la fase B en la Auditoría 09 (AUD-08-023 sigue abierto).
+- Google Search Console y envío del sitemap: tarea opcional del desarrollador, sin criterio asociado.
 - Etiqueta de Google, conversiones y política de seguridad de contenido (RDA-010 y 05-02). Si se aprueba, debe volver a medirse Lighthouse.

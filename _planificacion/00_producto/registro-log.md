@@ -3,8 +3,8 @@
 **Fuente única de verdad del trabajo pendiente.** Si discrepa con `_planificacion/README.md` o con cualquier otro documento de planificación, prevalece este archivo.
 
 - **Última actualización:** 2026-10-02
-- **Iteración activa:** 04-02 · Fotos, galería, rendimiento y cabeceras (en revisión: espera la verificación del desarrollador)
-- **Próximo hito:** verificación de 04-02 por el desarrollador; después, conexión de la vista previa de Cloudflare Pages y creación de la rama `iteracion/04-03-auditoria` para iniciar 04-03. Siguen pendientes la validación del JSON-LD (04-01) y la aprobación del cliente de la Épica 03 (hito «Prototipo»)
+- **Iteración activa:** 04-04 · Corrección de la auditoría local (en revisión: espera la verificación del desarrollador)
+- **Próximo hito:** verificación de 04-04 por el desarrollador; después, fase B de 04-03 sobre la versión corregida (PageSpeed, vista previa de Cloudflare Pages y dominio `gruasvillarrica.cl`) y registro de la Auditoría 09. Siguen pendientes la validación del JSON-LD (04-01) y la aprobación del cliente de la Épica 03 (hito «Prototipo»)
 - **Entrega tentativa:** 2026-10-18
 - **Flujo de ramas vigente:** trabajo directo en `main` mientras Cloudflare Pages no esté conectado; al conectarlo se retoma `iteracion/XX-YY-…`.
 
@@ -27,6 +27,7 @@
 | 04-01     | SEO técnico, marca y datos estructurados            | 04    | En revisión | 03-05      | [bitacora-04-01-2026-10-01](../99_bitacora/bitacora-04-01-2026-10-01.md) |
 | 04-02     | Fotos, galería, rendimiento y cabeceras             | 04    | En revisión | 04-01      | [bitacora-04-02-2026-10-02](../99_bitacora/bitacora-04-02-2026-10-02.md) |
 | 04-03     | Vista previa en Cloudflare, accesibilidad y Lighthouse | 04 | Pendiente  | 04-01, 04-02 | —      |
+| 04-04     | Corrección de la auditoría local                    | 04    | En revisión | 04-03 (fase A) | [bitacora-04-04-2026-10-02](../99_bitacora/bitacora-04-04-2026-10-02.md) |
 | 05-01     | Publicación en producción                           | 05    | Pendiente  | 04-03      | —        |
 | 05-02     | Medición: Web Analytics, Search Console y Google Ads | 05   | Pendiente  | 05-01      | —        |
 
@@ -59,6 +60,7 @@ Bloquean contenido real. Mientras falten, se usa `PENDIENTE_CLIENTE` en `src/dat
 | Aprobación del cliente de la Épica 03 (hito Prototipo) | —    | Desarrollador          |
 | Alinear `AGENTS.md` §6.4 y `DESIGN.md` §5 con la decisión D3 (nombre completo del autor) | RDA-007 (AUD-08-032) | Desarrollador |
 | Activar la política de seguridad de contenido de Astro (`security.csp`): recomendación en la bitácora 04-02. Requiere editar `astro.config.mjs` y una RDA; conviene decidirla junto con RDA-010 y Web Analytics (05-02) | Requiere RDA | Desarrollador |
+| Alinear `DESIGN.md` con lo implementado en 04-04: §9 (`scroll-padding-top` y `scroll-padding-bottom` con holgura, y `scroll-margin-top` de las anclas), §5.1 (anillo de foco hacia adentro en la barra móvil) y el borde `outline` de «Volver al inicio» en el 404. Detalle en la bitácora 04-04 | — | Desarrollador |
 
 ## 4. Propuestas fuera de alcance
 
@@ -96,3 +98,5 @@ Ideas detectadas durante el trabajo que no forman parte de lo contratado. Se cot
 | 2026-10-01 | Iteración 04-01 en revisión: metadatos, Open Graph, Twitter Card, favicon, imagen de vista previa de 1200 × 630 px, JSON-LD del negocio sin `geo` ni `hasMap`, `robots.txt`, sitemap verificado, isotipo en el header (edición autorizada de `DESIGN.md` §6) y borde en la barra móvil. Hallazgo: Astro no encuentra `sharp` en este proyecto; bloquea 04-02 hasta que el desarrollador decida. Pendiente: verificación del desarrollador y validación del JSON-LD. |
 | 2026-10-02 | Decisión del desarrollador sobre `sharp`: dependencia directa con `pnpm add sharp` (RDA-012). Sale de «Decisiones por tomar». |
 | 2026-10-02 | Iteración 04-02 en revisión: foto fija en el hero y galería «Trabajos en terreno» en AVIF con reserva WebP, `image` del JSON-LD optimizada, `public/_headers`, validación de `PENDIENTE_CLIENTE` en la compilación de producción (integración registrada en `astro.config.mjs`, con autorización del desarrollador), Tailwind limitado a `src/` y presupuesto de la primera vista medido (166,3 KB de 400). RDA-011 y RDA-012 registradas; RDA-009 y `DESIGN.md` §5 y §7 actualizadas. Salvedad aceptada por el desarrollador: Chrome adelanta 3 de las 9 fotos de la galería al cargar a 360 × 640 px. Pendiente: verificación del desarrollador. |
+| 2026-10-02 | Iteración 04-03, fase A (auditoría local): bitácora `bitacora-04-03-fase-a-2026-10-02` con 11 defectos (FA-01 a FA-11). La fase B y la Auditoría 09 siguen pendientes. |
+| 2026-10-02 | Iteración 04-04 en revisión: corrige FA-01, FA-02, FA-03, FA-04, FA-06, FA-07, FA-08, FA-10 y FA-11 (foco nunca tapado por elementos fijos, pie libre de los botones flotantes, anillo completo en la barra y en «Inicio», `sizes` ajustados, isotipo clicable, 404 y espaciado de texto) y agrega el enlace «Saltar al contenido» (`DESIGN.md` §5). Decisiones del desarrollador: borde `outline` en «Volver al inicio» y anillo hacia adentro en la barra móvil. FA-05 y FA-09 siguen abiertos; 320 × 568 px, riesgo aceptado. Queda por decidir si `DESIGN.md` §5.1 y §9 se alinean con lo implementado. |

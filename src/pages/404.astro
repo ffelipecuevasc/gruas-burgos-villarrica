@@ -25,7 +25,9 @@ const descripcion =
         Página no encontrada
       </h1>
 
-      <p class="mx-auto mt-space-md max-w-lg font-body text-body-lg text-secondary">
+      {/* `text-body-md` en móvil, como el párrafo del hero: a 360 × 640 px los tres botones quedan
+          completos sobre la barra inferior. */}
+      <p class="mx-auto mt-space-md max-w-lg font-body text-body-md text-secondary md:text-body-lg">
         La dirección a la que intentas acceder no está disponible. Si necesitas una grúa, llámanos o
         escríbenos por WhatsApp.
       </p>
@@ -33,7 +35,9 @@ const descripcion =
       <div class="mt-space-xl flex flex-wrap items-center justify-center gap-space-md">
         <BotonLlamada />
         <BotonWhatsApp />
-        <Boton href="/" variante="secundario">
+        {/* El relleno del botón secundario no se distingue del fondo `surface`: el borde `outline`
+            lo delimita con 5,87:1 (WCAG 1.4.11). */}
+        <Boton href="/" variante="secundario" class="border border-outline">
           Volver al inicio
         </Boton>
       </div>

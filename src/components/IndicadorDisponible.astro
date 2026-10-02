@@ -1,12 +1,14 @@
 ---
 // Punto con pulso y el texto "Disponible 24/7". El pulso solo se anima si la persona
 // no pidió movimiento reducido (motion-safe), como exige DESIGN.md §8.
+// Es un `div` y no un `p`: va dentro de la fila de alto fijo del header, y un párrafo recibe el
+// espacio extra que agregan las hojas de estilo de quien necesita más separación (WCAG 1.4.12).
 ---
 
-<p class="font-display text-label-md inline-flex items-center gap-space-sm uppercase">
+<div class="font-display text-label-md inline-flex items-center gap-space-sm uppercase">
   <span class="relative flex size-3" aria-hidden="true">
     <span class="bg-primary-container absolute inline-flex size-full motion-safe:animate-ping rounded-full opacity-75"></span>
     <span class="bg-primary-container relative inline-flex size-3 rounded-full"></span>
   </span>
   Disponible 24/7
-</p>
+</div>

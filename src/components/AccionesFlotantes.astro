@@ -5,9 +5,16 @@ import BotonWhatsApp from './BotonWhatsApp.astro';
 import { enlaceTelefono, enlaceWhatsApp } from '../data/negocio.js';
 ---
 
-{/* El borde superior suma 1 px a los 56 px de los botones: `LayoutBase` reserva 57 px en el `body`. */}
+{/* El borde superior suma 1 px a los 56 px de los botones: `LayoutBase` reserva 57 px en el `body`.
+    Los botones llegan a los bordes de la pantalla, así que su anillo de foco se dibuja hacia adentro
+    (el de afuera quedaría cortado). Sobre naranja va en `on-accent`: `primary` no alcanza 3:1. */}
 <div class="bg-surface-container-lowest border-surface-container-highest fixed inset-x-0 bottom-0 z-40 flex border-t pb-[env(safe-area-inset-bottom)] md:hidden">
-  <Boton href={enlaceTelefono()} icono="llamada" aria-label="Llamar ahora" class="h-14 flex-1">
+  <Boton
+    href={enlaceTelefono()}
+    icono="llamada"
+    aria-label="Llamar ahora"
+    class="h-14 flex-1 focus-visible:-outline-offset-3 focus-visible:outline-on-accent"
+  >
     Llamar
   </Boton>
   <Boton
@@ -16,7 +23,7 @@ import { enlaceTelefono, enlaceWhatsApp } from '../data/negocio.js';
     icono="whatsapp"
     externo
     aria-label="Escribir por WhatsApp"
-    class="h-14 flex-1"
+    class="h-14 flex-1 focus-visible:-outline-offset-3"
   >
     WhatsApp
   </Boton>

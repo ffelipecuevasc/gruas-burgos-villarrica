@@ -65,7 +65,9 @@ const fotos = [
 
     {/* Diez celdas: la destacada ocupa dos. Móvil, 2 columnas; desde `md`, 4; desde `lg`, 5 (dos filas).
         Cada imagen reserva su espacio con `width` y `height`, así que no hay saltos al cargar.
-        `width` también fija la variante mayor: sin él, Astro publica además la foto a tamaño completo. */}
+        `width` también fija la variante mayor: sin él, Astro publica además la foto a tamaño completo.
+        `sizes` es el ancho real de cada celda: el contenedor (100vw, o 1280 px como máximo) menos sus
+        márgenes de 20 px y las separaciones de 8 px, repartido en las columnas. */}
     <ul role="list" class="grid grid-cols-2 gap-space-sm md:grid-cols-4 lg:grid-cols-5">
       <li class="relative col-span-2 md:col-span-4 lg:col-span-2">
         <Picture
@@ -76,7 +78,7 @@ const fotos = [
           width={1440}
           height={804}
           widths={[480, 720, 960, 1440]}
-          sizes="(min-width: 1280px) 492px, (min-width: 1024px) 40vw, calc(100vw - 40px)"
+          sizes="(min-width: 1280px) 480px, (min-width: 1024px) calc(40vw - 21px), calc(100vw - 40px)"
           class="block h-auto w-full lg:absolute lg:inset-0 lg:h-full lg:object-cover"
         />
       </li>
@@ -90,7 +92,7 @@ const fotos = [
             width={640}
             height={640}
             widths={[160, 240, 320, 480, 640]}
-            sizes="(min-width: 1280px) 242px, (min-width: 1024px) 19vw, (min-width: 768px) 23vw, 45vw"
+            sizes="(min-width: 1280px) 240px, (min-width: 1024px) calc(20vw - 18px), (min-width: 768px) calc(25vw - 16px), calc(50vw - 24px)"
             class="block h-auto w-full"
           />
         </li>

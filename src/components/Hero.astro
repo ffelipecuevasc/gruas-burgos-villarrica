@@ -30,14 +30,17 @@ const localidades = negocio.cobertura.localidades.map((localidad) => localidad.n
   {/* Foto fija al 35 % bajo el velo (DESIGN.md §7). Es la imagen prioritaria de la página.
       En móvil el bloque es más alto que ancho: la foto ocupa solo el 60 % superior, para que la
       grúa se vea entera y no un recorte ampliado, y el velo llega a opaco justo donde termina.
-      Desde `md` cubre todo el bloque. */}
+      Desde `md` cubre todo el bloque.
+      `sizes` declara el ancho al que se dibuja la foto, que por el recorte (`object-cover`) no es el
+      de su caja: lo fija el alto del bloque cuando el `h1` ocupa tres o cuatro líneas (hasta 429 px)
+      y cuando la tarjeta de despacho va debajo del texto (de `md` a `lg`). Medido en 04-04. */}
   <Picture
     src={fotoHero}
     alt="Grúa con un auto accidentado sobre la plataforma, de noche, en un camino a las afueras de Villarrica."
     formats={['avif']}
     fallbackFormat="webp"
     widths={[640, 960, 1280, 1920]}
-    sizes="(min-width: 768px) 100vw, 640px"
+    sizes="(min-width: 1024px) 100vw, (min-width: 768px) 1170px, (min-width: 430px) 100vw, (min-width: 372px) 462px, 531px"
     loading="eager"
     fetchpriority="high"
     decoding="async"
