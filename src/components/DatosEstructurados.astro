@@ -1,0 +1,54 @@
+---
+import { negocio, PENDIENTE_CLIENTE } from '../data/negocio.js';
+import fotoHero from '../assets/fotos/06-grua-de-noche-con-auto-accidentado.webp';
+
+// JSON-LD del negocio (iteración 04-01). Un solo nodo y solo en la portada.
+// No lleva `geo` ni `hasMap` hasta que el desarrollador valide las coordenadas y entregue el enlace
+// oficial del perfil de Google; tampoco `priceRange`, `aggregateRating`, `review` (RDA-007),
+// `foundingDate` ni capacidades de las grúas.
+
+// `image` apunta al archivo original de la foto del hero: el servicio de imágenes de Astro no
+// encuentra `sharp` en este proyecto (ver la bitácora 04-01), así que no se genera una versión
+// optimizada. Se revisa en 04-02, junto con la foto del hero.
+const datos = {
+  '@context': 'https://schema.org',
+  '@type': ['EmergencyService', 'AutomotiveBusiness'],
+  name: negocio.nombre,
+  url: new URL('/', negocio.url).href,
+  telephone: negocio.telefono.e164,
+  email: negocio.correo,
+  image: new URL(fotoHero.src, negocio.url).href,
+  logo: new URL('/apple-touch-icon.png', negocio.url).href,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: negocio.direccion.calle,
+    addressLocality: negocio.direccion.comuna,
+    addressRegion: negocio.direccion.region,
+    addressCountry: negocio.direccion.pais,
+  },
+  ...(negocio.horario.siempreAbierto && {
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '00:00',
+      closes: '23:59',
+    },
+  }),
+  areaServed: negocio.cobertura.localidades.map((localidad) => ({
+    '@type': 'City',
+    name: localidad.nombre,
+  })),
+  sameAs: [negocio.redes.instagram, negocio.redes.facebook, negocio.redes.tiktok],
+};
+
+// `<` escapado para que ningún valor pueda cerrar la etiqueta `script`.
+const json = JSON.stringify(datos).replaceAll('<', '\\u003c');
+
+if (json.includes(PENDIENTE_CLIENTE)) {
+  throw new Error(
+    'DatosEstructurados.astro: el JSON-LD contiene un dato sin confirmar (PENDIENTE_CLIENTE).',
+  );
+}
+---
+
+<script type="application/ld+json" set:html={json} />

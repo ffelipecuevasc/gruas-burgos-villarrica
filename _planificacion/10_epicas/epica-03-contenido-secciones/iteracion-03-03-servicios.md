@@ -1,7 +1,7 @@
 # Iteración 03-03 · Sección Servicios y equipamiento
 
 - **Épica:** 03 · Contenido y secciones
-- **Estado:** En revisión (corregida en 03-05; espera la verificación del desarrollador)
+- **Estado:** Terminada (corregida en 03-05; verificada por el desarrollador el 2026-10-01, commit `d6121eb`)
 - **Rama sugerida:** `main` (temporal, ver `registro-log.md`)
 - **Depende de:** 03-01
 - **RDA relacionadas:** RDA-008

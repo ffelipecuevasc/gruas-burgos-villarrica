@@ -1,7 +1,7 @@
 # Iteración 03-01 · Sección Inicio: hero y contacto inmediato
 
 - **Épica:** 03 · Contenido y secciones
-- **Estado:** En revisión (corregida en 03-05; espera la verificación del desarrollador)
+- **Estado:** Terminada (corregida en 03-05; verificada por el desarrollador el 2026-10-01, commit `d6121eb`)
 - **Rama sugerida:** `main` (temporal, ver `registro-log.md`)
 - **Depende de:** 02-03
 - **RDA relacionadas:** RDA-008
@@ -66,7 +66,7 @@ Instrucción del desarrollador del 2026-09-30: las tres verificaciones manuales 
 ## Criterios de aceptación
 
 - [x] A 360 × 640 px, la etiqueta, el `h1` y ambos botones de contacto se ven sin scroll, sin quedar tapados por el header (112 px) ni por la barra inferior (56 px). (Medido en 03-05 con el espaciado de letra del token: etiqueta 152–170 px, `h1` 174–342 px y botones hasta 510 y 566 px; zona útil 112–584 px.)
-- [ ] Mientras no haya foto, el elemento LCP es el `h1` y el LCP es menor que 2 s en Lighthouse móvil sobre `pnpm preview`. Con foto, la imagen pasa a ser el elemento LCP con el mismo umbral. (Sin marcar: en 03-05 se midió en Chrome que el elemento LCP es el `h1`; Lighthouse móvil no se ha ejecutado y queda pendiente del desarrollador.)
+- [ ] Mientras no haya foto, el elemento LCP es el `h1` y el LCP es menor que 2 s en Lighthouse móvil sobre `pnpm preview`. Con foto, la imagen pasa a ser el elemento LCP con el mismo umbral. (Sin marcar: en 03-05 se midió en Chrome que el elemento LCP es el `h1`; Lighthouse móvil no se ha ejecutado y queda pendiente del desarrollador. La comprobación pendiente pasa a 04-03.)
 - [x] Ningún texto de la lista «No publicar» de la definición de la épica aparece en `dist/`. (Medido en 03-05: sin coincidencias fuera de las reseñas textuales y del texto aprobado; la frase «Zonas de atención rápida:» del footer se retiró.)
 - [x] `index.astro` y `404.astro` no usan clases de la paleta por defecto de Tailwind (`orange-*`, `neutral-*`). (Medido en 03-05: búsqueda en `src/` sin coincidencias.)
 - [x] El footer muestra «Villarrica, Pucón, Licán Ray y Freire». (Medido en 03-05 en `dist/`: bajo «Cobertura» queda solo ese texto.)

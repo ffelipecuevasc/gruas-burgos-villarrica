@@ -1,10 +1,12 @@
 ---
 import { Icon } from 'astro-icon/components';
+import Isotipo from '../assets/marca/isotipo-gruas-burgos.svg';
 
 // Única fuente de nombres de ícono del sitio (DESIGN.md §6).
+// `marca` no está en este mapa: es el isotipo local, que no viene de un paquete de íconos.
+const MARCA = 'marca';
 const ICONOS = new Map(
   Object.entries({
-    marca: 'material-symbols:car-crash-outline',
     llamada: 'material-symbols:call-outline',
     whatsapp: 'simple-icons:whatsapp',
     instagram: 'simple-icons:instagram',
@@ -24,17 +26,22 @@ const ICONOS = new Map(
 
 /**
  * @typedef {Object} Props
- * @property {string} nombre Clave del ícono, por ejemplo `llamada` o `whatsapp`.
+ * @property {string} nombre Clave del ícono, por ejemplo `llamada`, `whatsapp` o `marca` (el isotipo).
  * @property {string} [class] Clases de Tailwind para tamaño y color. Por defecto `size-6`.
  */
 
 /** @type {Props} */
 const { nombre, class: clase = 'size-6' } = Astro.props;
 
+const esMarca = nombre === MARCA;
 const id = ICONOS.get(nombre);
-if (!id) {
+if (!esMarca && !id) {
   throw new Error(`Icono.astro: no existe el ícono "${nombre}". Revisa el mapa ICONOS.`);
 }
 ---
 
-<Icon name={id} class={clase} aria-hidden="true" />
+{esMarca ? (
+  <Isotipo class={clase} aria-hidden="true" />
+) : (
+  <Icon name={id} class={clase} aria-hidden="true" />
+)}

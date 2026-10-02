@@ -15,6 +15,7 @@ import MapaEsquematico from '../components/MapaEsquematico.astro';
 import AvisoSeguridad from '../components/AvisoSeguridad.astro';
 import FormularioCotizacion from '../components/FormularioCotizacion.astro';
 import CintaLlamada from '../components/CintaLlamada.astro';
+import DatosEstructurados from '../components/DatosEstructurados.astro';
 import { servicios } from '../data/servicios.js';
 import { negocio } from '../data/negocio.js';
 
@@ -24,6 +25,8 @@ const descripcion =
 ---
 
 <LayoutBase titulo={titulo} descripcion={descripcion}>
+  <DatosEstructurados slot="head" />
+
   {/* Tres secciones ancladas (RDA-009). Quiénes somos y las opiniones son bloques de Inicio. */}
   <section id="inicio" aria-labelledby="titulo-inicio">
     <Hero idTitulo="titulo-inicio" />

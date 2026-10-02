@@ -5,7 +5,8 @@ import BotonWhatsApp from './BotonWhatsApp.astro';
 import { enlaceTelefono, enlaceWhatsApp } from '../data/negocio.js';
 ---
 
-<div class="bg-surface-container-lowest fixed inset-x-0 bottom-0 z-40 flex pb-[env(safe-area-inset-bottom)] shadow-[0_-1px_0_0_var(--color-surface-container-highest)] md:hidden">
+{/* El borde superior suma 1 px a los 56 px de los botones: `LayoutBase` reserva 57 px en el `body`. */}
+<div class="bg-surface-container-lowest border-surface-container-highest fixed inset-x-0 bottom-0 z-40 flex border-t pb-[env(safe-area-inset-bottom)] md:hidden">
   <Boton href={enlaceTelefono()} icono="llamada" aria-label="Llamar ahora" class="h-14 flex-1">
     Llamar
   </Boton>

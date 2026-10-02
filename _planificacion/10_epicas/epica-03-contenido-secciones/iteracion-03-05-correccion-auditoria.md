@@ -1,7 +1,7 @@
 # Iteración 03-05 · Corrección de la Épica 03 tras la auditoría
 
 - **Épica:** 03 · Contenido y secciones
-- **Estado:** En revisión
+- **Estado:** Terminada (verificada por el desarrollador el 2026-10-01, commit `d6121eb`)
 - **Rama sugerida:** `main` (temporal, ver `registro-log.md`)
 - **Depende de:** 03-04
 - **RDA relacionadas:** RDA-006, RDA-007, RDA-008, RDA-009
@@ -35,7 +35,7 @@ Quien implemente **no debe dar nada por cierto**: antes de corregir cada hallazg
 | E3-016 | **Matiz:** el segundo oyente (`astro:page-load`) solo se dispara si el proyecto usa `<ClientRouter />`, y no lo usa. El envío doble es hoy un riesgo latente, no un defecto alcanzable. Se corrige igual. |
 | E3-011, E3-014 | Confirmados en el código (`focus-visible:outline-2` en 5 componentes; `rounded-sm`, `shadow-sm` y `shadow-lg` fuera de lo que permite `DESIGN.md` §4). |
 | E3-019 | Confirmado: hay dos secciones «Auditoría 06» con los mismos IDs. |
-| **Nuevo** | **AUD-08-032 (Baja, Documentación):** `AGENTS.md` §6.4 y `DESIGN.md` §5 (`TarjetaResena`) piden «nombre abreviado del autor», pero D3 y RDA-007 establecen el nombre completo. El informe no lo detectó. Esos dos archivos solo se editan con aprobación del desarrollador: aquí solo se registra (tarea 11). |
+| **Nuevo** | **AUD-08-032 (Baja, Documentación):** `AGENTS.md` §6.4 y `DESIGN.md` §5 (`TarjetaResena`) piden «nombre abreviado del autor», pero D3 y RDA-007 establecen el nombre completo. El informe no lo detectó. Esos dos archivos solo se editan con aprobación del desarrollador: aquí solo se registra (tareas 8 y 9). |
 
 ## Reglas de la iteración
 
@@ -161,7 +161,7 @@ Cada criterio se comprueba con la medición indicada y se informa con el valor o
 - [x] El número de WhatsApp no aparece en ningún archivo de `src/` fuera de `negocio.js` (búsqueda con resultado informado). **Medido: la búsqueda del número (con y sin espacios) y de `wa.me` en `src/` solo devuelve `src/data/negocio.js`.**
 - [x] Bordes de campo con contraste de al menos 3:1; texto de campos de al menos 16 px; alto de campos de al menos 44 px. **Medido: borde `outline` con 5,43:1 contra la tarjeta y 6,10:1 contra el relleno del campo; texto de 18 px; alto de 48 px.**
 - [x] Mapa a 360 px: texto mínimo de 12 px efectivos, sin rótulos superpuestos, rutas con contraste de al menos 3:1 (se informa el mínimo medido). **Medido a 360 px: texto mínimo de 14,9 px efectivos, 0 rótulos superpuestos (separación mínima de 8,8 px) y rutas con 6,10:1 contra el fondo.**
-- [ ] Sin `rounded-*` fuera de los campos del formulario y los indicadores de estado; sin sombras distintas de `shadow-xl` y `shadow-2xl` en elementos flotantes (búsqueda con resultado informado). **Parcial. Medido en `src/`: `rounded-sm` solo en los campos del formulario y `rounded-full` solo en los dos puntos de `IndicadorDisponible`; `shadow-2xl` en `Header` y `AccionesFlotantes` y `shadow-xl` en `TarjetaDespacho`. Queda una sombra distinta: `shadow-[0_-1px_0_0_…]` en la barra móvil de `AccionesFlotantes` (Épica 02), que dibuja su línea superior de 1 px. No se modificó: reemplazarla por un borde cambia el alto de la barra y la zona útil de la primera pantalla. Requiere decisión del desarrollador.**
+- [x] Sin `rounded-*` fuera de los campos del formulario y los indicadores de estado; sin sombras distintas de `shadow-xl` y `shadow-2xl` en elementos flotantes (búsqueda con resultado informado). **Parcial. Medido en `src/`: `rounded-sm` solo en los campos del formulario y `rounded-full` solo en los dos puntos de `IndicadorDisponible`; `shadow-2xl` en `Header` y `AccionesFlotantes` y `shadow-xl` en `TarjetaDespacho`. Queda una sombra distinta: `shadow-[0_-1px_0_0_…]` en la barra móvil de `AccionesFlotantes` (Épica 02), que dibuja su línea superior de 1 px. No se modificó: reemplazarla por un borde cambia el alto de la barra y la zona útil de la primera pantalla. Requiere decisión del desarrollador.** **Cumplido en 04-01 (decisión 6 de `definicion-epica-04.md`): la sombra pasó a un borde superior de 1 px `surface-container-highest`. Medido en Chrome a 360 × 640 px: `box-shadow: none`, barra de 57 px (583–640 px) y 17 px de margen bajo el segundo botón del hero. En `src/` quedan `rounded-sm` (campos), `rounded-full` (indicador) y `shadow-xl` o `shadow-2xl` en header, acciones flotantes de escritorio y tarjeta de despacho.**
 - [x] `git status` muestra solo archivos de `src/` y de `_planificacion/`. Ningún cambio en `AGENTS.md`, `DESIGN.md`, `README.md`, configuración, `.claude/` ni bitácoras existentes. **Medido: solo aparecen archivos de `src/` y de `_planificacion/`; ninguna bitácora existente cambió.**
 - [x] La Auditoría 07 y la Auditoría 08 están registradas con estados coherentes con el resultado de esta iteración, y la bitácora de 03-05 usa la plantilla completa. **Hecho: Auditoría 07 (2 hallazgos) y Auditoría 08 (32 hallazgos) en `auditoria-tecnica.md`; bitácora `bitacora-03-05-2026-10-01.md` con todas las secciones de la plantilla.**
 

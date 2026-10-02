@@ -145,7 +145,7 @@ Material Symbols Outlined, peso 400, **como SVG en línea** (paquete `@iconify-j
 
 | Uso             | Ícono                                    |
 | :-------------- | :--------------------------------------- |
-| Marca           | `car-crash-outline`                      |
+| Marca           | Isotipo local (ver 6.1)                  |
 | Llamada         | `call-outline`                           |
 | WhatsApp        | ícono oficial de WhatsApp (Simple Icons) |
 | Horario         | `schedule-outline`                       |
@@ -159,6 +159,15 @@ Material Symbols Outlined, peso 400, **como SVG en línea** (paquete `@iconify-j
 | Advertencia     | `warning-outline`                        |
 
 Íconos decorativos con `aria-hidden="true"`; íconos que actúan solos como botón llevan `aria-label` en el elemento interactivo.
+
+### 6.1 Isotipo de la marca
+
+El isotipo es el ícono «auto-towing» de Material Symbols Light (Apache License 2.0), entregado por el cliente el 2026-10-01. Es la única excepción al paquete de íconos: vive como recurso local en `src/assets/marca/isotipo-gruas-burgos.svg` y se usa con `<Icono nombre="marca" />`. No es una marca registrable: siempre acompaña al nombre «Grúas Burgos» escrito en la tipografía display.
+
+| Uso                                                                              | Isotipo             | Fondo                                                               |
+| :------------------------------------------------------------------------------- | :------------------ | :------------------------------------------------------------------ |
+| Header                                                                           | `on-accent`, 32 px  | Bloque `primary-container` de 40 × 40 px, a la izquierda del nombre |
+| Favicon (`favicon.svg`, `favicon.ico`) e ícono de iOS (`apple-touch-icon.png`)   | `primary-container` | `surface-container-lowest`                                          |
 
 ## 7. Imágenes
 

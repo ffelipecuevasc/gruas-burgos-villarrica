@@ -1,6 +1,6 @@
 # Épica 03 · Contenido y secciones
 
-- **Estado:** En revisión (iteración 03-05 de corrección, tras la auditoría del 2026-10-01)
+- **Estado:** En revisión (iteraciones 03-01 a 03-05 terminadas y verificadas por el desarrollador el 2026-10-01, commit `d6121eb`; falta registrar la aprobación del cliente, AUD-08-023)
 - **Objetivo:** construir las tres secciones contratadas (Inicio, Servicios y Contacto) con contenido verificado, para que quien tiene una emergencia en ruta entienda en segundos qué hace Grúas Burgos, dónde opera y cómo pedir ayuda.
 - **Depende de:** Épica 02 (terminada el 2026-09-30).
 - **Fuentes de contenido:**
@@ -50,11 +50,11 @@
 
 | Iteración | Nombre | Estado |
 | :--- | :--- | :--- |
-| 03-01 | Sección Inicio: hero y contacto inmediato | En revisión |
-| 03-02 | Sección Inicio: quiénes somos y reseñas | En revisión |
-| 03-03 | Sección Servicios y equipamiento | En revisión |
-| 03-04 | Sección Contacto, cobertura y formulario | En revisión |
-| 03-05 | Corrección de la Épica 03 tras la auditoría | En revisión |
+| 03-01 | Sección Inicio: hero y contacto inmediato | Terminada |
+| 03-02 | Sección Inicio: quiénes somos y reseñas | Terminada |
+| 03-03 | Sección Servicios y equipamiento | Terminada |
+| 03-04 | Sección Contacto, cobertura y formulario | Terminada |
+| 03-05 | Corrección de la Épica 03 tras la auditoría | Terminada |
 
 ## Reglas transversales
 

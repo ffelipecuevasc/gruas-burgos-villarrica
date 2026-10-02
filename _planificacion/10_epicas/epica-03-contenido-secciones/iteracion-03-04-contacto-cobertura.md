@@ -1,7 +1,7 @@
 # Iteración 03-04 · Sección Contacto, cobertura y formulario
 
 - **Épica:** 03 · Contenido y secciones
-- **Estado:** En revisión (corregida en 03-05; espera la verificación del desarrollador)
+- **Estado:** Terminada (corregida en 03-05; verificada por el desarrollador el 2026-10-01, commit `d6121eb`)
 - **Rama sugerida:** `main` (temporal, ver `registro-log.md`)
 - **Depende de:** 03-01
 - **RDA relacionadas:** RDA-006, RDA-008, RDA-009
@@ -92,10 +92,10 @@ Cerrar la página con todos los canales de contacto, la cobertura real y una for
 ## Criterios de aceptación
 
 - [x] Las localidades y referencias coinciden con `negocio.js` (Villarrica, Pucón, Licán Ray y Freire) y no aparecen tiempos de llegada. (Medido en 03-05: cuatro filas iguales a `negocio.js`; sin tiempos en `dist/` fuera de las reseñas textuales.)
-- [ ] «Cómo llegar» abre Google Maps con destino a Vicente Reyes 870, Villarrica. (Sin marcar: en 03-05 se verificó en `dist/` la URL del enlace, con el formato documentado de Google Maps y el destino correcto; la apertura real queda pendiente del desarrollador.)
+- [ ] «Cómo llegar» abre Google Maps con destino a Vicente Reyes 870, Villarrica. (Sin marcar: en 03-05 se verificó en `dist/` la URL del enlace, con el formato documentado de Google Maps y el destino correcto; la apertura real queda pendiente del desarrollador. La comprobación pendiente pasa a 04-03.)
 - [x] El mapa es un SVG propio con texto alternativo, sin `iframe` ni imágenes de terceros. (Medido en 03-05: `role="img"`, nombre accesible aprobado, 0 `iframe` y 0 `img`; rediseñado para leerse a 360 px.)
-- [ ] El formulario funciona con teclado y con lector de pantalla, los errores de validación se anuncian, y sin JavaScript se ve el enlace directo a WhatsApp. (Sin marcar: en 03-05 se midió en Chrome el envío con teclado, el error visible por campo en una región `aria-live`, el foco en el primer campo inválido y el enlace sin JavaScript; falta la prueba con un lector de pantalla real, pendiente del desarrollador.)
-- [ ] Al enviar, se abre WhatsApp con el mensaje armado con los datos ingresados. Sin `alert()`. (Sin marcar: en 03-05 se midió que un envío válido abre una sola ventana hacia `wa.me` con el número de `negocio.js` y el mensaje esperado, sin `alert()`; la apertura real de WhatsApp queda pendiente del desarrollador.)
+- [ ] El formulario funciona con teclado y con lector de pantalla, los errores de validación se anuncian, y sin JavaScript se ve el enlace directo a WhatsApp. (Sin marcar: en 03-05 se midió en Chrome el envío con teclado, el error visible por campo en una región `aria-live`, el foco en el primer campo inválido y el enlace sin JavaScript; falta la prueba con un lector de pantalla real, pendiente del desarrollador. La comprobación pendiente pasa a 04-03.)
+- [ ] Al enviar, se abre WhatsApp con el mensaje armado con los datos ingresados. Sin `alert()`. (Sin marcar: en 03-05 se midió que un envío válido abre una sola ventana hacia `wa.me` con el número de `negocio.js` y el mensaje esperado, sin `alert()`; la apertura real de WhatsApp queda pendiente del desarrollador. La comprobación pendiente pasa a 04-03.)
 - [x] A 360 px, la sección se lee en una columna sin desborde horizontal y la `CintaLlamada` no queda tapada por la barra inferior. (Medido en 03-05: una columna, `scrollWidth` de 360 px; al final de la página el footer termina en 584 px, donde empieza la barra.)
 
 ## Datos pendientes del cliente
