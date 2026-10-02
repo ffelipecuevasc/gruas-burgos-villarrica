@@ -19,9 +19,11 @@ El agente (Claude Code) **no puede consultar la vista previa**: sus permisos nie
 - **04-04 (agente, en local):** corrige los defectos de la fase A. La fase B mide la versión corregida.
 - **Fase B (agente, con evidencia del desarrollador):** consolida las cifras y los resultados que el desarrollador obtuvo sobre la vista previa y registra la Auditoría 09.
 
-El desarrollador hace sus tareas en paralelo a la fase A y entrega la evidencia al empezar la fase B.
+El desarrollador hace sus tareas en paralelo a la fase A y entrega la evidencia al empezar la fase B, rellenando el archivo `evidencia-04-03-fase-b.md` (misma carpeta). Lo que falte en ese archivo se registra como «no verificado».
 
 ## Tareas del desarrollador
+
+Ya hechas el 2026-10-02: las tareas 1 a 3, la zona `gruasvillarrica.cl` activa en Cloudflare, el registro `www`, la redirección de `www` a la raíz y el HTTPS forzado.
 
 1. Crear la rama `iteracion/04-03-auditoria` desde `main` (ya contiene 04-01 y 04-02).
 2. Conectar el repositorio a Cloudflare Pages:
@@ -30,7 +32,7 @@ El desarrollador hace sus tareas en paralelo a la fase A y entrega la evidencia 
    - Nombre del proyecto: define la URL `<proyecto>.pages.dev`.
 3. En el registro de compilación de `main`, comprobar y anotar: versión de Node, versión de pnpm, que `sharp` se instale sin errores y la línea «Sin PENDIENTE_CLIENTE en N archivos publicados».
 4. Subir la rama `iteracion/04-03-auditoria` para que Cloudflare cree su vista previa, y anotar la URL.
-   - Cuando 04-04 esté verificada, fusionar la rama en `main`. Eso publica en producción, en `https://gruasvillarrica.cl`, que es ahora **indexable** (decisión del 2026-10-02).
+   - Cuando 04-04 esté verificada, abrir un Pull Request de `iteracion/04-03-auditoria` hacia `main` en GitHub, esperar que la vista previa de Cloudflare compile y fusionarlo (merge commit). Eso publica en producción, en `https://gruasvillarrica.cl`, que es ahora **indexable** (decisión del 2026-10-02). Anotar el hash del commit que Cloudflare despliega, para saber qué versión se midió.
 5. Cabeceras, desde PowerShell (usar `curl.exe`, porque `curl` es otro comando en PowerShell). Copiar las salidas completas:
    - `curl.exe -sI https://URL/` (portada).
    - `curl.exe -sI https://URL/_astro/ARCHIVO` (cualquier archivo con huella: el nombre sale de `view-source` o de la pestaña Red).
@@ -41,7 +43,9 @@ El desarrollador hace sus tareas en paralelo a la fase A y entrega la evidencia 
 7. Con TalkBack o VoiceOver: encabezados, nombres de botones, formulario y errores.
 8. PageSpeed Insights sobre `https://gruasvillarrica.cl` (después de fusionar en `main`), en móvil y en escritorio: **tres ejecuciones** de cada una; guardar las cuatro cifras de cada ejecución y el enlace al informe. Opcional: la misma medición sobre la vista previa de la rama, como referencia. Anotar LCP y tiempo de bloqueo total: la fase A midió un LCP local de 2,6 a 4,2 s con red y CPU limitadas, y debe contrastarse.
 9. Validador de Schema.org y Prueba de resultados enriquecidos (modo URL de la vista previa o pegando el bloque): resultado y capturas.
-10. Revisar el favicon en la pestaña del navegador y borrar `node_modules/.cache/prueba-csp` (3,8 MB, resto de la prueba de CSP de 04-02).
+10. Revisar el favicon en la pestaña del navegador y borrar `node_modules/.cache/prueba-csp` (3,8 MB, resto de la prueba de CSP de 04-02) y las carpetas `cdp-gruas-*` de `%TEMP%`.
+11. Qué inyecta Cloudflare en el HTML. La consulta del 2026-10-02 mostró el correo del pie como `[email protected]` con un enlace `cdn-cgi/l/email-protection`: la **ofuscación de correos** de Cloudflare está activa, reescribe el HTML y agrega un script, contra el límite de JavaScript de RDA-006. Recomendación: desactivar «Email Address Obfuscation» en el panel de la zona (se encuentra con Ctrl+K). Después, descargar la portada con `curl.exe -s https://gruasvillarrica.cl/ -o portada.html` y buscar `Select-String -Path portada.html -Pattern "cdn-cgi","beacon","email-protection"`; pegar el resultado y, aparte, el JSON-LD publicado (para comprobar que el campo `email` no fue alterado).
+12. Rellenar `evidencia-04-03-fase-b.md` con todo lo anterior.
 
 ## Tareas del agente · Fase A (local, sin Cloudflare)
 
@@ -59,7 +63,11 @@ El desarrollador hace sus tareas en paralelo a la fase A y entrega la evidencia 
 2. Contrastar las cabeceras con `public/_headers` y señalar cualquier diferencia.
 3. Evaluar los criterios de aceptación con esa evidencia y marcar las casillas pendientes de 03-01 a 03-05 que queden verificadas.
 4. Registrar la **Auditoría 09** con hallazgos `AUD-09-NNN`, y actualizar el estado de AUD-01-025, AUD-05-001 y de los demás hallazgos que cambien.
-5. Pasar 04-01, 04-02 y 04-03 al estado que corresponda en `registro-log.md` (el estado «Terminada» lo confirma el desarrollador).
+5. Pasar 04-01, 04-02, 04-03 y 04-04 al estado que corresponda en `registro-log.md` (el estado «Terminada» lo confirma el desarrollador).
+6. **Autorizado en esta fase:** alinear `DESIGN.md` con lo que implementó 04-04, solo como documentación: §9 (`scroll-padding-top` y `scroll-padding-bottom` con holgura y `scroll-margin-top` de las anclas), §5.1 (anillo de foco hacia adentro en la barra móvil) y el borde `outline` de «Volver al inicio» en el 404. No se cambia código.
+7. Actualizar `iteracion-05-01-publicacion.md`: lo que ya se hizo (dominio, `www`, HTTPS, validación de datos provisionales) pasa a verificación, y queda solo lo pendiente.
+8. Registrar en la Auditoría 09 la decisión del desarrollador del 2026-10-02 (dominio indexable antes de la aprobación del cliente, relacionado con AUD-08-023) y el estado de FA-05, FA-09 y de 320 × 568 px (abiertos, diferidos o riesgo aceptado).
+9. Esta fase no modifica `src/` ni `public/`. Si la evidencia muestra un incumplimiento (por ejemplo, una categoría de Lighthouse bajo 95), se registra como hallazgo con su severidad y su corrección recomendada, para una iteración posterior.
 
 ## Criterios de aceptación
 
