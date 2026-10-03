@@ -1,7 +1,7 @@
 # Iteración 04-02 · Fotos, galería, rendimiento y cabeceras
 
 - **Épica:** 04 · SEO técnico, rendimiento y accesibilidad
-- **Estado:** En revisión
+- **Estado:** Terminada (verificada por el desarrollador el 2026-10-02, commit `57de857`)
 - **Rama sugerida:** `main` (Cloudflare Pages aún no está conectado)
 - **Depende de:** 04-01
 - **RDA relacionadas:** RDA-001, RDA-004, RDA-006, RDA-008, RDA-009, RDA-011, RDA-012

@@ -1,6 +1,6 @@
 # Épica 04 · SEO técnico, rendimiento y accesibilidad
 
-- **Estado:** En revisión (2026-10-02: las cuatro iteraciones están implementadas y auditadas, Auditoría 09; los cuatro puntos del criterio de término se cumplen. Falta que el desarrollador pase 04-01 a 04-04 y la épica a «Terminada»)
+- **Estado:** Terminada (verificada por el desarrollador el 2026-10-02, commit `57de857`)
 - **Objetivo:** que Google encuentre el sitio en búsquedas locales de grúas, que la primera vista cargue con un LCP de Lighthouse móvil de 2,5 s o menos (umbral «bueno» de Core Web Vitals) y que cualquier persona pueda usarlo (WCAG 2.2 AA).
 - **Depende de:** Épica 03 (iteraciones 03-01 a 03-05 verificadas por el desarrollador el 2026-10-01, commit `d6121eb`; la épica sigue «En revisión» solo por la aprobación del cliente, AUD-08-023).
 - **Material del cliente entregado el 2026-10-01:** isotipo (`LogoGruasBurgos.svg`) y 10 fotos de operaciones tomadas de las redes del negocio (ver RDA-011).

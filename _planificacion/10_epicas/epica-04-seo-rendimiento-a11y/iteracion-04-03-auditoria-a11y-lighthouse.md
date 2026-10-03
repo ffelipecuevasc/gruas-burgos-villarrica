@@ -1,7 +1,7 @@
 # Iteración 04-03 · Vista previa en Cloudflare, accesibilidad y Lighthouse
 
 - **Épica:** 04 · SEO técnico, rendimiento y accesibilidad
-- **Estado:** En revisión (fase A y fase B hechas; Auditoría 09 registrada; bitácoras `bitacora-04-03-fase-a-2026-10-02.md`, `bitacora-04-03-fase-b-2026-10-02.md` y `bitacora-04-cierre-2026-10-02.md`)
+- **Estado:** Terminada (verificada por el desarrollador el 2026-10-02, commit `57de857`)
 - **Rama sugerida:** `iteracion/04-03-auditoria` (desde aquí se vuelve a trabajar con ramas)
 - **Depende de:** 04-01, 04-02 y, para la fase B, 04-04
 - **RDA relacionadas:** RDA-001, RDA-006, RDA-010, RDA-011, RDA-012

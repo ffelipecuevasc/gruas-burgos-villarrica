@@ -1,7 +1,7 @@
 # Iteración 04-04 · Corrección de la auditoría local
 
 - **Épica:** 04 · SEO técnico, rendimiento y accesibilidad
-- **Estado:** En revisión
+- **Estado:** Terminada (verificada por el desarrollador el 2026-10-02, commit `57de857`)
 - **Rama sugerida:** `iteracion/04-03-auditoria` (continúa en la misma rama; la vista previa de Cloudflare se reconstruye con cada push)
 - **Depende de:** 04-03 (fase A)
 - **RDA relacionadas:** RDA-006, RDA-009, RDA-011

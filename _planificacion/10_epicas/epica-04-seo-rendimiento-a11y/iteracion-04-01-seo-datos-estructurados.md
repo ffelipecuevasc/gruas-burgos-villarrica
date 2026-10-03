@@ -1,7 +1,7 @@
 # Iteración 04-01 · SEO técnico, marca y datos estructurados
 
 - **Épica:** 04 · SEO técnico, rendimiento y accesibilidad
-- **Estado:** En revisión
+- **Estado:** Terminada (verificada por el desarrollador el 2026-10-02, commit `57de857`)
 - **Rama sugerida:** `main` (Cloudflare Pages aún no está conectado)
 - **Depende de:** 03-05
 - **RDA relacionadas:** RDA-005, RDA-007, RDA-008, RDA-011
