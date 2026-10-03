@@ -138,7 +138,26 @@ alt-svc: h3=":443"; ma=86400
 
 ```
 curl.exe -sI https://gruasvillarrica.cl/_astro/NOMBRE-DE-UN-ARCHIVO-CON-HUELLA
-No se encontró ningún asset publicado bajo /_astro/ en el HTML de producción de la portada ni en Chrome DevTools > Red. Prueba no aplicable/no verificada.
+HTTP/1.1 200 OK
+Date: Sat, 03 Oct 2026 00:25:48 GMT
+Content-Type: image/jpeg
+Content-Length: 112393
+Connection: keep-alive
+x-frame-options: DENY
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=hFYpA7iw2%2BQvFr6vHwZKFaQbY2ZqV01UY2MqSGtIxcFZ46q6Zk0ZIxgfpYg%2FrUi0PnjFNovMiwNW9hj3%2FgoJIB9yB7wCU5Qv24xXzFQ7Y9WXrH34%2FscmadLsP%2BGCI7f6Rv55R8w9EXKc0EZ2BBvCKks%3D"}]}
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+Access-Control-Allow-Origin: *
+Cache-Control: public, max-age=31536000, immutable
+ETag: "00828955e8bf3a758e7e0c57bb5d67fd"
+content-security-policy: frame-ancestors 'none'
+permissions-policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+Server: cloudflare
+Accept-Ranges: bytes
+cf-cache-status: MISS
+CF-RAY: a447cfcfed4bb92f-GRU
+alt-svc: h3=":443"; ma=86400
 ```
 
 ```
@@ -165,7 +184,7 @@ Tres ejecuciones por categoría de dispositivo. Anotar las cuatro puntuaciones y
 | Escritorio  | 2         | 100         | 100           | 100              | 100 | 0.6 s | 0.002 | 0 ms | (https://pagespeed.web.dev/analysis/https-gruasvillarrica-cl/pscdxxgueq?form_factor=desktop) |
 | Escritorio  | 3         | 100         | 100           | 100              | 100 | 0.6 s | 0.002 | 0 ms | (https://pagespeed.web.dev/analysis/https-gruasvillarrica-cl/uy7qjtwlms?form_factor=desktop) |
 
-Auditorías que fallaron o con advertencias (nombre y detalle):
+Auditorías que fallaron o con advertencias (nombre y detalle): ninguna.
 
 ## 5. Validadores de datos estructurados
 
@@ -220,3 +239,24 @@ Auditorías que fallaron o con advertencias (nombre y detalle):
 - Problemas encontrados: Ninguno. La experiencia de navegación accesible fue fluida y sin bloqueos de foco.
 
 ## 8. Observaciones y problemas adicionales
+
+```
+curl.exe -sI https://ff925603.gruas-burgos-villarrica.pages.dev/
+HTTP/1.1 200 OK
+Date: Sat, 03 Oct 2026 00:26:55 GMT
+Content-Type: text/html; charset=utf-8
+Connection: keep-alive
+Access-Control-Allow-Origin: *
+Cache-Control: public, max-age=0, must-revalidate
+content-security-policy: frame-ancestors 'none'
+permissions-policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+x-frame-options: DENY
+x-robots-tag: noindex
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=1pXbPRMN9AzW%2FWNQ%2BJ1ROaepiAaLrKqRv6e5FccCaf3eQHbQR41ljNMngoq0hgMB9S6ItLUeLWI1XLMc7WRXKOjZN8pjzMJVrnHMwogm6W47WdjjeJD70x1kE6DODLfJXYwK99oWVbRIhspXfmmCuwtU5PeuucSZFSAdvEsgggZhSZevB8uaJYk%3D"}]}
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+Server: cloudflare
+CF-RAY: a447d16f7a5c1d07-GRU
+alt-svc: h3=":443"; ma=86400
+```

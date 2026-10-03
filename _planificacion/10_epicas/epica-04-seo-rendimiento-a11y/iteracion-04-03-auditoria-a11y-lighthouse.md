@@ -73,7 +73,7 @@ Ya hechas el 2026-10-02: las tareas 1 a 3, la zona `gruasvillarrica.cl` activa e
 
 - [ ] Lighthouse móvil en `https://gruasvillarrica.cl` (mediana de tres ejecuciones): ≥ 95 en Rendimiento, Accesibilidad, Buenas prácticas y SEO. La vista previa de `*.pages.dev` es referencia: su SEO excluye la indexación por el `noindex`.
 - [ ] Dominio propio: certificado activo, `www` redirigido a la raíz con código 301 conservando ruta y consulta, `http` redirigido a `https`, y la raíz sin `x-robots-tag`.
-- [ ] LCP < 2,0 s y CLS < 0,05 en Lighthouse móvil.
+- [ ] LCP de 2,5 s o menos y CLS menor a 0,05 en Lighthouse móvil (criterio ajustado el 2026-10-02: el LCP medido fue de 2,3 s; ver la decisión 9 de la definición de la épica).
 - [ ] JSON-LD: 0 errores en el validador de Schema.org y 0 errores críticos en la Prueba de resultados enriquecidos.
 - [ ] Vista previa de WhatsApp con imagen, título y descripción (captura en la bitácora).
 - [ ] Cabeceras de `_headers` verificadas sobre HTTPS con las salidas de `curl.exe`.

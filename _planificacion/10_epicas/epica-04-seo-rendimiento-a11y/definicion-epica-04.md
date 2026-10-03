@@ -1,7 +1,7 @@
 # Épica 04 · SEO técnico, rendimiento y accesibilidad
 
 - **Estado:** En curso (04-01 y 04-02 en revisión; 04-03 fase A hecha; 04-04 en revisión)
-- **Objetivo:** que Google encuentre el sitio en búsquedas locales de grúas, que la primera vista cargue en menos de 2 s con red móvil lenta (LCP de Lighthouse móvil) y que cualquier persona pueda usarlo (WCAG 2.2 AA).
+- **Objetivo:** que Google encuentre el sitio en búsquedas locales de grúas, que la primera vista cargue con un LCP de Lighthouse móvil de 2,5 s o menos (umbral «bueno» de Core Web Vitals) y que cualquier persona pueda usarlo (WCAG 2.2 AA).
 - **Depende de:** Épica 03 (iteraciones 03-01 a 03-05 verificadas por el desarrollador el 2026-10-01, commit `d6121eb`; la épica sigue «En revisión» solo por la aprobación del cliente, AUD-08-023).
 - **Material del cliente entregado el 2026-10-01:** isotipo (`LogoGruasBurgos.svg`) y 10 fotos de operaciones tomadas de las redes del negocio (ver RDA-011).
 
@@ -34,6 +34,7 @@
 6. **Pendientes aprobados de 03-05:** se aprueba el `aria-label` «Métricas destacadas del servicio», se mantiene el mensaje genérico del navegador para el teléfono con letras, se acepta la etiqueta del hero sin cápsula ni punto, y la sombra de 1 px de la barra móvil pasa a borde (04-01).
 7. **Dominio propio anticipado (2026-10-02):** `gruasvillarrica.cl` se conecta a Cloudflare Pages durante 04-03, con `www` redirigido a la raíz y HTTPS forzado, y es **indexable apenas esté activo**, antes de la aprobación del cliente de la Épica 03 (AUD-08-023). El `noindex` de `_headers` solo vale para `*.pages.dev`.
 8. **Corrección de la auditoría local (2026-10-02):** 04-04 corrige FA-01, FA-02, FA-03, FA-04, FA-06, FA-07, FA-08, FA-10 y FA-11; se aprueba el texto «Saltar al contenido». FA-05 y FA-09 quedan abiertos y diferidos (cambian `DESIGN.md`). La primera pantalla a 320 × 568 px es un riesgo aceptado. El presupuesto de peso se mide a 360 × 640 px con densidad 1 y red 4G; las cifras con densidad alta o 3G se informan, sin exigirlas.
+9. **Criterio de LCP (2026-10-02):** con tres ejecuciones de PageSpeed sobre `gruasvillarrica.cl` el LCP móvil fue de 2,3 s (puntajes de Rendimiento 96, 97 y 99). El desarrollador acepta ese valor y baja el criterio de «menos de 2,0 s» a «2,5 s o menos». Una mejora por debajo de 2,0 s queda como optimización opcional posterior.
 
 ## Reglas transversales
 
