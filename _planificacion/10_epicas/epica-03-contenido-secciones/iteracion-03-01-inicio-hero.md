@@ -1,7 +1,7 @@
 # Iteración 03-01 · Sección Inicio: hero y contacto inmediato
 
 - **Épica:** 03 · Contenido y secciones
-- **Estado:** Terminada (corregida en 03-05; verificada por el desarrollador el 2026-10-01, commit `d6121eb`)
+- **Estado:** Terminada (verificada por el desarrollador el 2026-10-02, commit `57de857`)
 - **Rama sugerida:** `main` (temporal, ver `registro-log.md`)
 - **Depende de:** 02-03
 - **RDA relacionadas:** RDA-008
