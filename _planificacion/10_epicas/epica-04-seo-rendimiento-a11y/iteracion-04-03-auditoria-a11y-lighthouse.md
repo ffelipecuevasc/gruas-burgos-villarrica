@@ -1,7 +1,7 @@
 # Iteración 04-03 · Vista previa en Cloudflare, accesibilidad y Lighthouse
 
 - **Épica:** 04 · SEO técnico, rendimiento y accesibilidad
-- **Estado:** Pendiente
+- **Estado:** En revisión (fase A y fase B hechas; Auditoría 09 registrada; bitácoras `bitacora-04-03-fase-a-2026-10-02.md`, `bitacora-04-03-fase-b-2026-10-02.md` y `bitacora-04-cierre-2026-10-02.md`)
 - **Rama sugerida:** `iteracion/04-03-auditoria` (desde aquí se vuelve a trabajar con ramas)
 - **Depende de:** 04-01, 04-02 y, para la fase B, 04-04
 - **RDA relacionadas:** RDA-001, RDA-006, RDA-010, RDA-011, RDA-012
@@ -71,16 +71,18 @@ Ya hechas el 2026-10-02: las tareas 1 a 3, la zona `gruasvillarrica.cl` activa e
 
 ## Criterios de aceptación
 
-- [ ] Lighthouse móvil en `https://gruasvillarrica.cl` (mediana de tres ejecuciones): ≥ 95 en Rendimiento, Accesibilidad, Buenas prácticas y SEO. La vista previa de `*.pages.dev` es referencia: su SEO excluye la indexación por el `noindex`.
-- [ ] Dominio propio: certificado activo, `www` redirigido a la raíz con código 301 conservando ruta y consulta, `http` redirigido a `https`, y la raíz sin `x-robots-tag`.
-- [ ] LCP de 2,5 s o menos y CLS menor a 0,05 en Lighthouse móvil (criterio ajustado el 2026-10-02: el LCP medido fue de 2,3 s; ver la decisión 9 de la definición de la épica).
-- [ ] JSON-LD: 0 errores en el validador de Schema.org y 0 errores críticos en la Prueba de resultados enriquecidos.
-- [ ] Vista previa de WhatsApp con imagen, título y descripción (captura en la bitácora).
-- [ ] Cabeceras de `_headers` verificadas sobre HTTPS con las salidas de `curl.exe`.
-- [ ] Compilación de `main` en Cloudflare con Node, pnpm y `sharp` correctos y con la línea de validación de datos provisionales.
-- [ ] Teclado, contraste, zoom al 200 % y 320 px sin hallazgos de severidad Alta abiertos.
-- [ ] Prueba en teléfono real y con lector de pantalla documentada en la bitácora, indicando quién la hizo y con qué dispositivo.
-- [ ] Auditoría 09 registrada en `auditoria-tecnica.md`.
+Evaluados en la fase B con la evidencia del desarrollador del 2026-10-02 (`evidencia-04-03-fase-b.md`; producción en el commit `b5fcbfc`).
+
+- [x] Lighthouse móvil en `https://gruasvillarrica.cl` (mediana de tres ejecuciones): ≥ 95 en Rendimiento, Accesibilidad, Buenas prácticas y SEO. La vista previa de `*.pages.dev` es referencia: su SEO excluye la indexación por el `noindex`. **Cumplido: Rendimiento 96, 97 y 99 (mediana 97); Accesibilidad, Buenas prácticas y SEO, 100 en las tres. Escritorio: 100 en las cuatro categorías, en las tres ejecuciones.**
+- [x] Dominio propio: certificado activo, `www` redirigido a la raíz con código 301 conservando ruta y consulta, `http` redirigido a `https`, y la raíz sin `x-robots-tag`. **Cumplido: `https://www.gruasvillarrica.cl/prueba?x=1` → 301 a `https://gruasvillarrica.cl/prueba?x=1`; `http://gruasvillarrica.cl/` → 301 a `https://gruasvillarrica.cl/`; raíz 200 sin `x-robots-tag`. Certificado: `curl.exe` obtuvo respuestas HTTPS del dominio y de `www` sin error; el emisor y el vencimiento no constan.**
+- [x] LCP de 2,5 s o menos y CLS menor a 0,05 en Lighthouse móvil (criterio ajustado el 2026-10-02: el LCP medido fue de 2,3 s; ver la decisión 9 de la definición de la épica). **Cumplido: LCP de 2,3 s y CLS 0 en las tres ejecuciones móviles. La mejora bajo 2,0 s es opcional (AUD-09-019).**
+- [x] JSON-LD: 0 errores en el validador de Schema.org y 0 errores críticos en la Prueba de resultados enriquecidos. **Cumplido: Schema.org, 0 errores y 0 advertencias; Prueba de resultados enriquecidos, 2 elementos válidos y 0 errores críticos, con dos avisos opcionales aceptados (`priceRange` y `postalCode`, AUD-09-020).**
+- [x] Vista previa de WhatsApp con imagen, título y descripción (captura en la bitácora). **Cumplido por testimonio del desarrollador, sin captura (decisión 10 de la definición de la épica; AUD-09-023): en Android, con Chrome móvil y WhatsApp, la tarjeta muestra la imagen, el título y la descripción.**
+- [x] Cabeceras de `_headers` verificadas sobre HTTPS con las salidas de `curl.exe`. **Cumplido: las reglas de seguridad, caché de `/` y `/_astro/*` y `noindex` de `pages.dev` y del despliegue por hash se aplican. Diferencias registradas en AUD-09-015 a AUD-09-018; en `pages.dev` solo se midió la portada.**
+- [x] Compilación de `main` en Cloudflare con Node, pnpm y `sharp` correctos y con la línea de validación de datos provisionales. **Cumplido: Node v24.13.1, pnpm 12.8.1, `sharp` 0.35.5 con 96 optimizaciones, y `[validar-datos-provisionales] Sin PENDIENTE_CLIENTE en 114 archivos publicados.`**
+- [x] Teclado, contraste, zoom al 200 % y 320 px sin hallazgos de severidad Alta abiertos. **Cumplido: la única Alta, AUD-09-001 (FA-01), se corrigió en 04-04 (0 elementos tapados en diez recorridos y 1.848 casos), medida en local sobre el mismo código publicado; no se repitió en producción.**
+- [x] Prueba en teléfono real y con lector de pantalla documentada en la bitácora, indicando quién la hizo y con qué dispositivo. **Cumplido: Felipe Cuevas, Samsung Galaxy A52+ con Android 16 (dato confirmado por el desarrollador), Chrome y TalkBack. Sin iPhone.**
+- [x] Auditoría 09 registrada en `auditoria-tecnica.md`. **Cumplido: AUD-09-001 a AUD-09-023.**
 
 ## Fuera de alcance
 

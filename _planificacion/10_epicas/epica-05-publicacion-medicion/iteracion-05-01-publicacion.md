@@ -37,6 +37,10 @@ Hecho por el desarrollador y verificado con su evidencia del 2026-10-02 (`eviden
    4. iPhone con Safari, si hay uno disponible.
 3. **Registro de compilación:** confirmar que no aparece «No data found for font family» y que `dist/` publica los archivos `.woff2` (AUD-04-003).
 4. Bitácora de 05-01 con lo anterior.
+5. **Caché de `robots.txt` y `favicon.ico` (AUD-09-016, trasladado por la decisión 12 de la Épica 04).** Hoy responden `Cache-Control: public, max-age=14400, must-revalidate` (4 h), valor que `public/_headers` no define. Decidir si se fija en `_headers` o se acepta el valor por defecto de Cloudflare. Medir también `favicon.svg`, `apple-touch-icon.png`, los sitemaps y el 404, que no se revisaron. Cambiar `_headers` requiere consulta previa (`AGENTS.md` §5).
+6. **HSTS (AUD-09-018, trasladado por la decisión 12 de la Épica 04).** Evaluar `Strict-Transport-Security` en Cloudflare (panel de la zona, SSL/TLS › Certificados perimetrales) o en `_headers`.
+   - **Riesgo:** el navegador que recibe la cabecera se niega a abrir el sitio por `http` durante todo el `max-age`. Si el certificado falla, o si con `includeSubDomains` algún subdominio no tiene HTTPS, el sitio queda inaccesible para esos visitantes hasta que venza el plazo, y no se puede revertir desde el servidor. Con `preload`, el dominio entra en la lista de los navegadores y salir de ella tarda meses.
+   - **Plan gradual:** empezar con `max-age=300` (5 minutos), sin `includeSubDomains` ni `preload`, y comprobarlo con `curl.exe -sI`. Si no hay problemas, subir a `max-age=86400` (1 día), luego a 604800 (1 semana) y por último a 31536000 (1 año). Agregar `includeSubDomains` solo si todos los subdominios, incluido `www`, sirven HTTPS. `preload` solo con una decisión explícita del desarrollador.
 
 ## Criterios de aceptación
 
