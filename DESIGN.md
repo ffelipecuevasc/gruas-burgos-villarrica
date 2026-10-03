@@ -141,6 +141,11 @@ Reglas:
 
 Todos: tipografía display en mayúsculas, alto mínimo de 48 px, foco visible con `outline: 3px solid #ffb59e; outline-offset: 2px`. El texto de la acción dice exactamente lo que ocurre: "Llamar ahora", "Escribir por WhatsApp".
 
+Excepciones (iteración 04-04, decisiones del desarrollador del 2026-10-02):
+
+- **Botones de la barra móvil de `AccionesFlotantes`:** llegan a los bordes de la pantalla y un anillo hacia afuera no cabe. El anillo de 3 px se dibuja hacia adentro (`outline-offset: -3px`): en `on-accent` sobre el botón naranja (6,09:1) y en `primary` sobre el botón oscuro (11,36:1).
+- **«Volver al inicio» del 404:** variante secundaria con un borde de 1 px en el token `outline` (5,87:1 contra `surface`). El relleno `surface-container-lowest` no se distingue del fondo `surface` (1,04:1) y el borde de la variante de contorno tampoco alcanza 3:1 (1,51:1).
+
 ## 6. Iconografía
 
 Material Symbols Outlined, peso 400, **como SVG en línea** (paquete `@iconify-json/material-symbols` renderizado en compilación). Nunca como fuente web.
@@ -237,7 +242,22 @@ Tokens en `src/styles/global.css`:
   html {
     color-scheme: dark;
     scroll-behavior: smooth;
-    scroll-padding-top: 7rem;
+    /* Lo que recibe el foco no queda bajo lo fijo (WCAG 2.4.11): header de 7rem arriba y barra
+       móvil de 3.5rem más su borde abajo, cada uno con una holgura de 1.25rem. */
+    scroll-padding-top: calc(7rem + 1.25rem);
+    scroll-padding-bottom: calc(3.5rem + 1px + env(safe-area-inset-bottom) + 1.25rem);
+  }
+  /* Desde `md`, lo fijo de abajo son los botones flotantes (8rem) más la holgura.
+     `Footer` reserva ese mismo alto al final de la página. */
+  @media (min-width: 48rem) {
+    html {
+      scroll-padding-bottom: 9.25rem;
+    }
+  }
+  /* Las anclas descuentan la holgura: siguen quedando justo bajo el header. */
+  main,
+  section[id] {
+    scroll-margin-top: -1.25rem;
   }
   body {
     @apply bg-surface text-on-surface font-body antialiased;
