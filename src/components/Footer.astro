@@ -1,10 +1,7 @@
 ---
 import Contenedor from './Contenedor.astro';
 import Icono from './Icono.astro';
-import { negocio, enlaceTelefono, localidadesTexto, PENDIENTE_CLIENTE } from '../data/negocio.js';
-
-// Año del pie: se calcula al compilar, porque el sitio es estático.
-const anio = new Date().getFullYear();
+import { negocio, enlaceTelefono, localidadesTexto } from '../data/negocio.js';
 
 const redes = [
   { nombre: 'Instagram', icono: 'instagram', href: negocio.redes.instagram },
@@ -12,14 +9,11 @@ const redes = [
   { nombre: 'TikTok', icono: 'tiktok', href: negocio.redes.tiktok },
 ];
 
-// Los datos que el cliente aún no confirma (PENDIENTE_CLIENTE) nunca se muestran.
 const hayCobertura = negocio.cobertura.localidades.length > 0;
-const hayFacturacion =
-  negocio.facturacion.razonSocial !== PENDIENTE_CLIENTE &&
-  negocio.facturacion.rut !== PENDIENTE_CLIENTE;
 ---
 
-<footer class="bg-surface-container-lowest border-surface-container-low border-t">
+{/* `AccionesFlotantes` observa este `id` para ocultar los botones flotantes mientras el pie está a la vista. */}
+<footer id="pie" class="bg-surface-container-lowest border-surface-container-low border-t">
   <Contenedor class="grid grid-cols-1 gap-space-xl py-space-xl md:grid-cols-3">
     <div class="space-y-space-sm">
       <p class="font-display text-headline-sm uppercase">{negocio.nombre}</p>
@@ -73,18 +67,11 @@ const hayFacturacion =
       </ul>
     </div>
   </Contenedor>
-  {/* Desde `md` reserva al final el alto de los botones flotantes más su holgura (el mismo valor que
-      `scroll-padding-bottom` en `global.css`): al llegar al final de la página no tapan el pie. */}
-  <div class="bg-surface-container-low md:pb-37">
-    <Contenedor class="text-secondary font-body text-body-sm flex flex-col gap-space-sm py-space-md md:flex-row md:items-center md:justify-between">
-      <p>
-        © {anio} {negocio.nombre}
-      </p>
-      {hayFacturacion && (
-        <p>
-          {negocio.facturacion.razonSocial} · RUT {negocio.facturacion.rut}
-        </p>
-      )}
+  {/* Sin JavaScript los botones flotantes no se ocultan al llegar al pie: solo entonces, desde `md`,
+      se reserva al final su alto más la holgura (el mismo valor que `scroll-padding-bottom` en
+      `global.css`) para que no tapen el crédito. */}
+  <div class="bg-surface-container-low md:noscript:pb-37">
+    <Contenedor class="text-secondary font-body text-body-sm py-space-md text-center">
       <p>
         Sitio desarrollado por{' '}
         <a

@@ -29,7 +29,25 @@ import { enlaceTelefono, enlaceWhatsApp } from '../data/negocio.js';
   </Boton>
 </div>
 
-<div class="fixed right-space-lg bottom-space-lg z-40 hidden flex-col gap-space-sm md:flex">
+{/* Desde `md`, el script marca este bloque con `data-oculto` mientras el pie está a la vista, para que
+    los botones no tapen sus textos ni enlaces. Oculto no recibe foco ni lo anuncia un lector de
+    pantalla (`display: none`); si uno de sus botones tiene el foco del teclado, sigue visible. Sin
+    transición (DESIGN.md §8). Sin JavaScript no se ocultan: `Footer` les reserva espacio al final. */}
+<div
+  id="acciones-flotantes"
+  class="fixed right-space-lg bottom-space-lg z-40 hidden flex-col gap-space-sm md:flex data-oculto:not-has-focus-visible:hidden"
+>
   <BotonLlamada class="shadow-2xl" />
   <BotonWhatsApp variante="secundario" class="shadow-2xl" />
 </div>
+
+<script>
+  const flotantes = document.getElementById('acciones-flotantes');
+  const pie = document.getElementById('pie');
+
+  if (flotantes && pie) {
+    new IntersectionObserver((entradas) => {
+      flotantes.toggleAttribute('data-oculto', entradas.at(-1)?.isIntersecting);
+    }).observe(pie);
+  }
+</script>

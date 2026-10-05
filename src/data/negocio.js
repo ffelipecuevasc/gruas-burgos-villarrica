@@ -60,12 +60,6 @@ export const PENDIENTE_CLIENTE = 'PENDIENTE_CLIENTE';
  */
 
 /**
- * @typedef {Object} Facturacion
- * @property {string} razonSocial
- * @property {string} rut
- */
-
-/**
  * @typedef {Object} Negocio
  * @property {string} nombre
  * @property {string} eslogan
@@ -79,7 +73,6 @@ export const PENDIENTE_CLIENTE = 'PENDIENTE_CLIENTE';
  * @property {Cobertura} cobertura
  * @property {string} anioInicio Año de inicio de operaciones.
  * @property {RedesSociales} redes
- * @property {Facturacion} facturacion
  */
 
 /** @type {Negocio} */
@@ -134,10 +127,6 @@ export const negocio = {
     facebook: 'https://www.facebook.com/p/Gr%C3%BAas-Burgos-villarrica-chile-247-100083010505193/',
     // Cuenta confirmada por el cliente (AUD-01-008).
     tiktok: 'https://www.tiktok.com/@yerko.gruas.burgo',
-  },
-  facturacion: {
-    razonSocial: PENDIENTE_CLIENTE,
-    rut: PENDIENTE_CLIENTE,
   },
 };
 

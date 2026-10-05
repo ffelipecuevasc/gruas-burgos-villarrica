@@ -117,7 +117,8 @@
   }
 
   /* Desde `md` lo fijo de abajo son los botones flotantes: 1.5rem de separación, dos botones de 3rem
-     y 0.5rem entre ellos (8rem), más la misma holgura. `Footer` reserva ese alto al final. */
+     y 0.5rem entre ellos (8rem), más la misma holgura. Al llegar al pie los botones se ocultan
+     (`AccionesFlotantes`); sin JavaScript, `Footer` reserva ese alto al final. */
   @media (min-width: 48rem) {
     html {
       scroll-padding-bottom: 9.25rem;

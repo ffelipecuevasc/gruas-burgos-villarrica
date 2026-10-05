@@ -46,8 +46,12 @@ const localidades = negocio.cobertura.localidades.map((localidad) => localidad.n
     decoding="async"
     class="absolute inset-x-0 top-0 h-3/5 w-full object-cover opacity-35 md:h-full md:object-[center_65%]"
   />
+  {/* Velo: parejo hasta la parada `from` y opaco en la parada `to`. Tres tramos, porque el recorte de
+      la foto cambia con el ancho: teléfonos, desde 430 px (el `h1` baja a dos líneas y quedan luces
+      de la foto bajo la etiqueta) y desde `md`. Los valores son los del nivel intermedio de la
+      iteración 05-03: contraste mínimo medido de 4,86:1. Aclararlo más exige volver a medirlo. */}
   <div
-    class="pointer-events-none absolute inset-0 bg-gradient-to-b from-surface-container-lowest/30 from-30% via-surface-container-lowest via-60% to-surface-container-lowest md:from-0% md:via-surface-container-lowest/55 md:via-50%"
+    class="pointer-events-none absolute inset-0 bg-gradient-to-b from-surface-container-lowest/12 from-40% to-surface-container-lowest to-60% min-[430px]:from-surface-container-lowest/23 md:from-surface-container-lowest/28 md:from-70% md:to-100%"
     aria-hidden="true"
   ></div>
 
