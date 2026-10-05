@@ -2,9 +2,9 @@
 
 **Fuente única de verdad del trabajo pendiente.** Si discrepa con `_planificacion/README.md` o con cualquier otro documento de planificación, prevalece este archivo.
 
-- **Última actualización:** 2026-10-02
-- **Iteración activa:** ninguna. La Épica 04 está terminada; falta planificar la Épica 05.
-- **Próximo hito:** Épica 05. Primero 05-01: lo pendiente de la prueba de humo, la falla de la validación de datos provisionales en Cloudflare, las fuentes en el registro de compilación, y la caché de `robots.txt` y `favicon.ico` y HSTS (AUD-09-016 y AUD-09-018, trasladados por la decisión 12). Después, 05-02 (Web Analytics, Search Console y Google Ads). Sigue pendiente la aprobación del cliente de la Épica 03 (hito «Prototipo», AUD-08-023), con el sitio ya publicado e indexable (AUD-09-013)
+- **Última actualización:** 2026-10-05
+- **Iteración activa:** ninguna. La Épica 05 está replanificada (revisión con el cliente del 2026-10-04); falta que el desarrollador suba sus archivos al repositorio y pida el prompt de 05-03.
+- **Próximo hito:** Épica 05, en este orden: 05-03 (pie de página y hero menos oscuro), 05-04 (cambios del cliente: servicios al inicio, «Quiénes somos» reducido y sin nombres, servicios nuevos, pagos y cobertura), 05-05 (mapa de cobertura con imagen real, cuando el desarrollador entregue el WebP), 05-01 (verificación final en producción, con caché y HSTS) y 05-02 (medición y Google Ads). Sigue pendiente la aprobación del cliente de la Épica 03 (hito «Prototipo», AUD-08-023), con el sitio ya publicado e indexable (AUD-09-013).
 - **Entrega tentativa:** 2026-10-18
 - **Flujo de ramas vigente:** Cloudflare Pages está conectado desde el 2026-10-02: se trabaja en ramas `iteracion/XX-YY-…` (cada push genera una vista previa en `pages.dev`) y `main` publica en `https://gruasvillarrica.cl`.
 
@@ -28,8 +28,11 @@
 | 04-02     | Fotos, galería, rendimiento y cabeceras             | 04    | Terminada | 04-01      | [bitacora-04-02-2026-10-02](../99_bitacora/bitacora-04-02-2026-10-02.md) |
 | 04-03     | Vista previa en Cloudflare, accesibilidad y Lighthouse | 04 | Terminada | 04-01, 04-02, 04-04 | [fase A](../99_bitacora/bitacora-04-03-fase-a-2026-10-02.md), [fase B](../99_bitacora/bitacora-04-03-fase-b-2026-10-02.md) y [cierre de la épica](../99_bitacora/bitacora-04-cierre-2026-10-02.md) |
 | 04-04     | Corrección de la auditoría local                    | 04    | Terminada | 04-03 (fase A) | [bitacora-04-04-2026-10-02](../99_bitacora/bitacora-04-04-2026-10-02.md) |
-| 05-01     | Publicación en producción                           | 05    | Pendiente  | 04-03      | —        |
-| 05-02     | Medición: Web Analytics, Search Console y Google Ads | 05   | Pendiente  | 05-01      | —        |
+| 05-03     | Pie de página y hero menos oscuro                   | 05    | Pendiente  | 04-04      | —        |
+| 05-04     | Cambios del cliente: contenido y estructura         | 05    | Pendiente  | 05-03      | —        |
+| 05-05     | Mapa de cobertura con imagen real                   | 05    | Pendiente  | 05-04 y el WebP del desarrollador | — |
+| 05-01     | Publicación y verificación final en producción      | 05    | Pendiente  | 05-03, 05-04, 05-05 | —  |
+| 05-02     | Medición: Search Console, Web Analytics y Google Ads | 05   | Pendiente  | 05-01      | —        |
 
 Nota: la iteración 01-01 la ejecuta el desarrollador de forma manual en WebStorm (creación del proyecto). La bitácora 01-01 puede redactarla el agente a partir del resumen del desarrollador.
 
@@ -46,10 +49,12 @@ Bloquean contenido real. Mientras falten, se usa `PENDIENTE_CLIENTE` en `src/dat
 | Localidades de cobertura y tiempos estimados                | AUD-01-005, AUD-01-006 | 03-04 | Parcial: cuatro localidades declaradas y publicadas; tiempos por zona y otras localidades, pendientes |
 | Año de inicio de operaciones                                | AUD-01-007  | 03-02          | Pendiente (lo confirma el desarrollador con Yerko; mientras tanto sigue en «No publicar» y no va en el JSON-LD) |
 | Confirmación de cuentas de redes sociales                   | AUD-01-008  | 02-03          | Confirmado |
-| Razón social, RUT y coordenadas de la base                  | AUD-01-009  | 02-03, 04-01   | Parcial: coordenadas de referencia cargadas en `negocio.js`, sin validar: el desarrollador las valida contra el pin del perfil de Google (tarea del desarrollador de 04-01) y hasta entonces no se publican (el JSON-LD no lleva `geo`); razón social y RUT, pendientes |
+| Razón social, RUT y coordenadas de la base                  | AUD-01-009  | 02-03, 04-01   | Parcial: coordenadas de referencia cargadas en `negocio.js`, sin validar: el desarrollador las valida contra el pin del perfil de Google (tarea del desarrollador de 04-01) y hasta entonces no se publican (el JSON-LD no lleva `geo`); razón social y RUT **no se publicarán** (decisión del cliente, reunión del 2026-10-04; se retiran del pie y de los datos en 05-03) |
 | Enlace al perfil de Google Maps y selección de reseñas      | AUD-01-010  | 03-02          | Parcial: 10 reseñas seleccionadas y publicadas; enlace oficial al perfil, pendiente (lo entrega el desarrollador; hasta entonces el JSON-LD no lleva `hasMap`) |
 | Fotos reales (flota, operaciones, base) y logo si existe    | AUD-01-011  | 03-01, 04-01, 04-02 | Parcial: isotipo y 10 fotos de operaciones entregados el 2026-10-01 (04-01) y publicados en el hero y en la galería (04-02), tal como están en las redes del negocio (RDA-011). Originales sin procesar, pendientes |
 | Textos del negocio (punto 2 de "Qué necesito de usted" en la propuesta) | — | 03-01 a 03-04 | Pendiente |
+| Tipos de vehículo que se trasladan (furgones, camiones de tres cuartos), maquinaria liviana y camión de 15 toneladas | — | 05-04 | Confirmado por escrito por el cliente y aprobado por el desarrollador el 2026-10-05; se publica en 05-04 |
+| Fotos del camión de carga y del camión pluma (con permiso de quien las tome) | AUD-01-011 | 05-04 | Pendiente (sin fotos de internet) |
 | Aceptación de publicar reseñas que mencionan tiempos y precio («alrededor de 30min», «tiempo récord», «precio») | — | 03-05 | Pendiente |
 
 ## 3. Decisiones por tomar
@@ -59,10 +64,13 @@ Bloquean contenido real. Mientras falten, se usa `PENDIENTE_CLIENTE` en `src/dat
 | Medición de conversiones de Google Ads en el sitio | RDA-010  | Desarrollador          |
 | Aprobación del cliente de la Épica 03 (hito Prototipo) | —    | Desarrollador          |
 | Alinear `AGENTS.md` §6.4 y `DESIGN.md` §5 con la decisión D3 (nombre completo del autor) | RDA-007 (AUD-08-032) | Desarrollador |
-| Activar la política de seguridad de contenido de Astro (`security.csp`): recomendación en la bitácora 04-02. Requiere editar `astro.config.mjs` y una RDA; conviene decidirla junto con RDA-010 y Web Analytics (05-02) | Requiere RDA | Desarrollador |
-| Caché de 4 h en `robots.txt` y `favicon.ico`, no definida en `_headers` (se decide en 05-01, tarea 5; decisión 12 de la Épica 04) | AUD-09-016 | Desarrollador |
-| HSTS en el dominio propio (se evalúa en 05-01, tarea 6, con su riesgo y un plan gradual; decisión 12 de la Épica 04) | AUD-09-018 | Desarrollador |
+| Activar la política de seguridad de contenido de Astro (`security.csp`): recomendación en la bitácora 04-02. Requiere editar `astro.config.mjs` y una RDA; se decide junto con RDA-010 y Web Analytics (05-02) | Requiere RDA | Desarrollador |
+| Caché de 4 h en `robots.txt` y `favicon.ico`, no definida en `_headers` (se decide en 05-01, tarea 4; decisión 12 de la Épica 04) | AUD-09-016 | Desarrollador |
+| HSTS en el dominio propio (se evalúa en 05-01, tarea 5, con su riesgo y un plan gradual; decisión 12 de la Épica 04) | AUD-09-018 | Desarrollador |
 | Probar en Cloudflare que la compilación de `main` falla con un dato provisional, o dar por suficiente la prueba local | 05-01, tarea 1 | Desarrollador |
+| Nivel de aclarado del hero (tres niveles que propone 05-03) | 05-03 | Desarrollador |
+| Web Analytics de Cloudflare (agrega un script, choca con RDA-006) | RDA nueva (05-02) | Desarrollador |
+| Aprobación del cliente de los cambios de 05-04 (vista previa) | AUD-08-023 | Desarrollador |
 | Cuándo se corrigen FA-05 (zoom al 400 %) y FA-09 (letra en rem), diferidos: ambos cambian `DESIGN.md` | AUD-09-005, AUD-09-009 | Desarrollador |
 
 ## 4. Propuestas fuera de alcance
@@ -107,3 +115,5 @@ Ideas detectadas durante el trabajo que no forman parte de lo contratado. Se cot
 | 2026-10-02 | Iteración 04-03, fase B en revisión: bitácora `bitacora-04-03-fase-b-2026-10-02` con la evidencia del desarrollador (Cloudflare, `curl.exe`, PageSpeed, validadores, teléfono y TalkBack). Auditoría 09 registrada (AUD-09-001 a AUD-09-022; 0 de severidad Alta abiertos). PageSpeed móvil, mediana: 97, 100, 100 y 100; LCP 2,3 s. 9 de 10 criterios cumplidos; la vista previa en WhatsApp queda sin verificar por falta de captura. `DESIGN.md` §5.1 y §9 alineados con 04-04 (sale de «Decisiones por tomar»). Casillas de 03-04 marcadas; la de LCP de 03-01 sigue sin marcar (2,3 s contra menos de 2 s). 04-01, 04-02 y 04-04 siguen «En revisión», listas para que el desarrollador las confirme. `iteracion-05-01-publicacion.md` actualizada. |
 | 2026-10-02 | Cierre de la Épica 04 en revisión (bitácora `bitacora-04-cierre-2026-10-02`). Decisiones del desarrollador 10 a 12: la vista previa en WhatsApp se da por verificada por su testimonio, sin captura (AUD-09-023); el criterio de LCP de 03-01 pasa a 2,5 s o menos y queda cumplido con 2,3 s (AUD-09-021 resuelto; sale de «Decisiones por tomar»); AUD-09-016 y AUD-09-018 se trasladan a 05-01 (tareas 5 y 6). Los 10 criterios de 04-03 quedan marcados y la épica, «En revisión». También la casilla del favicon de 04-01 y RDA-012 (`sharp` confirmado en Cloudflare). 04-01 a 04-04 siguen «En revisión»: las pasa a «Terminada» el desarrollador. Datos confirmados por el desarrollador: teléfono Samsung Galaxy A52+ con Android 16; mensaje 1 de WhatsApp probado desde 768 px, desde el hero; carpetas `cdp-gruas-*` borradas. |
 | 2026-10-02 | Iteraciones 04-01 a 04-04 y Épica 04 terminadas: verificadas por el desarrollador (commit `57de857`). La Épica 03 sigue «En revisión» hasta registrar la aprobación del cliente (AUD-08-023). |
+| 2026-10-05 | Épica 05 replanificada tras la revisión con el cliente del 2026-10-04 (las notas y la transcripción quedan fuera del repositorio, que es público). Nuevas iteraciones 05-03 (pie y hero), 05-04 (cambios del cliente) y 05-05 (mapa); 05-01 y 05-02 pasan al final y se reescriben. Decisiones del desarrollador en `definicion-epica-05.md`: botones flotantes ocultos al llegar al pie, «Quiénes somos» en franja con la foto 07 y sin nombres propios, mapa local de cinco localidades, servicios nuevos, cobertura en toda La Araucanía y Coñaripe, medios de pago, razón social y RUT no se publican, recargo por urgencia fuera. |
+| 2026-10-05 | El cliente confirmó por escrito (WhatsApp) los tipos de vehículo y la maquinaria liviana que traslada, y el desarrollador los aprobó, incluido «camión de 15 toneladas» (decisión 13 de `definicion-epica-05.md`). Entran en 05-04: un servicio nuevo («Traslado de maquinaria liviana», ocho servicios en total) y la lista del traslado en grúa cama. |
