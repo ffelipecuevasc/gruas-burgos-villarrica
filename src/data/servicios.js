@@ -6,6 +6,7 @@
  * @property {string} descripcion Resumen del alcance del servicio.
  * @property {string[]} caracteristicas Lista de 3 atributos clave verificados; el último, «Disponible 24/7».
  * @property {string} mensajeWhatsApp Mensaje inicial para WhatsApp (termina con espacio).
+ * @property {boolean} [banderas] Muestra las banderas de Chile y Argentina en la tarjeta, como decoración.
  */
 
 /** @type {Servicio[]} */
@@ -80,6 +81,7 @@ export const servicios = [
     id: 'envio-vehiculos',
     titulo: 'Envío de vehículos a todo Chile y a Argentina',
     icono: 'larga-distancia',
+    banderas: true,
     descripcion:
       'Enviamos tu vehículo a cualquier ciudad de Chile y a Argentina. Precios muy competitivos.',
     caracteristicas: ['Envíos a todo Chile', 'Envíos a Argentina', 'Disponible 24/7'],

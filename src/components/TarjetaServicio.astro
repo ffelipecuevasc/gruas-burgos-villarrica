@@ -1,6 +1,8 @@
 ---
 import Icono from './Icono.astro';
 import Boton from './Boton.astro';
+import BanderaChile from '../assets/banderas/chile.svg';
+import BanderaArgentina from '../assets/banderas/argentina.svg';
 import { enlaceWhatsApp } from '../data/negocio.js';
 
 /**
@@ -9,7 +11,9 @@ import { enlaceWhatsApp } from '../data/negocio.js';
 
 /**
  * Tarjeta de un servicio. Todas tienen la misma estructura: cuadro con el ícono, separador, título,
- * descripción, tres características y botón de WhatsApp.
+ * descripción, tres características y botón de WhatsApp. Si el servicio lo pide (`banderas`), lleva las
+ * banderas de Chile y Argentina arriba a la derecha, frente al ícono: son decoración (el título ya nombra
+ * los dos países) y no cambian el alto de la tarjeta.
  *
  * @typedef {Object} Props
  * @property {Servicio} servicio Objeto con la información del servicio.
@@ -31,11 +35,19 @@ const caracteristicas = Array.from(servicio.caracteristicas, String);
   ]}
 >
   <div class="space-y-space-md">
-    <div>
-      <div class="inline-flex size-12 items-center justify-center bg-surface-container-highest text-primary">
-        <Icono nombre={servicio.icono} class="size-6" />
+    <div class="flex items-start justify-between gap-space-md">
+      <div>
+        <div class="inline-flex size-12 items-center justify-center bg-surface-container-highest text-primary">
+          <Icono nombre={servicio.icono} class="size-6" />
+        </div>
+        <div class="mt-space-sm h-[2px] w-8 bg-primary" />
       </div>
-      <div class="mt-space-sm h-[2px] w-8 bg-primary" />
+      {servicio.banderas && (
+        <div class="flex h-12 shrink-0 items-center gap-space-xs" aria-hidden="true">
+          <BanderaChile class="size-8" />
+          <BanderaArgentina class="size-8" />
+        </div>
+      )}
     </div>
 
     <div class="space-y-space-xs">

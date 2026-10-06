@@ -39,7 +39,8 @@ const anchas = sobrantes === 1 ? 4 : sobrantes === 2 ? 2 : 0;
   <Contenedor class="space-y-space-xl">
     <TituloSeccion id="titulo-opiniones" bajada="Opiniones publicadas en Google.">
       Lo que dicen nuestros clientes
-      {/* Logotipo de Google: marca de un tercero, sin modificar (DESIGN.md §6.2). Solo se escala. */}
+      {/* Logotipo de Google: marca de un tercero, sin modificar (DESIGN.md §6.2). Solo se escala.
+          Desde `md` va en el extremo derecho de la fila del título; bajo `md`, debajo del título. */}
       <Fragment slot="junto">
         <LogoGoogle role="img" aria-label="Google" class="h-6 w-auto shrink-0 md:h-8" />
       </Fragment>

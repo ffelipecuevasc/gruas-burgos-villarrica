@@ -5,8 +5,9 @@
  * @property {string} [etiqueta] Texto breve sobre el título. Úsalo solo si aporta información.
  * @property {string} [bajada] Párrafo de apoyo bajo el título.
  *
- * El slot `junto` admite un elemento a la derecha del título (por ejemplo, un logotipo). Queda fuera
- * del `h2`, así que no cambia su nombre accesible; si no cabe en la línea, pasa debajo.
+ * El slot `junto` admite un elemento en la fila del título (por ejemplo, un logotipo). Queda fuera del
+ * `h2`, así que no cambia su nombre accesible. Desde `md` va en el extremo derecho de la fila, centrado
+ * con el título; bajo `md`, si no cabe en la línea, pasa debajo.
  */
 
 /** @type {Props} */
@@ -16,7 +17,7 @@ const { id, etiqueta, bajada } = Astro.props;
 <header>
   {etiqueta && <p class="font-display text-label-md text-primary uppercase">{etiqueta}</p>}
   {Astro.slots.has('junto') ? (
-    <div class="flex flex-wrap items-center gap-x-space-lg gap-y-space-sm">
+    <div class="flex flex-wrap items-center gap-x-space-lg gap-y-space-sm md:flex-nowrap md:justify-between">
       <h2 id={id} class="font-display text-headline-lg-mobile md:text-headline-lg uppercase">
         <slot />
       </h2>

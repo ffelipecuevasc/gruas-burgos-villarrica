@@ -45,11 +45,15 @@ Prueba a 768 px (`F12`, `Ctrl + Shift + M`, «Responsive», 768 de ancho y recar
 - A 767 px (un píxel menos), ¿quedan solo tres enlaces?:
 - Con `Tab`, ¿el foco pasa por los seis enlaces en orden y su contorno se ve completo?:
 
-## 4. Banderas
+## 4. Banderas del menú
 
-- Teléfono: ¿se ven las banderas de Chile y Argentina en el extremo derecho del menú, sin tapar ni empujar los enlaces?:
-- Escritorio: ¿se ven en el extremo derecho del menú?:
-- ¿Se reconocen las dos banderas a ese tamaño (16 px de alto)? La de Argentina va sin el Sol de Mayo:
+Son las que entregaste el 2026-10-06 (íconos con las esquinas redondeadas; la de Argentina, con el Sol de Mayo).
+
+- Teléfono: ¿se ven las dos banderas en el extremo derecho del menú (24 px), sin tapar ni empujar los enlaces «Inicio», «Servicios» y «Contacto»?:
+- Teléfono: ¿se reconocen a ese tamaño? ¿Se distingue el Sol de Mayo?:
+- Escritorio: ¿se ven en el extremo derecho del menú, más grandes (32 px)?:
+- A 768 px de ancho quedan a 16 px de «Contacto». ¿Se ve holgado o apretado?:
+- ¿El header mide lo mismo que antes (las banderas no lo hacen más alto)?:
 - ¿Las dejas así o prefieres otro tamaño o posición?:
 
 ## 5. Opiniones
@@ -57,7 +61,9 @@ Prueba a 768 px (`F12`, `Ctrl + Shift + M`, «Responsive», 768 de ancho y recar
 - ¿Se ven las diez opiniones sin tocar nada, en el teléfono y en escritorio?:
 - ¿Sigue apareciendo el botón «Ver 4 opiniones más»? (no debe aparecer):
 - ¿Sigue el botón «Ver más opiniones en Google» al final?:
-- ¿El logotipo de Google se ve junto al título «Lo que dicen nuestros clientes»? En el teléfono queda bajo el título; en escritorio, a su derecha:
+- Teléfono: ¿el logotipo de Google se ve debajo del título «Lo que dicen nuestros clientes»?:
+- Escritorio: ¿el logotipo queda en el extremo derecho de la fila del título, a su misma altura y lejos de la bajada «Opiniones publicadas en Google.»? Revísalo a 768 px y con la ventana completa:
+- En un teléfono en horizontal o una ventana de 520 a 767 px, el logotipo queda al lado del título (no en el extremo derecho). ¿Lo aceptas?:
 - ¿El logotipo se ve bien sobre el fondo oscuro (colores y tamaño)?:
 - En el teléfono, con las diez opiniones visibles y las ocho tarjetas completas, la página quedó unos 1.900 px más larga (unas tres pantallas más de desplazamiento). ¿Lo aceptas?:
 
@@ -78,6 +84,19 @@ Prueba a 768 px (`F12`, `Ctrl + Shift + M`, «Responsive», 768 de ancho y recar
 - Escritorio con la ventana completa: ¿se ven cuatro tarjetas arriba y cuatro abajo, sin espacios vacíos?:
 - Teléfono: ¿las ocho van una bajo otra, sin textos cortados?:
 - Toca «Escribir por WhatsApp» en dos tarjetas cualesquiera: ¿abre WhatsApp con el mensaje del servicio? (los mensajes no cambiaron):
+
+### 7.1 Banderas en la tarjeta de envío
+
+- En «Envío de vehículos a todo Chile y a Argentina», ¿se ven las dos banderas arriba a la derecha, frente al ícono, en el teléfono y en escritorio?:
+- ¿La tarjeta mide lo mismo que las de su fila (no quedó más alta ni descuadrada)?:
+- ¿Alguna otra tarjeta lleva banderas? (no debe):
+- ¿Te parece bien la ubicación o prefieres otra dentro de la tarjeta?:
+
+### 7.2 Ícono del camión pluma
+
+El sitio conserva el ícono actual. En la bitácora de la segunda pasada están los nombres de dos alternativas y la carpeta con sus capturas.
+
+- ¿Cuál eliges: el actual, la alternativa 1 o la alternativa 2?:
 
 ## 8. Primera pantalla del teléfono
 

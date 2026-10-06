@@ -85,15 +85,16 @@ const enlaces = [
           </li>
         ))}
       </ul>
-      {/* Banderas de los dos países adonde se envían vehículos. Son una sola imagen para un lector de
-          pantalla y no son enlaces. A 320 px no caben junto a los tres enlaces y se ocultan. */}
+      {/* Banderas de los dos países adonde se envían vehículos (DESIGN.md §6.2): 24 px bajo `md` y
+          32 px desde `md`. Son una sola imagen para un lector de pantalla y no son enlaces. A 320 px no
+          caben junto a los tres enlaces y se ocultan. */}
       <div
         role="img"
         aria-label="Banderas de Chile y Argentina"
-        class="hidden shrink-0 items-center gap-space-sm min-[360px]:flex"
+        class="hidden shrink-0 items-center gap-space-xs min-[360px]:flex"
       >
-        <BanderaChile class="h-4 w-auto" aria-hidden="true" />
-        <BanderaArgentina class="h-4 w-auto" aria-hidden="true" />
+        <BanderaChile class="size-6 md:size-8" aria-hidden="true" />
+        <BanderaArgentina class="size-6 md:size-8" aria-hidden="true" />
       </div>
     </Contenedor>
   </nav>
