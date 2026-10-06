@@ -1,7 +1,7 @@
 # Iteración 05-01 · Publicación y verificación final en producción
 
 - **Épica:** 05 · Ajustes finales, publicación y medición
-- **Estado:** En revisión (fase A, local: [bitacora-05-01-2026-10-06](../../99_bitacora/bitacora-05-01-2026-10-06.md); fase B registrada: [bitacora-05-01-fase-b-2026-10-06](../../99_bitacora/bitacora-05-01-fase-b-2026-10-06.md)). La marca «Terminada» la pone el desarrollador
+- **Estado:** Terminada (marcada por el desarrollador el 2026-10-06). Fase A, local: [bitacora-05-01-2026-10-06](../../99_bitacora/bitacora-05-01-2026-10-06.md); fase B registrada: [bitacora-05-01-fase-b-2026-10-06](../../99_bitacora/bitacora-05-01-fase-b-2026-10-06.md). Quedan sin verificar: Safari en iPhone, el elemento del LCP y el detalle de los equipos. El origen de los 11 KiB de «JavaScript heredado» de PageSpeed (AUD-10-001, Baja) se resuelve en 05-02. El plan de subida de HSTS queda a decisión del desarrollador.
 - **Rama sugerida:** `iteracion/05-01-verificacion-final`
 - **Depende de:** 05-03, 05-04 y 05-05 (terminadas)
 - **RDA relacionadas:** RDA-001, RDA-007, RDA-008, RDA-012
