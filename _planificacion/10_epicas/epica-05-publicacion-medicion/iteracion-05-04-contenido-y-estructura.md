@@ -52,7 +52,7 @@ Los servicios nuevos no llevan lista de características. «Rescates complejos c
 
 **Cobertura**
 
-- Localidades, en este orden: Villarrica (base de operaciones), Pucón, Licán Ray, Coñaripe y Freire. Las referencias de las cuatro existentes no cambian. Coñaripe lleva la referencia de ruta solo si se puede verificar en una fuente oficial; si no, **detenerse y consultar**.
+- Localidades, en este orden: Villarrica (base de operaciones), Pucón, Licán Ray, Coñaripe y Freire. Las referencias de las cuatro existentes no cambian. Coñaripe va **sin referencia de ruta**: no hay una fuente verificada de la ruta (decisión del 2026-10-05). Su fila muestra solo el nombre y no rompe la alineación de la lista.
 - Dos líneas nuevas en «Dónde atendemos»: «Grúas en toda La Araucanía.» y «Traslado de vehículos a todo Chile.»
 - Se mantiene: «También hemos prestado servicio en el paso fronterizo Mamuil Malal (Ruta CH-199, Curarrehue). Si estás en otra localidad, consúltanos.»
 
@@ -68,34 +68,34 @@ Los servicios nuevos no llevan lista de características. «Rescates complejos c
 ## Tareas
 
 1. **Orden y estructura.**
-    - El orden de la página es: hero, cinta de métricas, **Servicios**, «Quiénes somos» (franja), galería «Trabajos en terreno», opiniones de Google, **Contacto**.
-    - Siguen existiendo tres anclas (`#inicio`, `#servicios`, `#contacto`) y cada una lleva a donde dice su nombre, con el título visible bajo el header. El bloque de «Quiénes somos», galería y opiniones queda entre `#servicios` y `#contacto`, sin ancla propia.
-    - La jerarquía de títulos es coherente (un solo `h1`, sin saltos de nivel) y cada sección tiene su nombre accesible.
-    - RDA-009 y `DESIGN.md` se actualizan con la nueva estructura.
+   - El orden de la página es: hero, cinta de métricas, **Servicios**, «Quiénes somos» (franja), galería «Trabajos en terreno», opiniones de Google, **Contacto**.
+   - Siguen existiendo tres anclas (`#inicio`, `#servicios`, `#contacto`) y cada una lleva a donde dice su nombre, con el título visible bajo el header. El bloque de «Quiénes somos», galería y opiniones queda entre `#servicios` y `#contacto`, sin ancla propia.
+   - La jerarquía de títulos es coherente (un solo `h1`, sin saltos de nivel) y cada sección tiene su nombre accesible.
+   - RDA-009 y `DESIGN.md` se actualizan con la nueva estructura.
 
 2. **Servicios.**
-    - Aparecen los 3 servicios actuales y los 5 nuevos (ocho en total), cada uno con título, descripción y botón «Escribir por WhatsApp» con su mensaje y un `aria-label` con contexto.
-    - Los servicios nuevos son compactos: la sección completa mide 3.600 px o menos a 360 px de ancho y 1.800 px o menos a 1280 px (hoy 2.311 y 1.095 px, con 3 servicios).
-    - La grilla no deja huecos a 360, 768, 1024, 1280 y 1920 px.
-    - Se retira el bloque de «traslado a otra ciudad». El mensaje `trasladoOtraCiudad` se elimina de `negocio.js` si queda sin uso.
+   - Aparecen los 3 servicios actuales y los 5 nuevos (ocho en total), cada uno con título, descripción y botón «Escribir por WhatsApp» con su mensaje y un `aria-label` con contexto.
+   - Los servicios nuevos son compactos: la sección completa mide 3.600 px o menos a 360 px de ancho y 1.800 px o menos a 1280 px (hoy 2.311 y 1.095 px, con 3 servicios).
+   - La grilla no deja huecos a 360, 768, 1024, 1280 y 1920 px.
+   - Se retira el bloque de «traslado a otra ciudad». El mensaje `trasladoOtraCiudad` se elimina de `negocio.js` si queda sin uso.
 
 3. **Quiénes somos.**
-    - Franja resumida con el texto aprobado y la foto 07. La sección completa mide 560 px o menos a 360 px, 420 px o menos a 768 px y 360 px o menos desde 1024 px (hoy 818 px a 360 y 552 px desde 768).
-    - El ancho de lectura sigue en 75 caracteres por línea como máximo.
-    - La imagen es pequeña, con carga diferida, dimensiones declaradas y sin desplazamiento de diseño. En móvil el agente propone si va apilada u oculta, con las medidas.
-    - La galería, sin la foto 07, queda con 1 destacada y 7 fotos sin celdas vacías a 360, 768, 1024, 1280 y 1920 px. Ninguna foto aparece dos veces en la página.
+   - Franja resumida con el texto aprobado y la foto 07. La sección completa mide 560 px o menos a 360 px, 420 px o menos a 768 px y 360 px o menos desde 1024 px (hoy 818 px a 360 y 552 px desde 768).
+   - El ancho de lectura sigue en 75 caracteres por línea como máximo.
+   - La imagen es pequeña, con carga diferida, dimensiones declaradas y sin desplazamiento de diseño. En móvil el agente propone si va apilada u oculta, con las medidas.
+   - La galería, sin la foto 07, queda con 1 destacada y 7 fotos sin celdas vacías a 360, 768, 1024, 1280 y 1920 px. Ninguna foto aparece dos veces en la página.
 
 4. **Cobertura y tarjeta de despacho.**
-    - La lista de localidades, el texto de «Dónde atendemos», el pie y el JSON-LD reflejan las cinco localidades y las dos líneas nuevas.
-    - La primera pantalla a 360 × 640 px se conserva: el hero lista las localidades y ahora lleva una más.
-    - No queda ningún nombre propio del dueño en la página ni en `dist/`, salvo dentro de las reseñas textuales y en la URL oficial de TikTok.
+   - La lista de localidades, el texto de «Dónde atendemos», el pie y el JSON-LD reflejan las cinco localidades y las dos líneas nuevas.
+   - La primera pantalla a 360 × 640 px se conserva: el hero lista las localidades y ahora lleva una más.
+   - No queda ningún nombre propio del dueño en la página ni en `dist/`, salvo dentro de las reseñas textuales y en la URL oficial de TikTok.
 
 5. **Medios de pago y facturación.** El bloque de medios de pago es visible sin interacción en Contacto, en el orden de lectura junto a los canales de contacto. `paymentAccepted` está en el JSON-LD, y este pasa los validadores en la fase B.
 
 6. **Documentación.**
-    - Bitácora nueva `bitacora-05-04-AAAA-MM-DD.md` en `_planificacion/99_bitacora/`, con la plantilla de `_planificacion/README.md` §5.2, fecha real, fin de línea LF y estado final «En revisión». Nunca «Terminada».
-    - `DESIGN.md` §5 y §7; RDA-009 y RDA-011 actualizadas.
-    - `registro-log.md`: fila de 05-04, datos del cliente (razón social y RUT: «no se publican»), «Iteración activa» y «Próximo hito».
+   - Bitácora nueva `bitacora-05-04-AAAA-MM-DD.md` en `_planificacion/99_bitacora/`, con la plantilla de `_planificacion/README.md` §5.2, fecha real, fin de línea LF y estado final «En revisión». Nunca «Terminada».
+   - `DESIGN.md` §5 y §7; RDA-009 y RDA-011 actualizadas.
+   - `registro-log.md`: fila de 05-04, datos del cliente (razón social y RUT: «no se publican»), «Iteración activa» y «Próximo hito».
 
 ## Criterios de aceptación
 
@@ -110,6 +110,7 @@ Los servicios nuevos no llevan lista de características. «Rescates complejos c
 - [ ] Recorrido con Tab y Mayús + Tab a 320, 360, 768, 1280 y 1536 px: 0 elementos enfocados cubiertos por elementos fijos.
 - [ ] Búsqueda en `dist/`: «15 toneladas» aparece una sola vez; no aparece «Yerko» fuera de las reseñas y de la URL de TikTok, ni «Rozas», ni la palabra «RUT», ni «razón social», ni «© 2026». Todo el contenido aprobado aparece tal cual. Ningún texto de la lista «No publicar» aparece.
 - [ ] Las fotos usan los textos alternativos aprobados, sin rótulos, marca ni modelo.
+- [ ] La lista de localidades muestra las cinco en el orden aprobado; la fila de Coñaripe, sin referencia, queda alineada con las demás a 360, 768 y 1280 px.
 - [ ] JSON-LD con `areaServed` y `paymentAccepted`, sin `priceRange` ni datos tributarios, y sin valores `PENDIENTE_CLIENTE`.
 - [ ] `git status` muestra cambios solo en `src/`, `_planificacion/` y `DESIGN.md`.
 
