@@ -1,0 +1,41 @@
+---
+import { Picture } from 'astro:assets';
+import mapa from '../assets/mapa/mapa-cobertura.webp';
+
+/**
+ * Mapa de la zona de atención: imagen aprobada por el desarrollador (iteración 05-05), con la
+ * atribución del mapa base. Sin interacción ni JavaScript. Las localidades se dicen en texto en
+ * `ListaCobertura`, no aquí.
+ *
+ * @typedef {Object} Props
+ * @property {string} [class] Clases adicionales de Tailwind.
+ */
+
+/** @type {Props} */
+const { class: clase = '' } = Astro.props;
+---
+
+<figure class:list={['border border-surface-container-highest bg-surface-container-lowest', clase]}>
+  {/* El mapa no pasa de 576 px de lado, para que se vea completo, con su atribución, bajo el header
+      en una ventana de 768 px de alto. La imagen es cuadrada: `width` y `height` reservan su alto
+      antes de que cargue, y `width` fija además la variante mayor (576 px a densidad 2).
+      `sizes` es el ancho real: 576 px, o el de la columna cuando es más angosta (100vw menos los
+      márgenes de 20 px y el borde bajo `lg`; 7 de 12 columnas desde `lg`). */}
+  <div class="mx-auto max-w-xl">
+    <Picture
+      src={mapa}
+      alt="Mapa de la zona de atención: un círculo rojo centrado en Villarrica, entre Freire y Pucón."
+      formats={['avif']}
+      fallbackFormat="webp"
+      width={1152}
+      height={1152}
+      widths={[320, 480, 576, 640, 960, 1152]}
+      sizes="(min-width: 1080px) 576px, (min-width: 1024px) calc(58.33vw - 42px), (min-width: 618px) 576px, calc(100vw - 42px)"
+      loading="lazy"
+      class="block h-auto w-full"
+    />
+    <figcaption class="p-space-sm font-body text-body-sm text-secondary">
+      © colaboradores de OpenStreetMap
+    </figcaption>
+  </div>
+</figure>

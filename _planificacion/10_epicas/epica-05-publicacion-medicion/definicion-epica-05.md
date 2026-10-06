@@ -35,7 +35,7 @@ Se ejecutan en el orden de la tabla. 05-01 y 05-02 conservan sus números porque
 4. **Quiénes somos.** Pasa a una franja resumida, sin nombres propios («atendido por sus propios dueños») y con una imagen pequeña: la foto 07, que sale de la galería (05-04).
 5. **Servicios.** Suben justo bajo el hero. Se agregan puente de batería, cambio de neumático, rescates complejos con camión pluma y envío de vehículos a todo Chile y a Argentina. «Precios muy competitivos» queda aprobado por el desarrollador: es una afirmación subjetiva que no se respalda con datos y se acepta como riesgo (Ley 19.496).
 6. **Cobertura.** «Grúas en toda La Araucanía» y «traslado de vehículos a todo Chile», en texto. Coñaripe entra a la lista de localidades, que queda en Villarrica, Pucón, Licán Ray, Coñaripe y Freire. Licán Ray y Coñaripe son de la Región de Los Ríos (comuna de Panguipulli): por eso la lista se mantiene y no se reemplaza por «toda La Araucanía». Panguipulli y Valdivia no se publican.
-7. **Mapa.** Local, con las cinco localidades. La región se dice en texto, no en la imagen (05-05).
+7. **Mapa.** Imagen local aprobada por el desarrollador: mapa base de OpenStreetMap con un círculo rojo centrado en Villarrica. Las cinco localidades y la región se dicen en texto, no en la imagen (05-05).
 8. **Medios de pago y documentos.** Efectivo, transferencia, débito, crédito, boletas y facturas, aprobados desde ya, aunque la máquina de cobro del cliente llega el 2026-10-06.
 9. **Recargo por urgencia.** No se publica. Yerko lo negocia por teléfono caso a caso.
 10. **Hero menos oscuro.** Se mantiene el ajuste aunque la reunión no lo mencionó (Yerko dijo que el hero estaba bien). El desarrollador aprueba visualmente el nivel (05-03).
