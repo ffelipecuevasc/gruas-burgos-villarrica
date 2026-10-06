@@ -1,7 +1,7 @@
 # Iteración 05-03 · Pie de página y hero menos oscuro
 
 - **Épica:** 05 · Ajustes finales, publicación y medición
-- **Estado:** En revisión (fase A medida el 2026-10-05, [bitácora](../../99_bitacora/bitacora-05-03-2026-10-05.md); decisiones del desarrollador registradas el 2026-10-05, [bitácora de cierre](../../99_bitacora/bitacora-05-03-cierre-2026-10-05.md); falta la fase B)
+- **Estado:** En revisión (fase A medida el 2026-10-05, [bitácora](../../99_bitacora/bitacora-05-03-2026-10-05.md); decisiones del desarrollador registradas el 2026-10-05, [bitácora de cierre](../../99_bitacora/bitacora-05-03-cierre-2026-10-05.md); fase B registrada el 2026-10-05, [bitácora de la fase B](../../99_bitacora/bitacora-05-03-fase-b-2026-10-05.md); a la espera de que el desarrollador la marque «Terminada»)
 - **Rama sugerida:** `iteracion/05-03-pie-y-hero`
 - **Depende de:** 04-04
 - **RDA relacionadas:** RDA-006, RDA-008, RDA-011
@@ -85,9 +85,11 @@ Ningún otro texto cambia.
 
 **Fase B, vista previa de `pages.dev` (evidencia en `evidencia-05-03-fase-b.md`):**
 
-- [ ] El desarrollador elige el nivel del hero viendo los tres en escritorio y en el teléfono real.
-- [ ] En un Chrome real de escritorio, con la página al final: el crédito centrado, sin vacío y sin botones encima; Tab y Mayús + Tab desde el pie sin elementos cubiertos.
-- [ ] En el teléfono (Android, Chrome): la barra inferior no cambió y el hero se ve con la barra de direcciones a la vista.
+- [x] El desarrollador elige el nivel del hero viendo los tres en escritorio y en el teléfono real. **Nivel 2 confirmado** viendo la vista previa (commit `d276229`) junto a producción, en escritorio y en el teléfono: la foto se nota más clara y el texto se lee bien ([evidencia](evidencia-05-03-fase-b.md) §4). En la vista previa solo está el nivel 2; los niveles 1 y 3 se descartaron el 2026-10-05.
+- [x] En un Chrome real de escritorio, con la página al final: el crédito centrado, sin vacío y sin botones encima; Tab y Mayús + Tab desde el pie sin elementos cubiertos. **Cumple** a 768, 1024, 1280, 1536 y 1920 px: crédito centrado y sin vacío, botones ocultos al llegar al pie, reaparecen al subir y nada del pie tapado. Sin JavaScript, a 1280 px, el crédito y las redes quedan sin tapar al final. Con Tab, **ningún elemento enfocado cubierto**; con Mayús + Tab el foco llega a un botón flotante visible y, con el foco en él y la página al final, las redes quedan visibles ([evidencia](evidencia-05-03-fase-b.md) §2 y §3). Además, **Firefox sin problemas** en el PC (§6).
+- [x] En el teléfono (Android, Chrome): la barra inferior no cambió y el hero se ve con la barra de direcciones a la vista. **Cumple** en un Samsung Galaxy A52+: barra inferior sin cambios, hero completo con la barra de direcciones a la vista, crédito completo al final, ningún botón flotante extra y, en horizontal, botones ocultos y pie completo ([evidencia](evidencia-05-03-fase-b.md) §5).
+
+**No verificado en la fase B:** Safari en iPhone (§6) y lector de pantalla, Narrador de Windows (§7, opcional). No se dan por cumplidos.
 
 ## Fuera de alcance
 
