@@ -29,15 +29,15 @@ Ninguno en el sitio. Si el desarrollador entrega el pin validado de la base y el
 ## Tareas
 
 1. **Search Console.**
-    - Propiedad de dominio verificada (registro DNS TXT en Cloudflare) y `sitemap-index.xml` enviado y procesado. El desarrollador ya ingresó el sitio a Google «a mano» antes de la reunión del 2026-10-04: esta tarea deja constancia con evidencia, sin rehacerlo.
-    - Tras el merge final de 05-01, se solicita una nueva inspección de la portada, porque el contenido cambió.
+   - Propiedad de dominio verificada (registro DNS TXT en Cloudflare) y `sitemap-index.xml` enviado y procesado. El desarrollador ya ingresó el sitio a Google «a mano» antes de la reunión del 2026-10-04: esta tarea deja constancia con evidencia, sin rehacerlo.
+   - Tras el merge final de 05-01, se solicita una nueva inspección de la portada, porque el contenido cambió.
 2. **Web Analytics y CSP (RDA).** Decidir y registrar una RDA: se activa (con el impacto medido en Lighthouse antes y después) o se descarta. Decidir si `security.csp` se activa o se descarta.
 3. **Perfil de Empresa de Google.** Enlazar el sitio desde la ficha de Maps. Con el pin validado y el enlace oficial al perfil, `geo` y `hasMap` se agregan al JSON-LD y se validan.
 4. **RDA-010.** Cerrarla como Aceptada o Descartada. Si se decide medir clics en el sitio, la etiqueta se carga de forma diferida y se mide Lighthouse antes y después. Conversiones de llamadas desde anuncios y extensiones de llamada no requieren código en el sitio.
-5. **Google Ads.** La URL final de los anuncios es el sitio (o un ancla), con extensión de llamada configurada. La campaña queda lista, **sin activar**. El cliente pidió que se le avise antes de activarla (fines de octubre).
+5. **Google Ads.** La URL final de los anuncios es el sitio (o un ancla), con extensión de llamada configurada. La campaña queda lista, **sin activar**.
 6. **Documentación.**
-    - Bitácora nueva `bitacora-05-02-AAAA-MM-DD.md` en `_planificacion/99_bitacora/`, con la plantilla de `_planificacion/README.md` §5.2, fecha real, fin de línea LF y estado final «En revisión». Nunca «Terminada». Incluye las URLs de los paneles, sin credenciales, y las cifras base de rendimiento de 05-01.
-    - `decisiones.md`: RDA-010 y la nueva RDA, con su estado final. `registro-log.md`: fila de 05-02, «Iteración activa» y «Próximo hito».
+   - Bitácora nueva `bitacora-05-02-AAAA-MM-DD.md` en `_planificacion/99_bitacora/`, con la plantilla de `_planificacion/README.md` §5.2, fecha real, fin de línea LF y estado final «En revisión». Nunca «Terminada». Incluye las URLs de los paneles, sin credenciales, y las cifras base de rendimiento de 05-01.
+   - `decisiones.md`: RDA-010 y la nueva RDA, con su estado final. `registro-log.md`: fila de 05-02, «Iteración activa» y «Próximo hito».
 
 ## Criterios de aceptación
 
@@ -54,11 +54,10 @@ Ninguno en el sitio. Si el desarrollador entrega el pin validado de la base y el
 - [ ] RDA-010 en estado Aceptada o Descartada. La RDA de Web Analytics, aceptada o descartada.
 - [ ] Lighthouse móvil de 95 o más en las cuatro categorías después de cualquier etiqueta agregada, con la cifra anterior y la posterior.
 - [ ] Campaña de Google Ads con la URL final del sitio y la extensión de llamada configuradas, sin activar, con los textos aprobados por el desarrollador.
-- [ ] Se avisó al cliente de que la campaña está lista, para activarla a fines de octubre.
 
 ## Fuera de alcance
 
-- Activar la campaña: es del desarrollador y del cliente, cuando acuerden la fecha.
+- Activar la campaña: la hace el desarrollador cuando lo decida.
 - Presupuesto, palabras clave y pujas de la campaña.
 - Un panel de métricas propio o cualquier backend (RDA-001).
 
@@ -68,5 +67,4 @@ Ninguno en el sitio. Si el desarrollador entrega el pin validado de la base y el
 2. Decidir la RDA de Web Analytics, la CSP y RDA-010.
 3. Entregar el pin validado de la base y el enlace oficial del perfil de Google, si quiere sumar `geo` y `hasMap`.
 4. Configurar la campaña y la extensión de llamada; aprobar los textos de los anuncios.
-5. Avisarle al cliente y acordar la fecha de activación.
-6. Completar `evidencia-05-02-fase-b.md` con la plantilla de `evidencia-04-03-fase-b.md` y marcar la iteración «Terminada».
+5. Completar `evidencia-05-02-fase-b.md` con la plantilla de `evidencia-04-03-fase-b.md` y marcar la iteración «Terminada».

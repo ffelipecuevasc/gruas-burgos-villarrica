@@ -1,7 +1,7 @@
 # Iteración 05-04 · Cambios del cliente: contenido y estructura de la página
 
 - **Épica:** 05 · Ajustes finales, publicación y medición
-- **Estado:** En revisión (fase A medida el 2026-10-06, [bitácora](../../99_bitacora/bitacora-05-04-2026-10-06.md); falta la fase B del desarrollador y la aprobación del cliente)
+- **Estado:** En revisión (fase A medida el 2026-10-06, [bitácora](../../99_bitacora/bitacora-05-04-2026-10-06.md); fase B registrada el 2026-10-06, [bitácora](../../99_bitacora/bitacora-05-04-fase-b-2026-10-06.md): el cliente aprueba y quedan cinco ajustes pendientes antes del merge)
 - **Rama sugerida:** `iteracion/05-04-cambios-cliente`
 - **Depende de:** 05-03
 - **RDA relacionadas:** RDA-006, RDA-007, RDA-008, RDA-009, RDA-011
@@ -116,9 +116,11 @@ Los servicios nuevos no llevan lista de características. «Rescates complejos c
 
 **Fase B, vista previa de `pages.dev` (evidencia en `evidencia-05-04-fase-b.md`):**
 
-- [ ] El desarrollador revisa en el teléfono real y en escritorio el orden, los servicios, la franja y los medios de pago.
-- [ ] El cliente revisa la vista previa y aprueba los cambios (AUD-08-023). Si pide ajustes, se registran y se aplican en una tanda corta.
-- [ ] JSON-LD sin errores en el validador de Schema.org y sin errores críticos en la Prueba de resultados enriquecidos.
+- [x] El desarrollador revisa en el teléfono real y en escritorio el orden, los servicios, la franja y los medios de pago. Evidencia del 2026-10-06, sobre el commit `2200f9f`: **revisado y conforme** en el orden, las tres anclas, los ocho botones de WhatsApp (abren con el mensaje esperado), la franja (la foto 07 se deja apilada en el teléfono), la galería y los medios de pago; Firefox, igual que Chrome. **Una observación:** pide que las ocho tarjetas de servicios tengan el mismo diseño (ícono, separador y tres características). El desarrollador **no aprueba el merge** hasta aplicar los ajustes.
+- [ ] El cliente revisa la vista previa y aprueba los cambios (AUD-08-023). Si pide ajustes, se registran y se aplican en una tanda corta. **Parcial: aprueba** (2026-10-06) y confirma los textos de los servicios nuevos, los medios de pago y la cobertura; pide **cuatro ajustes**, registrados en la bitácora de la fase B y **no aplicados**. AUD-08-023 se registra en 05-01.
+- [x] JSON-LD sin errores en el validador de Schema.org y sin errores críticos en la Prueba de resultados enriquecidos. Evidencia: **0 errores y 0 advertencias** en Schema.org; en Google, **2 elementos válidos** (empresa local y organización) y solo avisos de campos opcionales (`priceRange` y `postalCode`).
+
+No verificado en la fase B: la cabecera `x-robots-tag: noindex` con `curl.exe` (la respuesta entregada es un 404 de la dirección de la rama, no del despliegue probado; el `noindex` consta solo por el aviso de Google), las dos líneas de alcance de «Dónde atendemos» en la vista previa (respuesta en blanco; en `dist/` sí están) y Safari en iPhone.
 
 ## Fuera de alcance
 
