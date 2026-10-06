@@ -312,27 +312,28 @@ La vista previa en WhatsApp se da por verificada con el testimonio escrito del d
 ## Auditoría 10 · Publicación y verificación final en producción (05-01)
 
 - **Fecha:** 2026-10-06
-- **Auditor:** Claude Code (fase A, local: mediciones sobre `pnpm build` en la rama `iteracion/05-01-verificacion-final`) y Claude (asistente de planificación), que preparó la iteración con las decisiones del desarrollador del 2026-10-06. El agente no consultó ninguna URL pública.
-- **Alcance:** los cuatro hallazgos que 05-01 debe cerrar (AUD-04-003, AUD-09-016, AUD-09-018 y AUD-08-032), sobre la compilación local de la versión final (05-03, 05-04 y 05-05 incluidas; commit base `a3ccc17`). La verificación en producción (`https://gruasvillarrica.cl`) es de la fase B y se registra con `evidencia-05-01-fase-b.md`; bitácora `bitacora-05-01-2026-10-06.md`.
+- **Auditor:** Claude Code (fase A, local: mediciones sobre `pnpm build` en la rama `iteracion/05-01-verificacion-final`; fase B: consolidada por el agente con la evidencia que obtuvo el desarrollador, Felipe Cuevas, en un teléfono Android y en un PC) y Claude (asistente de planificación), que preparó la iteración con las decisiones del desarrollador del 2026-10-06. El agente no consultó ninguna URL pública.
+- **Alcance:** los cuatro hallazgos que 05-01 debe cerrar (AUD-04-003, AUD-09-016, AUD-09-018 y AUD-08-032), sobre la compilación local de la versión final (05-03, 05-04 y 05-05 incluidas) y sobre producción en `https://gruasvillarrica.cl` y la vista previa de la rama (commit `c3c4033`), según `evidencia-05-01-fase-b.md`; bitácoras `bitacora-05-01-2026-10-06.md` y `bitacora-05-01-fase-b-2026-10-06.md`.
 
 ### Resumen
 
 Fase A, medida en local: la validación de datos provisionales pasa sin marcadores («Sin PENDIENTE_CLIENTE en 127 archivos publicados», código 0) y falla, nombrando el archivo, con un marcador puesto a propósito; `public/_headers` agrega `Strict-Transport-Security: max-age=300` en la regla `/*`, sin `includeSubDomains` ni `preload`; `AGENTS.md` §6.4 y `DESIGN.md` §5 dicen «nombre completo del autor»; la compilación local no muestra «No data found for font family» y `dist/` publica 6 archivos `.woff2`. JavaScript de cliente sin cambios (960 B en la portada y 191 B en el 404).
 
-**Nada de esto está comprobado en producción.** Que Cloudflare Pages entregue la cabecera HSTS definida en `_headers`, también en el 404, se comprueba en la fase B: primero en la vista previa de la rama y luego en el dominio propio. La tabla de hallazgos nuevos se completa tras la fase B.
+Fase B, según la evidencia del desarrollador del 2026-10-06: Cloudflare entrega la cabecera HSTS definida en `_headers`, en la vista previa y en producción, también en el 404; `http` y `www` siguen respondiendo 301; el registro de compilación de `main` copia las 6 fuentes sin avisos y la validación informa 127 archivos; la caché quedó medida y aceptada; la prueba de humo en un teléfono Android y en un PC salió conforme en todos sus puntos. PageSpeed móvil, mediana de tres ejecuciones: Rendimiento 99, Accesibilidad 100, Buenas prácticas 100 y SEO 100, con LCP de 1,8 s y CLS 0; en escritorio, 100 en las cuatro categorías. JSON-LD sin errores en los dos validadores.
+
+**No quedan hallazgos de severidad Alta abiertos.** El único hallazgo nuevo, AUD-10-001, es de severidad Baja y no bloquea el cierre de 05-01. No verificado: Safari en iPhone y el elemento del LCP.
 
 ### Estado de los hallazgos que cierra 05-01
 
-| ID | Severidad | Estado al 2026-10-06 (fase A) | Qué falta |
+| ID | Severidad | Estado tras la fase B (2026-10-06) | Qué queda |
 | :--- | :--- | :--- | :--- |
-| AUD-04-003 | Media | Abierto, pendiente de la fase B. Parte local cumplida: 0 apariciones de «No data found for font family» en `pnpm build` y 6 `.woff2` en `dist/_astro/fonts/` (112.872 B en total). La compilación local reutiliza la caché de fuentes del equipo, así que no prueba que el proveedor responda | Las líneas de las fuentes del registro de compilación de `main` en Cloudflare, sin «No data found for font family» |
-| AUD-09-016 | Baja | Decidido (decisión 1 del desarrollador, 2026-10-06): se acepta el valor que pone Cloudflare (`max-age=14400` en `robots.txt` y `favicon.ico`); `_headers` no se edita por este motivo | Medir en la fase B `/`, `robots.txt`, `favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, los sitemaps, el 404 y un archivo de `/_astro/`, y registrar los valores |
-| AUD-09-018 | Baja | Decidido (decisión 4 del desarrollador, 2026-10-06): HSTS desde `public/_headers` con `max-age=300`, sin `includeSubDomains` ni `preload`, como primer paso de un plan gradual (300 → 86400 → 604800 → 31536000). Implementado en 05-01 y medido en `dist/_headers`. **No probado en producción** | Comprobar en la fase B la cabecera en la vista previa de la rama y en producción (portada y 404), y que `http` siga respondiendo 301. Los pasos siguientes del plan quedan fuera de 05-01 |
+| AUD-04-003 | Media | Cerrado en 05-01. El registro de compilación de `main` en Cloudflare muestra `[assets] Copying fonts (6 files)...` y no contiene «No data found for font family» (evidencia del desarrollador). En local: 0 avisos y 6 `.woff2` en `dist/_astro/fonts/` | Nada. La recomendación de revisar esos avisos en cada compilación sigue vigente |
+| AUD-09-016 | Baja | Medido y aceptado (decisión 1 del desarrollador, 2026-10-06). `/`, `sitemap-index.xml` y `sitemap-0.xml`: `public, max-age=0, must-revalidate`. `robots.txt`, `favicon.ico`, `favicon.svg` y `apple-touch-icon.png`: `public, max-age=14400, must-revalidate` (4 horas, valor de Cloudflare). 404: `no-store`. `/_astro/Icono.DSEMQWBb.css`: `public, max-age=31536000, immutable`. `_headers` no se edita por este motivo | Nada |
+| AUD-09-018 | Baja | HSTS activo en producción con `max-age=300`, sin `includeSubDomains` ni `preload`, entregado desde `public/_headers` (decisión 4 del desarrollador). Comprobado con `curl.exe -sI` en la vista previa de la rama, en `https://gruasvillarrica.cl/` y en una ruta inexistente (404); `http` responde 301 a HTTPS sin la cabecera y `www`, 301 a la raíz | El plan de subida (300 → 86400 → 604800 → 31536000) queda pendiente, a decisión del desarrollador y fuera de 05-01 |
 | AUD-08-032 | Baja | Resuelto en 05-01 (decisión 3 del desarrollador, 2026-10-06): `AGENTS.md` §6.4 y `DESIGN.md` §5 (`TarjetaResena`) dicen «nombre completo del autor»; 0 apariciones de «nombre abreviado» en ambos | Nada |
 
 ### Hallazgos nuevos
 
-Se completa tras la fase B.
-
 | ID | Severidad | Área | Hallazgo | Acción recomendada | Estado |
 | :--- | :--- | :--- | :--- | :--- | :--- |
+| AUD-10-001 | Baja | Rendimiento | PageSpeed informa en producción un ahorro estimado de 11 KiB por «JavaScript heredado», pero el JavaScript propio del sitio pesa 960 B en la portada (medido en `dist/`). El origen de ese JavaScript no se identificó: puede ser un script externo, entre ellos el de Cloudflare Web Analytics, lo que no está confirmado. Las puntuaciones no se ven afectadas (Rendimiento 97 a 99 en móvil y 100 en escritorio; TBT 0 ms). | Identificarlo en 05-02, junto con la decisión de Web Analytics (RDA-006): revisar en el informe de PageSpeed qué archivo señala la auditoría y comparar el HTML publicado con `dist/index.html`. | Abierto, no bloquea el cierre de 05-01 (se traslada a 05-02) |

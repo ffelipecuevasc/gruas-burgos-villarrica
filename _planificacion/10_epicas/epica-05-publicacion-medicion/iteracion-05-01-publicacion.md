@@ -1,7 +1,7 @@
 # Iteración 05-01 · Publicación y verificación final en producción
 
 - **Épica:** 05 · Ajustes finales, publicación y medición
-- **Estado:** En revisión (fase A, local: [bitacora-05-01-2026-10-06](../../99_bitacora/bitacora-05-01-2026-10-06.md)). La fase B, en la vista previa y en producción, sigue pendiente
+- **Estado:** En revisión (fase A, local: [bitacora-05-01-2026-10-06](../../99_bitacora/bitacora-05-01-2026-10-06.md); fase B registrada: [bitacora-05-01-fase-b-2026-10-06](../../99_bitacora/bitacora-05-01-fase-b-2026-10-06.md)). La marca «Terminada» la pone el desarrollador
 - **Rama sugerida:** `iteracion/05-01-verificacion-final`
 - **Depende de:** 05-03, 05-04 y 05-05 (terminadas)
 - **RDA relacionadas:** RDA-001, RDA-007, RDA-008, RDA-012
@@ -72,16 +72,16 @@ Ninguno. No se publica nada nuevo.
 
 **Fase B (evidencia en `evidencia-05-01-fase-b.md`):**
 
-1. En la **vista previa de la rama**, antes del merge: `curl.exe -sI` devuelve `200 OK` y `strict-transport-security: max-age=300` (más `x-robots-tag: noindex`). Los `*.pages.dev` ya están en la lista de HSTS de los navegadores, así que es una prueba sin riesgo.
+1. En la **vista previa de la rama**, antes del merge: `curl.exe -sI` devuelve `200 OK` y `strict-transport-security: max-age=300` (más `x-robots-tag: noindex`). Los `*.pages.dev` ya están en la lista de HSTS de los navegadores, así que es una prueba sin riesgo. **Registrado (evidencia del 2026-10-06):** despliegue «Success» del commit `c3c4033`; la respuesta trae `Strict-Transport-Security: max-age=300`, sin `includeSubDomains` ni `preload`, y `x-robots-tag: noindex`. La salida pegada no incluye la línea de estado: el `200 OK` consta solo por la respuesta del desarrollador («sí, implícito en la respuesta exitosa»).
 2. En **producción**, después del merge:
-   - [ ] Cloudflare publicó el commit esperado (estado «Success»).
-   - [ ] `https://gruasvillarrica.cl/` y una ruta inexistente (404) devuelven `strict-transport-security: max-age=300`; `http://gruasvillarrica.cl/` responde 301 a HTTPS y `www` responde 301 a la raíz. Las demás cabeceras de `_headers` siguen presentes. Se registra el `max-age` vigente y el comando.
-   - [ ] Prueba de humo completa y documentada (teléfono y escritorio), con todos los mensajes de WhatsApp de la tabla. Lo que no se pudo verificar (iPhone, por ejemplo) figura como «no verificado».
-   - [ ] Registro de compilación de `main` sin «No data found for font family» y con la línea de la validación de datos provisionales; se transcriben las líneas.
-   - [ ] Caché medida en `robots.txt`, `favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, los sitemaps, el 404, `/` y un archivo de `/_astro/`; el valor de Cloudflare queda aceptado y registrado.
-   - [ ] PageSpeed móvil de la versión final: 95 o más en Rendimiento, Accesibilidad, Buenas prácticas y SEO (mediana de tres ejecuciones); LCP de 2,5 s o menos; CLS 0. Se informa también escritorio y el elemento del LCP.
-   - [ ] JSON-LD sin errores en el validador de Schema.org y en la Prueba de resultados enriquecidos de Google.
-   - [ ] Sin hallazgos de severidad Alta abiertos en la Auditoría 10.
+   - [x] Cloudflare publicó el commit esperado (estado «Success»). **Registrado:** «Success», commit `c3c4033c5284953cc3e642572a20d22db86105f7`.
+   - [x] `https://gruasvillarrica.cl/` y una ruta inexistente (404) devuelven `strict-transport-security: max-age=300`; `http://gruasvillarrica.cl/` responde 301 a HTTPS y `www` responde 301 a la raíz. Las demás cabeceras de `_headers` siguen presentes. Se registra el `max-age` vigente y el comando. **Registrado:** portada (`200 OK`) y ruta inexistente (`404 Not Found`) con `Strict-Transport-Security: max-age=300`; `http` responde 301 a `https://gruasvillarrica.cl/` sin la cabecera; `www` responde 301 a la raíz; las otras cinco cabeceras de `/*` y el `Cache-Control` de `/`, presentes; sin `x-robots-tag`. `max-age` vigente: 300. Comando: `curl.exe -sI`.
+   - [x] Prueba de humo completa y documentada (teléfono y escritorio), con todos los mensajes de WhatsApp de la tabla. Lo que no se pudo verificar (iPhone, por ejemplo) figura como «no verificado». **Registrado:** todas las casillas «sí» en un teléfono Android y en un PC, con los 11 mensajes de WhatsApp. Firefox en el PC: «sí». **No verificado:** Safari en iPhone. Detalle faltante: la evidencia no indica modelo, sistema, navegador ni tamaño de ventana, ni qué tarjeta de servicio se probó en escritorio.
+   - [x] Registro de compilación de `main` sin «No data found for font family» y con la línea de la validación de datos provisionales; se transcriben las líneas. **Registrado:** `22:06:19 [assets] Copying fonts (6 files)...` y `22:06:45 [validar-datos-provisionales] Sin PENDIENTE_CLIENTE en 127 archivos publicados.`; «No data found for font family» no aparece. Único aviso: `npm warn EBADENGINE` de `corepack`, sin efecto en la compilación.
+   - [x] Caché medida en `robots.txt`, `favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, los sitemaps, el 404, `/` y un archivo de `/_astro/`; el valor de Cloudflare queda aceptado y registrado. **Registrado:** `/` y los dos sitemaps, `public, max-age=0, must-revalidate`; `robots.txt`, `favicon.ico`, `favicon.svg` y `apple-touch-icon.png`, `public, max-age=14400, must-revalidate`; 404, `no-store`; `/_astro/Icono.DSEMQWBb.css`, `public, max-age=31536000, immutable`. Aceptado por el desarrollador.
+   - [x] PageSpeed móvil de la versión final: 95 o más en Rendimiento, Accesibilidad, Buenas prácticas y SEO (mediana de tres ejecuciones); LCP de 2,5 s o menos; CLS 0. Se informa también escritorio y el elemento del LCP. **Registrado:** móvil, tres ejecuciones: Rendimiento 97, 99 y 99 (mediana 99); Accesibilidad, Buenas prácticas y SEO, 100 en las tres; LCP 2,3, 1,8 y 1,8 s (mediana 1,8 s); CLS 0; TBT 0 ms. Escritorio: 100 en las cuatro categorías, LCP 0,6 s, CLS 0, 0 y 0,004. **Salvedad: el elemento del LCP no se determinó** (la respuesta no se leyó del informe).
+   - [x] JSON-LD sin errores en el validador de Schema.org y en la Prueba de resultados enriquecidos de Google. **Registrado:** Schema.org, 0 errores y 0 advertencias, con `areaServed` y `paymentAccepted`; Google, 1 elemento válido y 0 errores críticos, con los avisos opcionales de `priceRange` y `postalCode`.
+   - [x] Sin hallazgos de severidad Alta abiertos en la Auditoría 10. **Registrado:** un hallazgo nuevo, AUD-10-001, de severidad Baja.
 
 ## Fuera de alcance
 
