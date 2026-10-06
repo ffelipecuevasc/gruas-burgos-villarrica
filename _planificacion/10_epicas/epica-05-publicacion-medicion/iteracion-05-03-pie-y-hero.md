@@ -1,7 +1,7 @@
 # Iteración 05-03 · Pie de página y hero menos oscuro
 
 - **Épica:** 05 · Ajustes finales, publicación y medición
-- **Estado:** En revisión (fase A medida el 2026-10-05; [bitácora](../../99_bitacora/bitacora-05-03-2026-10-05.md))
+- **Estado:** En revisión (fase A medida el 2026-10-05, [bitácora](../../99_bitacora/bitacora-05-03-2026-10-05.md); decisiones del desarrollador registradas el 2026-10-05, [bitácora de cierre](../../99_bitacora/bitacora-05-03-cierre-2026-10-05.md); falta la fase B)
 - **Rama sugerida:** `iteracion/05-03-pie-y-hero`
 - **Depende de:** 04-04
 - **RDA relacionadas:** RDA-006, RDA-008, RDA-011
@@ -48,6 +48,9 @@ Ningún otro texto cambia.
     - Ocultar y mostrar los botones no mueve ningún elemento de la página (CLS 0).
     - Con `prefers-reduced-motion: reduce`, no hay transición.
     - Con JavaScript desactivado, los botones siguen funcionando y ningún texto ni enlace del pie queda cubierto, aunque quede espacio extra.
+    - **Aceptaciones del desarrollador (2026-10-05):**
+        - **Botón con foco de teclado.** Un botón flotante sigue visible mientras tiene el foco del teclado, aunque tape parte de las redes si la persona baja con el mouse hasta el final: **1.961 px²** a 768 px y **248 px²** a 1280 px (0 px² a 1920 px). Ocultarlo haría perder el foco.
+        - **404 de escritorio.** Los botones flotantes no se muestran a 800 ni a 1.024 px de alto, porque el pie está siempre a la vista (empieza en 592 px de 800 y en 726 px de 1.024).
 
 3. **Hero menos oscuro.**
     - Se proponen **tres niveles** de aclarado de la foto (opacidad y velo). La foto, su recorte y su peso no cambian.
@@ -72,9 +75,9 @@ Ningún otro texto cambia.
 - [x] Recorrido con Tab y Mayús + Tab a 320, 360, 768, 1024, 1280, 1536 y 1920 px, en la portada y el 404, con la página desplazada al final: **0 elementos enfocados cubiertos**. Un botón oculto no aparece en el recorrido, y uno enfocado está visible. Medido: **0 cubiertos en 28 recorridos**; paradas con Tab 44, 44, 45, 45, 45, 45 y 45 en la portada y 17, 17, 16, 16, 16, 16 y 16 en el 404.
 - [x] CLS 0 al ocultar y mostrar los botones (medido en navegador, con 0 elementos desplazados). Medido: **0 entradas `layout-shift`** en 12 cambios, a 768, 1280 y 1920 px.
 - [x] Con `prefers-reduced-motion: reduce`: 0 transiciones en los botones. Medido: **0 eventos de transición o animación** al ocultar y mostrar.
-- [ ] Con JavaScript desactivado, a los mismos cinco anchos: 0 elementos del pie cubiertos y los dos botones se pueden usar. **Parcial:** con la página al final, **0 px²** y los dos botones responden en 45 de 45 puntos; mientras la página se desplaza, los botones pasan sobre el pie como antes de esta iteración (hasta **24.876 px²** a 768 px). Lo decide el desarrollador.
+- [x] Con JavaScript desactivado, a los mismos cinco anchos: 0 elementos del pie cubiertos y los dos botones se pueden usar. Medido: con la página al final, **0 px²** y los dos botones responden en 45 de 45 puntos; mientras la página se desplaza, los botones pasan sobre el pie como antes de esta iteración (hasta **24.876 px²** a 768 px). **Aceptado por el desarrollador el 2026-10-05: al final de la página 0 px²; en tránsito los botones pasan sobre el pie, como cualquier botón fijo.**
 - [x] Menos de 768 px: la barra inferior sigue visible en todo momento y el último elemento del pie queda libre de ella con 8 px o más. Medido: **16,6 a 17,5 px**.
-- [x] Hero: los tres niveles medidos, con luminancia media y contraste mínimo en los 12 anchos. La tabla muestra hoy y los tres niveles. Medido: nivel 1, **+17,9 % y +21,1 %**, mínimo **5,29:1**; nivel 2 (aplicado), **+32,4 % y +34,3 %**, mínimo **4,90:1** (4,86:1 con 23 anchos más); nivel 3, **+36,6 % y +49,2 %**, mínimo **4,68:1**. **El nivel 3 no cumple su umbral de 45 % en móvil.**
+- [x] Hero: los tres niveles medidos, con luminancia media y contraste mínimo en los 12 anchos. La tabla muestra hoy y los tres niveles. Medido: nivel 1, **+17,9 % y +21,1 %**, mínimo **5,29:1**; nivel 2 (aplicado), **+32,4 % y +34,3 %**, mínimo **4,90:1** (4,86:1 con 23 anchos más); nivel 3, **+36,6 % y +49,2 %**, mínimo **4,68:1**. **El nivel 3 no cumple su umbral de 45 % en móvil.** **Nivel elegido por el desarrollador el 2026-10-05: el 2** (el aplicado; no cambia ningún valor). Los niveles 1 y 3 se descartan.
 - [x] Primera pantalla a 360 × 640 px: etiqueta, `h1` y ambos botones del hero completos con 8 px o más sobre la barra. 0 objetivos táctiles bajo 44 × 44 px. Sin desborde horizontal a 320, 360, 768, 1024 y 1280 px. Medido: **17 px**, **0 objetivos** y sin desborde.
 - [x] Presupuesto de peso a 360 × 640 px, densidad 1 y 4G: total de 400 KB o menos; HTML más CSS de 50 KB o menos; **JavaScript de menos de 1 KB** (se informa la cifra exacta); foto del hero de 150 KB o menos. Medido: **160,4 KB**, **21,5 KB**, **960 B** (191 B en el 404) y **19,1 KB**.
 - [x] El contenido aprobado coincide con `dist/`: no aparece «© 2026» ni «Grúas Burgos» en la franja del crédito, ni la palabra «RUT» ni «razón social». Medido: **0 apariciones**; el crédito, una vez por página.

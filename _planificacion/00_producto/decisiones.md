@@ -99,9 +99,9 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 - **Estado:** Aceptada
 
 **Contexto:** El teléfono aparece al menos ocho veces en el prototipo. Un cambio de número obligaría a editar muchos archivos y arriesga inconsistencias.
-**Decisión:** Un módulo `src/data/negocio.js` exporta nombre, teléfono (formato visible y E.164), WhatsApp, mensajes predeterminados, correo, dirección, coordenadas, horario, cobertura, redes sociales y datos de facturación. Componentes, JSON-LD y metadatos lo consumen. Los datos no confirmados llevan el valor `PENDIENTE_CLIENTE`.
+**Decisión:** Un módulo `src/data/negocio.js` exporta nombre, teléfono (formato visible y E.164), WhatsApp, mensajes predeterminados, correo, dirección, coordenadas, horario, cobertura y redes sociales. La razón social y el RUT no se publican (decisión del cliente, reunión del 2026-10-04) y se retiraron de `negocio.js` en la iteración 05-03. Componentes, JSON-LD y metadatos lo consumen. Los datos no confirmados llevan el valor `PENDIENTE_CLIENTE`.
 **Alternativas consideradas:** Colección de contenido de Astro (excesivo para un solo registro); variables de entorno (no aptas para datos públicos de contenido).
-**Consecuencias:** Un solo punto de cambio. La compilación debe fallar si queda algún `PENDIENTE_CLIENTE` al preparar producción (validación en la iteración 05-01).
+**Consecuencias:** Un solo punto de cambio. La compilación debe fallar si queda algún `PENDIENTE_CLIENTE` al preparar producción (la validación se adelantó a la iteración 04-02; la iteración 05-01 la reevalúa).
 
 ## RDA-009 · Una página con tres secciones ancladas
 

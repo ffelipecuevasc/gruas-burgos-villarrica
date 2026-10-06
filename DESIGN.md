@@ -248,7 +248,8 @@ Tokens en `src/styles/global.css`:
     scroll-padding-bottom: calc(3.5rem + 1px + env(safe-area-inset-bottom) + 1.25rem);
   }
   /* Desde `md`, lo fijo de abajo son los botones flotantes (8rem) más la holgura.
-     `Footer` reserva ese mismo alto al final de la página. */
+     Al llegar al pie los botones se ocultan (`AccionesFlotantes`): `Footer` ya no reserva
+     ese alto, salvo sin JavaScript, que lo conserva al final de la página. */
   @media (min-width: 48rem) {
     html {
       scroll-padding-bottom: 9.25rem;
