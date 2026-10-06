@@ -1,7 +1,7 @@
 # Iteración 05-05 · Mapa de cobertura con imagen real
 
 - **Épica:** 05 · Ajustes finales, publicación y medición
-- **Estado:** En revisión (fase A medida el 2026-10-06, [bitacora-05-05-2026-10-06](../../99_bitacora/bitacora-05-05-2026-10-06.md); fase B registrada el 2026-10-06 con la evidencia del desarrollador, [bitacora-05-05-fase-b-2026-10-06](../../99_bitacora/bitacora-05-05-fase-b-2026-10-06.md); la marca «Terminada» la pone el desarrollador)
+- **Estado:** Terminada (marcada por el desarrollador el 2026-10-06). Fase A medida el 2026-10-06, [bitacora-05-05-2026-10-06](../../99_bitacora/bitacora-05-05-2026-10-06.md); fase B registrada el 2026-10-06 con la evidencia del desarrollador, [bitacora-05-05-fase-b-2026-10-06](../../99_bitacora/bitacora-05-05-fase-b-2026-10-06.md). Quedan sin verificar: Safari en iPhone, la fecha de obtención del mapa base y la herramienta con que se dibujó el círculo. La atribución se acepta como texto, sin enlace.
 - **Rama sugerida:** `iteracion/05-05-mapa-cobertura`
 - **Depende de:** 05-04 (terminada) y el mapa aprobado por el desarrollador, que ya está en el repositorio
 - **RDA relacionadas:** RDA-006, RDA-009, RDA-011
