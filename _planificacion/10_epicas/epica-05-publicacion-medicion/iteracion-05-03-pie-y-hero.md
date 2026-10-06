@@ -1,7 +1,7 @@
 # Iteración 05-03 · Pie de página y hero menos oscuro
 
 - **Épica:** 05 · Ajustes finales, publicación y medición
-- **Estado:** En revisión (fase A medida el 2026-10-05, [bitácora](../../99_bitacora/bitacora-05-03-2026-10-05.md); decisiones del desarrollador registradas el 2026-10-05, [bitácora de cierre](../../99_bitacora/bitacora-05-03-cierre-2026-10-05.md); fase B registrada el 2026-10-05, [bitácora de la fase B](../../99_bitacora/bitacora-05-03-fase-b-2026-10-05.md); a la espera de que el desarrollador la marque «Terminada»)
+- **Estado:** Terminada.
 - **Rama sugerida:** `iteracion/05-03-pie-y-hero`
 - **Depende de:** 04-04
 - **RDA relacionadas:** RDA-006, RDA-008, RDA-011

@@ -1,6 +1,6 @@
 # Épica 05 · Ajustes finales, publicación y medición
 
-- **Estado:** Pendiente (replanificada el 2026-10-05 tras la revisión con el cliente del 2026-10-04)
+- **Estado:** En curso.
 - **Objetivo:** dejar el sitio de `gruasvillarrica.cl` con los ajustes que pidió el cliente, verificar la versión final en producción y dejar operativas la medición y la campaña de Google Ads. Es la etapa final del proyecto.
 - **Depende de:** Épica 04 (terminada; verificada por el desarrollador el 2026-10-02, commit `57de857`). La Épica 03 sigue «En revisión» hasta registrar la aprobación del cliente (AUD-08-023).
 - **Fechas:** entrega tentativa 2026-10-18. La campaña de Google Ads se activa a fines de octubre, cuando el desarrollador se lo avise al cliente. La mantención de octubre sigue vigente (ver «Después de la entrega»).

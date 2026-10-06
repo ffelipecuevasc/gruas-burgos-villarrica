@@ -3,7 +3,7 @@
 **Fuente única de verdad del trabajo pendiente.** Si discrepa con `_planificacion/README.md` o con cualquier otro documento de planificación, prevalece este archivo.
 
 - **Última actualización:** 2026-10-05
-- **Iteración activa:** 05-03 (pie de página y hero menos oscuro), en revisión: fase B registrada (vista previa de `pages.dev` del commit `d276229`, Chrome de escritorio, Firefox y teléfono; nivel 2 del hero confirmado), a la espera de que el desarrollador la marque «Terminada». No verificado: Safari en iPhone y lector de pantalla. JavaScript de cliente: 960 B de 1.024 B (margen 64 B).
+- **Iteración activa:** ninguna; 05-03 terminada el 2026-10-05. La siguiente es 05-04.
 - **Próximo hito:** 05-04, después del merge de 05-03. Épica 05 en este orden: 05-04 (cambios del cliente: servicios al inicio, «Quiénes somos» reducido y sin nombres, servicios nuevos, pagos y cobertura), 05-05 (mapa de cobertura con imagen real, cuando el desarrollador entregue el WebP), 05-01 (verificación final en producción, con caché y HSTS) y 05-02 (medición y Google Ads; parte con 64 B de margen de JavaScript propio). Sigue pendiente la aprobación del cliente de la Épica 03 (hito «Prototipo», AUD-08-023), con el sitio ya publicado e indexable (AUD-09-013).
 - **Entrega tentativa:** 2026-10-18
 - **Flujo de ramas vigente:** Cloudflare Pages está conectado desde el 2026-10-02: se trabaja en ramas `iteracion/XX-YY-…` (cada push genera una vista previa en `pages.dev`) y `main` publica en `https://gruasvillarrica.cl`.
@@ -12,27 +12,27 @@
 
 ## 1. Estado de épicas e iteraciones
 
-| Iteración | Nombre                                              | Épica | Estado     | Depende de | Bitácora |
-| :-------- | :-------------------------------------------------- | :---- | :--------- | :--------- | :------- |
-| 01-01     | Andamiaje del proyecto                              | 01    | Terminada  | —          | [bitacora-01-01-2026-09-30](../99_bitacora/bitacora-01-01-2026-09-30.md) |
-| 01-02     | Arquitectura base, layout y datos del negocio       | 01    | Terminada  | 01-01     | [bitacora-01-02-2026-09-30](../99_bitacora/bitacora-01-02-2026-09-30.md) |
-| 02-01     | Tokens de diseño, fuentes e íconos                  | 02    | Terminada  | 01-02     | [bitacora-02-01-2026-09-30](../99_bitacora/bitacora-02-01-2026-09-30.md) |
-| 02-02     | Componentes base de interfaz                        | 02    | Terminada  | 02-01      | [bitacora-02-02-2026-09-30](../99_bitacora/bitacora-02-02-2026-09-30.md) |
-| 02-03     | Header, acciones flotantes y footer                 | 02    | Terminada  | 02-02      | [bitacora-02-03-2026-09-30](../99_bitacora/bitacora-02-03-2026-09-30.md) |
-| 03-01     | Sección Inicio: hero y contacto inmediato           | 03    | Terminada  | 02-03      | [bitacora-03-01-2026-09-30](../99_bitacora/bitacora-03-01-2026-09-30.md) |
-| 03-02     | Sección Inicio: quiénes somos y reseñas             | 03    | Terminada  | 03-01      | [bitacora-03-02-2026-09-30](../99_bitacora/bitacora-03-02-2026-09-30.md) |
-| 03-03     | Sección Servicios y equipamiento                    | 03    | Terminada  | 02-03      | [bitacora-03-03-2026-09-30](../99_bitacora/bitacora-03-03-2026-09-30.md) |
-| 03-04     | Sección Contacto, cobertura y formulario            | 03    | Terminada  | 02-03      | [bitacora-03-04-2026-09-30](../99_bitacora/bitacora-03-04-2026-09-30.md) |
-| 03-05     | Corrección de la Épica 03 tras la auditoría         | 03    | Terminada  | 03-04      | [bitacora-03-05-2026-10-01](../99_bitacora/bitacora-03-05-2026-10-01.md) |
+| Iteración | Nombre                                              | Épica | Estado    | Depende de | Bitácora |
+| :-------- | :-------------------------------------------------- | :---- |:----------| :--------- | :------- |
+| 01-01     | Andamiaje del proyecto                              | 01    | Terminada | —          | [bitacora-01-01-2026-09-30](../99_bitacora/bitacora-01-01-2026-09-30.md) |
+| 01-02     | Arquitectura base, layout y datos del negocio       | 01    | Terminada | 01-01     | [bitacora-01-02-2026-09-30](../99_bitacora/bitacora-01-02-2026-09-30.md) |
+| 02-01     | Tokens de diseño, fuentes e íconos                  | 02    | Terminada | 01-02     | [bitacora-02-01-2026-09-30](../99_bitacora/bitacora-02-01-2026-09-30.md) |
+| 02-02     | Componentes base de interfaz                        | 02    | Terminada | 02-01      | [bitacora-02-02-2026-09-30](../99_bitacora/bitacora-02-02-2026-09-30.md) |
+| 02-03     | Header, acciones flotantes y footer                 | 02    | Terminada | 02-02      | [bitacora-02-03-2026-09-30](../99_bitacora/bitacora-02-03-2026-09-30.md) |
+| 03-01     | Sección Inicio: hero y contacto inmediato           | 03    | Terminada | 02-03      | [bitacora-03-01-2026-09-30](../99_bitacora/bitacora-03-01-2026-09-30.md) |
+| 03-02     | Sección Inicio: quiénes somos y reseñas             | 03    | Terminada | 03-01      | [bitacora-03-02-2026-09-30](../99_bitacora/bitacora-03-02-2026-09-30.md) |
+| 03-03     | Sección Servicios y equipamiento                    | 03    | Terminada | 02-03      | [bitacora-03-03-2026-09-30](../99_bitacora/bitacora-03-03-2026-09-30.md) |
+| 03-04     | Sección Contacto, cobertura y formulario            | 03    | Terminada | 02-03      | [bitacora-03-04-2026-09-30](../99_bitacora/bitacora-03-04-2026-09-30.md) |
+| 03-05     | Corrección de la Épica 03 tras la auditoría         | 03    | Terminada | 03-04      | [bitacora-03-05-2026-10-01](../99_bitacora/bitacora-03-05-2026-10-01.md) |
 | 04-01     | SEO técnico, marca y datos estructurados            | 04    | Terminada | 03-05      | [bitacora-04-01-2026-10-01](../99_bitacora/bitacora-04-01-2026-10-01.md) |
 | 04-02     | Fotos, galería, rendimiento y cabeceras             | 04    | Terminada | 04-01      | [bitacora-04-02-2026-10-02](../99_bitacora/bitacora-04-02-2026-10-02.md) |
 | 04-03     | Vista previa en Cloudflare, accesibilidad y Lighthouse | 04 | Terminada | 04-01, 04-02, 04-04 | [fase A](../99_bitacora/bitacora-04-03-fase-a-2026-10-02.md), [fase B](../99_bitacora/bitacora-04-03-fase-b-2026-10-02.md) y [cierre de la épica](../99_bitacora/bitacora-04-cierre-2026-10-02.md) |
 | 04-04     | Corrección de la auditoría local                    | 04    | Terminada | 04-03 (fase A) | [bitacora-04-04-2026-10-02](../99_bitacora/bitacora-04-04-2026-10-02.md) |
-| 05-03     | Pie de página y hero menos oscuro                   | 05    | En revisión | 04-04     | [fase A](../99_bitacora/bitacora-05-03-2026-10-05.md) y [cierre de la documentación](../99_bitacora/bitacora-05-03-cierre-2026-10-05.md) y [fase B](../99_bitacora/bitacora-05-03-fase-b-2026-10-05.md) |
-| 05-04     | Cambios del cliente: contenido y estructura         | 05    | Pendiente  | 05-03      | —        |
-| 05-05     | Mapa de cobertura con imagen real                   | 05    | Pendiente  | 05-04 y el WebP del desarrollador | — |
-| 05-01     | Publicación y verificación final en producción      | 05    | Pendiente  | 05-03, 05-04, 05-05 | —  |
-| 05-02     | Medición: Search Console, Web Analytics y Google Ads | 05   | Pendiente  | 05-01      | —        |
+| 05-03     | Pie de página y hero menos oscuro                   | 05    | Terminada | 04-04     | [fase A](../99_bitacora/bitacora-05-03-2026-10-05.md) y [cierre de la documentación](../99_bitacora/bitacora-05-03-cierre-2026-10-05.md) y [fase B](../99_bitacora/bitacora-05-03-fase-b-2026-10-05.md) |
+| 05-04     | Cambios del cliente: contenido y estructura         | 05    | Pendiente | 05-03      | —        |
+| 05-05     | Mapa de cobertura con imagen real                   | 05    | Pendiente | 05-04 y el WebP del desarrollador | — |
+| 05-01     | Publicación y verificación final en producción      | 05    | Pendiente | 05-03, 05-04, 05-05 | —  |
+| 05-02     | Medición: Search Console, Web Analytics y Google Ads | 05   | Pendiente | 05-01      | —        |
 
 Nota: la iteración 01-01 la ejecuta el desarrollador de forma manual en WebStorm (creación del proyecto). La bitácora 01-01 puede redactarla el agente a partir del resumen del desarrollador.
 
