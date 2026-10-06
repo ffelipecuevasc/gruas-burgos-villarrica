@@ -1,7 +1,7 @@
 # Iteración 05-04 · Cambios del cliente: contenido y estructura de la página
 
 - **Épica:** 05 · Ajustes finales, publicación y medición
-- **Estado:** En revisión (fase A medida el 2026-10-06, [bitácora](../../99_bitacora/bitacora-05-04-2026-10-06.md); fase B registrada el 2026-10-06, [bitácora](../../99_bitacora/bitacora-05-04-fase-b-2026-10-06.md): el cliente aprueba y pide ajustes; tanda de ajustes implementada y fase A medida el 2026-10-06, [bitácora](../../99_bitacora/bitacora-05-04-ajustes-2026-10-06.md); segunda pasada de la tanda implementada y medida el 2026-10-06, [bitácora](../../99_bitacora/bitacora-05-04-ajustes-2-2026-10-06.md); falta la fase B de la tanda)
+- **Estado:** En revisión (fase A medida el 2026-10-06, [bitácora](../../99_bitacora/bitacora-05-04-2026-10-06.md); fase B registrada el 2026-10-06, [bitácora](../../99_bitacora/bitacora-05-04-fase-b-2026-10-06.md): el cliente aprueba y pide ajustes; tanda de ajustes implementada y fase A medida el 2026-10-06, [bitácora](../../99_bitacora/bitacora-05-04-ajustes-2026-10-06.md); segunda pasada de la tanda implementada y medida el 2026-10-06, [bitácora](../../99_bitacora/bitacora-05-04-ajustes-2-2026-10-06.md); fase B de la tanda registrada el 2026-10-06 y tercera pasada (banderas con esquinas rectas) implementada y medida el mismo día, [bitácora](../../99_bitacora/bitacora-05-04-ajustes-fase-b-2026-10-06.md); quedan sin verificar las banderas con esquinas rectas en la vista previa y Safari en iPhone)
 - **Rama sugerida:** `iteracion/05-04-cambios-cliente`
 - **Depende de:** 05-03
 - **RDA relacionadas:** RDA-006, RDA-007, RDA-008, RDA-009, RDA-011
@@ -177,7 +177,21 @@ Tras la fase B, el cliente aprobó la vista previa con cuatro ajustes y el desar
 - [x] Primera pantalla a 360 × 640 px con 8 px o más sobre la barra (hoy 17). 0 elementos enfocados cubiertos por elementos fijos con Tab y Mayús + Tab a 320, 360, 768, 1280 y 1536 px. Medido: **17 px**, sin cambios; **0 cubiertos** en 20 recorridos completos (portada y 404) y en 395 paradas más, partiendo de un cuarto, la mitad, tres cuartos y el final de la página. Los botones flotantes siguen ocultándose al llegar al pie.
 - [x] `dist/` sin «Yerko» (salvo reseñas y URL de TikTok), sin «Rozas», «RUT», «razón social» ni «© 2026». Medido: «Yerko» **4 veces** en `index.html` (2 reseñas y 2 veces la URL de TikTok) y 1 en `404.html` (URL de TikTok); el resto, **0**.
 
-**Fase B (vista previa):** el desarrollador revisa lo cambiado en el teléfono y en escritorio, en `evidencia-05-04-fase-b-ajustes.md`.
+**Fase B (vista previa):** el desarrollador revisa lo cambiado en el teléfono y en escritorio, en `evidencia-05-04-fase-b-ajustes.md`. Registrada el 2026-10-06 ([bitácora](../../99_bitacora/bitacora-05-04-ajustes-fase-b-2026-10-06.md)), sobre el commit `c1b0eea` (segunda pasada, con las banderas de esquinas redondeadas):
+
+- [x] Vista previa de la rama: despliegue **Success** del commit `c1b0eea`; `curl.exe -sI` contra la dirección del despliegue con **`200 OK` y `x-robots-tag: noindex`** (queda verificado lo que faltaba de la fase B anterior). Un aviso `npm warn EBADENGINE` de `corepack`, sin efecto.
+- [x] Menú en el teléfono (Android, Chrome): **tres enlaces**, llevan a su sección con el título visible; el header mide lo mismo que antes.
+- [x] Menú en escritorio: **seis enlaces**, los seis llevan a su sección a 768 px y con la ventana completa; caben en una línea a 768 px; a 767 px quedan tres; el foco recorre los seis con el contorno completo.
+- [x] Banderas del menú: visibles en el teléfono (24 px) y en escritorio (32 px), se reconocen y se distingue el Sol de Mayo; a 768 px, bien espaciadas. **Tamaño y posición aprobados.** Pedido: esquinas cuadradas en vez de redondeadas (tercera pasada).
+- [x] Opiniones: las diez visibles; sin «Ver 4 opiniones más»; sigue «Ver más opiniones en Google»; logotipo de Google debajo del título en el teléfono y en el extremo derecho en escritorio. **Aceptado** que entre unos 520 y 767 px quede al lado del título y que la página sea unos 1.900 px más larga en el teléfono.
+- [x] Medios de pago: bloque destacado, cuatro medios con ícono y nombre, «Emitimos boletas y facturas.», sin textos cortados.
+- [x] Ocho tarjetas de servicio: misma estructura, «Disponible 24/7» en las ocho, íconos entendibles, cuatro y cuatro en escritorio, WhatsApp abre con el mensaje. Tarjeta de envío con las dos banderas, del mismo alto que su fila; **ubicación aprobada**. **El ícono del camión pluma se mantiene.**
+- [x] Primera pantalla del teléfono: etiqueta, título y dos botones completos sobre la barra; las banderas no le quitan espacio.
+- [x] Firefox en el PC: **verificado según la §9 de la evidencia** («Sí, verificado»). La §10 del mismo archivo dice que no se hizo una prueba independiente en Firefox: la inconsistencia queda anotada en la bitácora.
+- [ ] Banderas con esquinas rectas en la vista previa. **No verificado:** el cambio es posterior al despliegue revisado; se verá en el próximo.
+- [ ] Safari en iPhone. **No verificado:** no hay equipo.
+
+Veredicto del desarrollador en la evidencia: «Sí», condicionado al cambio de las banderas. No equivale a «Terminada»: la marca él.
 
 ### Segunda pasada de la tanda (2026-10-06)
 
@@ -208,6 +222,28 @@ Tras revisar la primera pasada, el desarrollador pide estos cambios. **Prevalece
 - [x] Dos alternativas del ícono del camión pluma capturadas a 360 y 1280 px, con su nombre en la bitácora; el código final conserva el ícono actual. Hecho: **`weight-outline`** y **`construction`**, con 9 capturas fuera del repositorio; `Icono.astro` sigue con `precision-manufacturing-outline` y no quedó código de comparación.
 - [x] Toda la tanda (primera y segunda pasada) medida sobre la **compilación final**: menú, anclas, opiniones, medios de pago, servicios, teclado, peso y JavaScript (960 B). Medido: 3 enlaces bajo 768 px y 6 desde 768 px; **44 de 44** clics de anclas con el título visible; **10** opiniones visibles, 0 `<details>` y textos sin cambios; **4** íconos de pago distintos, contraste mínimo 9,66:1; **8 de 8** tarjetas iguales, Servicios de **4.156** y **1.510 px**; **0 cubiertos** en 20 recorridos completos y en 395 paradas más; JavaScript **960 B** y 191 B; primera pantalla con **17 px**.
 - [x] Peso a 360 × 640 px, densidad 1 y 4G: total de 400 KB o menos; HTML más CSS de 50 KB o menos (la bandera de Argentina pesa 8,4 KB); foto del hero de 150 KB o menos. Medido: total **148,0 KB** (antes, 140,9); HTML más CSS **32,8 KB** (antes, 25,7); foto del hero **19,1 KB**. Página completa: **198,8 KB** (antes, 191,7). El aumento es HTML: la bandera de Argentina va incrustada dos veces.
+
+### Tercera pasada de la tanda (2026-10-06)
+
+Tras la fase B, el desarrollador pide un único cambio y lo deja como condición para dar por buena la tanda. **Prevalece sobre la segunda pasada** en lo que dice de no modificar los SVG de las banderas.
+
+**Tarea:** las banderas de Chile y Argentina pasan de esquinas redondeadas a **esquinas rectas**, en el relleno, en el contorno translúcido y en el brillo superior. No cambia nada más: colores, franjas, proporción, el rectángulo de la bandera dentro del lienzo de 32 × 32 (de x 1 a 31 y de y 4 a 28), la estrella de Chile, el Sol de Mayo, ni `width`, `height` y `viewBox`. `Header.astro` y `TarjetaServicio.astro` no cambian. El ícono del camión pluma se mantiene.
+
+**Criterios de aceptación de la tercera pasada (fase A)**
+
+- [ ] V1. Cada bandera nueva, comparada píxel a píxel con su original a 8× o más: 0 píxeles distintos fuera de las cuatro zonas de esquina (cuadrados de 4 × 4 unidades del lienzo en cada vértice). **Parcial.** A 16×: **20 px** distintos en la de Chile y **40 px** en la de Argentina (de 262.144), todos en la cola del brillo original, que baja por el costado hasta y = 9, una unidad más allá de la zona (x de 2 a 2,19 y de 29,81 a 30; y de 8 a 8,69). A 32×: 80 y 160 px, en el mismo lugar. A 8× hay además 2.409 y 2.635 px con diferencias de hasta 19 y 22 niveles, todos a 1 px de los bordes rectos: es el suavizado con que Chrome dibuja los trazados curvos del original a esa escala (a 16× y 32× no aparece). Fuera de eso, 0.
+- [x] V2. En las cuatro esquinas de cada bandera el vértice es un píxel opaco del color de la bandera, y no hay píxeles transparentes dentro del rectángulo. Medido: **4 de 4 vértices opacos** en cada una (en el original, los cuatro transparentes); **0 píxeles no opacos** dentro del rectángulo (antes, 3.712 y 3.720 a 16×) y 0 píxeles con color fuera de él.
+- [x] V3. Estrella de Chile y Sol de Mayo idénticos carácter por carácter. Medido: **iguales** (132 y 7.601 caracteres).
+- [x] V4. Mismos valores de `fill` y `opacity`. Medido: **iguales** (`#1435a1`, `#c73a29` y `#fff`; `#81acdc`, `#edb840` y `#fff`; `.15` y `.2`).
+- [x] V5. `width`, `height` y `viewBox` idénticos. Medido: la etiqueta `<svg>` es **igual** en ambos.
+- [x] V6. Menú: banderas de 24 × 24 px a 360, 390 y 767 px y de 32 × 32 px desde 768 px; separación de 12 px o más a 360, 768 y 1024 px; ocultas a 320 px; sin desborde. Medido: **24 × 24** y **32 × 32 px**; **28,8, 16 y 271,8 px**; ocultas a 320 px; **0 px** de desborde. Igual que la línea base.
+- [x] V7. Header de 112 px. Medido: **112 px** en los nueve anchos (320 a 1920 px), portada y 404.
+- [x] V8. Tarjeta de envío: 2 banderas de 32 × 32 px; mismo alto que la línea base; sin huecos; ninguna otra tarjeta con banderas. Medido: **2 de 32 × 32 px**; **417, 417, 395, 501 y 501 px**; **0 huecos**; **0** tarjetas más.
+- [x] V9. JavaScript de 960 B en la portada y 191 B en el 404. Medido: **960 B y 191 B**.
+- [x] V10. A 360 × 640 px y 4G: total de 400 KB o menos; HTML más CSS de 50 KB o menos; foto del hero de 150 KB o menos; primera pantalla con 8 px o más. Medido: **147,8 KB** (antes, 148,0); **32,6 KB** (antes, 32,8); **19,1 KB**; **17 px**.
+- [x] V11. `pnpm format:check`, `pnpm check` y `pnpm build` limpios. Medido: **0 errores, 0 advertencias y 52 hints**; build con código 0 y sin avisos.
+- [x] V12. Hashes y bytes de los dos SVG nuevos; `google.svg` sin cambio. Medido: `chile.svg`, **617 B** (antes, 964); `argentina.svg`, **8.118 B** (antes, 8.444); `google.svg`, **igual** (2.330 B, mismo SHA-256). Los hashes completos están en la bitácora.
+- [x] V13. Capturas de las esquinas de las banderas del menú y de la tarjeta de envío a 360 y 1280 px. Hecho: **4 capturas ampliadas** y 12 de contexto, fuera del repositorio.
 
 ## Fuera de alcance
 
