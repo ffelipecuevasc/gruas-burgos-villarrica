@@ -70,7 +70,7 @@ Usa siempre PNPM. Nunca `npm install` ni `yarn`.
 1. Todo el texto visible está en **español de Chile**, trato de **tú**, lenguaje simple y directo. Sin anglicismos innecesarios.
 2. **No inventes datos del negocio.** Teléfono, correo, tiempos de respuesta, capacidades de carga, años de experiencia, garantías, coberturas y reseñas deben venir de `src/data/negocio.js` y estar confirmados por el cliente. El prototipo contiene afirmaciones no verificadas (ver `auditoria-tecnica.md`); no las copies tal cual.
 3. Si falta un dato, usa un marcador explícito `PENDIENTE_CLIENTE` en `src/data/negocio.js` y regístralo en `registro-log.md`. Nunca publiques un número o afirmación de relleno que parezca real.
-4. Las reseñas se reproducen solo si son reales, de Google Maps, con nombre abreviado del autor y enlace a la fuente. No se marca `AggregateRating` en el JSON-LD.
+4. Las reseñas se reproducen solo si son reales, de Google Maps, con nombre completo del autor y enlace a la fuente. No se marca `AggregateRating` en el JSON-LD.
 5. Las mayúsculas del diseño se aplican con CSS (`uppercase`), no escribiendo el texto en mayúsculas.
 
 ## 7. Reglas técnicas

@@ -2,12 +2,17 @@
 
 # Seguridad, en todas las respuestas. El enmarcado se bloquea aquí porque `frame-ancestors`
 # no funciona dentro de una etiqueta <meta>.
+#
+# HSTS (iteración 05-01): primer paso de un plan gradual, 300 → 86400 → 604800 → 31536000 segundos.
+# Cada paso se hace con un push a `main`, comprobando antes que el sitio sigue accesible por HTTPS.
+# No lleva `includeSubDomains` ni `preload`.
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
   X-Frame-Options: DENY
   Content-Security-Policy: frame-ancestors 'none'
+  Strict-Transport-Security: max-age=300
 
 # Recursos con huella en el nombre: no cambian nunca.
 /_astro/*

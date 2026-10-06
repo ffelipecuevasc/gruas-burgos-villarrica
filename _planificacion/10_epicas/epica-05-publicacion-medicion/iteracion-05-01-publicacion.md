@@ -1,19 +1,29 @@
 # Iteración 05-01 · Publicación y verificación final en producción
 
 - **Épica:** 05 · Ajustes finales, publicación y medición
-- **Estado:** Pendiente
+- **Estado:** En revisión (fase A, local: [bitacora-05-01-2026-10-06](../../99_bitacora/bitacora-05-01-2026-10-06.md)). La fase B, en la vista previa y en producción, sigue pendiente
 - **Rama sugerida:** `iteracion/05-01-verificacion-final`
-- **Depende de:** 05-03, 05-04 y 05-05
-- **RDA relacionadas:** RDA-001, RDA-008, RDA-012
-- **Hallazgos que cierra:** AUD-04-003 (fuentes en el registro de compilación), AUD-09-016 (caché), AUD-09-018 (HSTS). Evalúa AUD-08-032 si el desarrollador la autoriza.
+- **Depende de:** 05-03, 05-04 y 05-05 (terminadas)
+- **RDA relacionadas:** RDA-001, RDA-007, RDA-008, RDA-012
+- **Hallazgos que cierra:** AUD-04-003 (fuentes en el registro de compilación), AUD-09-016 (caché), AUD-09-018 (HSTS) y AUD-08-032 (nombre del autor de las reseñas en la documentación).
 
 ## Objetivo
 
 Verificar en producción la versión final del sitio, ya con los cambios de 05-03, 05-04 y 05-05, y cerrar lo que quedó pendiente de la publicación del 2026-10-02.
 
-**Actualización 2026-10-05:** la publicación se adelantó (decisión 7 de la Épica 04) y `https://gruasvillarrica.cl` está en producción desde el commit `b5fcbfc`. Esta iteración ya no publica: verifica. Se hace al final de la épica porque la prueba de humo, PageSpeed, el caché y HSTS deben medirse sobre el sitio modificado. La evidencia previa está en `evidencia-04-03-fase-b.md` y `bitacora-04-03-fase-b-2026-10-02.md`.
+`https://gruasvillarrica.cl` está en producción desde el 2026-10-02 y cada merge a `main` la actualiza. Esta iteración no publica contenido nuevo: verifica, agrega la cabecera HSTS (con plazo corto) y alinea dos documentos. La evidencia previa está en `evidencia-04-03-fase-b.md` y `bitacora-04-03-fase-b-2026-10-02.md`.
 
 Esta iteración define **qué** debe quedar logrado y **cómo se comprueba**. La forma de lograrlo la decide quien implementa, dentro de las reglas de la iteración.
+
+## Decisiones del desarrollador (2026-10-06)
+
+1. **Caché (AUD-09-016).** Se acepta el valor que Cloudflare pone hoy (`max-age=14400`, 4 horas) en `robots.txt` y `favicon.ico`. No se edita `_headers` por este motivo. Se miden y se registran.
+2. **Validación de datos provisionales.** Basta la prueba local. No se prueba la falla en Cloudflare ni se hace un push de prueba a `main`.
+3. **AUD-08-032.** Se alinean `AGENTS.md` §6.4 y `DESIGN.md` §5 (`TarjetaResena`) con la decisión D3 de RDA-007: **nombre completo** del autor de las reseñas.
+4. **HSTS (AUD-09-018).** El panel de Cloudflare solo ofrece «Disable» o un plazo de 1 a 12 meses (Cloudflare Docs, HSTS), sin valores cortos. Por eso se activa desde `public/_headers`, con **`max-age=300`** (5 minutos), **sin `includeSubDomains` y sin `preload`**.
+   - **Riesgo real:** el navegador que recibe la cabecera se niega a abrir el sitio por `http` durante todo el `max-age`. Si el certificado vence o falla, si se pausa Cloudflare o si se mueven los servidores de nombres, los visitantes que ya la recibieron no pueden entrar hasta que venza el plazo. Con 300 s el daño máximo son 5 minutos.
+   - **Reversión:** poner `max-age=0` surte efecto en los navegadores que vuelvan a visitar el sitio por HTTPS.
+   - **Plan gradual (después de esta iteración):** 300 → 86400 (1 día) → 604800 (1 semana) → 31536000 (1 año), con un push a `main` en cada paso, comprobando antes que el sitio sigue accesible. Los tiempos los decide el desarrollador y el avance puede continuar después de la entrega. `includeSubDomains` solo si todos los subdominios, incluido `www`, sirven HTTPS. `preload` solo con una decisión explícita.
 
 ## Ya verificado el 2026-10-02 (no se repite)
 
@@ -21,11 +31,15 @@ Dominio y `www` con 301 a la raíz, HTTPS forzado, indexación solo en el domini
 
 ## Reglas de la iteración
 
-1. Esta iteración no cambia el diseño ni el contenido. Cualquier defecto que halle se registra y, si es de severidad Alta o Media, se corrige en una iteración corta nueva.
-2. **Autorizado:** editar `public/_headers` para la caché de `robots.txt` y `favicon.ico`, si el desarrollador decide fijarla. Cualquier otro cambio en archivos de configuración requiere consultar antes.
-3. **Autorizado solo con aprobación del desarrollador:** alinear `AGENTS.md` §6.4 y `DESIGN.md` §5 con la decisión D3 de RDA-007 (nombre completo del autor de las reseñas; AUD-08-032).
-4. No se hacen `commit`, `push` ni cambios de rama. Los hace el desarrollador. El agente no consulta URLs públicas (`curl` y `wget` están denegados): las mediciones sobre producción son de la fase B.
-5. Cuando se cite el registro de compilación de Cloudflare, se transcribe lo que entregó el desarrollador, sin inventar líneas.
+1. Esta iteración no cambia el diseño ni el contenido del sitio. Cualquier defecto que halle se registra y, si es de severidad Alta o Media, se corrige en una iteración corta nueva.
+2. **Autorizado:**
+   - `public/_headers`: solo agregar la cabecera HSTS descrita arriba en la regla `/*`, con su comentario. Ninguna otra línea cambia.
+   - `AGENTS.md` §6.4 y `DESIGN.md` §5 (fila `TarjetaResena`): solo la frase del nombre del autor.
+   - `auditoria-tecnica.md`: la Auditoría 10 (al final) y el estado de AUD-08-032.
+   - Los archivos de documentación de esta iteración.
+3. No se hacen `commit`, `push` ni cambios de rama. Los hace el desarrollador. El agente no consulta URLs públicas (`curl` y `wget` están denegados): las mediciones sobre producción son de la fase B.
+4. Cuando se cite el registro de compilación de Cloudflare, se transcribe lo que entregó el desarrollador, sin inventar líneas.
+5. Sin JavaScript nuevo ni dependencias nuevas.
 
 ## Contenido aprobado de esta iteración
 
@@ -33,63 +47,55 @@ Ninguno. No se publica nada nuevo.
 
 ## Tareas
 
-1. **Validación de datos provisionales, caso de falla.** Hoy solo se probó en local (04-02, con `CF_PAGES_BRANCH=main`). Se reevalúa con el cambio de 05-04, que elimina razón social y RUT de los datos. El desarrollador decide si se prueba en Cloudflare (una compilación fallida de `main` no reemplaza la versión publicada, pero exige un push a `main`) o si basta la prueba local. La decisión queda registrada.
-
-2. **Prueba de humo en producción**, tras el merge final, en el teléfono y en escritorio:
-   - Las anclas `#inicio`, `#servicios` y `#contacto` llevan a su sección con el título visible bajo el header.
-   - Llamada, y **todos** los mensajes de WhatsApp del sitio (hero, barra, siete servicios, formulario y botones flotantes), con el texto aprobado.
-   - Orden de la página, servicios nuevos, franja de «Quiénes somos», medios de pago y mapa.
-   - En escritorio, los botones flotantes se ocultan al llegar al pie y reaparecen al subir.
-   - Página 404 vista en el teléfono.
-   - Primera pantalla del teléfono con la barra de direcciones del navegador a la vista: etiqueta, `h1` y ambos botones del hero visibles sobre la barra inferior (se informa cuánto sobra).
-   - iPhone con Safari, si hay uno disponible. Si no, se declara «no verificado».
-
-3. **Fuentes (AUD-04-003).** El registro de compilación de `main` en Cloudflare no contiene «No data found for font family», y `dist/` publica los archivos `.woff2`. Se transcriben las líneas de las fuentes.
-
-4. **Caché (AUD-09-016).** Hoy `robots.txt` y `favicon.ico` responden `Cache-Control: public, max-age=14400, must-revalidate` (4 horas), que `_headers` no define. Se miden también `favicon.svg`, `apple-touch-icon.png`, los sitemaps y el 404, que no se revisaron. El desarrollador decide si se fija un valor o se acepta el de Cloudflare. La decisión queda registrada.
-
-5. **HSTS (AUD-09-018).** Se evalúa `Strict-Transport-Security` en el panel de Cloudflare (SSL/TLS › Edge Certificates, «HTTP Strict Transport Security») o en `_headers`; esta última vía no está probada.
-   - **Riesgo real:** el navegador que recibe la cabecera se niega a abrir el sitio por `http` durante todo el `max-age`. Si el certificado vence o falla, si se pausa Cloudflare o si se mueven los servidores de nombres, los visitantes que ya la recibieron no pueden entrar. Con `includeSubDomains`, un subdominio sin HTTPS queda inaccesible. Con `preload`, salir de la lista de los navegadores tarda meses.
-   - **Reversión:** se puede apagar con `max-age` en 0, pero solo surte efecto en los navegadores que vuelvan a visitar el sitio por HTTPS. Los que ya la recibieron siguen forzando HTTPS hasta que venza su plazo.
-   - **Plan gradual:** empezar con `max-age=300` (5 minutos), sin `includeSubDomains` ni `preload`, y comprobarlo con `curl.exe -sI`. Si no hay problemas, subir a 86400 (1 día), luego a 604800 (1 semana) y por último a 31536000 (1 año). El avance hasta el año puede continuar después de la entrega. `includeSubDomains` solo si todos los subdominios, incluido `www`, sirven HTTPS. `preload` solo con una decisión explícita del desarrollador.
-
-6. **Lighthouse y PageSpeed sobre la versión final** en `https://gruasvillarrica.cl`, móvil y escritorio, tres ejecuciones cada uno. Se informan las cifras y el elemento del LCP. Sirven de cifras base para 05-02.
-
-7. **Validadores.** JSON-LD en el validador de Schema.org y en la Prueba de resultados enriquecidos de Google, con los cambios de 05-04 (`areaServed` y `paymentAccepted`).
-
-8. **Documentación.**
+1. **Validación de datos provisionales, caso de falla (local).** Se reevalúa con los cambios de 05-03 y 05-04, que retiraron razón social y RUT de los datos. Compilando con `CF_PAGES_BRANCH=main`: sin marcadores, la compilación termina y lo informa; con un marcador `PENDIENTE_CLIENTE` colocado a propósito, falla y nombra el archivo. La prueba no deja ningún rastro en el repositorio.
+2. **HSTS en `_headers`.** La cabecera `Strict-Transport-Security: max-age=300` queda definida para todas las respuestas, con un comentario que explica el plan gradual. No lleva `includeSubDomains` ni `preload`.
+3. **AUD-08-032.** `AGENTS.md` §6.4 y `DESIGN.md` §5 dicen «nombre completo» del autor, igual que RDA-007 y el sitio.
+4. **Fuentes (AUD-04-003), parte local.** La compilación local no contiene «No data found for font family» y `dist/` publica los archivos `.woff2`; se informan sus nombres y pesos.
+5. **Preparación de la fase B.** Archivo `evidencia-05-01-fase-b.md`, vacío para el desarrollador, con la lista de verificación de la prueba de humo, la tabla de todos los mensajes de WhatsApp del sitio (extraídos de `dist/`, con su texto decodificado y dónde aparecen), los comandos de `curl.exe` de cabeceras, HSTS y caché con la lista de archivos a medir, el espacio para las líneas del registro de compilación de Cloudflare, PageSpeed (móvil y escritorio, tres ejecuciones cada uno) y los dos validadores del JSON-LD.
+6. **Auditoría 10.** Sección nueva al final de `auditoria-tecnica.md`, con el estado de AUD-04-003, AUD-09-016, AUD-09-018 y AUD-08-032 y la tabla de hallazgos nuevos (AUD-10-NNN) vacía, para completarla tras la fase B.
+7. **Documentación.**
    - Bitácora nueva `bitacora-05-01-AAAA-MM-DD.md` en `_planificacion/99_bitacora/`, con la plantilla de `_planificacion/README.md` §5.2, fecha real, fin de línea LF y estado final «En revisión». Nunca «Terminada».
-   - `registro-log.md`: fila de 05-01, hallazgos cerrados, «Iteración activa» y «Próximo hito».
-   - `auditoria-tecnica.md`: Auditoría 10 con los hallazgos de la fase B (AUD-10-NNN) y el estado de AUD-04-003, AUD-09-016 y AUD-09-018.
+   - `registro-log.md`: fila de 05-01, «Iteración activa», «Próximo hito» y una línea del historial.
 
 ## Criterios de aceptación
 
 **Fase A, local:**
 
-- [ ] `pnpm format:check` sin diferencias; `pnpm check` y `pnpm build` con 0 errores y 0 advertencias.
-- [ ] La lista de verificación de la prueba de humo, la plantilla de la fase B y la Auditoría 10 están preparadas, y `public/_headers` refleja lo que decida el desarrollador sobre la caché.
+- [x] `pnpm format:check` sin diferencias; `pnpm check` y `pnpm build` con 0 errores y 0 advertencias (hints: hoy 52). JavaScript de cliente sin cambios (960 B en la portada y 191 B en el 404). **Medido:** sin diferencias; 0 errores, 0 advertencias y 52 hints; build con código 0 y 0 líneas con «warn» o «error»; 960 B (769 + 191) y 191 B.
+- [ ] Validación de datos provisionales: con `CF_PAGES_BRANCH=main` y sin marcadores, la compilación termina con código 0 y el mensaje «Sin PENDIENTE_CLIENTE en N archivos publicados»; con un marcador, falla con código distinto de 0 y nombra el archivo. `git status` final igual al inicial. 0 `PENDIENTE_CLIENTE`, «RUT», «razón social» y «© 2026» en `src/data/` y en `dist/`. **Medido:** código 0 y «Sin PENDIENTE_CLIENTE en 127 archivos publicados»; con un marcador en un archivo temporal de `public/`, la compilación falla (código distinto de 0) y nombra `prueba-validacion-05-01.txt`; `git status` idéntico antes y después. En `dist/`: 0 `PENDIENTE_CLIENTE`, 0 «razón social», 0 «© 2026» y 0 «RUT» en los archivos de texto (la secuencia de bytes «RUT» aparece por azar dentro de dos imágenes WebP). «RUT», «razón social» y «© 2026»: 0 en `src/data/`. **Casilla sin marcar por una diferencia con la referencia, que decide el desarrollador:** en `src/data/negocio.js` el marcador aparece 5 veces en 4 líneas (un comentario, la constante que se exporta y dos datos que no se publican: `tiemposRespuesta` y `anioInicio`), así que «0 en `src/data/`» no se cumple al pie de la letra. Ninguno llega a `dist/`, y `src/` no se podía tocar.
+- [x] `public/_headers`: la única diferencia respecto de `main` es la cabecera HSTS (y su comentario) en la regla `/*`. `dist/_headers` contiene `Strict-Transport-Security: max-age=300` una sola vez, sin `includeSubDomains` ni `preload`. Se informa el número de reglas y la línea más larga del archivo. **Medido:** la diferencia con `main` son 5 líneas agregadas (4 de comentario y la cabecera) y 0 quitadas; `dist/_headers` es idéntico a `public/_headers` y contiene la cabecera 1 vez, con `max-age=300`; 0 `includeSubDomains` y 0 `preload` fuera de los comentarios; 5 reglas; línea más larga, de 99 caracteres (106 bytes). No probado en Cloudflare: fase B.
+- [x] `AGENTS.md` §6.4 y `DESIGN.md` §5 dicen «nombre completo» del autor, con 0 ocurrencias de «nombre abreviado» en ambos, y sin otros cambios en esos dos archivos. **Medido:** 1 «nombre completo» y 0 «nombre abreviado» en cada uno; 1 línea cambiada en cada archivo.
+- [x] La compilación local no muestra «No data found for font family» y `dist/` contiene los `.woff2` (se listan). **Medido:** 0 apariciones; 6 archivos en `dist/_astro/fonts/`, 112.872 B en total (lista en la bitácora). La compilación local reutiliza la caché de fuentes del equipo: no prueba que el proveedor responda (eso lo muestra el registro de Cloudflare, fase B).
+- [x] `evidencia-05-01-fase-b.md` existe con la estructura descrita; la tabla de WhatsApp coincide con los enlaces de `dist/`. **Medido:** 17 enlaces (14 en la portada y 3 en el 404), todos al mismo número, y 11 mensajes distintos: 11 filas.
+- [x] La Auditoría 10 existe en `auditoria-tecnica.md` y AUD-08-032 figura «Resuelto en 05-01». **Medido:** así es.
+- [x] `git status` muestra cambios solo en `public/_headers`, `AGENTS.md`, `DESIGN.md` y `_planificacion/`. **Medido:** así es, más un cambio ajeno que no se tocó (`AD src/assets/LogoGruasBurgos.svg`).
 
-**Fase B, producción (evidencia en `evidencia-05-01-fase-b.md`):**
+**Fase B (evidencia en `evidencia-05-01-fase-b.md`):**
 
-- [ ] Prueba de humo completa y documentada, con los puntos de la tarea 2. Lo que no se pudo verificar (iPhone, por ejemplo) figura como «no verificado».
-- [ ] Registro de compilación de `main` sin «No data found for font family» y con los `.woff2` publicados.
-- [ ] Caché de `robots.txt` y `favicon.ico` medida y decidida; los demás archivos, medidos.
-- [ ] HSTS: decidido. Si se activa, se registra el `max-age` vigente y el comando que lo comprobó.
-- [ ] PageSpeed móvil de la versión final: 95 o más en Rendimiento, Accesibilidad, Buenas prácticas y SEO (mediana de tres ejecuciones); LCP de 2,5 s o menos; CLS 0.
-- [ ] JSON-LD sin errores en los dos validadores.
-- [ ] Sin hallazgos de severidad Alta abiertos en la Auditoría 10.
+1. En la **vista previa de la rama**, antes del merge: `curl.exe -sI` devuelve `200 OK` y `strict-transport-security: max-age=300` (más `x-robots-tag: noindex`). Los `*.pages.dev` ya están en la lista de HSTS de los navegadores, así que es una prueba sin riesgo.
+2. En **producción**, después del merge:
+   - [ ] Cloudflare publicó el commit esperado (estado «Success»).
+   - [ ] `https://gruasvillarrica.cl/` y una ruta inexistente (404) devuelven `strict-transport-security: max-age=300`; `http://gruasvillarrica.cl/` responde 301 a HTTPS y `www` responde 301 a la raíz. Las demás cabeceras de `_headers` siguen presentes. Se registra el `max-age` vigente y el comando.
+   - [ ] Prueba de humo completa y documentada (teléfono y escritorio), con todos los mensajes de WhatsApp de la tabla. Lo que no se pudo verificar (iPhone, por ejemplo) figura como «no verificado».
+   - [ ] Registro de compilación de `main` sin «No data found for font family» y con la línea de la validación de datos provisionales; se transcriben las líneas.
+   - [ ] Caché medida en `robots.txt`, `favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, los sitemaps, el 404, `/` y un archivo de `/_astro/`; el valor de Cloudflare queda aceptado y registrado.
+   - [ ] PageSpeed móvil de la versión final: 95 o más en Rendimiento, Accesibilidad, Buenas prácticas y SEO (mediana de tres ejecuciones); LCP de 2,5 s o menos; CLS 0. Se informa también escritorio y el elemento del LCP.
+   - [ ] JSON-LD sin errores en el validador de Schema.org y en la Prueba de resultados enriquecidos de Google.
+   - [ ] Sin hallazgos de severidad Alta abiertos en la Auditoría 10.
 
 ## Fuera de alcance
 
 - Search Console, Web Analytics y Google Ads: 05-02.
+- Subir HSTS más allá de 300 s, `includeSubDomains` y `preload`: después de esta iteración, por pasos y con decisión del desarrollador.
+- Fijar valores propios de caché para `robots.txt` y `favicon.ico`.
+- Probar la falla de la validación en Cloudflare.
 - FA-05 (zoom al 400 %), FA-09 (letra en rem) y AUD-09-019 (LCP bajo 2,0 s): siguen diferidos u opcionales.
 - Primera pantalla a 320 × 568 px: riesgo aceptado.
 
 ## Tareas del desarrollador
 
-1. Hacer el merge final a `main` y confirmar que Cloudflare publicó el commit esperado.
-2. Ejecutar la fase B: prueba de humo, PageSpeed, validadores y mediciones de caché con `curl.exe -sI`, y completar `evidencia-05-01-fase-b.md` con la plantilla de `evidencia-04-03-fase-b.md`.
-3. Entregar las líneas del registro de compilación de Cloudflare (fuentes y validación).
-4. Decidir la caché, HSTS y la prueba de falla en Cloudflare.
-5. Decidir si se alinean `AGENTS.md` §6.4 y `DESIGN.md` §5 con D3 (AUD-08-032).
-6. Marcar la iteración «Terminada» cuando la verifique.
+1. Hacer `commit` y `push` de la rama y comprobar el HSTS en la vista previa (fase B, punto 1).
+2. Hacer el Pull Request y el merge a `main` y confirmar que Cloudflare publicó el commit esperado.
+3. Ejecutar la fase B en producción: prueba de humo, cabeceras, caché, PageSpeed y validadores con `curl.exe -sI`, y completar `evidencia-05-01-fase-b.md`.
+4. Entregar las líneas del registro de compilación de Cloudflare (fuentes y validación).
+5. Marcar la iteración «Terminada» cuando la verifique.

@@ -254,7 +254,7 @@ El informe declaró la épica INCOMPLETA: 31 hallazgos, 7 de severidad Alta. Se 
 | AUD-08-029 | Baja | Proceso | (E3-029) Cuatro bitácoras con CRLF en la copia de trabajo, fechas un día antes que los commits y un conteo de hints incorrecto. | Normalizar y usar la fecha real. | Resuelto parcialmente en 03-05 (lo nuevo usa la fecha real y LF; las bitácoras existentes no se editan: el desarrollador puede renormalizarlas con Git) |
 | AUD-08-030 | Baja | Proceso | (E3-030) 5 de 7 mensajes de commit de la épica no siguen el formato vigente. | No se reescribe el historial. | Informativo |
 | AUD-08-031 | Baja | Documentación | (E3-031) La actualización de RDA-007 no copiaba el texto indicado en la tarea 6 de 03-02. | Reemplazarla por el texto exacto. | Resuelto en 03-05 |
-| AUD-08-032 | Baja | Documentación | (Asistente de planificación) `AGENTS.md` §6.4 y `DESIGN.md` §5 (`TarjetaResena`) piden «nombre abreviado del autor», pero la decisión D3 y RDA-007 establecen el nombre completo. | Alinear ambos archivos con D3. | Abierto, requiere aprobación del desarrollador |
+| AUD-08-032 | Baja | Documentación | (Asistente de planificación) `AGENTS.md` §6.4 y `DESIGN.md` §5 (`TarjetaResena`) piden «nombre abreviado del autor», pero la decisión D3 y RDA-007 establecen el nombre completo. | Alinear ambos archivos con D3. | Resuelto en 05-01 (decisión 3 del desarrollador del 2026-10-06: ambos archivos dicen «nombre completo del autor») |
 
 ## Auditoría 09 · Vista previa en Cloudflare, dominio propio, accesibilidad y Lighthouse (Épica 04)
 
@@ -308,3 +308,31 @@ La vista previa en WhatsApp se da por verificada con el testimonio escrito del d
 | AUD-09-021 | Baja | Documentación | El criterio de 03-01 pide un LCP menor que 2 s en Lighthouse móvil; la medición dio 2,3 s. La decisión 9 cambió el umbral de la Épica 04 a 2,5 s, no el de 03-01, que queda sin marcar. | Que el desarrollador decida si la decisión 9 se extiende a 03-01 o si ese criterio espera AUD-09-019. | Resuelto el 2026-10-02 (decisión 11 de la Épica 04: el criterio de 03-01 pasa a «2,5 s o menos» y queda cumplido con los 2,3 s de producción) |
 | AUD-09-022 | Baja | Proceso | `main` avanzó hasta `b5fcbfc` sin merge commit (el historial es lineal), aunque la tarea 4 de 04-03 pedía fusionar con merge commit, y con 04-04 aún «En revisión». El commit `b5fcbfc` se rotula «Iteración 04-04», pero solo contiene la evidencia de 04-03. El código publicado es el de 04-04 (`fb800b6`). | No se reescribe el historial. | Informativo |
 | AUD-09-023 | Baja | Evidencia | La vista previa del enlace en WhatsApp (imagen, título y descripción) se dio por verificada con el testimonio escrito del desarrollador (Android, Chrome móvil y WhatsApp), sin la captura que pedía el criterio de 04-03. No hay registro visual de cómo se veía la tarjeta el 2026-10-02. | Ninguna obligatoria. Si cambia la imagen de vista previa o los metadatos, conviene guardar una captura. | Informativo (decisión 10 de la Épica 04, 2026-10-02) |
+
+## Auditoría 10 · Publicación y verificación final en producción (05-01)
+
+- **Fecha:** 2026-10-06
+- **Auditor:** Claude Code (fase A, local: mediciones sobre `pnpm build` en la rama `iteracion/05-01-verificacion-final`) y Claude (asistente de planificación), que preparó la iteración con las decisiones del desarrollador del 2026-10-06. El agente no consultó ninguna URL pública.
+- **Alcance:** los cuatro hallazgos que 05-01 debe cerrar (AUD-04-003, AUD-09-016, AUD-09-018 y AUD-08-032), sobre la compilación local de la versión final (05-03, 05-04 y 05-05 incluidas; commit base `a3ccc17`). La verificación en producción (`https://gruasvillarrica.cl`) es de la fase B y se registra con `evidencia-05-01-fase-b.md`; bitácora `bitacora-05-01-2026-10-06.md`.
+
+### Resumen
+
+Fase A, medida en local: la validación de datos provisionales pasa sin marcadores («Sin PENDIENTE_CLIENTE en 127 archivos publicados», código 0) y falla, nombrando el archivo, con un marcador puesto a propósito; `public/_headers` agrega `Strict-Transport-Security: max-age=300` en la regla `/*`, sin `includeSubDomains` ni `preload`; `AGENTS.md` §6.4 y `DESIGN.md` §5 dicen «nombre completo del autor»; la compilación local no muestra «No data found for font family» y `dist/` publica 6 archivos `.woff2`. JavaScript de cliente sin cambios (960 B en la portada y 191 B en el 404).
+
+**Nada de esto está comprobado en producción.** Que Cloudflare Pages entregue la cabecera HSTS definida en `_headers`, también en el 404, se comprueba en la fase B: primero en la vista previa de la rama y luego en el dominio propio. La tabla de hallazgos nuevos se completa tras la fase B.
+
+### Estado de los hallazgos que cierra 05-01
+
+| ID | Severidad | Estado al 2026-10-06 (fase A) | Qué falta |
+| :--- | :--- | :--- | :--- |
+| AUD-04-003 | Media | Abierto, pendiente de la fase B. Parte local cumplida: 0 apariciones de «No data found for font family» en `pnpm build` y 6 `.woff2` en `dist/_astro/fonts/` (112.872 B en total). La compilación local reutiliza la caché de fuentes del equipo, así que no prueba que el proveedor responda | Las líneas de las fuentes del registro de compilación de `main` en Cloudflare, sin «No data found for font family» |
+| AUD-09-016 | Baja | Decidido (decisión 1 del desarrollador, 2026-10-06): se acepta el valor que pone Cloudflare (`max-age=14400` en `robots.txt` y `favicon.ico`); `_headers` no se edita por este motivo | Medir en la fase B `/`, `robots.txt`, `favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, los sitemaps, el 404 y un archivo de `/_astro/`, y registrar los valores |
+| AUD-09-018 | Baja | Decidido (decisión 4 del desarrollador, 2026-10-06): HSTS desde `public/_headers` con `max-age=300`, sin `includeSubDomains` ni `preload`, como primer paso de un plan gradual (300 → 86400 → 604800 → 31536000). Implementado en 05-01 y medido en `dist/_headers`. **No probado en producción** | Comprobar en la fase B la cabecera en la vista previa de la rama y en producción (portada y 404), y que `http` siga respondiendo 301. Los pasos siguientes del plan quedan fuera de 05-01 |
+| AUD-08-032 | Baja | Resuelto en 05-01 (decisión 3 del desarrollador, 2026-10-06): `AGENTS.md` §6.4 y `DESIGN.md` §5 (`TarjetaResena`) dicen «nombre completo del autor»; 0 apariciones de «nombre abreviado» en ambos | Nada |
+
+### Hallazgos nuevos
+
+Se completa tras la fase B.
+
+| ID | Severidad | Área | Hallazgo | Acción recomendada | Estado |
+| :--- | :--- | :--- | :--- | :--- | :--- |
