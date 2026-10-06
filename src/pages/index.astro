@@ -9,7 +9,6 @@ import Resenas from '../components/Resenas.astro';
 import TituloSeccion from '../components/TituloSeccion.astro';
 import TarjetaServicio from '../components/TarjetaServicio.astro';
 import BloqueEquipamiento from '../components/BloqueEquipamiento.astro';
-import BotonWhatsApp from '../components/BotonWhatsApp.astro';
 import CanalDirecto from '../components/CanalDirecto.astro';
 import ListaCobertura from '../components/ListaCobertura.astro';
 import MapaEsquematico from '../components/MapaEsquematico.astro';
@@ -20,6 +19,22 @@ import DatosEstructurados from '../components/DatosEstructurados.astro';
 import { servicios } from '../data/servicios.js';
 import { negocio } from '../data/negocio.js';
 
+// Las tarjetas con lista de características van primero; las compactas, en una segunda grilla.
+const principales = servicios.filter((servicio) => servicio.caracteristicas?.length);
+const compactos = servicios.filter((servicio) => !servicio.caracteristicas?.length);
+
+// Columnas de cada tarjeta para que ninguna fila quede con un hueco: las tres principales ocupan una
+// fila desde `lg` y, de `md` a `lg`, la tercera toma el ancho completo. Las cinco compactas van de a
+// dos desde `md` (la quinta, a todo el ancho) y, desde `lg`, tres arriba y dos abajo.
+const anchoPrincipal = ['', '', 'md:col-span-2 lg:col-span-1'];
+const anchoCompacto = [
+  'lg:col-span-2',
+  'lg:col-span-2',
+  'lg:col-span-2',
+  'lg:col-span-3',
+  'md:col-span-2 lg:col-span-3',
+];
+
 const titulo = `${negocio.nombre} | Grúas en Villarrica 24 horas`;
 const descripcion =
   'Grúas, traslado y rescate vehicular en Villarrica, disponibles las 24 horas. Llama o escríbenos por WhatsApp.';
@@ -28,13 +43,11 @@ const descripcion =
 <LayoutBase titulo={titulo} descripcion={descripcion}>
   <DatosEstructurados slot="head" />
 
-  {/* Tres secciones ancladas (RDA-009). Quiénes somos, la galería y las opiniones son bloques de Inicio. */}
+  {/* Tres secciones ancladas (RDA-009). Quiénes somos, la galería y las opiniones van entre Servicios y
+      Contacto, sin ancla propia. */}
   <section id="inicio" aria-labelledby="titulo-inicio">
     <Hero idTitulo="titulo-inicio" />
     <CintaMetricas />
-    <QuienesSomos />
-    <GaleriaTrabajos />
-    <Resenas />
   </section>
 
   <section
@@ -50,27 +63,27 @@ const descripcion =
         Servicios
       </TituloSeccion>
 
-      <div class="grid grid-cols-1 gap-space-lg md:grid-cols-2 lg:grid-cols-3">
-        {servicios.map((servicio) => (
-          <TarjetaServicio servicio={servicio} />
-        ))}
-      </div>
+      <div class="space-y-space-lg">
+        <div class="grid grid-cols-1 gap-space-lg md:grid-cols-2 lg:grid-cols-3">
+          {principales.map((servicio, indice) => (
+            <TarjetaServicio servicio={servicio} class={anchoPrincipal[indice]} />
+          ))}
+        </div>
 
-      <div class="flex flex-col items-center justify-between gap-space-md border border-surface-container-highest bg-surface-container-low p-space-lg sm:flex-row">
-        <p class="font-body text-body-md text-secondary">
-          ¿Necesitas un traslado a otra ciudad? Escríbenos y coordinamos el viaje según el destino.
-        </p>
-        <BotonWhatsApp
-          mensaje={negocio.whatsapp.mensajes.trasladoOtraCiudad}
-          icono="larga-distancia"
-          aria-label="Escribir por WhatsApp sobre traslados a otras ciudades"
-          class="shrink-0"
-        />
+        <div class="grid grid-cols-1 gap-space-md md:grid-cols-2 lg:grid-cols-6">
+          {compactos.map((servicio, indice) => (
+            <TarjetaServicio servicio={servicio} class={anchoCompacto[indice]} />
+          ))}
+        </div>
       </div>
 
       <BloqueEquipamiento />
     </Contenedor>
   </section>
+
+  <QuienesSomos />
+  <GaleriaTrabajos />
+  <Resenas />
 
   {/* El relleno vertical va en el contenedor para que la cinta final llegue al borde de la sección. */}
   <section id="contacto" aria-labelledby="titulo-contacto" class="bg-surface text-on-surface">

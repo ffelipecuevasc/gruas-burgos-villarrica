@@ -6,7 +6,7 @@ import fotoHero from '../assets/fotos/06-grua-de-noche-con-auto-accidentado.webp
 // JSON-LD del negocio (iteración 04-01). Un solo nodo y solo en la portada.
 // No lleva `geo` ni `hasMap` hasta que el desarrollador valide las coordenadas y entregue el enlace
 // oficial del perfil de Google; tampoco `priceRange`, `aggregateRating`, `review` (RDA-007),
-// `foundingDate` ni capacidades de las grúas.
+// `foundingDate`, capacidades de las grúas, razón social ni RUT.
 
 // `image` es la foto del hero en WebP de 1280 px: la misma variante que `Hero.astro` publica como
 // reserva, así que no agrega otro archivo a `dist/`.
@@ -36,10 +36,14 @@ const datos = {
       closes: '23:59',
     },
   }),
-  areaServed: negocio.cobertura.localidades.map((localidad) => ({
-    '@type': 'City',
-    name: localidad.nombre,
-  })),
+  areaServed: [
+    ...negocio.cobertura.localidades.map((localidad) => ({
+      '@type': 'City',
+      name: localidad.nombre,
+    })),
+    { '@type': 'AdministrativeArea', name: negocio.cobertura.region },
+  ],
+  paymentAccepted: negocio.pagos.aceptados,
   sameAs: [negocio.redes.instagram, negocio.redes.facebook, negocio.redes.tiktok],
 };
 

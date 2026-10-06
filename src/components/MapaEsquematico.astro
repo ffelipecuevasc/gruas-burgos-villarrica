@@ -3,7 +3,8 @@ import { negocio, localidadesTexto } from '../data/negocio.js';
 
 /**
  * Mapa esquemático de la cobertura: SVG propio, sin escala, pensado para leerse a 360 px.
- * Los nombres y las referencias salen de `negocio.cobertura.localidades`.
+ * Los nombres y las referencias salen de `negocio.cobertura.localidades`. El texto alternativo nombra
+ * solo las localidades dibujadas.
  *
  * @typedef {Object} Props
  * @property {string} [class] Clases adicionales de Tailwind.
@@ -32,7 +33,7 @@ const puntos = negocio.cobertura.localidades.flatMap((localidad) => {
       ...posicion,
       esBase: localidad.nombre === negocio.direccion.comuna,
       // Una referencia con coma se reparte en dos líneas para que quepa en el ancho del mapa.
-      lineas: localidad.referencia.split(', '),
+      lineas: localidad.referencia ? localidad.referencia.split(', ') : [],
     },
   ];
 });
@@ -43,7 +44,7 @@ const puntos = negocio.cobertura.localidades.flatMap((localidad) => {
     viewBox="0 0 320 410"
     xmlns="http://www.w3.org/2000/svg"
     role="img"
-    aria-label={`Mapa esquemático de la cobertura: ${localidadesTexto()}`}
+    aria-label={`Mapa esquemático de la cobertura: ${localidadesTexto(puntos.map((punto) => punto.nombre))}`}
     class="mx-auto block h-auto w-full max-w-md"
   >
     <ellipse cx="158" cy="152" rx="70" ry="30" class="fill-surface-container-high"></ellipse>

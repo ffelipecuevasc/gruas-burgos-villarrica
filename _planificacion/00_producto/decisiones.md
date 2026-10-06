@@ -115,6 +115,8 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 
 **Actualización 2026-10-02:** Inicio incluye además la galería «Trabajos en terreno» (iteración 04-02), entre Quiénes somos y las opiniones. Siguen siendo tres secciones y tres anclas: la galería es un bloque de Inicio y no tiene ancla propia.
 
+**Actualización 2026-10-06 (iteración 05-04, pedido del cliente en la reunión del 2026-10-04):** el orden de la página pasa a ser hero, cinta de métricas, Servicios, Quiénes somos, galería «Trabajos en terreno», opiniones de Google y Contacto. Siguen las tres anclas: `#inicio` contiene el hero y la cinta de métricas; `#servicios`, los ocho servicios y el equipamiento; `#contacto`, los canales, los medios de pago, el formulario y la cobertura. Quiénes somos, la galería y las opiniones dejan de ser bloques de Inicio: son secciones entre `#servicios` y `#contacto`, cada una con su `h2`, sin ancla propia y sin entrada en el menú. Esto reemplaza lo que la decisión y la actualización del 2026-10-02 dicen sobre la ubicación de esos tres bloques. Sigue siendo una sola página, con la `404` aparte.
+
 ## RDA-010 · Medición de conversiones de Google Ads
 
 - **Fecha:** 2026-09-29
@@ -134,6 +136,8 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 **Decisión:** Publicar las diez fotos tal como están: la 6 fija en el hero y las otras nueve en la galería «Trabajos en terreno». Los riesgos anteriores los acepta el desarrollador. Ningún texto alternativo transcribe los rótulos (teléfonos, nombres, patentes) ni nombra la marca o el modelo de las grúas, y el teléfono válido es siempre el de `src/data/negocio.js`.
 **Alternativas consideradas:** Esperar los originales sin procesar (deja el hero y la galería sin fotos reales por un plazo indefinido); retocar o recortar los rótulos, las patentes y las personas (más manipulación sobre imágenes ya alteradas, y fuera de alcance).
 **Consecuencias:** El sitio muestra trabajos reales del negocio desde la primera versión. Un visitante puede leer en una foto un teléfono que no es el del negocio: en el hero la foto va al 35 % bajo el velo, pero en la galería los rótulos se leen. Cuando Yerko entregue los originales sin procesar, se reemplazan los archivos de `src/assets/fotos/` conservando los nombres, y se revisan los textos alternativos.
+
+**Actualización 2026-10-06 (iteración 05-04):** la foto 7 sale de la galería y pasa a la franja «Quiénes somos», con el mismo texto alternativo. El reparto queda así: la 6 en el hero, la 7 en «Quiénes somos» y las otras ocho en la galería (la 10 destacada y siete más); ninguna se repite en la página. La 7 se publica recortada a 16:9 y la 2, a 2:1; los recortes se hacen al compilar y los archivos de `src/assets/fotos/` no cambian. La regla de los textos alternativos sigue igual.
 
 ## RDA-012 · `sharp` como dependencia directa
 

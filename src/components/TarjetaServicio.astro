@@ -8,6 +8,9 @@ import { enlaceWhatsApp } from '../data/negocio.js';
  */
 
 /**
+ * Tarjeta de un servicio. Si el servicio no trae lista de características, la tarjeta es compacta:
+ * sin ícono ni lista, solo título, descripción y botón.
+ *
  * @typedef {Object} Props
  * @property {Servicio} servicio Objeto con la información del servicio.
  * @property {string} [class] Clases adicionales de Tailwind.
@@ -18,39 +21,45 @@ const { servicio, class: clase = '' } = Astro.props;
 
 // `astro check` no aplica el JSDoc de `Props` en el frontmatter, así que `servicio` llega sin tipo.
 // `Array.from(…, String)` devuelve un `string[]` y el parámetro del `.map()` de abajo queda tipado.
-const caracteristicas = Array.from(servicio.caracteristicas, String);
+const caracteristicas = Array.from(servicio.caracteristicas ?? [], String);
+const compacta = caracteristicas.length === 0;
 ---
 
 <article
   class:list={[
-    'flex flex-col justify-between border border-surface-container-highest bg-surface-container-low p-space-lg text-on-surface transition-colors hover:border-primary-container',
+    'flex flex-col justify-between border border-surface-container-highest bg-surface-container-low text-on-surface transition-colors hover:border-primary-container',
+    compacta ? 'gap-space-md p-space-md' : 'p-space-lg',
     clase,
   ]}
 >
-  <div class="space-y-space-md">
-    <div>
-      <div class="inline-flex size-12 items-center justify-center bg-surface-container-highest text-primary">
-        <Icono nombre={servicio.icono} class="size-6" />
+  <div class:list={[!compacta && 'space-y-space-md']}>
+    {!compacta && (
+      <div>
+        <div class="inline-flex size-12 items-center justify-center bg-surface-container-highest text-primary">
+          <Icono nombre={servicio.icono} class="size-6" />
+        </div>
+        <div class="mt-space-sm h-[2px] w-8 bg-primary" />
       </div>
-      <div class="mt-space-sm h-[2px] w-8 bg-primary"></div>
-    </div>
+    )}
 
     <div class="space-y-space-xs">
       <h3 class="font-display text-headline-sm text-on-surface uppercase">{servicio.titulo}</h3>
       <p class="font-body text-body-md text-secondary">{servicio.descripcion}</p>
     </div>
 
-    <ul class="space-y-space-xs pt-space-xs font-body text-body-sm text-secondary">
-      {caracteristicas.map((caracteristica) => (
-        <li class="flex items-start gap-space-xs">
-          <Icono nombre="verificacion" class="mt-0.5 size-4 shrink-0 text-primary" />
-          <span>{caracteristica}</span>
-        </li>
-      ))}
-    </ul>
+    {!compacta && (
+      <ul class="space-y-space-xs pt-space-xs font-body text-body-sm text-secondary">
+        {caracteristicas.map((caracteristica) => (
+          <li class="flex items-start gap-space-xs">
+            <Icono nombre="verificacion" class="mt-0.5 size-4 shrink-0 text-primary" />
+            <span>{caracteristica}</span>
+          </li>
+        ))}
+      </ul>
+    )}
   </div>
 
-  <div class="mt-space-lg border-t border-surface-container pt-space-md">
+  <div class:list={[!compacta && 'mt-space-lg border-t border-surface-container pt-space-md']}>
     <Boton
       href={enlaceWhatsApp(servicio.mensajeWhatsApp)}
       variante="contorno"

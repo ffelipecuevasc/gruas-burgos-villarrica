@@ -4,7 +4,6 @@ import Contenedor from './Contenedor.astro';
 import TituloSeccion from './TituloSeccion.astro';
 import fotoBomberos from '../assets/fotos/10-rescate-nocturno-junto-a-bomberos.webp';
 import fotoTraslado from '../assets/fotos/01-traslado-auto-accidentado-camino.webp';
-import fotoCable from '../assets/fotos/07-rescate-con-cable-de-camioneta.webp';
 import fotoDosGruas from '../assets/fotos/02-dos-gruas-en-carretera.webp';
 import fotoNoche from '../assets/fotos/05-grua-de-noche-con-auto-chocado.webp';
 import fotoJeep from '../assets/fotos/03-grua-con-jeep-sobre-plataforma.webp';
@@ -13,7 +12,8 @@ import fotoPana from '../assets/fotos/04-grua-con-vehiculo-en-pana.webp';
 import fotoAtardecer from '../assets/fotos/09-grua-al-atardecer-junto-al-volcan.webp';
 
 /**
- * Galería de trabajos: bloque de la sección `#inicio` (RDA-009), entre Quiénes somos y las opiniones.
+ * Galería de trabajos: bloque entre `#servicios` y `#contacto`, sin ancla propia (RDA-009). Va entre
+ * Quiénes somos y las opiniones.
  * Sin interacción ni JavaScript. Las fotos se publican tal como están en las redes del negocio (RDA-011).
  *
  * @typedef {Object} Props
@@ -23,7 +23,8 @@ import fotoAtardecer from '../assets/fotos/09-grua-al-atardecer-junto-al-volcan.
 /** @type {Props} */
 const { class: clase = '' } = Astro.props;
 
-// Orden y textos alternativos aprobados en la iteración 04-02. La primera foto es apaisada y va destacada.
+// Textos alternativos aprobados en la iteración 04-02. La primera foto es apaisada y va destacada.
+// La foto 07 pasó a «Quiénes somos» en la iteración 05-04: quedan la destacada y siete fotos.
 const destacada = {
   src: fotoBomberos,
   alt: 'Grúa trabajando junto a Bomberos en un rescate nocturno a las afueras de Villarrica.',
@@ -31,14 +32,6 @@ const destacada = {
 
 const fotos = [
   { src: fotoTraslado, alt: 'Grúa trasladando un auto accidentado por un camino de Villarrica.' },
-  {
-    src: fotoCable,
-    alt: 'Grúa rescatando con cable una camioneta que se salió del camino entre Villarrica y Pucón.',
-  },
-  {
-    src: fotoDosGruas,
-    alt: 'Dos grúas trabajando juntas en la carretera, a las afueras de Villarrica.',
-  },
   { src: fotoNoche, alt: 'Grúa de noche en Villarrica con un auto chocado sobre la plataforma.' },
   { src: fotoJeep, alt: 'Grúa llegando al centro de Villarrica con un jeep sobre la plataforma.' },
   {
@@ -51,19 +44,27 @@ const fotos = [
     alt: 'Grúa llegando al atardecer a un camino a los pies del volcán Villarrica.',
   },
 ];
+
+// Última celda: ocupa dos columnas para que ninguna fila quede con un hueco. Se eligió esta foto
+// porque su encuadre admite el recorte apaisado (2:1) sin cortar las grúas.
+const ancha = {
+  src: fotoDosGruas,
+  alt: 'Dos grúas trabajando juntas en la carretera, a las afueras de Villarrica.',
+};
 ---
 
 <section
   aria-labelledby="titulo-trabajos"
   class:list={[
-    'border-b border-surface-container-highest bg-surface-container-low py-space-xl text-on-surface',
+    'border-b border-surface-container-highest bg-surface py-space-xl text-on-surface',
     clase,
   ]}
 >
   <Contenedor class="space-y-space-xl">
     <TituloSeccion id="titulo-trabajos">Trabajos en terreno</TituloSeccion>
 
-    {/* Diez celdas: la destacada ocupa dos. Móvil, 2 columnas; desde `md`, 4; desde `lg`, 5 (dos filas).
+    {/* La destacada y la última ocupan dos celdas cada una; las otras seis, una. Así las filas quedan
+        completas: 2 columnas en móvil (5 filas), 4 desde `md` (3 filas) y 5 desde `lg` (2 filas).
         Cada imagen reserva su espacio con `width` y `height`, así que no hay saltos al cargar.
         `width` también fija la variante mayor: sin él, Astro publica además la foto a tamaño completo.
         `sizes` es el ancho real de cada celda: el contenedor (100vw, o 1280 px como máximo) menos sus
@@ -97,6 +98,22 @@ const fotos = [
           />
         </li>
       ))}
+      {/* En móvil va sola en su fila y toma su alto de la proporción 2:1; desde `md` comparte fila con
+          fotos cuadradas y toma el alto de ellas. */}
+      <li class="relative col-span-2 aspect-[2/1] md:aspect-auto">
+        <Picture
+          src={ancha.src}
+          alt={ancha.alt}
+          formats={['avif']}
+          fallbackFormat="webp"
+          width={960}
+          height={480}
+          fit="cover"
+          widths={[320, 480, 720, 960]}
+          sizes="(min-width: 1280px) 480px, (min-width: 1024px) calc(40vw - 21px), (min-width: 768px) calc(50vw - 24px), calc(100vw - 40px)"
+          class="absolute inset-0 block h-full w-full object-cover"
+        />
+      </li>
     </ul>
   </Contenedor>
 </section>

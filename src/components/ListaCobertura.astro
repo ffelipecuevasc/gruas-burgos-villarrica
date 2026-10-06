@@ -14,11 +14,19 @@ const localidades = negocio.cobertura.localidades;
 
 <div class:list={['space-y-space-md', clase]}>
   <h3 class="font-display text-headline-sm uppercase text-on-surface">Dónde atendemos</h3>
+  <div class="font-body text-body-md text-on-surface">
+    {negocio.cobertura.alcance.map((linea) => (
+      <p>{linea}</p>
+    ))}
+  </div>
   <ul class="divide-y divide-surface-container-highest border border-surface-container-highest bg-surface-container-low font-body text-body-md">
     {localidades.map((loc) => (
       <li class="flex items-center justify-between p-space-md gap-space-sm">
         <span class="font-display text-label-lg text-on-surface uppercase">{loc.nombre}</span>
-        <span class="text-secondary text-body-sm text-right">{loc.referencia}</span>
+        {/* Una localidad sin referencia de ruta muestra solo su nombre. */}
+        {loc.referencia && (
+          <span class="text-secondary text-body-sm text-right">{loc.referencia}</span>
+        )}
       </li>
     ))}
   </ul>

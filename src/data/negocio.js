@@ -15,7 +15,7 @@ export const PENDIENTE_CLIENTE = 'PENDIENTE_CLIENTE';
 /**
  * @typedef {Object} WhatsApp
  * @property {string} numero Solo dígitos, con código de país, para `wa.me`.
- * @property {{ emergencia: string, cotizacion: string, ubicacion: string, trasladoOtraCiudad: string }} mensajes Mensajes predeterminados; terminan con un espacio.
+ * @property {{ emergencia: string, cotizacion: string, ubicacion: string }} mensajes Mensajes predeterminados; terminan con un espacio.
  */
 
 /**
@@ -42,14 +42,22 @@ export const PENDIENTE_CLIENTE = 'PENDIENTE_CLIENTE';
 /**
  * @typedef {Object} Localidad
  * @property {string} nombre
- * @property {string} referencia
+ * @property {string} [referencia] Referencia de ruta. Se omite si no hay una fuente verificada.
  */
 
 /**
  * @typedef {Object} Cobertura
  * @property {Localidad[]} localidades Localidades atendidas.
+ * @property {string} region Región donde se presta el servicio de grúa.
+ * @property {string[]} alcance Frases sobre el alcance del servicio; cada una es una línea.
  * @property {string} asistenciasDocumentadas Lugar donde se ha prestado servicio, redactado para ir dentro de una frase.
  * @property {string} tiemposRespuesta Tiempos estimados de llegada por zona.
+ */
+
+/**
+ * @typedef {Object} Pagos
+ * @property {string} texto Medios de pago y documentos, para mostrar.
+ * @property {string} aceptados Medios de pago en una lista, para los datos estructurados.
  */
 
 /**
@@ -71,6 +79,7 @@ export const PENDIENTE_CLIENTE = 'PENDIENTE_CLIENTE';
  * @property {Coordenadas} coordenadas
  * @property {Horario} horario
  * @property {Cobertura} cobertura
+ * @property {Pagos} pagos
  * @property {string} anioInicio Año de inicio de operaciones.
  * @property {RedesSociales} redes
  */
@@ -90,7 +99,6 @@ export const negocio = {
       emergencia: 'Hola, necesito una grúa en Villarrica. Mi ubicación es: ',
       cotizacion: 'Hola, quiero cotizar un servicio de grúa. ',
       ubicacion: 'Hola, necesito una grúa. Te envío mi ubicación por aquí. ',
-      trasladoOtraCiudad: 'Hola, quiero cotizar un traslado a otra ciudad. ',
     },
   },
   correo: 'gruasburgosvillarrica@gmail.com',
@@ -115,11 +123,20 @@ export const negocio = {
       { nombre: 'Villarrica', referencia: 'Base de operaciones' },
       { nombre: 'Pucón', referencia: 'Ruta CH-199' },
       { nombre: 'Licán Ray', referencia: 'Ruta S-95-T' },
+      // Sin referencia de ruta: no hay una fuente verificada (decisión del 2026-10-05).
+      { nombre: 'Coñaripe' },
       { nombre: 'Freire', referencia: 'Ruta CH-199, conexión con la Ruta 5 Sur' },
     ],
+    region: 'La Araucanía',
+    alcance: ['Grúas en toda La Araucanía.', 'Traslado de vehículos a todo Chile.'],
     // En minúscula inicial: el dato se lee dentro de una frase (ListaCobertura.astro).
     asistenciasDocumentadas: 'paso fronterizo Mamuil Malal (Ruta CH-199, Curarrehue)',
     tiemposRespuesta: PENDIENTE_CLIENTE,
+  },
+  pagos: {
+    texto:
+      'Efectivo, transferencia, tarjeta de débito y tarjeta de crédito. Emitimos boletas y facturas.',
+    aceptados: 'Efectivo, transferencia bancaria, tarjeta de débito, tarjeta de crédito',
   },
   anioInicio: PENDIENTE_CLIENTE,
   redes: {
@@ -148,11 +165,11 @@ export function enlaceWhatsApp(mensaje = negocio.whatsapp.mensajes.emergencia) {
 }
 
 /**
- * Devuelve la lista de localidades principales en formato texto continuo.
- * @returns {string} Texto formateado con las localidades (ej. "Villarrica, Pucón, Licán Ray y Freire").
+ * Devuelve una lista de localidades en formato texto continuo.
+ * @param {string[]} [nombres] Nombres a unir; por defecto, todas las localidades de la cobertura.
+ * @returns {string} Texto formateado (ej. "Villarrica, Pucón, Licán Ray, Coñaripe y Freire").
  */
-export function localidadesTexto() {
-  const nombres = negocio.cobertura.localidades.map((loc) => loc.nombre);
+export function localidadesTexto(nombres = negocio.cobertura.localidades.map((loc) => loc.nombre)) {
   if (nombres.length === 0) return '';
   if (nombres.length === 1) return nombres[0];
   return `${nombres.slice(0, -1).join(', ')} y ${nombres[nombres.length - 1]}`;

@@ -1,9 +1,12 @@
 ---
+import { Picture } from 'astro:assets';
 import Contenedor from './Contenedor.astro';
 import TituloSeccion from './TituloSeccion.astro';
+import fotoCable from '../assets/fotos/07-rescate-con-cable-de-camioneta.webp';
 
 /**
- * Bloque de la sección `#inicio` (RDA-009).
+ * Franja resumida entre `#servicios` y `#contacto`, sin ancla propia (RDA-009).
+ * Texto aprobado en la iteración 05-04, sin nombres propios.
  *
  * @typedef {Object} Props
  * @property {string} [class] Clases adicionales de Tailwind.
@@ -16,36 +19,45 @@ const { class: clase = '' } = Astro.props;
 <section
   aria-labelledby="titulo-quienes-somos"
   class:list={[
-    'border-b border-surface-container-highest bg-surface py-space-xl text-on-surface',
+    'border-b border-surface-container-highest bg-surface-container-low py-space-xl text-on-surface',
     clase,
   ]}
 >
-  <Contenedor class="space-y-space-lg">
-    <TituloSeccion id="titulo-quienes-somos">Quiénes somos</TituloSeccion>
+  {/* En teléfonos la foto va apilada bajo el texto; desde `sm`, a su derecha. */}
+  <Contenedor class="grid grid-cols-1 items-center gap-space-lg sm:grid-cols-[minmax(0,1fr)_auto] md:gap-space-xl">
+    <div class="space-y-space-lg">
+      <TituloSeccion id="titulo-quienes-somos">Quiénes somos</TituloSeccion>
 
-    {/* Ancho de lectura de DESIGN.md §3 (regla 2): con `max-w-xl` las líneas no pasan de 75 caracteres.
-        Va aquí y no en `Contenedor`, que ya fija su propio ancho máximo. */}
-    <div class="max-w-xl space-y-space-md font-body text-body-lg text-secondary">
-      <p>
-        Grúas Burgos es un servicio de grúas con base en Villarrica. Lo dirige Yerko Burgos, que
-        está a cargo de los rescates.
-      </p>
+      {/* `text-body-md` en móvil, como el párrafo del hero, para que la franja no pase de 560 px.
+          Ancho de lectura de DESIGN.md §3 (regla 2): `max-w-lg` con esa letra y `max-w-xl` con la de
+          escritorio dejan las líneas en 75 caracteres o menos. */}
+      <div class="max-w-lg space-y-space-md md:max-w-xl font-body text-body-md text-secondary md:text-body-lg">
+        <p>
+          Grúas Burgos es un servicio de grúas con base en Villarrica, atendido por sus propios
+          dueños.
+        </p>
 
-      <p>
-        Trabajamos con un camión de plataforma hidráulica (grúa cama) y winche para sacar vehículos
-        atascados fuera del camino. Atendemos autos, SUV y camionetas 4x4 en la ciudad, en caminos
-        rurales y en rutas de cordillera, y hemos prestado servicio en el paso fronterizo Mamuil
-        Malal.
-      </p>
-
-      <p class="border-l-4 border-primary-container bg-surface-container-low p-space-md font-display text-headline-sm text-on-surface uppercase">
-        «Servicio de grúa 24/7 y donde nos necesiten.»
-      </p>
-
-      <p>
-        Quienes nos han llamado destacan la rapidez, la puntualidad, la buena disposición y el
-        cuidado con su vehículo.
-      </p>
+        <p>
+          Trabajamos con un camión de plataforma hidráulica (grúa cama) y winche para rescate y
+          traslado de vehículos. Hemos prestado servicio en el paso fronterizo Mamuil Malal.
+        </p>
+      </div>
     </div>
+
+    {/* Foto 07, recortada a 16:9 al compilar. Reserva su espacio con `width` y `height`.
+        `sizes` es el ancho al que se dibuja: el contenedor menos sus márgenes en teléfonos (384 px
+        como máximo), 224 px desde `sm`, 256 px desde `md` y 320 px desde `lg`. */}
+    <Picture
+      src={fotoCable}
+      alt="Grúa rescatando con cable una camioneta que se salió del camino entre Villarrica y Pucón."
+      formats={['avif']}
+      fallbackFormat="webp"
+      width={768}
+      height={432}
+      fit="cover"
+      widths={[256, 320, 480, 640, 768]}
+      sizes="(min-width: 1024px) 320px, (min-width: 768px) 256px, (min-width: 640px) 224px, (min-width: 424px) 384px, calc(100vw - 40px)"
+      class="block h-auto w-full max-w-sm sm:w-56 md:w-64 lg:w-80"
+    />
   </Contenedor>
 </section>

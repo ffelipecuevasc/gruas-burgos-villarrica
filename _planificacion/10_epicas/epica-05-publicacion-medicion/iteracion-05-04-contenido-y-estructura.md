@@ -1,7 +1,7 @@
 # Iteración 05-04 · Cambios del cliente: contenido y estructura de la página
 
 - **Épica:** 05 · Ajustes finales, publicación y medición
-- **Estado:** Pendiente
+- **Estado:** En revisión (fase A medida el 2026-10-06, [bitácora](../../99_bitacora/bitacora-05-04-2026-10-06.md); falta la fase B del desarrollador y la aprobación del cliente)
 - **Rama sugerida:** `iteracion/05-04-cambios-cliente`
 - **Depende de:** 05-03
 - **RDA relacionadas:** RDA-006, RDA-007, RDA-008, RDA-009, RDA-011
@@ -101,18 +101,18 @@ Los servicios nuevos no llevan lista de características. «Rescates complejos c
 
 **Fase A, local (`pnpm preview`):**
 
-- [ ] `pnpm format:check` sin diferencias; `pnpm check` y `pnpm build` con 0 errores y 0 advertencias.
-- [ ] Orden de la página verificado en el DOM. Las tres anclas llevan a su sección con el título visible bajo el header, a 360, 768 y 1280 px.
-- [ ] Ocho servicios con su botón y mensaje; cada mensaje abre `wa.me` con el texto aprobado (se prueba cada enlace).
-- [ ] Alturas medidas a 360, 768, 1024, 1280 y 1920 px: Servicios y «Quiénes somos» dentro de los límites de las tareas 2 y 3. Sin huecos en las grillas de Servicios y de la galería.
-- [ ] Peso a 360 × 640 px, densidad 1 y 4G: total de 400 KB o menos; HTML más CSS de 50 KB o menos; JavaScript de menos de 1 KB (igual al de 05-03); foto del hero de 150 KB o menos. Se informa también el peso de la página completa con carga diferida.
-- [ ] Primera pantalla a 360 × 640 px: etiqueta, `h1` y ambos botones del hero completos con 8 px o más sobre la barra. 0 objetivos táctiles bajo 44 × 44 px. Sin desborde horizontal a 320, 360, 768, 1024 y 1280 px.
-- [ ] Recorrido con Tab y Mayús + Tab a 320, 360, 768, 1280 y 1536 px: 0 elementos enfocados cubiertos por elementos fijos.
-- [ ] Búsqueda en `dist/`: «15 toneladas» aparece una sola vez; no aparece «Yerko» fuera de las reseñas y de la URL de TikTok, ni «Rozas», ni la palabra «RUT», ni «razón social», ni «© 2026». Todo el contenido aprobado aparece tal cual. Ningún texto de la lista «No publicar» aparece.
-- [ ] Las fotos usan los textos alternativos aprobados, sin rótulos, marca ni modelo.
-- [ ] La lista de localidades muestra las cinco en el orden aprobado; la fila de Coñaripe, sin referencia, queda alineada con las demás a 360, 768 y 1280 px.
-- [ ] JSON-LD con `areaServed` y `paymentAccepted`, sin `priceRange` ni datos tributarios, y sin valores `PENDIENTE_CLIENTE`.
-- [ ] `git status` muestra cambios solo en `src/`, `_planificacion/` y `DESIGN.md`.
+- [x] `pnpm format:check` sin diferencias; `pnpm check` y `pnpm build` con 0 errores y 0 advertencias. Medido: **0 errores, 0 advertencias y 52 hints** (igual que antes); `pnpm build` con código 0 y sin avisos.
+- [x] Orden de la página verificado en el DOM. Las tres anclas llevan a su sección con el título visible bajo el header, a 360, 768 y 1280 px. Medido: **15 de 15 clics** con el título visible; sección a **111,6–112,2 px** con el header hasta 112 px; **1** `h1`, **0** saltos de nivel y **0** `id` duplicados.
+- [x] Ocho servicios con su botón y mensaje; cada mensaje abre `wa.me` con el texto aprobado (se prueba cada enlace). Medido: **8 de 8** mensajes iguales al aprobado, carácter por carácter y con el espacio final. Se comprobó el enlace; la apertura de WhatsApp es de la fase B.
+- [x] Alturas medidas a 360, 768, 1024, 1280 y 1920 px: Servicios y «Quiénes somos» dentro de los límites de las tareas 2 y 3. Sin huecos en las grillas de Servicios y de la galería. Medido: Servicios **3.099, 1.992, 1.403, 1.325 y 1.325 px**; «Quiénes somos» **552, 352, 324, 324 y 324 px**; **0 huecos** y **0 celdas vacías** en los cinco anchos. La línea base no coincide con el «hoy» de las tareas 2 y 3: medí 2.165 y 1.039 px en Servicios, y 764 y 526 px en «Quiénes somos».
+- [x] Peso a 360 × 640 px, densidad 1 y 4G: total de 400 KB o menos; HTML más CSS de 50 KB o menos; JavaScript de menos de 1 KB (igual al de 05-03); foto del hero de 150 KB o menos. Se informa también el peso de la página completa con carga diferida. Medido: **137,4 KB** en total, **22,2 KB** de HTML más CSS, **960 B** de JavaScript (igual que en 05-03; 191 B en el 404) y **19,1 KB** de foto del hero. Página completa: **188,2 KB**.
+- [x] Primera pantalla a 360 × 640 px: etiqueta, `h1` y ambos botones del hero completos con 8 px o más sobre la barra. 0 objetivos táctiles bajo 44 × 44 px. Sin desborde horizontal a 320, 360, 768, 1024 y 1280 px. Medido: **17 px** sobre la barra; **0** objetivos bajo 44 × 44 px (el menor, 45 × 44 px); **sin desborde** en esos cinco anchos ni a 1536 y 1920 px.
+- [x] Recorrido con Tab y Mayús + Tab a 320, 360, 768, 1280 y 1536 px: 0 elementos enfocados cubiertos por elementos fijos. Medido: **0 cubiertos** en 20 recorridos completos (portada y 404) y en 393 paradas más, partiendo de la mitad y del final de la página. Los botones flotantes siguen ocultándose al llegar al pie.
+- [x] Búsqueda en `dist/` (medido: «15 toneladas» **1 vez**; «Yerko» **4 veces** en `index.html`, 2 en reseñas y 2 en la URL de TikTok; el resto, **0**; las 26 cadenas aprobadas comprobadas, tal cual): «15 toneladas» aparece una sola vez; no aparece «Yerko» fuera de las reseñas y de la URL de TikTok, ni «Rozas», ni la palabra «RUT», ni «razón social», ni «© 2026». Todo el contenido aprobado aparece tal cual. Ningún texto de la lista «No publicar» aparece.
+- [x] Las fotos usan los textos alternativos aprobados, sin rótulos, marca ni modelo. Medido: **10 de 10** sin cambios respecto de 04-02; 0 dígitos y 0 marcas.
+- [x] La lista de localidades muestra las cinco en el orden aprobado; la fila de Coñaripe, sin referencia, queda alineada con las demás a 360, 768 y 1280 px. Medido: fila de **53 px** con el nombre en **x = 37 px**, igual que las demás de una línea, en los tres anchos.
+- [x] JSON-LD con `areaServed` y `paymentAccepted`, sin `priceRange` ni datos tributarios, y sin valores `PENDIENTE_CLIENTE`. Medido: `areaServed` con **5 localidades y La Araucanía**; `paymentAccepted` con el texto aprobado; el JSON se interpreta sin error.
+- [x] `git status` muestra cambios solo en `src/`, `_planificacion/` y `DESIGN.md`. Sigue además `AD src/assets/LogoGruasBurgos.svg`, anterior a la iteración.
 
 **Fase B, vista previa de `pages.dev` (evidencia en `evidencia-05-04-fase-b.md`):**
 
