@@ -1,7 +1,7 @@
 # Iteración 05-05 · Mapa de cobertura con imagen real
 
 - **Épica:** 05 · Ajustes finales, publicación y medición
-- **Estado:** En revisión (fase A medida el 2026-10-06, [bitacora-05-05-2026-10-06](../../99_bitacora/bitacora-05-05-2026-10-06.md); falta la fase B del desarrollador)
+- **Estado:** En revisión (fase A medida el 2026-10-06, [bitacora-05-05-2026-10-06](../../99_bitacora/bitacora-05-05-2026-10-06.md); fase B registrada el 2026-10-06 con la evidencia del desarrollador, [bitacora-05-05-fase-b-2026-10-06](../../99_bitacora/bitacora-05-05-fase-b-2026-10-06.md); la marca «Terminada» la pone el desarrollador)
 - **Rama sugerida:** `iteracion/05-05-mapa-cobertura`
 - **Depende de:** 05-04 (terminada) y el mapa aprobado por el desarrollador, que ya está en el repositorio
 - **RDA relacionadas:** RDA-006, RDA-009, RDA-011
@@ -75,9 +75,9 @@ El peso del archivo fuente no cuenta contra el presupuesto de la página: Astro 
 
 **Fase B, vista previa de `pages.dev` (evidencia en `evidencia-05-05-fase-b.md`):**
 
-- [ ] El desarrollador revisa el mapa en el teléfono real y en escritorio: se ve completo, el círculo rojo queda centrado en Villarrica y la atribución es visible.
-- [ ] El desarrollador deja la confirmación escrita de la fuente y la licencia del mapa base (OpenStreetMap, sin Google Maps) y de que la atribución cumple la licencia.
-- [ ] `curl.exe -sI` contra la dirección de la vista previa devuelve `200 OK` y `x-robots-tag: noindex`.
+- [x] El desarrollador revisa el mapa en el teléfono real y en escritorio: se ve completo, el círculo rojo queda centrado en Villarrica y la atribución es visible. **Evidencia (2026-10-06, commit `59d9753`, Chrome):** completo y sin deformarse en el teléfono y en escritorio; centrado en Villarrica, a juicio del desarrollador; atribución visible y sin taparse. El tamaño de 576 px en escritorio se deja así.
+- [x] El desarrollador deja la confirmación escrita de la fuente y la licencia del mapa base (OpenStreetMap, sin Google Maps) y de que la atribución cumple la licencia. **Evidencia:** datos y teselas de OpenStreetMap, sin Google Maps; ODbL para los datos y CC BY-SA para las teselas estándar; atribución considerada suficiente y aceptada como texto, sin enlace. **Nota:** la fecha de obtención del mapa base y la herramienta con que se dibujó el círculo quedaron no verificadas.
+- [x] `curl.exe -sI` contra la dirección de la vista previa devuelve `200 OK` y `x-robots-tag: noindex`. **Evidencia:** `200 OK` y `x-robots-tag: noindex`, contra la dirección del despliegue.
 
 ## Fuera de alcance
 
