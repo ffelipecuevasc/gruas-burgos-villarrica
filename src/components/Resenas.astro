@@ -3,11 +3,13 @@ import Contenedor from './Contenedor.astro';
 import TituloSeccion from './TituloSeccion.astro';
 import TarjetaResena from './TarjetaResena.astro';
 import Boton from './Boton.astro';
+import LogoGoogle from '../assets/marcas/google.svg';
 import { resenas } from '../data/resenas.js';
 import { enlaceOpinionesGoogle } from '../data/negocio.js';
 
 /**
- * Bloque entre `#servicios` y `#contacto`, sin ancla propia (RDA-009). Si no hay reseñas, no se renderiza.
+ * Opiniones de Google, con el ancla `#opiniones` (RDA-009). Se muestran todas, sin acordeón (RDA-007).
+ * Si no hay reseñas, no se renderiza.
  *
  * @typedef {Object} Props
  * @property {string} [class] Clases adicionales de Tailwind.
@@ -20,11 +22,14 @@ if (!resenas || resenas.length === 0) {
   return null;
 }
 
-const primerasResenas = resenas.slice(0, 6);
-const resenasRestantes = resenas.slice(6);
+// Desde `lg` la grilla tiene 6 columnas: cada tarjeta ocupa 2 (tres por fila) y, si la última fila
+// quedaría incompleta, las últimas tarjetas ocupan 3 (dos por fila). Así ninguna fila deja un hueco.
+const sobrantes = resenas.length % 3;
+const anchas = sobrantes === 1 ? 4 : sobrantes === 2 ? 2 : 0;
 ---
 
 <section
+  id="opiniones"
   aria-labelledby="titulo-opiniones"
   class:list={[
     'border-b border-surface-container-highest bg-surface-container-lowest py-space-xl text-on-surface',
@@ -34,31 +39,20 @@ const resenasRestantes = resenas.slice(6);
   <Contenedor class="space-y-space-xl">
     <TituloSeccion id="titulo-opiniones" bajada="Opiniones publicadas en Google.">
       Lo que dicen nuestros clientes
+      {/* Logotipo de Google: marca de un tercero, sin modificar (DESIGN.md §6.2). Solo se escala. */}
+      <Fragment slot="junto">
+        <LogoGoogle role="img" aria-label="Google" class="h-6 w-auto shrink-0 md:h-8" />
+      </Fragment>
     </TituloSeccion>
 
-    <div class="grid grid-cols-1 gap-space-md md:grid-cols-2 lg:grid-cols-3">
-      {primerasResenas.map((resena) => (
-        <TarjetaResena resena={resena} />
+    <div class="grid grid-cols-1 gap-space-md md:grid-cols-2 lg:grid-cols-6">
+      {resenas.map((resena, indice) => (
+        <TarjetaResena
+          resena={resena}
+          class={indice >= resenas.length - anchas ? 'lg:col-span-3' : 'lg:col-span-2'}
+        />
       ))}
     </div>
-
-    {/* Acordeón nativo: sin JavaScript y operable con teclado. */}
-    {resenasRestantes.length > 0 && (
-      <details class="group space-y-space-md">
-        <summary class="inline-flex min-h-11 cursor-pointer items-center gap-space-xs border border-surface-container-highest bg-surface-container-low px-space-md font-display text-label-md text-on-surface uppercase transition-colors select-none hover:border-primary-container">
-          Ver {resenasRestantes.length} opiniones más
-          <span class="transition-transform group-open:rotate-180" aria-hidden="true">
-            ▼
-          </span>
-        </summary>
-
-        <div class="grid grid-cols-1 gap-space-md md:grid-cols-2 lg:grid-cols-3">
-          {resenasRestantes.map((resena) => (
-            <TarjetaResena resena={resena} />
-          ))}
-        </div>
-      </details>
-    )}
 
     <Boton href={enlaceOpinionesGoogle()} variante="contorno" externo>
       Ver más opiniones en Google

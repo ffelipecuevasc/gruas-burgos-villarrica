@@ -55,8 +55,15 @@ export const PENDIENTE_CLIENTE = 'PENDIENTE_CLIENTE';
  */
 
 /**
+ * @typedef {Object} MedioPago
+ * @property {string} nombre Nombre visible del medio de pago.
+ * @property {string} icono Clave del ícono en Icono.astro.
+ */
+
+/**
  * @typedef {Object} Pagos
- * @property {string} texto Medios de pago y documentos, para mostrar.
+ * @property {MedioPago[]} medios Medios de pago, cada uno con su ícono, para mostrar.
+ * @property {string} documentos Documentos tributarios que se emiten, para mostrar.
  * @property {string} aceptados Medios de pago en una lista, para los datos estructurados.
  */
 
@@ -134,8 +141,13 @@ export const negocio = {
     tiemposRespuesta: PENDIENTE_CLIENTE,
   },
   pagos: {
-    texto:
-      'Efectivo, transferencia, tarjeta de débito y tarjeta de crédito. Emitimos boletas y facturas.',
+    medios: [
+      { nombre: 'Efectivo', icono: 'efectivo' },
+      { nombre: 'Transferencia', icono: 'transferencia' },
+      { nombre: 'Tarjeta de débito', icono: 'debito' },
+      { nombre: 'Tarjeta de crédito', icono: 'credito' },
+    ],
+    documentos: 'Emitimos boletas y facturas.',
     aceptados: 'Efectivo, transferencia bancaria, tarjeta de débito, tarjeta de crédito',
   },
   anioInicio: PENDIENTE_CLIENTE,

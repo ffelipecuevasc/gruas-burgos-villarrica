@@ -12,8 +12,7 @@ import fotoPana from '../assets/fotos/04-grua-con-vehiculo-en-pana.webp';
 import fotoAtardecer from '../assets/fotos/09-grua-al-atardecer-junto-al-volcan.webp';
 
 /**
- * Galería de trabajos: bloque entre `#servicios` y `#contacto`, sin ancla propia (RDA-009). Va entre
- * Quiénes somos y las opiniones.
+ * Galería de trabajos, con el ancla `#trabajos` (RDA-009). Va entre Quiénes somos y las opiniones.
  * Sin interacción ni JavaScript. Las fotos se publican tal como están en las redes del negocio (RDA-011).
  *
  * @typedef {Object} Props
@@ -54,6 +53,7 @@ const ancha = {
 ---
 
 <section
+  id="trabajos"
   aria-labelledby="titulo-trabajos"
   class:list={[
     'border-b border-surface-container-highest bg-surface py-space-xl text-on-surface',

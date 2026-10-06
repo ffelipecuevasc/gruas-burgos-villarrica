@@ -1,0 +1,5 @@
+<!--
+  Bandera de Argentina, dibujada para este sitio (iteración 05-04). Proporción 9:14, sin el Sol de Mayo.
+  Colores: celeste #74acdf y blanco.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="18" viewBox="0 0 28 18"><path fill="#74acdf" d="M0 0h28v18H0z"/><path fill="#fff" d="M0 6h28v6H0z"/></svg>

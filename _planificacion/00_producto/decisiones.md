@@ -93,6 +93,8 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 
 **Actualización 2026-09-30:** el desarrollador entregó 10 reseñas seleccionadas (no de 3 a 6), que se publican textuales y con el nombre completo del autor tal como aparece en Google. Se mantiene la prohibición de `AggregateRating` y `Review` en el marcado.
 
+**Actualización 2026-10-06 (iteración 05-04, ajustes del cliente):** las diez reseñas se muestran visibles, sin acordeón ni botón «Ver 4 opiniones más»; hasta ahora se veían seis y las otras cuatro quedaban en un acordeón nativo. Los textos, los nombres y los enlaces no cambian, y se mantiene «Ver más opiniones en Google». Junto al título de la sección va el logotipo de Google, como recurso local y sin modificar (`DESIGN.md` §6.2): es una marca de un tercero y solo indica el origen de las opiniones. Sigue sin haber widgets, JavaScript ni `AggregateRating` o `Review` en el marcado.
+
 ## RDA-008 · Fuente única de datos del negocio en `src/data/negocio.js`
 
 - **Fecha:** 2026-09-29
@@ -116,6 +118,8 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 **Actualización 2026-10-02:** Inicio incluye además la galería «Trabajos en terreno» (iteración 04-02), entre Quiénes somos y las opiniones. Siguen siendo tres secciones y tres anclas: la galería es un bloque de Inicio y no tiene ancla propia.
 
 **Actualización 2026-10-06 (iteración 05-04, pedido del cliente en la reunión del 2026-10-04):** el orden de la página pasa a ser hero, cinta de métricas, Servicios, Quiénes somos, galería «Trabajos en terreno», opiniones de Google y Contacto. Siguen las tres anclas: `#inicio` contiene el hero y la cinta de métricas; `#servicios`, los ocho servicios y el equipamiento; `#contacto`, los canales, los medios de pago, el formulario y la cobertura. Quiénes somos, la galería y las opiniones dejan de ser bloques de Inicio: son secciones entre `#servicios` y `#contacto`, cada una con su `h2`, sin ancla propia y sin entrada en el menú. Esto reemplaza lo que la decisión y la actualización del 2026-10-02 dicen sobre la ubicación de esos tres bloques. Sigue siendo una sola página, con la `404` aparte.
+
+**Actualización 2026-10-06 (iteración 05-04, ajustes del cliente tras la vista previa):** la página pasa de tres a seis anclas, en este orden: `#inicio`, `#servicios`, `#quienes-somos`, `#trabajos`, `#opiniones` y `#contacto`. El menú muestra los seis enlaces desde 768 px («Inicio», «Servicios», «Quiénes somos», «Trabajos en terreno», «Opiniones» y «Contacto») y, bajo 768 px, solo «Inicio», «Servicios» y «Contacto», como antes. Esto reemplaza lo que el título de esta RDA, la decisión y las actualizaciones anteriores dicen sobre «tres secciones ancladas» y sobre que Quiénes somos, la galería y las opiniones no tienen ancla ni entrada en el menú. Sigue siendo una sola página, con la `404` aparte, y el alcance contratado no cambia: no se agregan secciones, solo enlaces a las que ya existían.
 
 ## RDA-010 · Medición de conversiones de Google Ads
 

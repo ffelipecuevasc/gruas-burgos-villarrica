@@ -3,12 +3,19 @@ import Contenedor from './Contenedor.astro';
 import Icono from './Icono.astro';
 import BotonLlamada from './BotonLlamada.astro';
 import IndicadorDisponible from './IndicadorDisponible.astro';
+import BanderaChile from '../assets/banderas/chile.svg';
+import BanderaArgentina from '../assets/banderas/argentina.svg';
 import { negocio, enlaceTelefono } from '../data/negocio.js';
 
-// Navegación por anclas de la página única (RDA-009). Con "/#…" también funciona desde la 404.
+// Navegación por anclas de la página única (RDA-009), en el orden de la página. Con "/#…" también
+// funciona desde la 404. Los enlaces con `soloEscritorio` se muestran desde `md`: bajo ese ancho su
+// `li` no se dibuja, así que no existen para el teclado ni para un lector de pantalla.
 const enlaces = [
   { texto: 'Inicio', href: '/#inicio' },
   { texto: 'Servicios', href: '/#servicios' },
+  { texto: 'Quiénes somos', href: '/#quienes-somos', soloEscritorio: true },
+  { texto: 'Trabajos en terreno', href: '/#trabajos', soloEscritorio: true },
+  { texto: 'Opiniones', href: '/#opiniones', soloEscritorio: true },
   { texto: 'Contacto', href: '/#contacto' },
 ];
 ---
@@ -60,16 +67,16 @@ const enlaces = [
     aria-label="Principal"
     class="bg-surface-container-low border-surface-container h-12 border-b"
   >
-    <Contenedor class="flex h-full items-center">
+    <Contenedor class="flex h-full items-center justify-between gap-space-md">
       {/* El primer enlace no lleva relleno a la izquierda: así su texto sigue alineado con el margen
           y el anillo de foco cabe entero en la pantalla. */}
       <ul class="flex h-full items-center">
         {enlaces.map((enlace, indice) => (
-          <li class="h-full">
+          <li class:list={['h-full', enlace.soloEscritorio && 'hidden md:block']}>
             <a
               href={enlace.href}
               class:list={[
-                'text-on-surface-variant hover:text-on-surface font-display text-label-md flex h-full items-center uppercase transition-colors duration-150',
+                'text-on-surface-variant hover:text-on-surface font-display text-label-md flex h-full items-center whitespace-nowrap uppercase transition-colors duration-150',
                 indice === 0 ? 'pr-space-md' : 'px-space-md',
               ]}
             >
@@ -78,6 +85,16 @@ const enlaces = [
           </li>
         ))}
       </ul>
+      {/* Banderas de los dos países adonde se envían vehículos. Son una sola imagen para un lector de
+          pantalla y no son enlaces. A 320 px no caben junto a los tres enlaces y se ocultan. */}
+      <div
+        role="img"
+        aria-label="Banderas de Chile y Argentina"
+        class="hidden shrink-0 items-center gap-space-sm min-[360px]:flex"
+      >
+        <BanderaChile class="h-4 w-auto" aria-hidden="true" />
+        <BanderaArgentina class="h-4 w-auto" aria-hidden="true" />
+      </div>
     </Contenedor>
   </nav>
 </header>

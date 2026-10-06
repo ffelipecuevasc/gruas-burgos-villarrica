@@ -19,21 +19,10 @@ import DatosEstructurados from '../components/DatosEstructurados.astro';
 import { servicios } from '../data/servicios.js';
 import { negocio } from '../data/negocio.js';
 
-// Las tarjetas con lista de características van primero; las compactas, en una segunda grilla.
-const principales = servicios.filter((servicio) => servicio.caracteristicas?.length);
-const compactos = servicios.filter((servicio) => !servicio.caracteristicas?.length);
-
-// Columnas de cada tarjeta para que ninguna fila quede con un hueco: las tres principales ocupan una
-// fila desde `lg` y, de `md` a `lg`, la tercera toma el ancho completo. Las cinco compactas van de a
-// dos desde `md` (la quinta, a todo el ancho) y, desde `lg`, tres arriba y dos abajo.
-const anchoPrincipal = ['', '', 'md:col-span-2 lg:col-span-1'];
-const anchoCompacto = [
-  'lg:col-span-2',
-  'lg:col-span-2',
-  'lg:col-span-2',
-  'lg:col-span-3',
-  'md:col-span-2 lg:col-span-3',
-];
+// Ocho tarjetas iguales en una sola grilla, sin huecos: de a dos desde `md`; de `lg` a `xl`, tres,
+// tres y dos (6 columnas: las dos últimas ocupan la mitad cada una); desde `xl`, cuatro y cuatro.
+const anchoNormal = 'lg:col-span-2 xl:col-span-1';
+const anchoUltimas = 'lg:col-span-3 xl:col-span-1';
 
 const titulo = `${negocio.nombre} | Grúas en Villarrica 24 horas`;
 const descripcion =
@@ -43,8 +32,8 @@ const descripcion =
 <LayoutBase titulo={titulo} descripcion={descripcion}>
   <DatosEstructurados slot="head" />
 
-  {/* Tres secciones ancladas (RDA-009). Quiénes somos, la galería y las opiniones van entre Servicios y
-      Contacto, sin ancla propia. */}
+  {/* Seis secciones ancladas (RDA-009): `#inicio`, `#servicios`, `#quienes-somos`, `#trabajos`,
+      `#opiniones` y `#contacto`. */}
   <section id="inicio" aria-labelledby="titulo-inicio">
     <Hero idTitulo="titulo-inicio" />
     <CintaMetricas />
@@ -63,18 +52,13 @@ const descripcion =
         Servicios
       </TituloSeccion>
 
-      <div class="space-y-space-lg">
-        <div class="grid grid-cols-1 gap-space-lg md:grid-cols-2 lg:grid-cols-3">
-          {principales.map((servicio, indice) => (
-            <TarjetaServicio servicio={servicio} class={anchoPrincipal[indice]} />
-          ))}
-        </div>
-
-        <div class="grid grid-cols-1 gap-space-md md:grid-cols-2 lg:grid-cols-6">
-          {compactos.map((servicio, indice) => (
-            <TarjetaServicio servicio={servicio} class={anchoCompacto[indice]} />
-          ))}
-        </div>
+      <div class="grid grid-cols-1 gap-space-lg md:grid-cols-2 lg:grid-cols-6 xl:grid-cols-4">
+        {servicios.map((servicio, indice) => (
+          <TarjetaServicio
+            servicio={servicio}
+            class={indice >= servicios.length - 2 ? anchoUltimas : anchoNormal}
+          />
+        ))}
       </div>
 
       <BloqueEquipamiento />

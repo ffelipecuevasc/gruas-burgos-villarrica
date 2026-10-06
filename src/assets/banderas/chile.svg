@@ -1,0 +1,5 @@
+<!--
+  Bandera de Chile, dibujada para este sitio (iteración 05-04). Proporción 2:3.
+  Colores: azul #0039a6, rojo #d52b1e y blanco.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" viewBox="0 0 30 20"><path fill="#fff" d="M0 0h30v10H0z"/><path fill="#d52b1e" d="M0 10h30v10H0z"/><path fill="#0039a6" d="M0 0h10v10H0z"/><path fill="#fff" d="m5 2.5.561 1.727h1.817l-1.47 1.068.561 1.728L5 5.955 3.531 7.023l.561-1.728-1.47-1.068h1.817z"/></svg>

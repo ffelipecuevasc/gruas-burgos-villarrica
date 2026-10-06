@@ -5,7 +5,7 @@ import TituloSeccion from './TituloSeccion.astro';
 import fotoCable from '../assets/fotos/07-rescate-con-cable-de-camioneta.webp';
 
 /**
- * Franja resumida entre `#servicios` y `#contacto`, sin ancla propia (RDA-009).
+ * Franja resumida entre Servicios y la galería, con el ancla `#quienes-somos` (RDA-009).
  * Texto aprobado en la iteración 05-04, sin nombres propios.
  *
  * @typedef {Object} Props
@@ -17,6 +17,7 @@ const { class: clase = '' } = Astro.props;
 ---
 
 <section
+  id="quienes-somos"
   aria-labelledby="titulo-quienes-somos"
   class:list={[
     'border-b border-surface-container-highest bg-surface-container-low py-space-xl text-on-surface',

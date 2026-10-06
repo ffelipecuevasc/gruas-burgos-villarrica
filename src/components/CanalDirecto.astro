@@ -60,9 +60,25 @@ const { class: clase = '' } = Astro.props;
       <p class="font-body text-body-md text-secondary">Atención 24 horas, los 7 días.</p>
     </div>
 
-    <div class="space-y-space-xs border border-surface-container-highest bg-surface-container-low p-space-lg md:col-span-2">
-      <h3 class="font-display text-label-md text-on-surface uppercase">Medios de pago</h3>
-      <p class="font-body text-body-md text-secondary">{negocio.pagos.texto}</p>
+    {/* Bloque destacado: borde y barra de acento, y cada medio con su ícono en un cuadro, como las
+        tarjetas de servicio. Dos columnas (una bajo 360 px, donde los nombres no caben de a dos) y cuatro
+        de `md` a `lg`, donde el bloque ocupa todo el ancho. */}
+    <div class="space-y-space-md border border-l-4 border-primary-container bg-surface-container p-space-lg md:col-span-2">
+      <h3 class="font-display text-label-lg text-on-surface uppercase">Medios de pago</h3>
+      <ul
+        role="list"
+        class="grid grid-cols-1 gap-space-md min-[360px]:grid-cols-2 md:grid-cols-4 lg:grid-cols-2"
+      >
+        {negocio.pagos.medios.map((medio) => (
+          <li class="flex items-center gap-space-sm">
+            <span class="inline-flex size-10 shrink-0 items-center justify-center bg-surface-container-highest text-primary">
+              <Icono nombre={medio.icono} class="size-6" />
+            </span>
+            <span class="font-display text-label-md text-on-surface uppercase">{medio.nombre}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="font-body text-body-md text-secondary">{negocio.pagos.documentos}</p>
     </div>
   </div>
 </div>
