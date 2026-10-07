@@ -1,7 +1,7 @@
 # Iteración 05-02 · Medición: Search Console, Web Analytics y Google Ads
 
 - **Épica:** 05 · Ajustes finales, publicación y medición
-- **Estado:** En revisión (fase A, local: [bitacora-05-02-2026-10-06](../../99_bitacora/bitacora-05-02-2026-10-06.md)). La fase B, en los paneles, la ejecuta el desarrollador; la marca «Terminada» la pone él.
+- **Estado:** En revisión. Fase A, local: [bitacora-05-02-2026-10-06](../../99_bitacora/bitacora-05-02-2026-10-06.md). Fase B registrada con la evidencia del desarrollador: [bitacora-05-02-fase-b-2026-10-07](../../99_bitacora/bitacora-05-02-fase-b-2026-10-07.md). Las tareas de Perfil de Empresa de Google y de Google Ads pasan a la iteración 05-06. La marca «Terminada» la pone el desarrollador.
 - **Rama sugerida:** `iteracion/05-02-medicion`
 - **Depende de:** 05-01 (terminada)
 - **RDA relacionadas:** RDA-006, RDA-010, RDA-013 (Web Analytics) y RDA-014 (CSP)
@@ -58,12 +58,12 @@ Ninguno en el sitio. Si el desarrollador entrega el pin validado de la base y el
 
 **Fase B, paneles (evidencia en `evidencia-05-02-fase-b.md`):**
 
-- [ ] Search Console muestra la propiedad verificada y `sitemap-index.xml` procesado, con captura sin datos personales.
-- [ ] Se solicitó la nueva inspección de la portada, después del merge final de 05-01.
-- [ ] Web Analytics: se registra si el script ya estaba activo; se activa si no lo estaba; se mide PageSpeed con el script (móvil y escritorio, tres ejecuciones cada uno) y se compara con las cifras de 05-01. Se decide: mantener (RDA-013 «Aceptada») o desactivar (RDA-013 «Descartada»).
-- [ ] El sitio está enlazado desde el Perfil de Empresa de Google.
-- [ ] Campaña de Google Ads de Búsqueda con anuncio adaptable, recurso de llamada con el número del negocio y conversión «Llamadas desde anuncios», con la URL final del sitio y los textos aprobados por el desarrollador, **en estado pausado** (sin activar).
-- [ ] Lighthouse móvil con 95 o más en las cuatro categorías con el estado final de Web Analytics.
+- [x] Search Console muestra la propiedad verificada y `sitemap-index.xml` procesado, con captura sin datos personales. **Evidencia (2026-10-07):** propiedad de dominio `gruasvillarrica.cl`, verificada por registro DNS TXT; sitemap enviado el 2 oct 2026, estado «Correcto», 1 página descubierta, última lectura el 5 oct 2026. Captura del desarrollador: `Google Search Console - Sitemaps.pdf` (no está en el repositorio).
+- [ ] Se solicitó la nueva inspección de la portada, después del merge final de 05-01. **Sin marcar:** el desarrollador decidió no solicitarla. La URL figura «en Google», con último rastreo el 2 oct 2026, 15:54:48.
+- [x] Web Analytics: se registra si el script ya estaba activo; se activa si no lo estaba; se mide PageSpeed con el script (móvil y escritorio, tres ejecuciones cada uno) y se compara con las cifras de 05-01. Se decide: mantener (RDA-013 «Aceptada») o desactivar (RDA-013 «Descartada»). **Evidencia (2026-10-07):** el script ya estaba activo (el desarrollador lo activó antes de 05-01); `static.cloudflareinsights.com/beacon.min.js` aparece en producción; PageSpeed medido con el script, tres ejecuciones por dispositivo. Decisión: se mantiene; RDA-013 «Aceptada». No hay medición sin el script, así que no hay comparación «antes y después».
+- [ ] El sitio está enlazado desde el Perfil de Empresa de Google. **Sin marcar: se traslada a 05-06** (el desarrollador no tiene acceso al perfil).
+- [ ] Campaña de Google Ads de Búsqueda con anuncio adaptable, recurso de llamada con el número del negocio y conversión «Llamadas desde anuncios», con la URL final del sitio y los textos aprobados por el desarrollador, **en estado pausado** (sin activar). **Sin marcar: se traslada a 05-06** (el desarrollador no tiene acceso a la cuenta).
+- [x] Lighthouse móvil con 95 o más en las cuatro categorías con el estado final de Web Analytics. **Evidencia (2026-10-07):** mediana de tres ejecuciones de PageSpeed: Rendimiento 96 (96, 96 y 94), Accesibilidad 100, Buenas prácticas 100 y SEO 100; CLS 0. **LCP de 2,5 s en las tres: justo en el límite.** La tercera ejecución dio 94 por sí sola; la regla es la mediana.
 
 ## Fuera de alcance
 

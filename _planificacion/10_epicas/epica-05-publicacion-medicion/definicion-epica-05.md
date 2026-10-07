@@ -12,6 +12,7 @@
 3. Mapa de cobertura como imagen real (05-05).
 4. Verificación final en producción: prueba de humo, caché, HSTS, PageSpeed y validadores (05-01).
 5. Medición y Google Ads: Search Console, Web Analytics (decisión previa) y campaña (05-02).
+6. Perfil de Empresa de Google y campaña de Google Ads: las tareas de 05-02 que dependen del acceso a esas cuentas (05-06).
 
 Las acciones en Cloudflare, Google Search Console, Google Ads y el teléfono real las ejecuta el desarrollador. El agente prepara archivos, listas de verificación y documentación.
 
@@ -26,6 +27,7 @@ Se ejecutan en el orden de la tabla. 05-01 y 05-02 conservan sus números porque
 | 05-05     | Mapa de cobertura con imagen real                            | 05-04 y el archivo WebP del desarrollador | Fase A en local; fase B en la vista previa |
 | 05-01     | Publicación y verificación final en producción               | 05-03, 05-04 y 05-05 | Fase A en local; fase B en `gruasvillarrica.cl`   |
 | 05-02     | Medición: Search Console, Web Analytics y Google Ads         | 05-01        | Fase B en los paneles                                    |
+| 05-06     | Perfil de Empresa de Google y campaña de Google Ads          | 05-02 y el acceso a las cuentas | Fase B en los paneles                     |
 
 ## Decisiones del desarrollador que rigen esta épica (2026-10-05)
 
@@ -40,7 +42,7 @@ Se ejecutan en el orden de la tabla. 05-01 y 05-02 conservan sus números porque
 9. **Recargo por urgencia.** No se publica. Yerko lo negocia por teléfono caso a caso.
 10. **Hero menos oscuro.** Se mantiene el ajuste aunque la reunión no lo mencionó (Yerko dijo que el hero estaba bien). El desarrollador aprueba visualmente el nivel (05-03).
 11. **Fotos.** Sin fotos de internet (derechos de autor). Las fotos del camión de carga y del camión pluma solo entran cuando Yerko o su colega las entreguen con permiso. Hasta entonces, esos servicios van sin foto.
-12. **Orden de ejecución.** 05-03, 05-04, 05-05, 05-01 y 05-02.
+12. **Orden de ejecución.** 05-03, 05-04, 05-05, 05-01, 05-02 y 05-06 (agregada el 2026-10-07).
 13. **Vehículos y maquinaria (2026-10-05).** Yerko los confirmó por escrito (WhatsApp) y el desarrollador los aprueba, **incluido «camión de 15 toneladas»**: autos, SUV, camionetas, furgones y camiones de tres cuartos; maquinaria liviana (minirretroexcavadoras, montacargas y minicargadores), con la grúa cama y, si es necesario, con un camión de 15 toneladas. No se publica «todo tipo de vehículos» ni «etc.» (no se pueden respaldar). Entra en 05-04 como un servicio nuevo («Traslado de maquinaria liviana») y en la lista del traslado en grúa cama.
 14. **Ajustes del cliente del 2026-10-06.** Tras ver la vista previa de 05-04, el cliente aprobó los cambios y pidió cuatro ajustes; el desarrollador agregó un quinto. Se implementan en 05-04, antes del merge:
     - **Menú.** Seis enlaces desde 768 px, en el orden de la página: «Inicio», «Servicios», «Quiénes somos», «Trabajos en terreno», «Opiniones» y «Contacto». Bajo 768 px siguen los tres de antes. La página pasa a seis anclas (RDA-009).

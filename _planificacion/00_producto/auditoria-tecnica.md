@@ -336,7 +336,7 @@ Fase B, según la evidencia del desarrollador del 2026-10-06: Cloudflare entrega
 
 | ID | Severidad | Área | Hallazgo | Acción recomendada | Estado |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| AUD-10-001 | Baja | Rendimiento | PageSpeed informa en producción un ahorro estimado de 11 KiB por «JavaScript heredado», pero el JavaScript propio del sitio pesa 960 B en la portada (medido en `dist/`). El origen de ese JavaScript no se identificó: puede ser un script externo, entre ellos el de Cloudflare Web Analytics, lo que no está confirmado. Las puntuaciones no se ven afectadas (Rendimiento 97 a 99 en móvil y 100 en escritorio; TBT 0 ms). | Identificarlo en 05-02, junto con la decisión de Web Analytics (RDA-006): revisar en el informe de PageSpeed qué archivo señala la auditoría y comparar el HTML publicado con `dist/index.html`. | Abierto, no bloquea el cierre de 05-01. Plan de resolución en 05-02 (ver «Seguimiento en 05-02»): se comprueba en la fase B si el script de Cloudflare Web Analytics está activo |
+| AUD-10-001 | Baja | Rendimiento | PageSpeed informa en producción un ahorro estimado de 11 KiB por «JavaScript heredado», pero el JavaScript propio del sitio pesa 960 B en la portada (medido en `dist/`). El origen de ese JavaScript no se identificó: puede ser un script externo, entre ellos el de Cloudflare Web Analytics, lo que no está confirmado. Las puntuaciones no se ven afectadas (Rendimiento 97 a 99 en móvil y 100 en escritorio; TBT 0 ms). | Identificarlo en 05-02, junto con la decisión de Web Analytics (RDA-006): revisar en el informe de PageSpeed qué archivo señala la auditoría y comparar el HTML publicado con `dist/index.html`. | Cerrado en 05-02: el origen es el script de Cloudflare Web Analytics (`beacon.min.js`), que el desarrollador activó antes de 05-01 (ver «Seguimiento en 05-02, fase B») |
 
 ### Seguimiento en 05-02 (fase A, 2026-10-06)
 
@@ -348,3 +348,16 @@ Registrado por Claude Code en la fase A de la iteración 05-02 (rama `iteracion/
 | AUD-10-001 | Baja | Abierto, con plan de resolución. Origen probable, **no confirmado**: el script de Cloudflare Web Analytics (`beacon.min.js`), que la compilación no contiene (medido en local: 960 B de JavaScript en línea en la portada, 0 archivos `.js` y 0 etiquetas `<script src>` en `dist/`). Antecedente: el 2026-10-02 la portada descargada no contenía `beacon` (AUD-09-014), así que, de estar activo hoy, se habría activado después | En la fase B se comprueba si el script está activo (`curl.exe` y panel de Cloudflare) y, si lo está, se copia del informe de PageSpeed el archivo que señala la auditoría «JavaScript heredado». El resultado se registra y recién entonces se cierra. Decide además RDA-013 |
 | AUD-01-009 | Media | Abierto. Las coordenadas de referencia siguen sin validar contra el pin del perfil de Google; el JSON-LD no lleva `geo`. Razón social y RUT no se publican (decisión del cliente, 2026-10-04) | El desarrollador entrega el pin validado de la base; `geo` se agrega en una iteración corta aparte |
 | AUD-01-010 | Media | Abierto (resuelto parcialmente en 03-02: 10 reseñas publicadas). Falta el enlace oficial del perfil de Google; el JSON-LD no lleva `hasMap` | El desarrollador entrega el enlace oficial; `hasMap` se agrega en una iteración corta aparte |
+
+### Seguimiento en 05-02 (fase B, 2026-10-07)
+
+Consolidado por Claude Code con la evidencia del desarrollador (`evidencia-05-02-fase-b.md`, producción con el commit `24660b3`) y registrado en `bitacora-05-02-fase-b-2026-10-07.md`. El agente no midió nada en producción ni consultó ninguna URL pública. Esta tabla reemplaza, para estos hallazgos, el estado de la tabla de la fase A.
+
+| ID | Severidad | Estado tras la fase B de 05-02 | Qué queda |
+| :--- | :--- | :--- | :--- |
+| AUD-10-001 | Baja | Cerrado en 05-02: el origen es el script de Cloudflare Web Analytics (`beacon.min.js`), que el desarrollador activó antes de 05-01. En producción, `curl.exe` muestra `static.cloudflareinsights.com/beacon.min.js` y el panel lo muestra activado; PageSpeed informa 11 KiB de «JavaScript heredado» y el desarrollador lo atribuye a ese script («visible indirectamente mediante el ahorro en JS de terceros») | Nada. El script se mantiene (RDA-013, «Aceptada»). Queda por decidir la excepción de `AGENTS.md` §7.3 |
+| AUD-09-017 | Baja | Sin cambios: considerado y aceptado, sin acción | Nada |
+| AUD-01-009 | Media | Abierto, trasladado a 05-06. Sin pin validado de la base; el JSON-LD no lleva `geo` | El desarrollador entrega el pin validado; se agrega en 05-06 |
+| AUD-01-010 | Media | Abierto, trasladado a 05-06. Sin enlace oficial del perfil de Google; el JSON-LD no lleva `hasMap` | El desarrollador entrega el enlace oficial; se agrega en 05-06 |
+
+**No quedan hallazgos de severidad Alta abiertos.** El desarrollador califica de «Alta» las dos tareas que pasan a 05-06 (Perfil de Empresa de Google y campaña de Google Ads): son tareas pendientes, no hallazgos de esta auditoría. Observación: PageSpeed móvil con el script activo da 96 de mediana en Rendimiento y LCP de 2,5 s en las tres ejecuciones, justo en el límite del criterio (AUD-09-019 sigue abierto, no bloqueante).

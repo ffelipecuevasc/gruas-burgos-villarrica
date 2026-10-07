@@ -16,7 +16,7 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 | RDA-010 | Medición de conversiones de Google Ads                   | Aceptada   |
 | RDA-011 | Fotos del negocio publicadas tal como están en sus redes | Aceptada   |
 | RDA-012 | `sharp` como dependencia directa                         | Aceptada   |
-| RDA-013 | Cloudflare Web Analytics                                 | Aceptada, condicionada a la medición de la fase B |
+| RDA-013 | Cloudflare Web Analytics                                 | Aceptada   |
 | RDA-014 | Política de seguridad de contenido (`security.csp`) de Astro | Descartada |
 
 ---
@@ -136,6 +136,8 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 **Decisión (2026-10-06, iteración 05-02):** el desarrollador adopta la propuesta original, solo en su primera parte. Las llamadas se miden con el recurso de llamada del anuncio (lo que la propuesta llama «extensiones de llamada») y con la conversión «Llamadas desde anuncios» de Google Ads, sin código en el sitio. No se agrega la etiqueta de Google (`gtag.js`) ni Google Tag Manager, tampoco de forma diferida. Los clics de WhatsApp en el sitio no se miden.
 **Consecuencias de la decisión:** el sitio no carga JavaScript de Google y el límite de RDA-006 no se toca por este motivo; no hay impacto de rendimiento que cuantificar ni consentimiento que evaluar. Se pierde la información de conversión dentro del sitio: no se sabrá cuántas visitas terminan en un clic de «Llamar» o de WhatsApp, solo cuántas llamadas nacen del anuncio. Las visitas se cuentan aparte (RDA-013). Si más adelante se quiere medir clics en el sitio, hace falta una RDA nueva y medir antes el impacto en Lighthouse.
 
+**Actualización 2026-10-07 (fase B de 05-02):** la decisión sigue «Aceptada», pero aún no está implementada: la campaña de Google Ads, el recurso de llamada y la conversión «Llamadas desde anuncios» no se crearon, porque el desarrollador no tiene acceso a la cuenta. La confirmación de que quedó implementada pasa a la iteración 05-06. En el sitio no hay ninguna etiqueta de Google.
+
 ## RDA-011 · Fotos del negocio publicadas tal como están en sus redes
 
 - **Fecha:** 2026-10-01 (decisión del desarrollador; registrada el 2026-10-02 en la iteración 04-02)
@@ -161,13 +163,16 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 ## RDA-013 · Cloudflare Web Analytics
 
 - **Fecha:** 2026-10-06 (decisión del desarrollador; registrada en la iteración 05-02)
-- **Estado:** Aceptada, condicionada a la medición de la fase B de 05-02
+- **Estado:** Aceptada (decisión del desarrollador del 2026-10-07, con la medición de la fase B de 05-02; hasta entonces, «Aceptada, condicionada a la medición»)
 
 **Contexto:** El sitio no tiene ninguna medición de visitas. Cloudflare Web Analytics agrega a cada página un script propio de Cloudflare (`beacon.min.js`, servido desde `static.cloudflareinsights.com`). En Cloudflare Pages se activa con un clic en el panel y el script se agrega en el siguiente despliegue, sin tocar el código del repositorio. Cuenta visitas y visitantes; no cuenta llamadas ni clics de WhatsApp. Es JavaScript de terceros en tiempo de ejecución, y choca con el límite de JavaScript de RDA-006 (menos de 1 KB; hoy 960 B en la portada) y con la regla «sin recursos de terceros» de `AGENTS.md` §7.3 si se activa sin medir su efecto.
 **Decisión:** Se activa y se mide el impacto. La decisión se cierra con la medición de la fase B de 05-02 (`evidencia-05-02-fase-b.md`).
 **Condición:** con el script activo, Lighthouse móvil da 95 o más en las cuatro categorías (mediana de tres ejecuciones), LCP de 2,5 s o menos y CLS 0, y el JavaScript propio del sitio sigue por debajo de 1 KB (el script de Cloudflare es de terceros y se mide aparte). Si no se cumple, se desactiva (Web Analytics › Manage site › Disable) y esta RDA pasa a «Descartada».
 **Alternativas consideradas:** No usarlo y medir solo con Search Console (búsquedas y clics desde Google) y Google Ads (llamadas desde anuncios): cero JavaScript de terceros, pero sin cifras de visitas totales. Instalación manual del script en `LayoutBase` (descartada: obliga a editar `src/` y a escribir el identificador del sitio en un repositorio público, sin ninguna ventaja sobre la activación desde el panel).
 **Consecuencias:** La página carga un script de terceros que el repositorio no contiene: `dist/` y lo publicado dejan de ser idénticos, como ya ocurrió con la ofuscación de correos de Cloudflare (AUD-09-014, desactivada el 2026-10-02). La referencia de rendimiento es la de producción en 05-01: móvil, Rendimiento 97, 99 y 99, las otras tres categorías en 100, LCP 2,3, 1,8 y 1,8 s, CLS 0 y TBT 0 ms; escritorio, 100 en las cuatro y LCP 0,6 s. Si el script ya estaba activo cuando se tomaron esas cifras (se comprueba en la fase B), ya lo incluyen, y es el origen probable de los 11 KiB de «JavaScript heredado» de AUD-10-001. La regla de RDA-006 se lee desde ahora sobre el JavaScript propio; el de terceros se informa por separado. Mientras no haya política de seguridad de contenido (RDA-014), el script no necesita declararse.
+
+**Actualización 2026-10-07 (fase B de 05-02, evidencia del desarrollador):** la condición se cumple y Web Analytics **se mantiene**; la RDA queda «Aceptada». PageSpeed móvil en producción con el script activo, tres ejecuciones: Rendimiento 96, 96 y 94 (mediana 96); Accesibilidad, Buenas prácticas y SEO, 100 en las tres; LCP 2,5 s en las tres; CLS 0; TBT 0, 0 y 10 ms. Escritorio: 100 en las cuatro categorías; LCP 0,6, 0,7 y 0,6 s. El LCP queda **justo en el límite** de 2,5 s, sin margen, y la tercera ejecución móvil dio 94 por sí sola (la regla es la mediana). JavaScript propio: 960 B, sin cambios. El script ya estaba activo cuando se midió 05-01: el desarrollador lo había activado antes, así que aquellas cifras (97, 99 y 99; LCP de 1,8 a 2,3 s) ya lo incluían y no existe una medición sin él. La diferencia entre ambas tandas se atribuye a la variación entre ejecuciones de PageSpeed y no a la activación del script; es una interpretación, no una medición. PageSpeed atribuye al script los 11 KiB de «JavaScript heredado» (AUD-10-001, cerrado).
+**Consecuencias de la decisión:** el sitio carga en cada página un recurso de terceros en tiempo de ejecución (`static.cloudflareinsights.com/beacon.min.js`), que el repositorio no contiene. Eso contradice la regla 3 de las reglas técnicas de `AGENTS.md` (§7.3, «Sin recursos de terceros en tiempo de ejecución»). La excepción no está escrita en `AGENTS.md`: es una decisión pendiente del desarrollador (`registro-log.md`, «Decisiones por tomar»). Con el LCP en el límite, cualquier cambio que agregue peso a la primera vista debe medirse de nuevo. Para revertir: Web Analytics › Manage site › Disable, y esta RDA pasa a «Descartada».
 
 ## RDA-014 · Política de seguridad de contenido (`security.csp`) de Astro
 
