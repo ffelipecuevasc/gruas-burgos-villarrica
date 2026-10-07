@@ -1,70 +1,81 @@
 # Iteración 05-02 · Medición: Search Console, Web Analytics y Google Ads
 
 - **Épica:** 05 · Ajustes finales, publicación y medición
-- **Estado:** Pendiente
+- **Estado:** En revisión (fase A, local: [bitacora-05-02-2026-10-06](../../99_bitacora/bitacora-05-02-2026-10-06.md)). La fase B, en los paneles, la ejecuta el desarrollador; la marca «Terminada» la pone él.
 - **Rama sugerida:** `iteracion/05-02-medicion`
-- **Depende de:** 05-01
-- **RDA relacionadas:** RDA-006, RDA-010; se crea la de Web Analytics (la numeración la asigna quien la registra)
-- **Hallazgos que cierra:** AUD-09-017 (Report-To y NEL, solo se considera al decidir), AUD-01-009 (coordenadas de la base) y AUD-01-010 (enlace oficial al perfil), si el desarrollador entrega los datos.
+- **Depende de:** 05-01 (terminada)
+- **RDA relacionadas:** RDA-006, RDA-010, RDA-013 (Web Analytics) y RDA-014 (CSP)
+- **Hallazgos que cierra:** AUD-09-017 (Report-To y NEL: considerado y aceptado) y AUD-10-001 (origen del «JavaScript heredado»). AUD-01-009 y AUD-01-010 siguen abiertos hasta que el desarrollador entregue el pin validado de la base y el enlace oficial del perfil de Google.
 
 ## Objetivo
 
-Medir visitas, búsquedas y conversiones sin degradar la velocidad del sitio, y dejar la campaña de Google Ads lista para activarse a fines de octubre.
+Medir visitas, búsquedas y llamadas sin degradar la velocidad del sitio, y dejar la campaña de Google Ads lista para activarse a fines de octubre.
 
-Esta iteración es casi toda de la fase B: los paneles los opera el desarrollador. El agente prepara las listas de verificación, la plantilla de evidencia y los cambios mínimos del sitio, si los hay.
+Esta iteración es casi toda de la fase B: los paneles los opera el desarrollador. El agente deja las decisiones registradas, la evidencia preparada y la documentación al día. No cambia el sitio.
+
+## Decisiones del desarrollador (2026-10-06)
+
+1. **Web Analytics (RDA-013): se activa, condicionada a la medición.** Cloudflare Web Analytics agrega a cada página un script propio de Cloudflare (`beacon.min.js`). Para Pages se activa en un clic y el script se agrega en el siguiente despliegue. Cuenta visitas y visitantes; no cuenta llamadas ni clics de WhatsApp. La RDA queda «Aceptada, condicionada» y se cierra con la medición de la fase B:
+   - **Se mantiene** si, con el script activo, Lighthouse móvil da 95 o más en las cuatro categorías (mediana de tres ejecuciones), LCP de 2,5 s o menos y CLS 0, y el JavaScript propio sigue por debajo de 1 KB (el script de Cloudflare es de terceros y se mide aparte).
+   - **Se desactiva** en caso contrario (Web Analytics › Manage site › Disable) y la RDA queda «Descartada».
+   - Cifras de comparación (producción, 05-01): móvil, Rendimiento 97, 99 y 99; Accesibilidad, Buenas prácticas y SEO 100; LCP 2,3, 1,8 y 1,8 s; CLS 0; TBT 0 ms. Escritorio: 100 en las cuatro; LCP 0,6 s.
+   - Si el script ya estaba activo antes de esta iteración (se comprueba en la fase B), las cifras de 05-01 ya lo incluyen, y es probable que expliquen el «JavaScript heredado» de AUD-10-001.
+2. **CSP de Astro (RDA-014): descartada por ahora.** El sitio es estático y sin scripts externos propios. Si se activara con Web Analytics encendido, habría que declarar el script de Cloudflare. Se reabre solo si cambia el panorama.
+3. **RDA-010: aceptada la propuesta original.** La medición se hace con el recurso de llamada y las conversiones de llamadas desde anuncios, sin código en el sitio. No se agrega la etiqueta de Google (`gtag.js`). Los clics de WhatsApp en el sitio no se miden.
+4. **AUD-09-017.** Cloudflare agrega `Report-To` y `NEL`, no es JavaScript ni un recurso de la página; sin CSP no hay conflicto. Se considera y se acepta, sin acción.
+5. **Anuncios.** Campaña de Búsqueda con anuncio adaptable y recurso de llamada (los anuncios «solo de llamada» se retiran en febrero de 2027). Los textos son un borrador que el desarrollador aprueba y pega en el panel; no se guardan en el repositorio.
 
 ## Reglas de la iteración
 
-1. El JavaScript propio sigue por debajo de 1 KB (RDA-006). Un script de terceros (analítica, etiquetas de Google) **no se agrega sin una RDA aceptada** que lo apruebe y mida su impacto.
-2. **Web Analytics.** Cloudflare Web Analytics, activado con inyección automática, agrega un script a la página. Eso choca con RDA-006 y con el criterio con que se desactivó la ofuscación de correos de la zona (AUD-09-014). Por eso se decide en una RDA antes de activarlo. Las alternativas son: no usarlo y medir con Search Console y Google Ads, o aceptarlo con medición del impacto.
-3. La política de seguridad de contenido de Astro (`security.csp`, recomendación de la bitácora 04-02) se decide junto con la medición, porque cualquier script de terceros la afecta. Requiere una RDA.
-4. **Los textos de los anuncios** (títulos, descripciones y extensiones) siguen la lista «No publicar» de `definicion-epica-05.md` y el desarrollador los aprueba. No llevan tiempos de respuesta, tarifas ni recargos, ni nombres propios del dueño.
-5. Las credenciales, los identificadores de cuenta de pago y los datos personales no se escriben en el repositorio, que es público.
-6. No se hacen `commit`, `push` ni cambios de rama. Los hace el desarrollador. El agente no consulta URLs públicas.
+1. El JavaScript propio sigue por debajo de 1 KB (RDA-006). Esta iteración no cambia código del sitio.
+2. **Autorizado:** `decisiones.md` (RDA-010, RDA-013 y RDA-014), `auditoria-tecnica.md` (solo la sección de la Auditoría 10) y los archivos de documentación de esta iteración.
+3. **Los textos de los anuncios** siguen la lista «No publicar» de `definicion-epica-05.md` y los aprueba el desarrollador. No llevan tiempos de respuesta, tarifas ni recargos, ni nombres propios del dueño.
+4. Las credenciales, los identificadores de cuenta de pago y los datos personales no se escriben en el repositorio, que es público. Las capturas no deben mostrar datos personales.
+5. No se hacen `commit`, `push` ni cambios de rama. Los hace el desarrollador. El agente no consulta URLs públicas.
 
 ## Contenido aprobado de esta iteración
 
-Ninguno en el sitio. Si el desarrollador entrega el pin validado de la base y el enlace oficial del perfil de Google, se agregan `geo` y `hasMap` al JSON-LD con esos datos exactos.
+Ninguno en el sitio. Si el desarrollador entrega el pin validado de la base y el enlace oficial del perfil de Google, se agregan `geo` y `hasMap` al JSON-LD con esos datos exactos, en una iteración corta aparte.
 
 ## Tareas
 
-1. **Search Console.**
-   - Propiedad de dominio verificada (registro DNS TXT en Cloudflare) y `sitemap-index.xml` enviado y procesado. El desarrollador ya ingresó el sitio a Google «a mano» antes de la reunión del 2026-10-04: esta tarea deja constancia con evidencia, sin rehacerlo.
-   - Tras el merge final de 05-01, se solicita una nueva inspección de la portada, porque el contenido cambió.
-2. **Web Analytics y CSP (RDA).** Decidir y registrar una RDA: se activa (con el impacto medido en Lighthouse antes y después) o se descarta. Decidir si `security.csp` se activa o se descarta.
-3. **Perfil de Empresa de Google.** Enlazar el sitio desde la ficha de Maps. Con el pin validado y el enlace oficial al perfil, `geo` y `hasMap` se agregan al JSON-LD y se validan.
-4. **RDA-010.** Cerrarla como Aceptada o Descartada. Si se decide medir clics en el sitio, la etiqueta se carga de forma diferida y se mide Lighthouse antes y después. Conversiones de llamadas desde anuncios y extensiones de llamada no requieren código en el sitio.
-5. **Google Ads.** La URL final de los anuncios es el sitio (o un ancla), con extensión de llamada configurada. La campaña queda lista, **sin activar**.
-6. **Documentación.**
-   - Bitácora nueva `bitacora-05-02-AAAA-MM-DD.md` en `_planificacion/99_bitacora/`, con la plantilla de `_planificacion/README.md` §5.2, fecha real, fin de línea LF y estado final «En revisión». Nunca «Terminada». Incluye las URLs de los paneles, sin credenciales, y las cifras base de rendimiento de 05-01.
-   - `decisiones.md`: RDA-010 y la nueva RDA, con su estado final. `registro-log.md`: fila de 05-02, «Iteración activa» y «Próximo hito».
+1. **Decisiones.** RDA-010 «Aceptada» (propuesta original), RDA-013 «Aceptada, condicionada a la medición» (se cierra en la fase B) y RDA-014 «Descartada», con el índice de `decisiones.md` actualizado.
+2. **Auditoría 10.** AUD-09-017 considerado y aceptado; AUD-10-001 con su plan de resolución; AUD-01-009 y AUD-01-010 siguen abiertos.
+3. **Evidencia de la fase B** (`evidencia-05-02-fase-b.md`), vacía para el desarrollador: Web Analytics (estado actual, activación y medición), Search Console, nueva inspección de la portada, Perfil de Empresa de Google, Google Ads (campaña sin activar) y PageSpeed.
+4. **Documentación.**
+   - Bitácora nueva `bitacora-05-02-AAAA-MM-DD.md` en `_planificacion/99_bitacora/`, con la plantilla de `_planificacion/README.md` §5.2, fecha real, fin de línea LF y estado final «En revisión». Nunca «Terminada».
+   - `registro-log.md`: fila de 05-02, «Iteración activa», «Próximo hito» y una línea del historial.
 
 ## Criterios de aceptación
 
-**Fase A, local (solo si hay cambios en el sitio):**
+**Fase A, local:**
 
-- [ ] `pnpm format:check` sin diferencias; `pnpm check` y `pnpm build` con 0 errores y 0 advertencias.
-- [ ] JavaScript propio de menos de 1 KB. Si se agregó una etiqueta de terceros, se mide aparte y consta la RDA.
-- [ ] Si se agregaron `geo` y `hasMap`: JSON-LD sin errores y sin valores `PENDIENTE_CLIENTE`.
+- [x] `pnpm format:check` sin diferencias; `pnpm check` y `pnpm build` con 0 errores y 0 advertencias (hints: hoy 52). JavaScript de cliente sin cambios: 960 B en la portada y 191 B en el 404. **Medido:** `format:check` sin diferencias; `check` con 0 errores, 0 advertencias y 52 hints en 40 archivos; `build` con código 0, 2 páginas y 0 líneas con «warn» o «error»; JavaScript en línea de 960 B (769 + 191) en la portada y 191 B en el 404, igual antes y después, sin archivos `.js` ni `<script src>` en `dist/`.
+- [x] `decisiones.md` tiene RDA-010 «Aceptada», RDA-013 «Aceptada, condicionada a la medición» y RDA-014 «Descartada», con el índice al día. **Medido:** 14 filas en el índice y 14 secciones, de RDA-001 a RDA-014, correlativas y con el mismo título y estado en ambos lados.
+- [x] La Auditoría 10 registra AUD-09-017 y AUD-10-001 como se describe arriba. **Medido:** apartado «Seguimiento en 05-02» con AUD-09-017 (considerado y aceptado, sin acción), AUD-10-001 (abierto, con plan de resolución para la fase B) y AUD-01-009 y AUD-01-010 (abiertos). AUD-10-001 no se cierra en la fase A.
+- [x] `evidencia-05-02-fase-b.md` existe, con todas las secciones y sin respuestas prellenadas. **Medido:** encabezado, secciones 1 a 7, «Otros navegadores» (no aplica), observaciones y veredicto; 0 respuestas con contenido; 0 correos, teléfonos, identificadores de cuenta o textos de anuncios.
+- [x] `git status` muestra cambios solo en `_planificacion/` (más los ajenos). Nada en `src/` ni en `public/`. **Medido:** cuatro archivos modificados y dos nuevos, todos en `_planificacion/`; ajeno y sin tocar, `AD src/assets/LogoGruasBurgos.svg`; nada en `public/`.
 
 **Fase B, paneles (evidencia en `evidencia-05-02-fase-b.md`):**
 
-- [ ] Search Console muestra la propiedad verificada y el sitemap procesado, con captura sin datos personales.
-- [ ] Se solicitó la nueva inspección de la portada tras el merge final de 05-01.
-- [ ] RDA-010 en estado Aceptada o Descartada. La RDA de Web Analytics, aceptada o descartada.
-- [ ] Lighthouse móvil de 95 o más en las cuatro categorías después de cualquier etiqueta agregada, con la cifra anterior y la posterior.
-- [ ] Campaña de Google Ads con la URL final del sitio y la extensión de llamada configuradas, sin activar, con los textos aprobados por el desarrollador.
+- [ ] Search Console muestra la propiedad verificada y `sitemap-index.xml` procesado, con captura sin datos personales.
+- [ ] Se solicitó la nueva inspección de la portada, después del merge final de 05-01.
+- [ ] Web Analytics: se registra si el script ya estaba activo; se activa si no lo estaba; se mide PageSpeed con el script (móvil y escritorio, tres ejecuciones cada uno) y se compara con las cifras de 05-01. Se decide: mantener (RDA-013 «Aceptada») o desactivar (RDA-013 «Descartada»).
+- [ ] El sitio está enlazado desde el Perfil de Empresa de Google.
+- [ ] Campaña de Google Ads de Búsqueda con anuncio adaptable, recurso de llamada con el número del negocio y conversión «Llamadas desde anuncios», con la URL final del sitio y los textos aprobados por el desarrollador, **en estado pausado** (sin activar).
+- [ ] Lighthouse móvil con 95 o más en las cuatro categorías con el estado final de Web Analytics.
 
 ## Fuera de alcance
 
 - Activar la campaña: la hace el desarrollador cuando lo decida.
 - Presupuesto, palabras clave y pujas de la campaña.
+- CSP (descartada), etiqueta de Google (`gtag.js`) y medición de clics de WhatsApp.
+- `geo` y `hasMap` del JSON-LD, mientras no estén el pin validado y el enlace oficial.
 - Un panel de métricas propio o cualquier backend (RDA-001).
 
 ## Tareas del desarrollador
 
-1. Verificar la propiedad y enviar el sitemap en Search Console (o dejar constancia de lo que ya hizo).
-2. Decidir la RDA de Web Analytics, la CSP y RDA-010.
-3. Entregar el pin validado de la base y el enlace oficial del perfil de Google, si quiere sumar `geo` y `hasMap`.
-4. Configurar la campaña y la extensión de llamada; aprobar los textos de los anuncios.
-5. Completar `evidencia-05-02-fase-b.md` con la plantilla de `evidencia-04-03-fase-b.md` y marcar la iteración «Terminada».
+1. Ejecutar la fase B en los paneles y completar `evidencia-05-02-fase-b.md`.
+2. Aprobar y pegar en Google Ads los textos del borrador, y dejar la campaña pausada.
+3. Decidir, con la medición, si Web Analytics se mantiene o se desactiva.
+4. Hacer `commit`, `push`, el Pull Request y el merge, y marcar la iteración «Terminada».

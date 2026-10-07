@@ -13,9 +13,11 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 | RDA-007 | Reseñas de Google renderizadas en estático               | Aceptada   |
 | RDA-008 | Fuente única de datos del negocio en `src/data/negocio.js` | Aceptada |
 | RDA-009 | Una página con tres secciones ancladas                   | Aceptada   |
-| RDA-010 | Medición de conversiones de Google Ads                   | Propuesta  |
+| RDA-010 | Medición de conversiones de Google Ads                   | Aceptada   |
 | RDA-011 | Fotos del negocio publicadas tal como están en sus redes | Aceptada   |
 | RDA-012 | `sharp` como dependencia directa                         | Aceptada   |
+| RDA-013 | Cloudflare Web Analytics                                 | Aceptada, condicionada a la medición de la fase B |
+| RDA-014 | Política de seguridad de contenido (`security.csp`) de Astro | Descartada |
 
 ---
 
@@ -124,12 +126,15 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 ## RDA-010 · Medición de conversiones de Google Ads
 
 - **Fecha:** 2026-09-29
-- **Estado:** Propuesta (se decide en la iteración 05-02)
+- **Estado:** Aceptada (decisión del desarrollador del 2026-10-06, iteración 05-02)
 
 **Contexto:** La campaña de Google Ads necesita medir llamadas y clics de WhatsApp. La etiqueta de Google (gtag.js) agrega unos 100 KB de JavaScript y requiere evaluar consentimiento.
 **Decisión propuesta:** Priorizar extensiones de llamada y conversiones de llamadas desde anuncios, que no requieren código en el sitio. Si se necesita medir clics en el sitio, cargar gtag.js de forma diferida después de la interacción o de `load`, y medir el impacto en Lighthouse antes de aceptarlo.
 **Alternativas consideradas:** Sin medición en el sitio (se pierde información de conversión); Google Tag Manager (más peso y complejidad).
 **Consecuencias:** Posible impacto de rendimiento que debe cuantificarse. Requiere decisión conjunta con el desarrollador.
+
+**Decisión (2026-10-06, iteración 05-02):** el desarrollador adopta la propuesta original, solo en su primera parte. Las llamadas se miden con el recurso de llamada del anuncio (lo que la propuesta llama «extensiones de llamada») y con la conversión «Llamadas desde anuncios» de Google Ads, sin código en el sitio. No se agrega la etiqueta de Google (`gtag.js`) ni Google Tag Manager, tampoco de forma diferida. Los clics de WhatsApp en el sitio no se miden.
+**Consecuencias de la decisión:** el sitio no carga JavaScript de Google y el límite de RDA-006 no se toca por este motivo; no hay impacto de rendimiento que cuantificar ni consentimiento que evaluar. Se pierde la información de conversión dentro del sitio: no se sabrá cuántas visitas terminan en un clic de «Llamar» o de WhatsApp, solo cuántas llamadas nacen del anuncio. Las visitas se cuentan aparte (RDA-013). Si más adelante se quiere medir clics en el sitio, hace falta una RDA nueva y medir antes el impacto en Lighthouse.
 
 ## RDA-011 · Fotos del negocio publicadas tal como están en sus redes
 
@@ -152,3 +157,24 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 **Decisión:** Declarar `sharp` en `dependencies` de `package.json` (`pnpm add sharp`, versión 0.35.5, la misma que ya resolvía Astro). Es la única dependencia nueva de la iteración 04-02.
 **Alternativas consideradas:** `publicHoistPattern` en `pnpm-workspace.yaml` (descartada: depende de la configuración del instalador y es fácil de perder en Cloudflare Pages u otra máquina); `passthroughImageService` de Astro (no se usa: publica las fotos sin optimizar, de 0,9 a 2,3 MB cada una).
 **Consecuencias:** Peso en `dist/`: 0 B, porque `sharp` solo se ejecuta al compilar (`AGENTS.md` §5). No descarga nada nuevo: el paquete ya estaba en `node_modules` como dependencia opcional de Astro, y `pnpm-lock.yaml` solo deja de marcarlo como opcional. La compilación en frío genera 96 variantes de imagen (unos 25 s en la máquina del desarrollador); las siguientes las toman de la caché. Confirmado en Cloudflare Pages el 2026-10-02 (fase B de 04-03, registro de compilación de `main` entregado por el desarrollador): `sharp` 0.35.5 instalado con su binario nativo (`@img/sharp-libvips-linux-x64@1.3.4`) y 96 optimizaciones de imágenes a AVIF y WebP, con Node v24.13.1 y pnpm 12.8.1.
+
+## RDA-013 · Cloudflare Web Analytics
+
+- **Fecha:** 2026-10-06 (decisión del desarrollador; registrada en la iteración 05-02)
+- **Estado:** Aceptada, condicionada a la medición de la fase B de 05-02
+
+**Contexto:** El sitio no tiene ninguna medición de visitas. Cloudflare Web Analytics agrega a cada página un script propio de Cloudflare (`beacon.min.js`, servido desde `static.cloudflareinsights.com`). En Cloudflare Pages se activa con un clic en el panel y el script se agrega en el siguiente despliegue, sin tocar el código del repositorio. Cuenta visitas y visitantes; no cuenta llamadas ni clics de WhatsApp. Es JavaScript de terceros en tiempo de ejecución, y choca con el límite de JavaScript de RDA-006 (menos de 1 KB; hoy 960 B en la portada) y con la regla «sin recursos de terceros» de `AGENTS.md` §7.3 si se activa sin medir su efecto.
+**Decisión:** Se activa y se mide el impacto. La decisión se cierra con la medición de la fase B de 05-02 (`evidencia-05-02-fase-b.md`).
+**Condición:** con el script activo, Lighthouse móvil da 95 o más en las cuatro categorías (mediana de tres ejecuciones), LCP de 2,5 s o menos y CLS 0, y el JavaScript propio del sitio sigue por debajo de 1 KB (el script de Cloudflare es de terceros y se mide aparte). Si no se cumple, se desactiva (Web Analytics › Manage site › Disable) y esta RDA pasa a «Descartada».
+**Alternativas consideradas:** No usarlo y medir solo con Search Console (búsquedas y clics desde Google) y Google Ads (llamadas desde anuncios): cero JavaScript de terceros, pero sin cifras de visitas totales. Instalación manual del script en `LayoutBase` (descartada: obliga a editar `src/` y a escribir el identificador del sitio en un repositorio público, sin ninguna ventaja sobre la activación desde el panel).
+**Consecuencias:** La página carga un script de terceros que el repositorio no contiene: `dist/` y lo publicado dejan de ser idénticos, como ya ocurrió con la ofuscación de correos de Cloudflare (AUD-09-014, desactivada el 2026-10-02). La referencia de rendimiento es la de producción en 05-01: móvil, Rendimiento 97, 99 y 99, las otras tres categorías en 100, LCP 2,3, 1,8 y 1,8 s, CLS 0 y TBT 0 ms; escritorio, 100 en las cuatro y LCP 0,6 s. Si el script ya estaba activo cuando se tomaron esas cifras (se comprueba en la fase B), ya lo incluyen, y es el origen probable de los 11 KiB de «JavaScript heredado» de AUD-10-001. La regla de RDA-006 se lee desde ahora sobre el JavaScript propio; el de terceros se informa por separado. Mientras no haya política de seguridad de contenido (RDA-014), el script no necesita declararse.
+
+## RDA-014 · Política de seguridad de contenido (`security.csp`) de Astro
+
+- **Fecha:** 2026-10-06 (decisión del desarrollador; registrada en la iteración 05-02)
+- **Estado:** Descartada
+
+**Contexto:** Astro puede generar una política de seguridad de contenido con `security.csp` en `astro.config.mjs`. La bitácora 04-02 la probó en una compilación aparte (`security.csp: true`, sin tocar la configuración) y recomendó decidirla junto con la medición. Resultados de esa prueba: 0 infracciones en Chrome a 360 y 1280 px y en el 404, con el formulario, las fuentes, los estilos y las fotos funcionando; la compilación emite un aviso (el resaltado de código de Markdown, Shiki, no es compatible con la CSP), que rompería la regla de cero advertencias aunque el sitio no usa Markdown; la política por defecto es incompleta (no incluye `default-src`, `img-src`, `object-src` ni `base-uri`); y `frame-ancestors`, que no funciona en una etiqueta `<meta>`, ya está en `public/_headers`. Su comportamiento en Cloudflare Pages no se verificó.
+**Decisión:** Descartada por ahora. El sitio es estático y sin scripts externos propios, y con Web Analytics activo (RDA-013) habría que declarar el script de Cloudflare en la política. `astro.config.mjs` no se toca. Se reabre, con una RDA nueva, solo si cambia el panorama: por ejemplo, si el sitio pasa a cargar scripts propios de otros dominios o a recibir contenido de terceros.
+**Alternativas consideradas:** Activarla con la política por defecto (deja el aviso de Shiki y una política incompleta); activarla completa con `security.csp.directives` y declarando el script de Cloudflare (más configuración que mantener, para un riesgo bajo en un sitio sin contenido de terceros ni datos de usuarios).
+**Consecuencias:** El sitio sigue sin una política de scripts y estilos; la protección contra el enmarcado se mantiene con `X-Frame-Options: DENY` y `Content-Security-Policy: frame-ancestors 'none'` en `_headers`. Las cabeceras `Report-To` y `NEL` que agrega Cloudflare (AUD-09-017) no entran en conflicto con nada.
