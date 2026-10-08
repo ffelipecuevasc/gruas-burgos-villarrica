@@ -1,7 +1,7 @@
 # Iteración 06-01 · Carrusel en la sección de opiniones
 
 - **Épica:** 06 · Evolución y mejoras de diseño
-- **Estado:** En revisión (fase A medida en local el 2026-10-08, [bitácora](../../99_bitacora/bitacora-06-01-2026-10-08.md); falta la fase B del desarrollador)
+- **Estado:** En revisión (fase A medida en local el 2026-10-08, [bitácora de la fase A](../../99_bitacora/bitacora-06-01-2026-10-08.md); fase B con la evidencia del desarrollador registrada el 2026-10-08, [bitácora de la fase B](../../99_bitacora/bitacora-06-01-fase-b-2026-10-08.md); falta que el desarrollador la marque «Terminada»)
 - **Rama sugerida:** `iteracion/06-01-carrusel-opiniones`
 - **Depende de:** 05-01 (terminada) y RDA-015 y RDA-016 (registradas en esta iteración)
 - **RDA relacionadas:** RDA-015 (nueva; reemplaza parcialmente a RDA-003 y a RDA-006), RDA-016 (nueva; reemplaza parcialmente a RDA-007), RDA-008 y RDA-011. `DESIGN.md` §5 y §8.
@@ -69,13 +69,13 @@ Esta iteración define **qué** debe quedar logrado y **cómo se comprueba**.
 - [x] Con teclado: Tab llega a los botones, a los puntos y a los enlaces «Ver en Google»; un enlace enfocado en una diapositiva fuera de la vista la trae a la vista; nada enfocado queda cubierto por elementos fijos (Tab y Mayús + Tab).
 - [x] Sin JavaScript (desactivado en Chrome): las diez reseñas se leen y se recorren con desplazamiento horizontal.
 - [x] Con `prefers-reduced-motion: reduce` emulado: sin animación al cambiar de diapositiva. Sin movimiento automático en 10 s de espera.
-- [ ] Lighthouse móvil local, mediana de tres, antes y después: Rendimiento, Accesibilidad, Buenas prácticas y SEO informados, CLS 0.
+- [x] Lighthouse móvil local, mediana de tres, antes y después: Rendimiento, Accesibilidad, Buenas prácticas y SEO informados, CLS 0. Salvedad: el CLS local de 0,0005 es anterior al carrusel (igual antes y después); en producción el CLS móvil fue 0 (AUD-11-004).
 
 **Fase B, vista previa y producción (evidencia en `evidencia-06-01-fase-b.md`):**
 
-- [ ] Vista previa en «Success» con el commit de la rama; carrusel deslizable con el dedo en el teléfono Android y con flechas en Chrome y Firefox del PC.
-- [ ] TalkBack anuncia la región, «Opinión N de 10» y los botones con su nombre.
-- [ ] PageSpeed móvil en producción tras el merge, mediana de tres: 95 o más en las cuatro categorías, LCP de 2,5 s o menos y CLS 0; escritorio informado.
+- [x] Vista previa en «Success» con el commit de la rama; carrusel deslizable con el dedo en el teléfono Android y con flechas en Chrome y Firefox del PC.
+- [x] TalkBack anuncia la región, «Opinión N de 10» y los botones con su nombre.
+- [x] PageSpeed móvil en producción tras el merge, mediana de tres: 95 o más en las cuatro categorías, LCP de 2,5 s o menos y CLS 0; escritorio informado. Medido por el desarrollador: móvil 96, 100, 100 y 100, LCP 2,5 s, CLS 0; escritorio 100 en las cuatro, CLS 0,002 (el mismo valor del 2026-10-02, anterior al carrusel).
 
 ## Fuera de alcance
 

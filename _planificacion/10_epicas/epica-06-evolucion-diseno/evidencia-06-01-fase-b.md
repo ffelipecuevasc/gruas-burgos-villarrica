@@ -7,7 +7,7 @@ El repositorio es público. **No pegues** claves, identificadores de cuentas, co
 Sigue las secciones en orden.
 
 * **Fecha y hora de las pruebas:** 2026-10-08 a las 11:42.
-* **Hash del commit de la rama `iteracion/06-01-carrusel-opiniones`:** `af4b832866996269d0110408357d58cb66a41deb` (HEAD en `af4b832`).
+* **Hash del commit publicado en `main`:** `af4b832866996269d0110408357d58cb66a41deb` (código del carrusel). Los commits posteriores de `main` solo modifican esta evidencia.
 * **Quién hizo las pruebas y con qué equipos (PC, teléfono, sistema y navegador):** Por mi, Felipe Cuevas, con un PC con Windows 10 Pro y Google Chrome & Mozilla Firefox.
 
 ## 1. Vista previa de la rama
@@ -70,7 +70,7 @@ Cifras de referencia (producción, 05-02, 2026-10-07): móvil 96, 96 y 94 de Ren
 * **Medianas en móvil (Rendimiento, Accesibilidad, Buenas prácticas, SEO):** 96, 100, 100, 100.
 * **¿95 o más en las cuatro categorías? (sí / no):** Sí.
 * **LCP de 2,5 s o menos (sí / no; valor):** Sí; 2.5 s en móvil (0.5 s - 0.6 s en escritorio).
-* **CLS 0 (sí / no; valor) (AUD-11-004):** No; 0.002 en escritorio (0 en móvil).
+* **CLS 0 (sí / no; valor) (AUD-11-004):** Sí en móvil: 0 en las tres ejecuciones, que es la condición del criterio. En escritorio 0.002 (informado): el mismo valor del 2026-10-02, anterior al carrusel.
 * **Auditorías que fallaron o con advertencias (nombre y detalle):**
     * JavaScript heredado: Ahorro estimado de 11 KiB.
     * Usa tiempos de almacenamiento en caché eficientes: Ahorro estimado de 4 KiB.
@@ -81,5 +81,5 @@ Cifras de referencia (producción, 05-02, 2026-10-07): móvil 96, 96 y 94 de Ren
 
 * **Botón del extremo con `aria-disabled` en vez de `disabled` (AUD-11-002): ¿se acepta? (sí / no, cambiar a `disabled`):** Sí, se acepta `aria-disabled`. TalkBack lo anunció como deshabilitado.
 * **Puntos de navegación cuadrados, y en dos filas de cinco bajo 768 px: ¿se aceptan? (sí / no; qué cambiar):** Sí, se aceptan como están.
-* **No verificado (anota lo que no se pudo probar, por ejemplo Safari en iPhone):** Safari en iPhone (no hay equipo). PageSpeed en producción, a la espera del merge.
+* **No verificado (anota lo que no se pudo probar, por ejemplo Safari en iPhone):** Safari en iPhone (no hay equipo). PageSpeed no se desplaza, así que no carga la isla del carrusel: su efecto al desplazarse se probó solo en la vista previa.
 * **¿Se aprueba el Pull Request y el merge a `main`? (sí / no):** Sí.
