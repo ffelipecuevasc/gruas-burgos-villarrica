@@ -361,3 +361,24 @@ Consolidado por Claude Code con la evidencia del desarrollador (`evidencia-05-02
 | AUD-01-010 | Media | Abierto, trasladado a 05-06. Sin enlace oficial del perfil de Google; el JSON-LD no lleva `hasMap` | El desarrollador entrega el enlace oficial; se agrega en 05-06 |
 
 **No quedan hallazgos de severidad Alta abiertos.** El desarrollador califica de «Alta» las dos tareas que pasan a 05-06 (Perfil de Empresa de Google y campaña de Google Ads): son tareas pendientes, no hallazgos de esta auditoría. Observación: PageSpeed móvil con el script activo da 96 de mediana en Rendimiento y LCP de 2,5 s en las tres ejecuciones, justo en el límite del criterio (AUD-09-019 sigue abierto, no bloqueante).
+
+## Auditoría 11 · Carrusel de opiniones como isla de React (06-01)
+
+- **Fecha:** 2026-10-08
+- **Auditor:** Claude Code (fase A, local: mediciones sobre `pnpm build` y `pnpm preview` en la rama `iteracion/06-01-carrusel-opiniones`, con Chrome 154 sin interfaz por CDP y Lighthouse 13.5.0). El agente no consultó ninguna URL pública.
+- **Alcance:** el carrusel de la sección `#opiniones` (`src/components/CarruselOpiniones.jsx` y `Resenas.astro`), las cinco dependencias nuevas, `astro.config.mjs` y los criterios de la fase A de `iteracion-06-01-carrusel-opiniones.md`; bitácora `bitacora-06-01-2026-10-08.md`.
+
+### Resumen
+
+Fase A, medida en local sobre la compilación final: las diez reseñas siguen en `dist/index.html`, idénticas a `src/data/resenas.js` (comparación por programa), sin `AggregateRating` ni `Review`. El JavaScript propio fuera de la isla no cambia (960 B en la portada y 191 B en el 404) y el 404 no carga nada de la isla. La isla pesa 79.356 B en gzip (77,5 KB), bajo el presupuesto de 80 KB que el desarrollador fijó después de que la primera medición superó los 75 KB iniciales (RDA-015). A 360 × 640 px, sin desplazarse, no hay peticiones de la isla y la primera pantalla pesa 150,7 KB. Una, dos y tres opiniones por vista en los seis anchos pedidos, sin desborde en los siete. Controles con los nombres aprobados, 44 × 44 px, foco de 3 px y contraste AA. Teclado, sin JavaScript y movimiento reducido, conformes. Lighthouse móvil local, mediana de tres: 99, 100, 100 y 100 antes y después.
+
+**No hay hallazgos de severidad Alta ni Media.** Sin verificar: toda la fase B (vista previa, teléfono, TalkBack, Firefox, Safari y PageSpeed en producción). Riesgo aceptado por el desarrollador y fuera de esta tabla: el aviso de copyright y licencia MIT de Embla Carousel no se incluye en el repositorio (decisión 5 de la iteración).
+
+### Hallazgos
+
+| ID | Severidad | Área | Hallazgo | Acción recomendada | Estado |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| AUD-11-001 | Baja | Rendimiento | La isla pesa 79.356 B en gzip (77,5 KB): `client` 65.675 B, `CarruselOpiniones` 8.744 B, `react` 3.010 B y el script de hidratación en línea, 1.927 B. Superó el presupuesto inicial de 75 KB y el desarrollador lo subió a 80 KB (RDA-015). Quedan unos 2,5 KB de margen, y `@astrojs/react` no está en versión exacta (`^7.0.1`). | Medir la isla de nuevo cada vez que se actualice React, Astro, `@astrojs/react` o Embla. | Abierto (riesgo conocido) |
+| AUD-11-002 | Baja | Accesibilidad | El botón del extremo («Opinión anterior» al inicio y «Opinión siguiente» al final) se marca con `aria-disabled="true"` y no con el atributo `disabled`, para que el foco del teclado no se pierda al llegar al extremo. El árbol de accesibilidad de Chrome lo expone como deshabilitado y un clic sobre él no mueve nada (medido). Es una diferencia con la letra del criterio de la iteración. | Que el desarrollador la acepte o pida `disabled`. | Abierto (decide el desarrollador) |
+| AUD-11-003 | Baja | Accesibilidad | `aria-roledescription="opinión"` está bien escrito en `dist/index.html` (10 apariciones, medido), pero el árbol de accesibilidad leído por CDP lo devolvió como «opiniÃ³n», mientras que los nombres con tilde («Opinión 1 de 10») llegaron bien. No se pudo determinar si es un defecto de la lectura por CDP o de lo que Chrome entrega a un lector de pantalla. | Comprobarlo con TalkBack en la fase B: debe anunciar «opinión». Si lo lee mal, cambiar la descripción del rol. | Abierto (se verifica en la fase B) |
+| AUD-11-004 | Baja | Rendimiento | Lighthouse móvil local informa CLS 0,0005 en las tres ejecuciones, antes y después del cambio: no es 0 exacto, y el criterio de la iteración dice «CLS 0». El valor es anterior al carrusel y este no lo cambia; el CLS medido en la página al desplazarse hasta la sección e hidratar la isla es 0. Lighthouse no se desplaza, así que no carga la isla. PageSpeed en producción informó CLS 0 en 05-01 y 05-02. | Juzgar el criterio con PageSpeed en producción (fase B). | Abierto (se verifica en la fase B) |

@@ -2,10 +2,10 @@
 
 **Fuente única de verdad del trabajo pendiente.** Si discrepa con `_planificacion/README.md` o con cualquier otro documento de planificación, prevalece este archivo.
 
-- **Última actualización:** 2026-10-07
+- **Última actualización:** 2026-10-08
 - **Iteración activa:** 05-06 (Perfil de Empresa de Google y campaña de Google Ads), pendiente de que el desarrollador pueda operar esas cuentas. 05-02 terminada el 2026-10-07.
 - **Próximo hito:** cuando tenga acceso al Perfil de Empresa de Google y a Google Ads, se ejecuta 05-06 (sitio enlazado desde el perfil, campaña de Búsqueda pausada, confirmación de RDA-010 y, si entrega el pin y el enlace, `geo` y `hasMap`). Después, el hito final de la Épica 05: aprobación del cliente (AUD-08-023) y Lighthouse final. Ya cumplido: propiedad verificada y sitemap procesado en Search Console, y RDA-010, RDA-013 y RDA-014 registradas. El plan de subida de HSTS sigue a decisión del desarrollador.
-- **Épica 06 (Evolución y mejoras de diseño):** abierta el 2026-10-07, de larga duración; cada solicitud del cliente entra como iteración. 06-01 pendiente de las decisiones del desarrollador (RDA-003, RDA-006 y RDA-007).
+- **Épica 06 (Evolución y mejoras de diseño):** abierta el 2026-10-07, de larga duración; cada solicitud del cliente entra como iteración. 06-01 en revisión: fase A medida en local el 2026-10-08 (RDA-015 y RDA-016 registradas); falta la fase B del desarrollador (`evidencia-06-01-fase-b.md`).
 - **Entrega tentativa:** 2026-10-18
 - **Flujo de ramas vigente:** Cloudflare Pages está conectado desde el 2026-10-02: se trabaja en ramas `iteracion/XX-YY-…` (cada push genera una vista previa en `pages.dev`) y `main` publica en `https://gruasvillarrica.cl`.
 
@@ -35,7 +35,7 @@
 | 05-01     | Publicación y verificación final en producción      | 05    | Terminada | 05-03, 05-04, 05-05 | [fase A](../99_bitacora/bitacora-05-01-2026-10-06.md) y [fase B](../99_bitacora/bitacora-05-01-fase-b-2026-10-06.md) |
 | 05-02     | Medición: Search Console, Web Analytics y Google Ads | 05   | Terminada | 05-01      | [fase A](../99_bitacora/bitacora-05-02-2026-10-06.md) y [fase B](../99_bitacora/bitacora-05-02-fase-b-2026-10-07.md) |
 | 05-06     | Perfil de Empresa de Google y campaña de Google Ads | 05    | Pendiente | 05-02 y el acceso a las cuentas | — ([iteración](../10_epicas/epica-05-publicacion-medicion/iteracion-05-06-perfil-y-ads.md)) |
-| 06-01     | Carrusel en la sección de opiniones                 | 06    | Pendiente | 05-01 y las RDA de la iteración | — ([iteración](../10_epicas/epica-06-evolucion-diseno/iteracion-06-01-carrusel-opiniones.md)) |
+| 06-01     | Carrusel en la sección de opiniones                 | 06    | En revisión | 05-01, RDA-015 y RDA-016 | [fase A](../99_bitacora/bitacora-06-01-2026-10-08.md) |
 
 Nota: la iteración 01-01 la ejecuta el desarrollador de forma manual en WebStorm (creación del proyecto). La bitácora 01-01 puede redactarla el agente a partir del resumen del desarrollador.
 
@@ -67,7 +67,6 @@ Bloquean contenido real. Mientras falten, se usa `PENDIENTE_CLIENTE` en `src/dat
 | Aprobación del cliente de la Épica 03 (hito Prototipo) | —    | Desarrollador          |
 | Aprobación del cliente de los cambios de 05-04 (vista previa) | AUD-08-023 | Desarrollador |
 | Cuándo se corrigen FA-05 (zoom al 400 %) y FA-09 (letra en rem), diferidos: ambos cambian `DESIGN.md` | AUD-09-005, AUD-09-009 | Desarrollador |
-| Carrusel de opiniones (06-01): técnica, cumplimiento de RDA-007, límite de JavaScript y aviso de licencia MIT | RDA-003, RDA-006, RDA-007 | Desarrollador |
 
 ## 4. Propuestas fuera de alcance
 
@@ -133,3 +132,4 @@ Ideas detectadas durante el trabajo que no forman parte de lo contratado. Se cot
 | 2026-10-07 | `AGENTS.md` §7, regla 3: se agrega la excepción del script de Cloudflare Web Analytics (RDA-013). La decisión sale de «Decisiones por tomar». |
 | 2026-10-07 | Iteración 05-02 terminada (marcada por el desarrollador). Search Console verificado, RDA-010, RDA-013 y RDA-014 registradas y AUD-10-001 cerrado. Lo que depende del acceso a las cuentas sigue en 05-06. La Épica 05 sigue «En curso». |
 | 2026-10-08 | Alta de la Épica 06 (Evolución y mejoras de diseño) y de la iteración 06-01 (carrusel en la sección de opiniones), «Pendiente» de las decisiones del desarrollador (RDA-003, RDA-006 y RDA-007). Sin cambios en `src/` ni en `public/`. |
+| 2026-10-08 | Iteración 06-01 en revisión (fase A, local; bitácora `bitacora-06-01-2026-10-08`). Las diez opiniones pasan de la grilla a un carrusel: única isla de React del sitio (`CarruselOpiniones.jsx`, Embla Carousel 8.6.0, React 19.3.0, `client:visible`), con una opinión por vista bajo 768 px, dos desde 768 px y tres desde 1280 px, botones de anterior y siguiente y puntos de 44 × 44 px, sin movimiento automático ni bucle. RDA-015 y RDA-016 registradas; RDA-003, RDA-006 y RDA-007 remiten a ellas. El carrusel sale de «Decisiones por tomar». **El agente se detuvo una vez:** la isla midió 77,5 KB gzip contra un presupuesto de 75; el desarrollador lo subió a 80 KB (RDA-015 y decisión 7 de la iteración). Medido sobre la compilación final: `format:check`, `check` (0 errores, 0 advertencias, 52 hints) y `build` conformes; diez reseñas idénticas a `resenas.js`, sin `AggregateRating` ni `Review`; JavaScript propio sin cambios (960 B y 191 B); a 360 × 640 px sin desplazarse, ninguna petición de la isla, 150,7 KB en total (antes 147,7) y HTML más CSS de 35,5 KB (antes 32,4); hero con 17 px de margen; sin desborde en siete anchos; teclado, sin JavaScript y movimiento reducido conformes. Lighthouse móvil local (Lighthouse 13.5.0 con `pnpm dlx`, fuera del proyecto), mediana de tres, antes y después: 99, 100, 100 y 100; LCP 2,07 y 1,98 s; CLS 0,0005 en ambos (no es 0 exacto: esa casilla queda sin marcar). 10 de 11 casillas de la fase A marcadas. Diferencias con la iteración: el botón del extremo usa `aria-disabled` en vez de `disabled` y los puntos son cuadrados (`DESIGN.md` §4). Dependencias nuevas: `@astrojs/react`, `react`, `react-dom`, `embla-carousel` y `embla-carousel-react`; `astro.config.mjs` registra la integración; `DESIGN.md` §5 y §8 con los textos aprobados. Auditoría 11 registrada (AUD-11-001 a AUD-11-004, todas de severidad Baja). **Sin verificar: toda la fase B** (vista previa, teléfono, TalkBack, Firefox y PageSpeed en producción). |

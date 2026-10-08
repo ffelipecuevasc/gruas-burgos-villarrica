@@ -18,6 +18,8 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 | RDA-012 | `sharp` como dependencia directa                         | Aceptada   |
 | RDA-013 | Cloudflare Web Analytics                                 | Aceptada   |
 | RDA-014 | Política de seguridad de contenido (`security.csp`) de Astro | Descartada |
+| RDA-015 | Isla de React con Embla Carousel para las opiniones      | Aceptada   |
+| RDA-016 | Opiniones en carrusel en todos los anchos                | Aceptada   |
 
 ---
 
@@ -51,6 +53,8 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 **Alternativas consideradas:** Instalar React "por si acaso" (agrega unos 45 KB comprimidos por isla y costo de hidratación).
 **Consecuencias:** Cero JavaScript de framework en el cliente. Si una función futura lo justifica, se instala con una RDA que la reemplace parcialmente.
 
+**Actualización 2026-10-07:** reemplazada parcialmente por RDA-015.
+
 ## RDA-004 · Fuentes autoalojadas con la Fonts API de Astro
 
 - **Fecha:** 2026-09-29
@@ -83,6 +87,8 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 **Alternativas consideradas:** Cloudflare Pages Functions con envío de correo (fuera de alcance, requiere servidor y proveedor de correo); eliminar el formulario (pierde un canal de cotización estructurada).
 **Consecuencias:** No se almacenan datos personales en ningún servidor. El mensaje llega al mismo WhatsApp que usa el cliente.
 
+**Actualización 2026-10-07:** reemplazada parcialmente por RDA-015.
+
 ## RDA-007 · Reseñas de Google renderizadas en estático
 
 - **Fecha:** 2026-09-29
@@ -96,6 +102,8 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 **Actualización 2026-09-30:** el desarrollador entregó 10 reseñas seleccionadas (no de 3 a 6), que se publican textuales y con el nombre completo del autor tal como aparece en Google. Se mantiene la prohibición de `AggregateRating` y `Review` en el marcado.
 
 **Actualización 2026-10-06 (iteración 05-04, ajustes del cliente):** las diez reseñas se muestran visibles, sin acordeón ni botón «Ver 4 opiniones más»; hasta ahora se veían seis y las otras cuatro quedaban en un acordeón nativo. Los textos, los nombres y los enlaces no cambian, y se mantiene «Ver más opiniones en Google». Junto al título de la sección va el logotipo de Google, como recurso local y sin modificar (`DESIGN.md` §6.2): es una marca de un tercero y solo indica el origen de las opiniones. Sigue sin haber widgets, JavaScript ni `AggregateRating` o `Review` en el marcado.
+
+**Actualización 2026-10-07:** reemplazada parcialmente por RDA-016.
 
 ## RDA-008 · Fuente única de datos del negocio en `src/data/negocio.js`
 
@@ -183,3 +191,25 @@ Consolidado de las decisiones técnicas del proyecto. Formato y reglas en `_plan
 **Decisión:** Descartada por ahora. El sitio es estático y sin scripts externos propios, y con Web Analytics activo (RDA-013) habría que declarar el script de Cloudflare en la política. `astro.config.mjs` no se toca. Se reabre, con una RDA nueva, solo si cambia el panorama: por ejemplo, si el sitio pasa a cargar scripts propios de otros dominios o a recibir contenido de terceros.
 **Alternativas consideradas:** Activarla con la política por defecto (deja el aviso de Shiki y una política incompleta); activarla completa con `security.csp.directives` y declarando el script de Cloudflare (más configuración que mantener, para un riesgo bajo en un sitio sin contenido de terceros ni datos de usuarios).
 **Consecuencias:** El sitio sigue sin una política de scripts y estilos; la protección contra el enmarcado se mantiene con `X-Frame-Options: DENY` y `Content-Security-Policy: frame-ancestors 'none'` en `_headers`. Las cabeceras `Report-To` y `NEL` que agrega Cloudflare (AUD-09-017) no entran en conflicto con nada.
+
+## RDA-015 · Isla de React con Embla Carousel para las opiniones
+
+- **Fecha:** 2026-10-07 (decisión del desarrollador; registrada el 2026-10-08 en la iteración 06-01)
+- **Estado:** Aceptada
+
+**Contexto:** El cliente pide modernizar la sección de opiniones con un carrusel. RDA-003 excluía React y RDA-006 fija 1 KB de JavaScript propio.
+**Decisión:** `@astrojs/react` con una sola isla para el carrusel de opiniones, hidratada con `client:visible`, con `embla-carousel-react` 8.6.0 en versión exacta (`embla-carousel` 8.6.0, y `react` y `react-dom` 19.3.0, también exactas). Presupuesto de la isla: 80 KB gzip, que no se descarga en la primera pantalla. El JavaScript propio fuera de la isla sigue bajo 1 KB.
+**Alternativas consideradas:** Embla sin React (unos 8 KB gzip) y carrusel solo con CSS (0 B), descartadas por el desarrollador.
+**Consecuencias:** React solo en esta isla; cualquier otra isla requiere una RDA nueva. El aviso de licencia MIT de Embla no se incluye en el repositorio (riesgo aceptado por el desarrollador).
+
+**Actualización 2026-10-08 (iteración 06-01, medición de la fase A):** el presupuesto inicial era de 75 KB gzip. La isla midió 79.356 B (77,5 KB, con 1 KB = 1.024 B): tres archivos, `client` (React DOM y el cliente de Astro, 65.675 B), `CarruselOpiniones` (Embla y el componente, 8.744 B) y `react` (3.010 B), más el script de hidratación que Astro escribe en línea en el HTML (4.752 B sin comprimir, 1.927 B en gzip). El agente se detuvo y el desarrollador subió el presupuesto a 80 KB gzip. El margen es de unos 2,5 KB: una actualización de React, de Astro o de Embla puede superarlo, y hay que volver a medir. El carrusel es `src/components/CarruselOpiniones.jsx`; las diapositivas se renderizan en Astro (`Resenas.astro` y `TarjetaResena.astro`) y pasan a la isla como contenido, así que la isla no recibe datos de las reseñas.
+
+## RDA-016 · Opiniones en carrusel en todos los anchos
+
+- **Fecha:** 2026-10-07 (decisión del desarrollador; registrada el 2026-10-08 en la iteración 06-01)
+- **Estado:** Aceptada
+
+**Contexto:** La actualización del 2026-10-06 de RDA-007 dejó las diez opiniones «visibles» en una grilla. El cliente pide un carrusel (RDA-015), que muestra solo algunas a la vez.
+**Decisión:** Las diez opiniones van en el HTML compilado, completas y accesibles, dentro de un carrusel de una, dos o tres por vista según el ancho (una bajo 768 px, dos desde 768 px y tres desde 1280 px), sin movimiento automático. Sin JavaScript se recorren con desplazamiento horizontal. Reemplaza la grilla y precisa «visibles» de la actualización del 2026-10-06 de RDA-007. Sigue sin `AggregateRating` ni `Review`.
+**Alternativas consideradas:** Mantener la grilla en escritorio y el carrusel solo en teléfonos (descartada por el desarrollador: carrusel en todos los anchos).
+**Consecuencias:** En pantalla se ven de una a tres opiniones a la vez; las demás se alcanzan con los botones, los puntos, el arrastre o el teclado. La sección es más corta (a 360 px la página pasa de 13.012 a 11.099 px de alto). Textos, autores, fechas, calificaciones y enlaces no cambian y siguen saliendo de `src/data/resenas.js` (RDA-008).

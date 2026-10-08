@@ -3,12 +3,14 @@ import Contenedor from './Contenedor.astro';
 import TituloSeccion from './TituloSeccion.astro';
 import TarjetaResena from './TarjetaResena.astro';
 import Boton from './Boton.astro';
+import CarruselOpiniones from './CarruselOpiniones.jsx';
 import LogoGoogle from '../assets/marcas/google.svg';
 import { resenas } from '../data/resenas.js';
 import { enlaceOpinionesGoogle } from '../data/negocio.js';
 
 /**
- * Opiniones de Google, con el ancla `#opiniones` (RDA-009). Se muestran todas, sin acordeón (RDA-007).
+ * Opiniones de Google, con el ancla `#opiniones` (RDA-009). Van todas en el HTML, sin acordeón (RDA-007),
+ * dentro de un carrusel: una por vista bajo `md`, dos desde `md` y tres desde `xl` (RDA-015 y RDA-016).
  * Si no hay reseñas, no se renderiza.
  *
  * @typedef {Object} Props
@@ -21,11 +23,6 @@ const { class: clase = '' } = Astro.props;
 if (!resenas || resenas.length === 0) {
   return null;
 }
-
-// Desde `lg` la grilla tiene 6 columnas: cada tarjeta ocupa 2 (tres por fila) y, si la última fila
-// quedaría incompleta, las últimas tarjetas ocupan 3 (dos por fila). Así ninguna fila deja un hueco.
-const sobrantes = resenas.length % 3;
-const anchas = sobrantes === 1 ? 4 : sobrantes === 2 ? 2 : 0;
 ---
 
 <section
@@ -46,13 +43,24 @@ const anchas = sobrantes === 1 ? 4 : sobrantes === 2 ? 2 : 0;
       </Fragment>
     </TituloSeccion>
 
-    <div class="grid grid-cols-1 gap-space-md md:grid-cols-2 lg:grid-cols-6">
-      {resenas.map((resena, indice) => (
-        <TarjetaResena
-          resena={resena}
-          class={indice >= resenas.length - anchas ? 'lg:col-span-3' : 'lg:col-span-2'}
-        />
-      ))}
+    {/* Única isla de React del sitio (RDA-015): se hidrata cuando la sección se acerca a la vista.
+        Las diapositivas se renderizan aquí, en el servidor, y la isla solo agrega el movimiento.
+        El `div` recibe la separación del contenedor: `astro-island` no genera caja. */}
+    <div>
+      <CarruselOpiniones client:visible>
+        <div class="embla__container flex gap-space-md">
+          {resenas.map((resena, indice) => (
+            <div
+              class="embla__slide min-w-0 shrink-0 grow-0 basis-full md:basis-[calc((100%-var(--spacing-space-md))/2)] xl:basis-[calc((100%-2*var(--spacing-space-md))/3)] noscript:snap-start"
+              role="group"
+              aria-roledescription="opinión"
+              aria-label={`Opinión ${indice + 1} de ${resenas.length}`}
+            >
+              <TarjetaResena resena={resena} class="h-full" />
+            </div>
+          ))}
+        </div>
+      </CarruselOpiniones>
     </div>
 
     <Boton href={enlaceOpinionesGoogle()} variante="contorno" externo>
