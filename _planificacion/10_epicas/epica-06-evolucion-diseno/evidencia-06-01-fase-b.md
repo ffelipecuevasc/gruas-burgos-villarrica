@@ -7,7 +7,7 @@ El repositorio es público. **No pegues** claves, identificadores de cuentas, co
 Sigue las secciones en orden.
 
 * **Fecha y hora de las pruebas:** 2026-10-08 a las 11:42.
-* **Hash del commit publicado en `main`:** `af4b832866996269d0110408357d58cb66a41deb` (código del carrusel). Los commits posteriores de `main` solo modifican esta evidencia.
+* **Hash del commit de la rama `iteracion/06-01-carrusel-opiniones`:** `af4b832866996269d0110408357d58cb66a41deb` (HEAD en `af4b832`).
 * **Quién hizo las pruebas y con qué equipos (PC, teléfono, sistema y navegador):** Por mi, Felipe Cuevas, con un PC con Windows 10 Pro y Google Chrome & Mozilla Firefox.
 
 ## 1. Vista previa de la rama
@@ -25,7 +25,7 @@ Abre la vista previa y baja hasta «Lo que dicen nuestros clientes».
 * **¿El carrusel se desliza con el dedo, hacia ambos lados? (sí / no):** Sí.
 * **¿Los botones de anterior y siguiente y los puntos funcionan al tocarlos? (sí / no):** Sí.
 * **¿Se llega a la opinión 10 y ahí el botón de siguiente queda apagado? (sí / no):** Sí.
-* **¿Al deslizar el carrusel la página se mueve hacia los lados? (sí / no):** Sí.
+* **¿Al deslizar el carrusel la página se mueve hacia los lados? (sí / no):** No.
 * **¿«Ver en Google» abre la reseña? (sí / no):** Sí.
 * **¿Algo se mueve solo, sin tocar nada? (sí / no):** No.
 * **Observaciones:** Ninguna observación.
@@ -66,7 +66,7 @@ Cifras de referencia (producción, 05-02, 2026-10-07): móvil 96, 96 y 94 de Ren
 | Escritorio | 2 | 100 | 100 | 100 | 100 | 0.6 s | 0.002 | 0 ms | [Enlace](https://pagespeed.web.dev/analysis/https-gruasvillarrica-cl/gp7n22veqj?form_factor=desktop) |
 | Escritorio | 3 | 100 | 100 | 100 | 100 | 0.6 s | 0.002 | 0 ms | [Enlace](https://pagespeed.web.dev/analysis/https-gruasvillarrica-cl/h42p7cen5k?form_factor=desktop) |
 
-* **Hash del commit publicado en `main`:** Pendiente de indicar por el desarrollador.
+* **Hash del commit publicado en `main`:** `af4b832866996269d0110408357d58cb66a41deb` (código del carrusel). Los commits posteriores de `main` solo modifican esta evidencia.
 * **Medianas en móvil (Rendimiento, Accesibilidad, Buenas prácticas, SEO):** 96, 100, 100, 100.
 * **¿95 o más en las cuatro categorías? (sí / no):** Sí.
 * **LCP de 2,5 s o menos (sí / no; valor):** Sí; 2.5 s en móvil (0.5 s - 0.6 s en escritorio).
