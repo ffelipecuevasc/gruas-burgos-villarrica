@@ -5,6 +5,7 @@
 - **Última actualización:** 2026-10-07
 - **Iteración activa:** 05-06 (Perfil de Empresa de Google y campaña de Google Ads), pendiente de que el desarrollador pueda operar esas cuentas. 05-02 terminada el 2026-10-07.
 - **Próximo hito:** cuando tenga acceso al Perfil de Empresa de Google y a Google Ads, se ejecuta 05-06 (sitio enlazado desde el perfil, campaña de Búsqueda pausada, confirmación de RDA-010 y, si entrega el pin y el enlace, `geo` y `hasMap`). Después, el hito final de la Épica 05: aprobación del cliente (AUD-08-023) y Lighthouse final. Ya cumplido: propiedad verificada y sitemap procesado en Search Console, y RDA-010, RDA-013 y RDA-014 registradas. El plan de subida de HSTS sigue a decisión del desarrollador.
+- **Épica 06 (Evolución y mejoras de diseño):** abierta el 2026-10-07, de larga duración; cada solicitud del cliente entra como iteración. 06-01 pendiente de las decisiones del desarrollador (RDA-003, RDA-006 y RDA-007).
 - **Entrega tentativa:** 2026-10-18
 - **Flujo de ramas vigente:** Cloudflare Pages está conectado desde el 2026-10-02: se trabaja en ramas `iteracion/XX-YY-…` (cada push genera una vista previa en `pages.dev`) y `main` publica en `https://gruasvillarrica.cl`.
 
@@ -34,6 +35,7 @@
 | 05-01     | Publicación y verificación final en producción      | 05    | Terminada | 05-03, 05-04, 05-05 | [fase A](../99_bitacora/bitacora-05-01-2026-10-06.md) y [fase B](../99_bitacora/bitacora-05-01-fase-b-2026-10-06.md) |
 | 05-02     | Medición: Search Console, Web Analytics y Google Ads | 05   | Terminada | 05-01      | [fase A](../99_bitacora/bitacora-05-02-2026-10-06.md) y [fase B](../99_bitacora/bitacora-05-02-fase-b-2026-10-07.md) |
 | 05-06     | Perfil de Empresa de Google y campaña de Google Ads | 05    | Pendiente | 05-02 y el acceso a las cuentas | — ([iteración](../10_epicas/epica-05-publicacion-medicion/iteracion-05-06-perfil-y-ads.md)) |
+| 06-01     | Carrusel en la sección de opiniones                 | 06    | Pendiente | 05-01 y las RDA de la iteración | — ([iteración](../10_epicas/epica-06-evolucion-diseno/iteracion-06-01-carrusel-opiniones.md)) |
 
 Nota: la iteración 01-01 la ejecuta el desarrollador de forma manual en WebStorm (creación del proyecto). La bitácora 01-01 puede redactarla el agente a partir del resumen del desarrollador.
 
@@ -65,6 +67,7 @@ Bloquean contenido real. Mientras falten, se usa `PENDIENTE_CLIENTE` en `src/dat
 | Aprobación del cliente de la Épica 03 (hito Prototipo) | —    | Desarrollador          |
 | Aprobación del cliente de los cambios de 05-04 (vista previa) | AUD-08-023 | Desarrollador |
 | Cuándo se corrigen FA-05 (zoom al 400 %) y FA-09 (letra en rem), diferidos: ambos cambian `DESIGN.md` | AUD-09-005, AUD-09-009 | Desarrollador |
+| Carrusel de opiniones (06-01): técnica, cumplimiento de RDA-007, límite de JavaScript y aviso de licencia MIT | RDA-003, RDA-006, RDA-007 | Desarrollador |
 
 ## 4. Propuestas fuera de alcance
 
@@ -129,3 +132,4 @@ Ideas detectadas durante el trabajo que no forman parte de lo contratado. Se cot
 | 2026-10-07 | Iteración 05-02, fase B registrada (bitácora `bitacora-05-02-fase-b-2026-10-07`), con la evidencia del desarrollador (`evidencia-05-02-fase-b.md`) sobre producción, con el commit `24660b3`. Web Analytics: el script `static.cloudflareinsights.com/beacon.min.js` está activo; el desarrollador lo había activado antes de 05-01, así que las cifras de 05-01 ya lo incluían y no hay medición sin él. PageSpeed móvil con el script, mediana: 96, 100, 100 y 100; LCP 2,5 s en las tres ejecuciones (justo en el límite); CLS 0. Escritorio: 100 en las cuatro. Decisión del desarrollador: se mantiene; RDA-013 «Aceptada». AUD-10-001 cerrado (los 11 KiB de «JavaScript heredado» son de ese script). Search Console: propiedad de dominio verificada por DNS TXT; `sitemap-index.xml` «Correcto», 1 página, última lectura el 5 oct 2026. Tres de las seis casillas de la fase B marcadas. Sin marcar: la nueva inspección de la portada (no solicitada, por decisión del desarrollador; último rastreo, 2 oct 2026) y las de Perfil de Empresa de Google y Google Ads, no verificadas por falta de acceso a las cuentas. Decisión de organización del desarrollador: 05-02 se cierra con lo hecho y lo bloqueado pasa a la iteración nueva 05-06, dada de alta en `definicion-epica-05.md` y en este registro. RDA-010 sigue «Aceptada»; su implementación se confirma en 05-06. AUD-01-009 y AUD-01-010 siguen abiertos, trasladados a 05-06. Nueva decisión por tomar: la excepción de `AGENTS.md` §7.3 para el script de Web Analytics. No verificado: el elemento del LCP. 05-02 sigue «En revisión». Sin cambios en `src/` ni en `public/`. |
 | 2026-10-07 | `AGENTS.md` §7, regla 3: se agrega la excepción del script de Cloudflare Web Analytics (RDA-013). La decisión sale de «Decisiones por tomar». |
 | 2026-10-07 | Iteración 05-02 terminada (marcada por el desarrollador). Search Console verificado, RDA-010, RDA-013 y RDA-014 registradas y AUD-10-001 cerrado. Lo que depende del acceso a las cuentas sigue en 05-06. La Épica 05 sigue «En curso». |
+| 2026-10-08 | Alta de la Épica 06 (Evolución y mejoras de diseño) y de la iteración 06-01 (carrusel en la sección de opiniones), «Pendiente» de las decisiones del desarrollador (RDA-003, RDA-006 y RDA-007). Sin cambios en `src/` ni en `public/`. |
