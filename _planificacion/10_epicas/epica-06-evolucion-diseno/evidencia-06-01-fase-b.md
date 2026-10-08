@@ -57,25 +57,29 @@ En `https://pagespeed.web.dev/`, analiza `https://gruasvillarrica.cl/`. Tres eje
 
 Cifras de referencia (producción, 05-02, 2026-10-07): móvil 96, 96 y 94 de Rendimiento (mediana 96), 100 en las otras tres categorías, LCP 2,5 s, CLS 0; escritorio, 100 en las cuatro.
 
-| Dispositivo | Ejecución | Rendimiento | Accesibilidad | Buenas prácticas | SEO | LCP | CLS | TBT | Enlace |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Móvil | 1 | | | | | | | | |
-| Móvil | 2 | | | | | | | | |
-| Móvil | 3 | | | | | | | | |
-| Escritorio | 1 | | | | | | | | |
-| Escritorio | 2 | | | | | | | | |
-| Escritorio | 3 | | | | | | | | |
+| Dispositivo | Ejecución | Rendimiento | Accesibilidad | Buenas prácticas | SEO | LCP   | CLS | TBT | Enlace |
+| :--- | :--- | :--- | :--- | :--- | :--- |:------| :--- | :--- | :--- |
+| Móvil | 1 | 94 | 100 | 100 | 100 | 2.5 s | 0 | 20 ms | [Enlace](https://pagespeed.web.dev/analysis/https-gruasvillarrica-cl/g2sjn5e7ga?form_factor=mobile) |
+| Móvil | 2 | 96 | 100 | 100 | 100 | 2.5 s | 0 | 0 ms | [Enlace](https://pagespeed.web.dev/analysis/https-gruasvillarrica-cl/gp7n22veqj?form_factor=mobile) |
+| Móvil | 3 | 96 | 100 | 100 | 100 | 2.5 s | 0 | 0 ms | [Enlace](https://pagespeed.web.dev/analysis/https-gruasvillarrica-cl/h42p7cen5k?form_factor=mobile) |
+| Escritorio | 1 | 100 | 100 | 100 | 100 | 0.5 s | 0.002 | 0 ms | [Enlace](https://pagespeed.web.dev/analysis/https-gruasvillarrica-cl/g2sjn5e7ga?form_factor=desktop) |
+| Escritorio | 2 | 100 | 100 | 100 | 100 | 0.6 s | 0.002 | 0 ms | [Enlace](https://pagespeed.web.dev/analysis/https-gruasvillarrica-cl/gp7n22veqj?form_factor=desktop) |
+| Escritorio | 3 | 100 | 100 | 100 | 100 | 0.6 s | 0.002 | 0 ms | [Enlace](https://pagespeed.web.dev/analysis/https-gruasvillarrica-cl/h42p7cen5k?form_factor=desktop) |
 
-* **Hash del commit publicado en `main`:**
-* **Medianas en móvil (Rendimiento, Accesibilidad, Buenas prácticas, SEO):**
-* **¿95 o más en las cuatro categorías? (sí / no):**
-* **LCP de 2,5 s o menos (sí / no; valor):**
-* **CLS 0 (sí / no; valor) (AUD-11-004):**
+* **Hash del commit publicado en `main`:** Pendiente de indicar por el desarrollador.
+* **Medianas en móvil (Rendimiento, Accesibilidad, Buenas prácticas, SEO):** 96, 100, 100, 100.
+* **¿95 o más en las cuatro categorías? (sí / no):** Sí.
+* **LCP de 2,5 s o menos (sí / no; valor):** Sí; 2.5 s en móvil (0.5 s - 0.6 s en escritorio).
+* **CLS 0 (sí / no; valor) (AUD-11-004):** No; 0.002 en escritorio (0 en móvil).
 * **Auditorías que fallaron o con advertencias (nombre y detalle):**
+    * JavaScript heredado: Ahorro estimado de 11 KiB.
+    * Usa tiempos de almacenamiento en caché eficientes: Ahorro estimado de 4 KiB.
+    * Solicitudes de bloqueo de renderización: Ahorro estimado de 150 ms (en la ejecución 1 de escritorio).
+    * Evita tareas largas en el subproceso principal: Se encontró 1 tarea larga (en la ejecución 1 de móvil).
 
 ## 4. Decisiones y veredicto
 
-* **Botón del extremo con `aria-disabled` en vez de `disabled` (AUD-11-002): ¿se acepta? (sí / no, cambiar a `disabled`):**
-* **Puntos de navegación cuadrados, y en dos filas de cinco bajo 768 px: ¿se aceptan? (sí / no; qué cambiar):**
-* **No verificado (anota lo que no se pudo probar, por ejemplo Safari en iPhone):**
-* **¿Se aprueba el Pull Request y el merge a `main`? (sí / no):**
+* **Botón del extremo con `aria-disabled` en vez de `disabled` (AUD-11-002): ¿se acepta? (sí / no, cambiar a `disabled`):** Sí, se acepta `aria-disabled`. TalkBack lo anunció como deshabilitado.
+* **Puntos de navegación cuadrados, y en dos filas de cinco bajo 768 px: ¿se aceptan? (sí / no; qué cambiar):** Sí, se aceptan como están.
+* **No verificado (anota lo que no se pudo probar, por ejemplo Safari en iPhone):** Safari en iPhone (no hay equipo). PageSpeed en producción, a la espera del merge.
+* **¿Se aprueba el Pull Request y el merge a `main`? (sí / no):** Sí.
