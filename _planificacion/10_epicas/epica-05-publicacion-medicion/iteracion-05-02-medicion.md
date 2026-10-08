@@ -1,7 +1,7 @@
 # Iteración 05-02 · Medición: Search Console, Web Analytics y Google Ads
 
 - **Épica:** 05 · Ajustes finales, publicación y medición
-- **Estado:** En revisión. Fase A, local: [bitacora-05-02-2026-10-06](../../99_bitacora/bitacora-05-02-2026-10-06.md). Fase B registrada con la evidencia del desarrollador: [bitacora-05-02-fase-b-2026-10-07](../../99_bitacora/bitacora-05-02-fase-b-2026-10-07.md). Las tareas de Perfil de Empresa de Google y de Google Ads pasan a la iteración 05-06. La marca «Terminada» la pone el desarrollador.
+- **Estado:** Terminada (marcada por el desarrollador el 2026-10-07). Fase A, local: [bitacora-05-02-2026-10-06](../../99_bitacora/bitacora-05-02-2026-10-06.md); fase B registrada: [bitacora-05-02-fase-b-2026-10-07](../../99_bitacora/bitacora-05-02-fase-b-2026-10-07.md). Las tareas de Perfil de Empresa de Google y de Google Ads pasan a la iteración 05-06.
 - **Rama sugerida:** `iteracion/05-02-medicion`
 - **Depende de:** 05-01 (terminada)
 - **RDA relacionadas:** RDA-006, RDA-010, RDA-013 (Web Analytics) y RDA-014 (CSP)
